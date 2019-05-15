@@ -1,37 +1,44 @@
-## Welcome to GitHub Pages
+# dotfiles and desktop config
 
-You can use the [editor on GitHub](https://github.com/kabeero/dotfiles/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+## General
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+My setup
+- window manager: [plasma (kde5)](https://wiki.gentoo.org/wiki/KDE) with [i3wm](https://i3wm.org/docs/userguide.html)
+- login manager: sddm
+- compsition manager: compton
+- terminal: [urxvt](https://wiki.archlinux.org/index.php/Rxvt-unicode)
+- fonts: dina, google droid sans, adobe source code sans/serif
+- background changers: feh / nitrogen
+- audio: [pulseaudio](https://wiki.archlinux.org/index.php/PulseAudio) and [mpd](https://wiki.archlinux.org/index.php/Music_Player_Daemon/Tips_and_tricks#Local_(with_separate_mpd_user))
+- init: [systemd](https://access.redhat.com/articles/systemd-cheat-sheet)
 
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+## Misc Commands
 
 ```markdown
-Syntax highlighted code block
+$ xset m 1/4 1
 
-# Header 1
-## Header 2
-### Header 3
+$ systemctl suspend
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+$ journalctl -xfu sshd
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+## References
 
-### Jekyll Themes
+UI: based on this post / github
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kabeero/dotfiles/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+https://www.reddit.com/r/unixporn/comments/64mihc/i3_kde_plasma_a_match_made_in_heaven/
 
-### Support or Contact
+https://i3wm.org/docs/userguide.html
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+second link will get mpd to show as a volume slider in pavucontrol
+
+https://wiki.archlinux.org/index.php/PulseAudio
+
+https://wiki.archlinux.org/index.php/PulseAudio#Music_Player_Daemon_(MPD)
+
+
+gentoo kernel config
+
+https://wiki.gentoo.org/wiki/Power_management/Processor
+
+https://wiki.gentoo.org/wiki/AMDGPU
