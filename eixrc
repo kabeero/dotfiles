@@ -1,0 +1,2671 @@
+# STRING
+# The file which is used instead of /etc/eixrc and ~/.eixrc.
+# This variable can of course only be set in the environment.
+EIXRC=""
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It defines whether you have a wide terminal (>80 columns).
+# An empty value or "auto" means that COLUMNS is used/calculated.
+WIDETERM=""
+
+# INTEGER
+# Set the terminal width to define the WIDETERM expansion.
+# An empty value or "auto" means that a heuristic is used instead.
+COLUMNS=""
+
+# PREFIXSTRING
+# This path is prepended to source commands in /etc/eixrc.
+# If set in /etc/eixrc it temporarily overrides the environment.
+# You must not use delayed substitution in this variable.
+EIXRC_SOURCE=""
+
+# STRING
+# This variable is used for delayed substitution in EIX_SYNC_CONF.
+# It contains code which is evaluated by eix-sync, so be aware of security!
+EIX_SYNC_OPTS=""
+
+# STRING
+# The content of this variable is appended to /etc/eix-sync.conf
+# In particular, it can be used to override options set in that file.
+# Parts of this variable are evaluated in eix-sync: Be aware of security!
+EIX_SYNC_CONF="%{EIX_SYNC_OPTS}"
+
+# STRING
+# This variable contains default options for the eix-remote script.
+# Note that its content is evaluated, so quote correctly. Typical example:
+# EIX_REMOTE_OPTS='-f /var/lib/layman/eix-caches.tar.bz2'
+EIX_REMOTE_OPTS=""
+
+# STRING
+# This variable contains default options for the eix-layman script.
+# Note that its content is evaluated, so quote correctly.
+EIX_LAYMAN_OPTS=""
+
+# STRING
+# This variable contains default options for the eix-test-obsolete script.
+EIX_TEST_OBSOLETE_OPTS="-d"
+
+# STRING
+# This variable contains default arguments for the eix-installed-after script.
+EIX_INSTALLED_AFTER=""
+
+# PREFIXSTRING
+# If this variable is set in the environment, then it is prefixed
+# to the path where /etc/eixrc is searched. If it is not set in the
+# environment, then PORTAGE_CONFIGROOT is used instead.
+# If both are unset, the EIX_PREFIX default value is used instead.
+# Moreover, EIX_PREFIX is used for delayed substitution for EPREFIX
+# and EPREFIX_SOURCE.
+EIX_PREFIX=""
+
+# PREFIXSTRING
+# This variable is only used for delayed substitution.
+# It influences most paths except for $HOME/.eixrc, the cache file
+# passed in the command line, PORTAGE_PROFILE, PORTDIR,
+# and overlays. In contrast to EPREFIX, further exceptions are:
+# PORTAGE_CONFIGROOT, portage/scripts-internal stuff and the eix cachefile.
+ROOT=""
+
+# PREFIXSTRING
+# This variable is used for delayed substitution for path prefixes.
+# It influences most paths except for $HOME/.eixrc, the cache file
+# passed in the command line, PORTAGE_PROFILE, PORTDIR, and overlays.
+EPREFIX="%{EIX_PREFIX}"
+
+# PREFIXSTRING
+# This variable is only used for delayed substitution.
+# It is the path prepended to PORTAGE_PROFILE, PORTDIR, and overlays.
+EPREFIX_TREE=""
+
+# PREFIXSTRING
+# It applies for those paths for which EPREFIX and ROOT should both apply.
+# So you can decide here what to do if both are nonempty. For instance,
+# the choice %{EPREFIX}%{ROOT} will apply both; the default applies EPREFIX
+# but not ROOT for these paths in such a case (i.e. if both are nonempty).
+EPREFIX_ROOT="%{??EPREFIX}%{EPREFIX}%{else}%{ROOT}%{}"
+
+# PREFIXSTRING
+# This path is prepended to the /etc paths.
+PORTAGE_CONFIGROOT="%{EPREFIX}"
+
+# PREFIXSTRING
+# This variable is only used for delayed substitution.
+# It is the path prepended to MAKE_GLOBALS and PORTAGE_REPOS_CONF.
+PORTAGE_DEFAULTS="%{EPREFIX}/usr/share/portage/config"
+
+# STRING
+# This file is used instead of %{PORTAGE_CONFIGROOT}/etc/make.globals
+# if it exists. This is reasonable for >=portage-2.2*
+MAKE_GLOBALS="%{PORTAGE_DEFAULTS}/make.globals"
+
+# STRING
+# This file is used to set the default repository information.
+PORTAGE_REPOS_CONF="%{PORTAGE_DEFAULTS}/repos.conf"
+
+# PREFIXSTRING
+# This variable is only used for delayed substitution.
+# It is used as prefix in the EXEC_EBUILD* and EBUILD_DEPEND_TEMP defaults.
+EPREFIX_PORTAGE_EXEC="%{EPREFIX}"
+
+# PREFIXSTRING
+# This path is prepended to source commands in /etc/make.{conf,globals}.
+EPREFIX_SOURCE="%{EIX_PREFIX}"
+
+# PREFIXSTRING
+# Prefix to the path where eix expects information about installed packages.
+EPREFIX_INSTALLED="%{EPREFIX_ROOT}"
+
+# PREFIXSTRING
+# This prefix is prepended to the portage cache.
+EPREFIX_PORTAGE_CACHE="%{EPREFIX}"
+
+# PREFIXSTRING
+# This prefix is prepended to overlays when their files are accessed.
+EPREFIX_ACCESS_OVERLAYS=""
+
+# PREFIXSTRING
+# This path is prepended to PORTDIR.
+EPREFIX_PORTDIR="%{EPREFIX_TREE}"
+
+# PREFIXSTRING
+# This path is prepended to PORTIDIR_OVERLAY values.
+EPREFIX_OVERLAYS="%{EPREFIX_TREE}"
+
+# PREFIXSTRING
+# This path is prepended to PORTAGE_PROFILE.
+EPREFIX_PORTAGE_PROFILE="%{EPREFIX_TREE}"
+
+# PREFIXSTRING
+# This is prepended to overlays in eix database to test whether they exist.
+EPREFIX_VIRTUAL="%{EPREFIX_TREE}"
+
+# STRING
+# This file is the default eix cache.
+EIX_CACHEFILE="%{EPREFIX}/var/cache/eix/portage.eix"
+
+# STRING
+# This file is the previous eix cache (used by eix-diff and eix-sync).
+EIX_PREVIOUS="%{EPREFIX}/var/cache/eix/previous.eix"
+
+# STRING
+# This is the eix cache used when -R is in effect. If the string is nonempty,
+# eix-remote uses this file for the output.
+EIX_REMOTE1="%{EPREFIX}/var/cache/eix/remote.eix"
+
+# STRING
+# This is the eix cache used when -Z is in effect. If the string is nonempty,
+# eix-remote uses this file for the output.
+EIX_REMOTE2="%{EPREFIX}/var/cache/eix/remote2.eix"
+
+# INTEGER
+# 1, 2, or 0 means that eix option -R, -Z, or neither is the default.
+REMOTE_DEFAULT="0"
+
+# STRING
+# This is a local copy of the remote archive used by eix-remote.
+# If the name is empty, only a temporary file is used.
+EIX_REMOTEARCHIVE1="%{EPREFIX}/var/cache/eix/remote.tar.bz2"
+
+# STRING
+# This is a local copy of the remote archive used by eix-remote.
+# If the name is empty, only a temporary file is used.
+EIX_REMOTEARCHIVE2="%{EPREFIX}/var/cache/eix/remote2.tar.bz2"
+
+# STRING
+# If nonempty, this will override the heuristics for eix-remote -L.
+LOCAL_LAYMAN=""
+
+# STRING
+# The path to the ebuild executable.
+EXEC_EBUILD="%{EPREFIX_PORTAGE_EXEC}/usr/bin/ebuild"
+
+# STRING
+# The path to the ebuild.sh executable.
+EXEC_EBUILD_SH="%{EPREFIX_PORTAGE_EXEC}/usr/lib64/portage/bin/ebuild.sh"
+
+# STRING
+# The path to the tempfile generated by "ebuild depend".
+EBUILD_DEPEND_TEMP="%{EPREFIX_PORTAGE_EXEC}/var/cache/edb/dep/aux_db_key_temp"
+
+# STRING
+# This file is considered as the world file.
+EIX_WORLD="%{EPREFIX_ROOT}/var/lib/portage/world"
+
+# STRING
+# This file is considered as the world_sets file.
+EIX_WORLD_SETS="%{EIX_WORLD}_sets"
+
+# BOOLEAN
+# Store the information of the world file in the cache file.
+# Set this to false if you do not want that everybody can get this information.
+SAVE_WORLD="true"
+
+# BOOLEAN
+# Prefer the current world file (if readable) over the data in the cachefile.
+CURRENT_WORLD="true"
+
+# STRING
+# Attempt to change to this user if possible. See EIX_UID.
+EIX_USER="portage"
+
+# STRING
+# Attempt to change to this group if possible. See EIX_GID.
+EIX_GROUP="%{EIX_USER}"
+
+# INTEGER
+# If EIX_USER is empty or nonexistent, use this user id.
+# In this case and if ${EIX_UID} <= 0, the user id is not changed.
+EIX_UID="250"
+
+# INTEGER
+# If EIX_GROUP is empty or nonexistent, use this group id.
+# In this case and if ${EIX_GID} <= 0, the group id is not changed.
+EIX_GID="%{EIX_UID}"
+
+# STRING
+# This variable is passed unchanged to ebuild.sh
+# Usually ebuild.sh uses it to calculate the PATH.
+PORTAGE_ROOTPATH="/opt/bin:/usr/x86_64-pc-linux-gnu/gcc-bin/4.7.3"
+
+# STRING
+# This variable is passed unchanged to ebuild.sh
+# Usually ebuild.sh uses it to calculate the PATH.
+PORTAGE_BIN_PATH=""
+
+# STRING
+# The default ARCH if none is specified by the profile.
+DEFAULT_ARCH="amd64"
+
+# INTEGER
+# This value is used as exit status if there are 0 matches.
+# The value of COUNT_ONLY_PRINTED is honoured.
+NOFOUND_STATUS="1"
+
+# INTEGER
+# This value is used as exit status if there are 2 or more matches.
+# The value of COUNT_ONLY_PRINTED is honoured.
+MOREFOUND_STATUS="0"
+
+# INTEGER
+# The maximal number of matches shown on terminal in non-compact mode.
+# The value 0 means all matches are shown.
+EIX_LIMIT="50"
+
+# INTEGER
+# The maximal number of matches shown on terminal in compact mode.
+# The value 0 means all matches are shown.
+EIX_LIMIT_COMPACT="200"
+
+# BOOLEAN
+# Whether --quick is on by default.
+QUICKMODE="false"
+
+# BOOLEAN
+# Whether --care is on.
+CAREMODE="false"
+
+# BOOLEAN
+# If true, use build time from BUILD_TIME entry instead of reading the install
+# time from the directory timestamp. This is usually preferable but slower.
+# The BUILD_TIME exists only for packages emerged with >=portage-2.2_rc63
+USE_BUILD_TIME="true"
+
+# BOOLEAN
+# Whether --quiet is on by default.
+QUIETMODE="false"
+
+# STRING
+# This string is appended to the output of --print.
+# To read variables in a shell without omitting trailing spaces, use e.g.
+# VAR=`PRINT_APPEND=x eix --print VAR` ; VAR=${VAR%x}
+PRINT_APPEND="\\n"
+
+# BOOLEAN
+# If true, eix-diff will only consider version changes for installed packages.
+DIFF_ONLY_INSTALLED="false"
+
+# BOOLEAN
+# If true, eix-diff will not consider slots for version changes.
+DIFF_NO_SLOTS="false"
+
+# BOOLEAN
+# If false, eix-diff will mix deleted and changed packages
+DIFF_SEPARATE_DELETED="true"
+
+# BOOLEAN
+# Should eix-diff print a header info line?
+DIFF_PRINT_HEADER="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, RESTRICT and PROPERTIES values are output.
+NO_RESTRICTIONS="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, tags are output for packages/versions with *.tbz2 files.
+NO_BINARY="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, USE_EXPAND variables are output separately.
+EIX_USE_EXPAND="true"
+
+# BOOLEAN
+# If true, calculate RESTRICT/PROPERTIES for installed versions.
+RESTRICT_INSTALLED="true"
+
+# BOOLEAN
+# If true, read RESTRICT for installed versions always from disk.
+# This is ignored if RESTRICT_INSTALLED=false.
+CARE_RESTRICT_INSTALLED="true"
+
+# BOOLEAN
+# If true, read *DEPEND for installed versions always from disk.
+# This is ignored if DEP=false.
+DEPS_INSTALLED="true"
+
+# BOOLEAN
+# If true, store/use {R,P,H,}DEPEND (e.g. shown with eix -lv).
+# Usage of DEP roughly doubles disk resp. memory requirements.
+DEP="true"
+
+# STRING
+# Defines whether --compact or --verbose is on by default.
+DEFAULT_FORMAT="normal"
+
+# STRING
+# Allowed values are true/false/never.
+# If true, always print the number of matches (even 0 or 1) in the last line.
+PRINT_COUNT_ALWAYS="false"
+
+# BOOLEAN
+# Do not output colors.
+NOCOLORS="%{NOCOLOR}"
+
+# BOOLEAN
+# Do not output status line.
+NOSTATUSLINE="%{NOCOLOR}"
+
+# BOOLEAN
+# Do not output percentage progress.
+NOPERCENTAGE="%{NOCOLOR}"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It is the default for FORCE_{COLORS,STATUSLINE,PERCENTAGE}.
+FORCE_USECOLORS="false"
+
+# BOOLEAN
+# Output colors even if not printing to a terminal.
+FORCE_COLORS="%{FORCE_USECOLORS}"
+
+# BOOLEAN
+# Output status line even if not printing to a terminal.
+FORCE_STATUSLINE="%{FORCE_USECOLORS}"
+
+# BOOLEAN
+# Output percentage progress even if not printing to a terminal.
+FORCE_PERCENTAGE="%{FORCE_USECOLORS}"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, versions are only colored according to the local setting.
+COLOR_ORIGINAL="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, COLOR_ORIGINAL=false has no effect on versions which are
+# only locally masked (i.e. [m]).
+COLOR_LOCAL_MASK="false"
+
+# BOOLEAN
+# Defines whether --versionsorted is on by default.
+STYLE_VERSION_SORTED="false"
+
+# BOOLEAN
+# Defines whether --versionlines is on by default.
+STYLE_VERSION_LINES="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, the slotnames appended to versions are not colored.
+COLORED_SLOTS="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, separated slots from versions with a colon instead of braces.
+COLON_SLOTS="false"
+
+# BOOLEAN
+# Whether default concatenation of queries is -o (or) or -a (and)
+DEFAULT_IS_OR="false"
+
+# BOOLEAN
+# Whether checks for duplicate packages occur only among overlays
+DUP_PACKAGES_ONLY_OVERLAYS="false"
+
+# BOOLEAN
+# Whether checks for duplicate versions occur only among overlays
+DUP_VERSIONS_ONLY_OVERLAYS="false"
+
+# STRING
+# Which overlays to list (all/all-if-used/all-used/all-used-renumbered/no)
+OVERLAYS_LIST="all-used-renumbered"
+
+# INTEGER
+# The default maximal levensthein distance for which a string is
+# considered a match for the fuzzy match algorithm.
+LEVENSHTEIN_DISTANCE="2"
+
+# BOOLEAN
+# Whether eix-update -v is on by default (output cache method per ebuild)
+UPDATE_VERBOSE="false"
+
+# STRING
+# This string is appended to all cache methods using parse[*] or ebuild[*].
+CACHE_METHOD_PARSE="#metadata-md5#metadata-flat#assign"
+
+# STRING
+# Portage cache-backend that should be used for PORTDIR
+# (metadata[:*]/sqlite/flat[:*]/portage-2.1/parse[*][|]ebuild[*]/eix[*][:*])
+PORTDIR_CACHE_METHOD="metadata-md5-or-flat"
+
+# STRING
+# Portage cache-backend that should be used for the overlays.
+# (metadata[:*]/sqlite/flat[:*]/portage-2.1/parse[*][|]ebuild[*]/eix[*][:*])
+OVERLAY_CACHE_METHOD="parse|ebuild*"
+
+# STRING
+# This variable is only used for delayed substitution in CACHE_METHOD.
+# It is meant to be a local addition to CACHE_METHOD.
+ADD_CACHE_METHOD=""
+
+# STRING
+# Overrides OVERLAY_CACHE_METHOD or PORTDIR_CACHE_METHOD for particular paths.
+# This is a list of pairs DIR-PATTERN METHOD. Later entries take precedence.
+CACHE_METHOD="%{ADD_CACHE_METHOD}"
+
+# STRING
+# This variable is only used for delayed substitution in OVERRIDE_CACHE_METHOD.
+# It is meant to be a local addition to OVERRIDE_CACHE_METHOD.
+ADD_OVERRIDE_CACHE_METHOD=""
+
+# STRING
+# This variable can override the choices of CACHE_METHOD,
+# and in addition it can override the choices made by KEEP_VIRTUALS.
+OVERRIDE_CACHE_METHOD="%{ADD_OVERRIDE_CACHE_METHOD}"
+
+# STRING
+# This is a list of pairs DIR-PATTERN OVERLAY_LABEL.
+# When a new cachefile is created, the overlay matching DIR-PATTERN obtains
+# the label OVERLAY_LABEL, independent of the content of profiles/repo_name
+# or the label associated by KEEP_VIRTUALS.
+# The last matching DIR_PATTERN takes precedence.
+REPO_NAMES=""
+
+# STRING
+# List of overlays that should be excluded from the index.
+EXCLUDE_OVERLAY=""
+
+# STRING
+# List of overlays that should be added to the index.
+ADD_OVERLAY=""
+
+# BOOLEAN
+# If true and overlays are excluded or added, export modified PORTDIR_OVERLAY.
+EXPORT_PORTDIR_OVERLAY="true"
+
+# BOOLEAN
+# Keep virtuals of the old cache file by adding corresponding entries
+# implicitly to the values of ADD_OVERLAY and ADD_CACHE_METHOD
+KEEP_VIRTUALS="false"
+
+# BOOLEAN
+# If false, /etc/portage and ACCEPT_KEYWORDS are ignored.
+LOCAL_PORTAGE_CONFIG="true"
+
+# BOOLEAN
+# If true, ACCEPT_KEYWORDS is used even without LOCAL_PORTAGE_CONFIG,
+# e.g. to determine the "default" stability.
+ALWAYS_ACCEPT_KEYWORDS="false"
+
+# BOOLEAN
+# If +/-, eix -u will match as if LOCAL_PORTAGE_CONFIG=true/false.
+UPGRADE_LOCAL_MODE=""
+
+# BOOLEAN
+# If +/-, recommendations for up- or downgrade will act as if
+# LOCAL_PORTAGE_CONFIG=true/false.
+RECOMMEND_LOCAL_MODE=""
+
+# BOOLEAN
+# Are packages/sets in included sets part of the parent set?
+RECURSIVE_SETS="true"
+
+# BOOLEAN
+# If true, upgrade tests succeed for installed packages with new higher slots.
+# Use the files SLOT_UPGRADE_FORBID or SLOT_UPGRADE_ALLOW, respectively,
+# to specify exceptions.
+UPGRADE_TO_HIGHEST_SLOT="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It defines whether all information lines are printed (even if empty).
+PRINT_ALWAYS="false"
+
+# BOOLEAN
+# If false, count independently of whether the matches are printed.
+COUNT_ONLY_PRINTED="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It defines whether a bug reference is printed in verbose format.
+PRINT_BUGS="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It defines whether eix-diff will output installed versions.
+DIFF_PRINT_INSTALLED="true"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the command used to print the package set names.
+PRINT_SETNAMES="%{?ALL_SETNAMES}all%{}setnames"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, no slot information is printed.
+PRINT_SLOTS="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution in PRINT_IUSE.
+# If false, no IUSE data is printed for eix. See also VERSION_IUSE_*
+EIX_PRINT_IUSE="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution in PRINT_IUSE.
+# If false, no IUSE data is printed for eix-diff.
+DIFF_PRINT_IUSE="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution in PRINT_IUSE.
+# It is unused by default.
+UPDATE_PRINT_IUSE="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution in PRINT_IUSE.
+# It is unused by default.
+DROP_PRINT_IUSE="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, no IUSE data is printed.
+PRINT_IUSE="%{*PRINT_IUSE}"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines (nonverbose) outputs IUSE for each version.
+VERSION_IUSE_NORMAL="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines --verbose outputs IUSE for each version.
+VERSION_IUSE_VERBOSE="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, KEYWORDS are never output.
+PRINT_KEYWORDS="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines (nonverbose) outputs KEYWORDS.
+VERSION_KEYWORDS_NORMAL="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines --verbose outputs KEYWORDS.
+VERSION_KEYWORDS_VERBOSE="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If false, mask reasons are never output.
+PRINT_MASKREASONS="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines (nonverbose) outputs mask reasons.
+MASKREASONS_NORMAL="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines --verbose outputs mask reasons.
+MASKREASONS_VERBOSE="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines (nonverbose) outputs {,R,P}DEPEND.
+VERSION_DEPS_NORMAL="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix --versionlines --verbose outputs {,R,P}DEPEND.
+VERSION_DEPS_VERBOSE="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# Print effective keywords (modified by profile) instead of KEYWORDS.
+USE_EFFECTIVE_KEYWORDS="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It defines whether to include "system" in package sets output.
+ALL_SETNAMES="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, compact format prints no version if none is installable.
+NOBEST_COMPACT="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, compact format prints no versions if all installable vanished.
+NOBEST_CHANGE="true"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix-diff prints no version if none is installable.
+DIFF_NOBEST="false"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# If true, eix-diff prints no versions if all installable vanished.
+DIFF_NOBEST_CHANGE="false"
+
+# STRING
+# The current terminal. Usually this is set by the environment variable.
+TERM="xterm-256color"
+# changed locally, default was:
+# TERM="xterm"
+
+# STRING
+# If the beginning of TERM matches a word of this space-separated list,
+# it is assumed that the terminal supports a status line.
+TERM_STATUSLINE="xterm screen rxvt aterm konsole gnome Eterm eterm kterm interix"
+
+# STRING
+# If the beginning of TERM matches a word of this space-separated list, and
+# if a status line is active, also a soft status line will be output.
+TERM_SOFTSTATUSLINE="screen"
+
+# STRING
+# If this is nonempty, it is used as the exit statusline.
+# An optional leading space in this string is ignored.
+EXIT_STATUSLINE=""
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It decides whether background colors are reset on every newline.
+# This may be desired if you set BG? to a value differrent than "none".
+RESET_ALL_LINES="true"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the background color for color scheme 0. Use "none" for no change.
+BG0="none"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the background color for color scheme 1. Use "none" for no change.
+BG1="black"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the background color for color scheme 2. Use "none" for no change.
+BG2="none"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the background color for color scheme 3. Use "none" for no change.
+BG3="white"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is used instead of BG0 to ignore BG0 if SOLARIZED is set.
+BG0S="%{!SOLARIZED}%{BG0}%{else}none%{}"
+
+# STRING
+# This is a list of regular expressions; if one of it matches TERM, then
+# COLORSCHEME1 is used instead of COLORSCHEME0. The intention is that the
+# specified terminals default to 256 colors.
+TERM_ALT1="256 [aeEkx]term konsole gnome putty %{TERM_ALT1_ADD}"
+
+# STRING
+# This variable is only used for delayed substitution of TERM_ALT1.
+TERM_ALT1_ADD=""
+
+# STRING
+# This is a list of regular expressions; if one of it matches TERM, then
+# COLORSCHEME2 is used instead of COLORSCHEME0. The intention is that the
+# specified terminals default to 88 colors.
+TERM_ALT2="88 rxvt-unicode[^2]*\$ %{TERM_ALT2_ADD}"
+
+# STRING
+# This variable is only used for delayed substitution of TERM_ALT2.
+TERM_ALT2_ADD=""
+
+# STRING
+# This is a list of regular expressions; if one of it matches TERM, then
+# COLORSCHEME3 is used instead of COLORSCHEME0. The intention is that
+# these terminals are exceptions made on user request.
+TERM_ALT3=""
+
+# STRING
+# The value "true" or "false" means that the first or second entry of the
+# COLORSCHEME* variables is used (meaning black or white background, resp.).
+# The value "auto" means a heuristic based on TERM_DARK and COLORFGBG_DARK.
+DARK="auto"
+
+# STRING
+# A list of pairs regexp1 darkmode1 regexp2 darkmode2 ... [default darkmode].
+# If DARK=auto the first darkmode for which TERM matches regexp is assumed.
+# In modes true* and false* also COLORGBGB is respected by COLORFGBG_DARK.
+TERM_DARK="linux true cygwin true putty true true*"
+
+# STRING
+# This is a list of regular expressions.
+# If modes true* and false* are active in TERM_DARK and COLORFGBG is nonempty,
+# then the darkmode depends on whether COLORFGBG matches at least one entry.
+COLORFGBG_DARK=";0?[02-689]\$ ;1[0-46]\$ ;[a-km-vxz][a-z]*\$"
+
+# STRING
+# Usually, this is set in the environment by some terminals like rxvt.
+# It is only used if DARK=auto, see COLORFGBG_BLACK.
+COLORFGBG=""
+
+# BOOLEAN
+# This variable is only used in delayed substitution in COLORSCHEME?.
+# Set it (e.g. in your environment) if your terminal is configured to use
+# the solarized color scheme of Ethan Schoonover.
+#SOLARIZED="false"
+SOLARIZED="true"
+
+# STRING
+# This is one or two numbers. If TERM_ALT? does not match, this chooses the
+# corresponding number in color specifications (starting from 0).
+# If two numbers are specified, the choice depends on DARK.
+# The intention of this variable is to select the color scheme used for
+# 8/16 color terminals.
+COLORSCHEME0="%{!SOLARIZED}0 2%{else}5%{}"
+
+# STRING
+# This is one or two numbers. If TERM_ALT1 matches, this chooses the
+# corresponding number in color specifications (starting from 0).
+# If two numbers are specified, the choice depends on DARK.
+# The intention of this variable is to select the color scheme used for
+# 256 color terminals.
+COLORSCHEME1="%{!SOLARIZED}1 3%{else}4%{}"
+
+# STRING
+# This is one or two numbers. If TERM_ALT2 matches, this chooses the
+# corresponding number in color specifications (starting from 0).
+# If two numbers are specified, the choice depends on DARK.
+# The intention of this variable is to select the color scheme used for
+# 88 color terminals.
+COLORSCHEME2="%{COLORSCHEME0}"
+
+# STRING
+# This is one or two numbers. If TERM_ALT3 matches, this chooses the
+# corresponding number in color specifications (starting from 0).
+# If two numbers are specified, the choice depends on DARK.
+# The intention of this variable is to select the color scheme used for
+# user-specified terminals.
+COLORSCHEME3="%{COLORSCHEME0}"
+
+# BOOLEAN
+# If false, sort installed useflags by whether they are set.
+SORT_INST_USE_ALPHA="false"
+
+# STRING
+# Allowed values are true/false/repository.
+# If true, always check from which overlay a package version was installed.
+# If false, only packages with versions in at least two trees are checked.
+# The compromise - repository - checks at least always the repository files.
+# Without a check, the assumed overlay may be wrong if the version was
+# actually installed from a place not in the database anymore.
+CHECK_INSTALLED_OVERLAYS="repository"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_FIELD for description.
+MATCH_FIELD_DESCRIPTION="[ ]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_FIELD for set.
+MATCH_FIELD_SET="[@]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_FIELD for homepage.
+MATCH_FIELD_HOMEPAGE="http.*:"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_FIELD for category/name.
+MATCH_FIELD_CATEGORY_NAME="/"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_FIELD for license.
+MATCH_FIELD_LICENSE="GPL|BSD|Art"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_FIELD for license.
+MATCH_FIELD_DEPS="[<>=!]"
+
+# STRING
+# This is a list of strings of the form regexp[ ]match_field.
+# If regexp matches the search pattern, use match_field as the default.
+# A fallback match_field may be specified as the last entry in the list.
+# Admissible values for match_field are: name, category, category/name,
+# description, license, homepage, set, slot, installed-slot, use
+# with-use, without-use.
+DEFAULT_MATCH_FIELD="%{\\MATCH_FIELD_DESCRIPTION} description %{\\MATCH_FIELD_SET} set %{\\MATCH_FIELD_HOMEPAGE} homepage %{\\MATCH_FIELD_CATEGORY_NAME} category/name %{\\MATCH_FIELD_LICENSE} license %{\\MATCH_FIELD_DEPS} deps name"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_ALGORITHM for regex.
+MATCH_ALGORITHM_REGEX="[][^\$|()]|[.][*+?]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_ALGORITHM for pattern.
+MATCH_ALGORITHM_PATTERN1="^[*]|[^][().][*]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_ALGORITHM for substring.
+MATCH_ALGORITHM_SUBSTRING="[^][().][+?]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_ALGORITHM for exact.
+MATCH_ALGORITHM_EXACT="^[@]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_ALGORITHM for pattern.
+MATCH_ALGORITHM_PATTERN2=":"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is a regular expression used in DEFAULT_MATCH_ALGORITHM for begin.
+MATCH_ALGORITHM_BEGIN="/"
+
+# STRING
+# This is a list of strings of the form regexp[ ]match_algorithm.
+# If regexp matches the search pattern, use match_algorithm as the default.
+# A fallback match_algorithm may be specified as the last entry in the list.
+# Admissible values for match_algorithm are: regex, pattern, substring,
+# begin, end, exact, fuzzy.
+DEFAULT_MATCH_ALGORITHM="%{\\MATCH_ALGORITHM_REGEX} regex %{\\MATCH_ALGORITHM_PATTERN1} pattern %{\\MATCH_ALGORITHM_SUBSTRING} substring %{\\MATCH_ALGORITHM_EXACT} exact %{\\MATCH_ALGORITHM_PATTERN2} pattern %{\\MATCH_ALGORITHM_BEGIN} begin regex"
+
+# BOOLEAN
+# Defines whether empty entries in /etc/portage/package.* are shown with -t.
+TEST_FOR_EMPTY="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.accept_keywords is tested with -t.
+TEST_KEYWORDS="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.mask is tested with -t.
+TEST_MASK="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.unmask is tested with -t.
+TEST_UNMASK="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.use is tested with -t.
+TEST_USE="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.env is tested with -t.
+TEST_ENV="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.license is tested with -t.
+TEST_LICENSE="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.accept_restrict is tested with -t.
+TEST_RESTRICT="true"
+
+# BOOLEAN
+# Defines whether /etc/portage/package.cflags is tested with -t.
+TEST_CFLAGS="true"
+
+# BOOLEAN
+# Defines whether removed packages are tested with -t.
+TEST_REMOVED="true"
+
+# BOOLEAN
+# Defines whether non-existing installed versions are positive for -T.
+TEST_FOR_NONEXISTENT="true"
+
+# BOOLEAN
+# Defines whether versions are non-existent for TEST_FOR_NONEXISTENT
+# if they come from a different overlay than the installed version.
+NONEXISTENT_IF_OTHER_OVERLAY="true"
+
+# BOOLEAN
+# Defines whether masked versions are non-existent for TEST_FOR_NONEXISTENT.
+NONEXISTENT_IF_MASKED="true"
+
+# BOOLEAN
+# Defines whether redundant entries are positive for -T.
+TEST_FOR_REDUNDANCY="true"
+
+# STRING
+# If full or true modify ARCH by ACCEPT_KEYWORDS.
+# This determines which keywords are considered as ARCH or OTHERARCH.
+# The value full also influences the original ARCH keywording.
+ACCEPT_KEYWORDS_AS_ARCH="full"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords lists the same keyword
+# twice for the versions in question.
+REDUNDANT_IF_DOUBLE="some"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords has two lines for
+# identical target.
+REDUNDANT_IF_DOUBLE_LINE="some"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords lists two different
+# keywords, e.g. ~ARCH and -*, for the versions in question.
+REDUNDANT_IF_MIXED="false"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords lists a keywords which can
+# be replaced by a weaker keyword, e.g. -* or ~OTHERARCH or OTHERARCH
+# in place of ~ARCH, or ~OTHERARCH in place of OTHERARCH,
+# for the versions in question.
+REDUNDANT_IF_WEAKER="all-installed"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords lists a strange keyword
+# e.g. UNKNOWNARCH (unknown to the .ebuild and ARCH) or -OTHERARCH,
+# for the versions in question.
+REDUNDANT_IF_STRANGE="some"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords provides keywords which do
+# not change the availability keywords status for the versions in question.
+REDUNDANT_IF_NO_CHANGE="all-installed"
+
+# STRING
+# Applies if /etc/portage/package.mask contains entries
+# which do not change the mask status for the versions in question.
+REDUNDANT_IF_MASK_NO_CHANGE="all-uninstalled"
+
+# STRING
+# Applies if /etc/portage/package.unmask contains entries
+# which do not change the mask status for the versions in question.
+REDUNDANT_IF_UNMASK_NO_CHANGE="all-installed"
+
+# STRING
+# Applies if /etc/portage/package.mask matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_MASKED="some"
+
+# STRING
+# Applies if /etc/portage/package.unmask matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_UNMASKED="some"
+
+# STRING
+# Applies if /etc/portage/package.use matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_USE="false"
+
+# STRING
+# Applies if /etc/portage/package.env matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_ENV="false"
+
+# STRING
+# Applies if /etc/portage/package.license matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_LICENSE="some"
+
+# STRING
+# Applies if /etc/portage/package.accept_restrict matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_RESTRICT="some"
+
+# STRING
+# Applies if /etc/portage/package.cflags matches twice
+# for the versions in question.
+REDUNDANT_IF_DOUBLE_CFLAGS="false"
+
+# STRING
+# Applies if /etc/portage/package.accept_keywords contains a matching entry.
+REDUNDANT_IF_IN_KEYWORDS="-some"
+
+# STRING
+# Applies if /etc/portage/package.mask matches.
+REDUNDANT_IF_IN_MASK="-some"
+
+# STRING
+# Applies if /etc/portage/package.unmask matches.
+REDUNDANT_IF_IN_UNMASK="-some"
+
+# STRING
+# Applies if /etc/portage/package.use matches.
+REDUNDANT_IF_IN_USE="false"
+
+# STRING
+# Applies if /etc/portage/package.env matches.
+REDUNDANT_IF_IN_ENV="false"
+
+# STRING
+# Applies if /etc/portage/package.license matches.
+REDUNDANT_IF_IN_LICENSE="-some"
+
+# STRING
+# Applies if /etc/portage/package.accept_restrict matches.
+REDUNDANT_IF_IN_RESTRICT="-some"
+
+# STRING
+# Applies if /etc/portage/package.cflags matches.
+REDUNDANT_IF_IN_CFLAGS="false"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the directory where eix searches for its package.*.*/sets.eix files.
+EIXCFGDIR="%{PORTAGE_CONFIGROOT}/etc/portage"
+
+# BOOLEAN
+# If UPGRADE_TO_HIGHEST_SLOT=true, then packages listed in these files/dirs
+# are treated as if UPGRADE_TO_HIGHEST_SLOT=false.
+SLOT_UPGRADE_FORBID="%{\\EIXCFGDIR}/package.slot_upgrade_forbid"
+
+# BOOLEAN
+# If UPGRADE_TO_HIGHEST_SLOT=false, then packages listed in these files/dirs
+# are treated as if UPGRADE_TO_HIGHEST_SLOT=true.
+SLOT_UPGRADE_ALLOW="%{\\EIXCFGDIR}/package.slot_upgrade_allow"
+
+# STRING
+# Entries listed in these files/dirs are excluded for -t TEST_KEYWORDS.
+KEYWORDS_NONEXISTENT="%{\\EIXCFGDIR}/package.accept_keywords.nonexistent %{\\EIXCFGDIR}/package.keywords.nonexistent"
+
+# STRING
+# Entries listed in these files/dirs are excluded for -t TEST_MASK.
+MASK_NONEXISTENT="%{\\EIXCFGDIR}/package.mask.nonexistent"
+
+# STRING
+# Entries listed in these files/dirs are excluded for -t TEST_UNMASK.
+UNMASK_NONEXISTENT="%{\\EIXCFGDIR}/package.unmask.nonexistent"
+
+# STRING
+# Entries listed in these files/dire are excluded for -t TEST_USE.
+USE_NONEXISTENT="%{\\EIXCFGDIR}/package.use.nonexistent"
+
+# STRING
+# Entries listed in these files/dire are excluded for -t TEST_ENV.
+ENV_NONEXISTENT="%{\\EIXCFGDIR}/package.env.nonexistent"
+
+# STRING
+# Entries listed in these files/dirs are excluded for -t TEST_LICENSE.
+LICENSE_NONEXISTENT="%{\\EIXCFGDIR}/package.license.nonexistent"
+
+# STRING
+# Entries listed in these files/dirs are excluded for -t TEST_RESTRICT.
+RESTRICT_NONEXISTENT="%{\\EIXCFGDIR}/package.accept_restrict.nonexistent"
+
+# STRING
+# Entries listed in these files/dirs are excluded for -t TEST_CFLAGS.
+CFLAGS_NONEXISTENT="%{\\EIXCFGDIR}/package.cflags.nonexistent"
+
+# STRING
+# Packages listed in these files/dirs are excluded for -t TEST_REMOVED.
+INSTALLED_NONEXISTENT="%{\\EIXCFGDIR}/package.installed.nonexistent"
+
+# STRING
+# This variable is only used for delayed substitution in PACKAGE_NOWARN.
+# It is meant to be a local addition to PACKAGE_NOWARN.
+ADD_PACKAGE_NOWARN=""
+
+# BOOLEAN
+# This variable is only used for delayed substitution in PACKAGE_NOWARN.
+# If it is set then the files from OBSOLETE_PACKAGE_NOWARN are used.
+OBSOLETE_NOWARN="false"
+
+# STRING
+# This variable is used for delayed substitution in PACKAGE_NOWARN if the
+# variable OBSOLETE_NOWARN is set.
+OBSOLETE_PACKAGE_NOWARN="%{\\EIXCFGDIR}/package.accept_keywords.nowarn %{\\EIXCFGDIR}/package.keywords.nowarn %{\\EIXCFGDIR}/package.mask.nowarn %{\\EIXCFGDIR}/package.unmask.nowarn %{\\EIXCFGDIR}/package.use.nowarn %{\\EIXCFGDIR}/package.env.nowarn %{\\EIXCFGDIR}/package.license.nowarn %{\\EIXCFGDIR}/package.accept_restrict.nowarn %{\\EIXCFGDIR}/package.cflags.nowarn %{\\EIXCFGDIR}/package.installed.nowarn"
+
+# STRING
+# This file/directory contains exceptions for -T tests.
+PACKAGE_NOWARN="%{\\EIXCFGDIR}/package.nowarn %{?OBSOLETE_NOWARN}%{OBSOLETE_PACKAGE_NOWARN} %{}%{ADD_PACKAGE_NOWARN}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It specifies directories for EIX_LOCAL_SETS.
+EIX_LOCAL_SETS_ADD=""
+
+# STRING
+# This is a space-separated list of directories containing set definitions.
+EIX_LOCAL_SETS="%{EIX_LOCAL_SETS_ADD} %{\\EIXCFGDIR}/sets.eix %{\\PORTAGE_CONFIGROOT}/etc/portage/sets */sets sets"
+
+# STRING
+# This regular expression describes the recognized EAPIs in .ebuild suffixes.
+# You might need to modify it according to the installed portage version.
+# Leave it empty if EAPI-suffixed ebuilds (GLEP 55) should be ignored.
+EAPI_REGEX="[0-9]+"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the color used for default colors.
+COLOR_RESET=";%{BG0S}|;%{BG1}|;%{BG2}|;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the color used for default colors.
+COLOR_RESET_BG="none;%{BG0S}|none;%{BG1}|none;%{BG2}|none;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the name of packages.
+COLOR_NAME=",1;%{BG0S}|253,1;%{BG1}|,1;%{BG2}|232;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the name of world packages.
+COLOR_WORLD="green,1;%{BG0S}|47,1;%{BG1}|green,1;%{BG2}|22,1;%{BG3}|cyan,1|cyan,1"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the name of world sets packages.
+COLOR_WORLD_SETS="yellow,1;%{BG0S}|214,1;%{BG1}|blue,1;%{BG2}|33,1;%{BG3}|purple,1|purple,1"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the category of packages.
+COLOR_CATEGORY="%{COLOR_NORMAL}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the category of system packages.
+COLOR_CATEGORY_SYSTEM="yellow;%{BG0S}|154,1;%{BG1}|blue;%{BG2}|57,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the category of world packages.
+COLOR_CATEGORY_WORLD="%{COLOR_WORLD}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the category of world sets packages.
+COLOR_CATEGORY_WORLD_SETS="%{COLOR_WORLD_SETS}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing upgrade recommendation texts.
+COLOR_UPGRADE_TEXT="cyan,1;%{BG0S}|87,1;%{BG1}|blue,1;%{BG2}|21,1;%{BG3}|39,1"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing downgrade recommendation texts.
+COLOR_DOWNGRADE_TEXT="blue,1;%{BG0S}|135,1;%{BG1}|purple,1;%{BG2}|89,1;%{BG3}|135,1"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing upgrade recommendation tags.
+COLOR_UPGRADE="%{COLOR_UPGRADE_TEXT;inverse}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing downgrade recommendation tags.
+COLOR_DOWNGRADE="%{COLOR_DOWNGRADE_TEXT;inverse}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing tags for uninstalled packages
+# which have gained a stable version.
+DIFF_COLOR_UNINST_STABILIZE="%{COLOR_STABLE,1}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing tags for installed packages
+# which have gained a stable version.
+DIFF_COLOR_INST_STABILIZE="%{DIFF_COLOR_UNINST_STABILIZE;inverse}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for "better version" tags (eix-diff).
+DIFF_COLOR_BETTER="%{DIFF_COLOR_CHANGED}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for "worse version" tags (eix-diff).
+DIFF_COLOR_WORSE="%{DIFF_COLOR_DELETE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for "new package" tags (eix-diff).
+DIFF_COLOR_NEW_TAG="%{DIFF_COLOR_NEW}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for "new package" separators (eix-diff).
+DIFF_COLOR_NEW="%{COLOR_STABLE,1}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for "deleted package" separators (eix-diff).
+DIFF_COLOR_DELETE="red,1;%{BG0S}|197,1;%{BG1}|red,1;%{BG2}|197,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for "changed package" separators (eix-diff).
+DIFF_COLOR_CHANGED="yellow;%{BG0S}|226;%{BG1}|blue;%{BG2}|24;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for tagging installed packages.
+COLOR_INST_TAG="%{COLOR_STABLE,1;inverse}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for tagging uninstalled packages.
+COLOR_UNINST_TAG="%{COLOR_STABLE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the date.
+COLOR_DATE="purple,1;%{BG0S}|166;%{BG1}|purple,1;%{BG2}|130,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color of the DEPEND output.
+COLOR_DEPEND="none|248;%{BG1}|none|241,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the end of color of the DEPEND output.
+COLOR_DEPEND_END="none|;%{BG1}|none|;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing normal texts.
+COLOR_NORMAL=";%{BG0S}|252;%{BG1}|,1;%{BG2}|237,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing end of normal texts.
+COLOR_NORMAL_END="none|;%{BG1}|none|;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color of the mask reasons output.
+COLOR_MASKREASONS="red;%{BG0S}|177;%{BG1}|red;%{BG2}|201;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the set useflags.
+COLOR_SET_USE="red,1;%{BG0S}|125,1;%{BG1}|red,1;%{BG2}|125,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the unset useflags.
+COLOR_UNSET_USE="blue,1;%{BG0S}|33;%{BG1}|blue,1;%{BG2}|17;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing IUSE for available versions.
+COLOR_VERSION_IUSE=";%{BG0S}|168;%{BG1}|,1;%{BG2}|168,1;%{BG3}|yellow,1|yellow,1"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing collected IUSE for packages.
+COLOR_COLL_IUSE=";%{BG0S}|38;%{BG1}|,1;%{BG2}|61,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing USE_EXPAND variables.
+COLOR_USE_EXPAND_START=";%{BG0S}|115;%{BG1}|;%{BG2}|95,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing end of USE_EXPAND variables.
+COLOR_USE_EXPAND_END="none|;%{BG1}|none|;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the braces around collected USE.
+COLOR_USE_COLL="yellow,1;%{BG0S}|252;%{BG1}|blue;%{BG2}|237,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the version of installed packages.
+COLOR_INST_VERSION="black;blue|33,1;%{BG1}|black;green|30,1;%{BG3}|33,1"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the title texts for packages.
+COLOR_TITLE="green;%{BG0S}|34;%{BG1}|;%{BG2}|240,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the title texts for installed versions.
+COLOR_INST_TITLE="cyan;%{BG0S}|67;%{BG1}|cyan,1;%{BG2}|67,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for the title texts for available versions.
+COLOR_AVAILABLE_TITLE="purple;%{BG0S}|70;%{BG1}|purple;%{BG2}|65,1;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing a marked version of a packages.
+COLOR_MARKED_VERSION="%{COLOR_MARKED_NAME}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing the package sets.
+COLOR_PACKAGESETS="%{COLOR_WORLD_SETS}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color used for printing a marked package name.
+COLOR_MARKED_NAME="red,1;%{BG0S};%{MARK_VERSIONS}|207,1;%{BG1};%{MARK_VERSIONS}|red,1;%{BG2};%{MARK_VERSIONS}|164,1;%{BG3};%{MARK_VERSIONS}"
+
+# STRING
+# Color for the overlaykey in version listings.
+COLOR_OVERLAYKEY="cyan;%{BG0S}|87;%{BG1}|cyan,1;%{BG2}|26,1;%{BG3}|39"
+
+# STRING
+# Color for the overlaykey for virtual overlays in version listings.
+COLOR_VIRTUALKEY="purple;%{BG0S}|170;%{BG1}|purple,1;%{BG2}|92,1;%{BG3}|170"
+
+# STRING
+# Color after printing an overlay key.
+COLOR_KEYEND="%{COLOR_RESET}"
+
+# STRING
+# Color for printing an overlay name.
+COLOR_OVERLAYNAME="%{COLOR_NORMAL}"
+
+# STRING
+# Color after printing an overlay name.
+COLOR_OVERLAYNAMEEND=""
+
+# STRING
+# Color for printing the number of packages.
+COLOR_NUMBERTEXT="%{COLOR_NORMAL}"
+
+# STRING
+# Color after printing the number of packages.
+COLOR_NUMBERTEXTEND=""
+
+# STRING
+# Color for slots. This is only used for delayed substitution.
+COLOR_SLOTS="red,1;%{BG0S}|166,1;%{BG1}|red,1;%{BG2}|166,1;%{BG3}"
+
+# STRING
+# Color for versions with *.tbz2. This is only used for delayed substitution.
+COLOR_BINARY="blue,1;%{BG0S}|39,1;%{BG1}|blue,1;%{BG2}|39,1;%{BG3}|39,1"
+
+# STRING
+# Color for the restriction tags. This is only used for delayed substitution.
+COLOR_RESTRICT="red;%{BG0S}|99;%{BG1}|red;%{BG2}|53;%{BG3}|99"
+
+# STRING
+# Color for the properties tags. This is only used for delayed substitution.
+COLOR_PROPERTIES="cyan;%{BG0S}|143;%{BG1}|cyan,1;%{BG2}|57;%{BG3}|214"
+
+# STRING
+# Color for keywords. This is only used for delayed substitution.
+COLOR_KEYWORDS="cyan;%{BG0S}|73;%{BG1}|cyan,1;%{BG2}|26;%{BG3}"
+
+# STRING
+# Color for keywords*. This is only used for delayed substitution.
+COLOR_KEYWORDSS="%{COLOR_KEYWORDS}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines how installed versions are marked.
+MARK_INSTALLED="inverse"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines how upgrade candidate versions are marked.
+MARK_UPGRADE="bold"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines how the package versions passed with --pipe are marked.
+MARK_VERSIONS="underline"
+
+# BOOLEAN
+# This variable is only used for delayed substitution.
+# It is the default for NO{COLORS,STATUSLINE,PERCENTAGE}.
+NOCOLOR="false"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for upgrade recommendations.
+CHAR_UPGRADE="U"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for downgrade recommendations.
+CHAR_DOWNGRADE="D"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for installed packages.
+CHAR_INSTALLED="I"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for uninstalled packages.
+CHAR_UNINSTALLED="%{DIFF_CHAR_NEW}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for uninstalled packages which have gained
+# a stable version.
+DIFF_CHAR_UNINST_STABILIZE="%{DIFF_CHAR_INST_STABILIZE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for installed packages which have gained
+# a stable version.
+DIFF_CHAR_INST_STABILIZE="*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character printed for new packages (eix-diff).
+DIFF_CHAR_NEW="N"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character used for "better version" tags (eix-diff).
+DIFF_CHAR_BETTER=">"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the character used for "worse version" tags (eix-diff).
+DIFF_CHAR_WORSE="\\<"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag printed for upgrade recommendations.
+TAG_UPGRADE="(%{COLOR_UPGRADE})%{CHAR_UPGRADE}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag printed for downgrade recommendations.
+TAG_DOWNGRADE="(%{COLOR_DOWNGRADE})%{CHAR_DOWNGRADE}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag printed for installed packages.
+TAG_INSTALLED="(%{COLOR_INST_TAG})%{CHAR_INSTALLED}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag printed for uninstalled packages.
+TAG_UNINSTALLED="(%{COLOR_UNINST_TAG})%{CHAR_UNINSTALLED}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag for packages which have gained a stable version.
+TAG_STABILIZE="{installed}(%{DIFF_COLOR_INST_STABILIZE})%{DIFF_CHAR_INST_STABILIZE}{else}(%{DIFF_COLOR_UNINST_STABILIZE})%{DIFF_CHAR_UNINST_STABILIZE}{}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag printed for new packages (eix-diff).
+TAG_NEW="(%{DIFF_COLOR_NEW_TAG})%{DIFF_CHAR_NEW}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag used for "better version" (eix-diff).
+TAG_BETTER="(%{DIFF_COLOR_BETTER})%{DIFF_CHAR_BETTER}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the tag used for "worse version" (eix-diff).
+TAG_WORSE="(%{DIFF_COLOR_WORSE})%{DIFF_CHAR_WORSE}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the string used for "plain" tagging installed packages.
+STRING_PLAIN_INSTALLED="%{STRING_PLAIN_UNINSTALLED}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the string used for "plain" tagging uninstalled packages.
+STRING_PLAIN_UNINSTALLED="*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the string used for "new package" separators (eix-diff).
+DIFF_STRING_NEW=">>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the string used for "deleted package" separators (eix-diff).
+DIFF_STRING_DELETE="\\<\\<"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the string used for "changed package" separators (eix-diff).
+DIFF_STRING_CHANGED="=="
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines what to print if no version number is printed.
+FORMAT_NOBEST="%{FORMAT_COLOR_MASKED}--(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines what to print after "->" if there is no installable.
+FORMAT_NOBEST_CHANGE="%{FORMAT_COLOR_MASKED}??(%{COLOR_RESET})"
+
+# STRING
+# Tag for versions with *.tbz2. This is only used for delayed substitution.
+TAG_BINARY="\\{tbz2}"
+
+# STRING
+# Tag for RESTRICT=fetch. This is only used for delayed substitution.
+TAG_RESTRICT_FETCH="f"
+
+# STRING
+# Tag for RESTRICT=mirror. This is only used for delayed substitution.
+TAG_RESTRICT_MIRROR="m"
+
+# STRING
+# Tag for RESTRICT=primaryuri. This is only used for delayed substitution.
+TAG_RESTRICT_PRIMARYURI="p"
+
+# STRING
+# Tag for RESTRICT=binchecks. This is only used for delayed substitution.
+TAG_RESTRICT_BINCHECKS="b"
+
+# STRING
+# Tag for RESTRICT=strip. This is only used for delayed substitution.
+TAG_RESTRICT_STRIP="s"
+
+# STRING
+# Tag for RESTRICT=test. This is only used for delayed substitution.
+TAG_RESTRICT_TEST="t"
+
+# STRING
+# Tag for RESTRICT=userpriv. This is only used for delayed substitution.
+TAG_RESTRICT_USERPRIV="u"
+
+# STRING
+# Tag for RESTRICT=installsources. This is only used for delayed substitution.
+TAG_RESTRICT_INSTALLSOURCES="i"
+
+# STRING
+# Tag for RESTRICT=bindist. This is only used for delayed substitution.
+TAG_RESTRICT_BINDIST="d"
+
+# STRING
+# Tag for RESTRICT=parallel. This is only used for delayed substitution.
+TAG_RESTRICT_PARALLEL="P"
+
+# STRING
+# Tag for PROPERTIES=interactive. This is only used for delayed substitution.
+TAG_PROPERTIES_INTERACTIVE="i"
+
+# STRING
+# Tag for PROPERTIES=live. This is only used for delayed substitution.
+TAG_PROPERTIES_LIVE="l"
+
+# STRING
+# Tag for PROPERTIES=virtual. This is only used for delayed substitution.
+TAG_PROPERTIES_VIRTUAL="v"
+
+# STRING
+# Tag for PROPERTIES=set. This is only used for delayed substitution.
+TAG_PROPERTIES_SET="s"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "profile masked" versions.
+TAG_FOR_PROFILE="[P]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "package.masked" versions.
+TAG_FOR_MASKED="[M]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally profile masked but unmasked" versions.
+TAG_FOR_EX_PROFILE="{P}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally package.masked but unmasked" versions.
+TAG_FOR_EX_MASKED="{M}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "only locally masked" versions.
+TAG_FOR_LOCALLY_MASKED="[m]"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "stable" versions.
+TAG_FOR_STABLE=""
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "unstable" versions.
+TAG_FOR_UNSTABLE="~"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "-*" versions.
+TAG_FOR_MINUS_ASTERISK="-*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "-~*" versions.
+TAG_FOR_MINUS_UNSTABLE="-~*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "-ARCH" versions.
+TAG_FOR_MINUS_KEYWORD="-"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "ALIENARCH" versions.
+TAG_FOR_ALIEN_STABLE="*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "~ALIENARCH" versions.
+TAG_FOR_ALIEN_UNSTABLE="~*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "no keyword" versions.
+TAG_FOR_MISSING_KEYWORD="**"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally unstable but now stable" versions.
+TAG_FOR_EX_UNSTABLE="(~)"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally -* but now stable" versions.
+TAG_FOR_EX_MINUS_ASTERISK="(-*)"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally -~* but now stable" versions.
+TAG_FOR_EX_MINUS_UNSTABLE="(-~*)"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally -ARCH but now stable" versions.
+TAG_FOR_EX_MINUS_KEYWORD="(-)"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally ALIENARCH but now stable" versions.
+TAG_FOR_EX_ALIEN_STABLE="(*)"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally ~ALIENARCH but now stable" versions.
+TAG_FOR_EX_ALIEN_UNSTABLE="(~*)"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the tag for "originally no keyword but now stable" versions.
+TAG_FOR_EX_MISSING_KEYWORD="(**)"
+
+# STRING
+# This variable is used by delayed substitution in version formatters.
+# It prints a newline at the end of a version.
+VERSION_NEWLINE="\\n"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage with <bestslotupgradeversions:NAMEVERSION>
+# or <installedversions:NAMEVERION> or <availableversions:NAMEVERSION>.
+NAMEVERSION="<category>/<name>-<version>%{VERSION_NEWLINE}"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage with <bestslotupgradeversions:EQNAMEVERSION>
+# or <installedversions:EQNAMEVERION> or <availableversions:EQNAMEVERSION>.
+EQNAMEVERSION="=<category>/<name>-<version>%{VERSION_NEWLINE}"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage as <availableversion:ANAMESLOT:ANAMESLOT>.
+ANAMESLOT="{slotlast}<category>/<name>{slots}:<slot>{}%{VERSION_NEWLINE}"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage with <availableversion:ANAMEASLOT:ANAMEASLOT>.
+ANAMEASLOT="{slotlast}<category>/<name>:<slot>{!last}\\n{}{}%{VERSION_NEWLINE}"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage with <installedversions:NAMESLOT>.
+NAMESLOT="<category>/<name>{slots}:<slot>{}%{VERSION_NEWLINE}"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage with <installedversions:NAMEASLOT>.
+NAMEASLOT="<category>/<name>:<slot>%{VERSION_NEWLINE}"
+
+# STRING
+# strftime() format for printing the installation date in DATESORT
+DATESORT_DATE="%s	%x %X"
+
+# STRING
+# This variable is used as a version formatter.
+# It is an example for usage as <installedversions:DATESORT>. Typical usage:
+# eix -'*I' --format '<installedversions:DATESORT>' | sort | cut -f2-3
+DATESORT="<date:DATESORT_DATE>\\t%{NAMESLOT}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the DEPEND output.
+FORMAT_DEPEND="(%{COLOR_DEPEND})<depend*>(%{COLOR_DEPEND_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the RDEPEND output.
+FORMAT_RDEPEND="(%{COLOR_DEPEND})<rdepend*>(%{COLOR_DEPEND_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the PDEPEND output.
+FORMAT_PDEPEND="(%{COLOR_DEPEND})<pdepend*>(%{COLOR_DEPEND_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the HDEPEND output.
+FORMAT_HDEPEND="(%{COLOR_DEPEND})<hdepend*>(%{COLOR_DEPEND_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the DEPEND output with --verbose.
+FORMAT_DEPEND_VERBOSE="%{FORMAT_DEPEND}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the RDEPEND output with --verbose.
+FORMAT_RDEPEND_VERBOSE="%{FORMAT_RDEPEND}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the PDEPEND output with --verbose.
+FORMAT_PDEPEND_VERBOSE="%{FORMAT_PDEPEND}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the HDEPEND output with --verbose.
+FORMAT_HDEPEND_VERBOSE="%{FORMAT_HDEPEND}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is used for colored <use> in available versions; color is not reset.
+FORMAT_VERSION_IUSE="(%{COLOR_VERSION_IUSE})%{?EIX_USE_EXPAND}<use*>%{else}<use>%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is used for colored <colliuse>; color is not reset.
+FORMAT_COLLIUSE="(%{COLOR_COLL_IUSE})%{?EIX_USE_EXPAND}<colliuse*>%{else}<colliuse>%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is used for printing colored <keywords>; color is not reset.
+FORMAT_KEYWORDS="(%{COLOR_KEYWORDS})<versionkeywords>(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is used for printing colored <keywords*>; color is not reset.
+FORMAT_KEYWORDSS="(%{COLOR_KEYWORDSS})<versionkeywords*>(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines what to output for KEYWORDS* if they equal KEYWORDS.
+FORMAT_KEYWORDS_EQUAL="{versionkeywords}(%{COLOR_KEYWORDSS})\$\\{KEYWORDS\\}(%{COLOR_RESET}){}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It sets the runtime variable $mask to the masking tag, and unless the
+# runtime variable $color is set, it outputs the color and sets $color.
+FORMAT_MASK_TAG="{!*mask}{washardmasked}%{?COLOR_ORIGINAL}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}%{}{isprofilemasked}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*mask=\"%{TAG_FOR_PROFILE}\"}{else}{ismasked}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*mask=\"%{TAG_FOR_MASKED}\"}{else}{wasprofilemasked}{*mask=\"%{TAG_FOR_EX_PROFILE}\"}{else}{*mask=\"%{TAG_FOR_EX_MASKED}\"}{}{}{}{else}{ishardmasked}%{?COLOR_LOCAL_MASK}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}%{}{*mask=\"%{TAG_FOR_LOCALLY_MASKED}\"}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It sets the runtime variable $stable to the stability tag, and unless the
+# runtime variable $color is set, it outputs the color and sets $color.
+FORMAT_STABILITY_TAG="{isstable}%{!COLOR_ORIGINAL}{!\$color}{*color}%{FORMAT_COLOR_STABLE}{}%{}{wasstable}{!\$color}{*color}%{FORMAT_COLOR_STABLE}{}{*stable=\"%{TAG_FOR_STABLE}\"}{else}{wasunstable}{!\$color}{*color}%{FORMAT_COLOR_UNSTABLE}{}{*stable=\"%{TAG_FOR_EX_UNSTABLE}\"}{else}{wasmissingkeyword}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_EX_MISSING_KEYWORD}\"}{else}{wasalienstable}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_EX_ALIEN_STABLE}\"}{else}{wasalienunstable}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_EX_ALIEN_UNSTABLE}\"}{else}{wasminuskeyword}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_EX_MINUS_KEYWORD}\"}{else}{wasminusunstable}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_EX_MINUS_UNSTABLE}\"}{else}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_EX_MINUS_ASTERISK}\"}{}{}{}{}{}{}{}{else}{isunstable}{!\$color}{*color}%{FORMAT_COLOR_UNSTABLE}{}{*stable=\"%{TAG_FOR_UNSTABLE}\"}{else}{ismissingkeyword}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_MISSING_KEYWORD}\"}{else}{isalienstable}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_ALIEN_STABLE}\"}{else}{isalienunstable}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_ALIEN_UNSTABLE}\"}{else}{isminuskeyword}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_MINUS_KEYWORD}\"}{else}{isminusunstable}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_MINUS_UNSTABLE}\"}{else}{!\$color}{*color}%{FORMAT_COLOR_MASKED}{}{*stable=\"%{TAG_FOR_MINUS_ASTERISK}\"}{}{}{}{}{}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It outputs the stability tag, changing the color appropriately.
+# It sets the runtime variable $color depending on whether color was changed.
+FORMAT_STABILITY="{!*color}%{FORMAT_MASK_TAG}%{FORMAT_STABILITY_TAG}<\$mask><\$stable>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It sets the initial string and $color for PROPERTIES output.
+FORMAT_PROPERTIESSEPARATOR="<\$sep>{!*sep}{*color}(%{COLOR_PROPERTIES})*"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It sets the initial string and $color for RESTRICT output.
+FORMAT_RESTRICTSEPARATOR="<\$sep>{!*sep}{*color}(%{COLOR_RESTRICT})^"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It outputs the PROPERTIES tag, changing the color appropriately.
+# It sets the runtime variable $color if color was changed.
+FORMAT_PROPERTIES="{properties}%{FORMAT_PROPERTIESSEPARATOR}{propertiesinteractive}%{TAG_PROPERTIES_INTERACTIVE}{}{propertieslive}%{TAG_PROPERTIES_LIVE}{}{propertiesset}%{TAG_PROPERTIES_SET}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It outputs the RESTRICT tag, changing the color appropriately.
+# It sets the runtime variable $color if color was changed.
+FORMAT_RESTRICT="{restrict}%{FORMAT_RESTRICTSEPARATOR}{restrictfetch}%{TAG_RESTRICT_FETCH}{}{restrictmirror}%{TAG_RESTRICT_MIRROR}{}{restrictprimaryuri}%{TAG_RESTRICT_PRIMARYURI}{}{restrictbinchecks}%{TAG_RESTRICT_BINCHECKS}{}{restrictstrip}%{TAG_RESTRICT_STRIP}{}{restricttest}%{TAG_RESTRICT_TEST}{}{restrictuserpriv}%{TAG_RESTRICT_USERPRIV}{}{restrictinstallsources}%{TAG_RESTRICT_INSTALLSOURCES}{}{restrictbindist}%{TAG_RESTRICT_BINDIST}{}{restrictparallel}%{TAG_RESTRICT_PARALLEL}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the PROPERTIES and RESTRICT of a version
+# and resets the color.
+FORMAT_PROPRESTRICT="%{!NO_RESTRICTIONS}{!*color}%{FORMAT_PROPERTIES}%{FORMAT_RESTRICT}{\$color}(%{COLOR_RESET}){}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format of the PROPERTIES and RESTRICT of a version
+# and resets the color.
+FORMAT_BINARY="%{!NO_BINARY}{isbinary}<\$sep>{!*sep}(%{COLOR_BINARY})%{TAG_BINARY}(%{COLOR_RESET}){}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the slot format printed for slotsorted versions.
+FORMAT_SLOT="(%{COLOR_SLOTS})\\(<slot>\\)(%{COLOR_RESET})"
+
+# STRING
+# This variable is used for <markedversions:MARKEDVERSION>.
+MARKEDVERSION="(%{COLOR_MARKED_VERSION})<version>(%{COLOR_RESET}){!last} {}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It outputs an available version with various marks and sets the runtime
+# variable $color if a mark was printed.
+# It should be follows by FORMAT_VERSION_END or FORMAT_VERSIONS_END.
+FORMAT_PVERSION="{color}{installedversion}{*color}(none;%{MARK_INSTALLED}){else}{isbestupgradeslot}{*color}(%{MARK_UPGRADE}){}{}{markedversion}{*color}(%{MARK_VERSIONS}){}{}<version>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It resets all colors/markers if the runtime variable $color was set.
+FORMAT_VERSION_END="{\$color}(%{COLOR_RESET}){}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It outputs an optional subslot, caring about the runtime variable $color,
+# and then invokes FORMAT_VERSION_END.
+FORMAT_VERSIONO_END="%{?PRINT_SLOTS}{issubslot}%{?COLORED_SLOTS}{\$color}(%{COLOR_RESET}){}{*color}%{?COLON_SLOTS}:(%{COLOR_SLOTS})<fullslot>%{else}<\$sep>{!*sep}(%{COLOR_SLOTS})\\(<fullslot>\\)%{}%{else}%{?COLON_SLOTS}:<fullslot>%{else}<\$sep>{!*sep}\\(<fullslot>\\)%{}%{}{}%{}%{FORMAT_VERSION_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It outputs an optional slot, caring about the runtime variable $color,
+# and then invokes FORMAT_VERSION_END.
+FORMAT_VERSIONS_END="%{?PRINT_SLOTS}{isfullslot}%{?COLORED_SLOTS}{\$color}(%{COLOR_RESET}){}{*color}%{?COLON_SLOTS}:(%{COLOR_SLOTS})<fullslot>%{else}<\$sep>{!*sep}(%{COLOR_SLOTS})\\(<fullslot>\\)%{}%{else}%{?COLON_SLOTS}:<fullslot>%{else}<\$sep>{!*sep}\\(<fullslot>\\)%{}%{}{}%{}%{FORMAT_VERSION_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a plain version without slot.
+PVERSION="%{FORMAT_PVERSION}%{FORMAT_VERSION_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for printing a plain version with its slot.
+PVERSIONO="%{FORMAT_PVERSION}%{FORMAT_VERSIONO_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for printing a plain version with its slot.
+PVERSIONS="%{FORMAT_PVERSION}%{FORMAT_VERSIONS_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an available version without slot.
+AVERSION="%{FORMAT_STABILITY}%{FORMAT_PVERSION}%{FORMAT_VERSION_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for printing an available version
+# with its optional subslot.
+AVERSIONO="%{FORMAT_STABILITY}%{FORMAT_PVERSION}%{FORMAT_VERSIONO_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for printing an available version with its slot.
+AVERSIONS="%{FORMAT_STABILITY}%{FORMAT_PVERSION}%{FORMAT_VERSIONS_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for printing an installed version with its slot.
+IVERSIONS="(%{COLOR_INST_VERSION}){*color}<version>%{FORMAT_VERSIONS_END}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for printing the overlay in versions.
+OVERLAYVER="{overlayver}<\$sep>{!*sep}<overlayver>{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a plain version with most data and slot.
+PVERSIONS_VERBOSE="%{PVERSIONS}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an available version with most data and slot.
+AVERSIONS_VERBOSE="%{AVERSIONS}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an installed version with most data and slot.
+IVERSIONS_VERBOSE="%{IVERSIONS}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a plain version with most data, optional subslot.
+PVERSIONO_VERBOSE="%{PVERSIONO}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an available version with most data,
+# optional subslot.
+AVERSIONO_VERBOSE="%{AVERSIONO}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a plain version with most data, no slot.
+PVERSION_VERBOSE="%{PVERSION}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an available version with most data, no slot.
+AVERSION_VERBOSE="%{AVERSION}%{FORMAT_PROPRESTRICT}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a plain version with important data and slot.
+PVERSIONS_COMPACT="%{PVERSIONS}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an available version with important data and slot.
+AVERSIONS_COMPACT="%{AVERSIONS}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for an installed version with important data and slot.
+IVERSIONS_COMPACT="%{IVERSIONS}%{FORMAT_BINARY}%{OVERLAYVER}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed before KEYWORDS string for a version is output
+# (with --versionlines and nonverbose)
+FORMAT_BEFORE_KEYWORDS="(%{COLOR_NORMAL}) \\C<%{COLUMN_KEYWORDS}>\""
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed after KEYWORDS string for a version is output.
+# (with --versionlines and nonverbose)
+FORMAT_AFTER_KEYWORDS="(%{COLOR_NORMAL})\"(%{COLOR_NORMAL_END})"
+
+# STRING
+# This variable only used for delayed substitution.
+# It prints a newline, optionally handling background colors for broken terminals.
+FORMAT_NEWLINE="%{?RESET_ALL_LINES}()\\n(%{COLOR_RESET_BG})%{else}\\n%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the titles.
+COLUMN_TITLE="5"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column after the version.
+COLUMN_KEYWORDS="22"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the content.
+COLUMN_CONTENT="26"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the title of installed versions.
+COLUMN_INST_TITLE="%{COLUMN_CONTENT}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the content of installed versions.
+COLUMN_INST_CONTENT="37"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the title of available versions.
+COLUMN_AVAILABLE_TITLE="15"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the content of available versions.
+COLUMN_AVAILABLE_CONTENT="26"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column for the slot without versionlines.
+COLUMN_SLOT="%{COLUMN_TITLE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column after the slot without versionlines.
+COLUMN_SLOT_AFTER="12"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first stability column with versionlines.
+COLUMN_STABILITY="7"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column after stability with versionlines.
+COLUMN_STABILITY_AFTER="12"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column of the slot with versionsort.
+COLUMN_SLOT_APPEND="22"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column after the version without versionsort.
+COLUMN_VER_APPEND="22"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the first column of the collected USE.
+COLUMN_USE="7"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the column for the main tag in eix-diff.
+DIFF_COLUMNA="6"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the column after the tags in eix-diff.
+DIFF_COLUMNB="9"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the lineskip used for the versionline appendix.
+FORMAT_VER_LINESKIP="%{FORMAT_NEWLINE}\\C<%{COLUMN_AVAILABLE_TITLE}>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the normal format for KEYWORDS for an available version.
+FORMAT_VERSION_KEYWORDS_NORMAL="%{?PRINT_KEYWORDS}%{?VERSION_KEYWORDS_NORMAL}%{FORMAT_BEFORE_KEYWORDS}%{?USE_EFFECTIVE_KEYWORDS}%{FORMAT_KEYWORDSS}%{else}%{FORMAT_KEYWORDS}%{}%{FORMAT_AFTER_KEYWORDS}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the normal format for IUSE for an available version.
+FORMAT_IUSE_NORMAL="%{?PRINT_IUSE}%{?VERSION_IUSE_NORMAL}{haveuse}%{FORMAT_BEFORE_IUSE}%{FORMAT_VERSION_IUSE}%{FORMAT_AFTER_IUSE}{}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the verbose format for DEPs for an available version.
+FORMAT_DEPS_NORMAL="%{?DEP}%{?VERSION_DEPS_NORMAL}{havedepend}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})DEPEND:(%{COLOR_RESET})\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_DEPEND}{}{haverdepend}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})RDEPEND:(%{COLOR_RESET})\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_RDEPEND}{}{havepdepend}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})PDEPEND:(%{COLOR_RESET})\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_PDEPEND}{}{havehdepend}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})HDEPEND:(%{COLOR_RESET})\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_HDEPEND}{}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the normal format for mask reasons for an available version.
+FORMAT_MASKREASONS_NORMAL="%{?PRINT_MASKREASONS}%{?MASKREASONS_NORMAL}{havemaskreasons}%{?WIDETERM} %{else}%{FORMAT_NEWLINE}%{}(%{COLOR_MASKREASONS})<maskreasons>(%{COLOR_RESET}){}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the verbose format for KEYWORDS for an available version.
+FORMAT_VERSION_KEYWORDS_VERBOSE="%{?PRINT_KEYWORDS}%{?VERSION_KEYWORDS_VERBOSE}%{!PRINT_ALWAYS}{versionkeywords}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})KEYWORDS:(%{COLOR_RESET})%{?PRINT_ALWAYS}{versionkeywords}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_KEYWORDS}(%{COLOR_RESET}){}%{!PRINT_ALWAYS}{versionekeywords}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})KEYWORDS*:(%{COLOR_RESET})%{?PRINT_ALWAYS}{!versionekeywords}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_KEYWORDS_EQUAL}{else}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_KEYWORDSS}(%{COLOR_RESET}){}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the verbose format for IUSE for an available version.
+FORMAT_IUSE_VERBOSE="%{?PRINT_IUSE}%{?VERSION_IUSE_VERBOSE}%{!PRINT_ALWAYS}{haveuse}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})IUSE:(%{COLOR_RESET})%{?PRINT_ALWAYS}{haveuse}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_VERSION_IUSE}(%{COLOR_RESET}){}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the verbose format for DEPs for an available version.
+FORMAT_DEPS_VERBOSE="%{?DEP}%{?VERSION_DEPS_VERBOSE}%{!PRINT_ALWAYS}{havedepend}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})DEPEND:(%{COLOR_RESET})%{?PRINT_ALWAYS}{depend}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_DEPEND_VERBOSE}{}%{!PRINT_ALWAYS}{haverdepend}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})RDEPEND:(%{COLOR_RESET})%{?PRINT_ALWAYS}{haverdepend}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_RDEPEND_VERBOSE}{}%{!PRINT_ALWAYS}{havepdepend}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})PDEPEND:(%{COLOR_RESET})%{?PRINT_ALWAYS}{havepdepend}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_PDEPEND_VERBOSE}{}%{!PRINT_ALWAYS}{havehdepend}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})HDEPEND:(%{COLOR_RESET})%{?PRINT_ALWAYS}{havehdepend}%{}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{FORMAT_HDEPEND_VERBOSE}{}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the verbose format for mask reasons for an available version.
+FORMAT_MASKREASONS_VERBOSE="%{?PRINT_MASKREASONS}%{?MASKREASONS_VERBOSE}%{!PRINT_ALWAYS}{havemaskreasons}%{}%{FORMAT_VER_LINESKIP}(%{COLOR_AVAILABLE_TITLE})Mask:(%{COLOR_RESET})%{?PRINT_ALWAYS}{havemaskreasons}%{}%{?WIDETERM}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{else}%{FORMAT_NEWLINE}%{}(%{COLOR_MASKREASONS})<maskreasons*>(%{COLOR_RESET}){}%{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines normal data appended to available versions with --versionlines
+FORMAT_VERSION_APPENDIX_NORMAL="%{FORMAT_VERSION_KEYWORDS_NORMAL}%{FORMAT_IUSE_NORMAL}%{FORMAT_DEPS_NORMAL}%{FORMAT_MASKREASONS_NORMAL}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines verbose data appended to available versions with --versionlines
+FORMAT_VERSION_APPENDIX_VERBOSE="%{FORMAT_VERSION_KEYWORDS_VERBOSE}%{FORMAT_IUSE_VERBOSE}%{FORMAT_DEPS_VERBOSE}%{FORMAT_MASKREASONS_VERBOSE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the data appended to available versions with --versionlines
+FORMAT_VERSION_APPENDIX="{\$modus=verbose}%{FORMAT_VERSION_APPENDIX_VERBOSE}{else}%{FORMAT_VERSION_APPENDIX_NORMAL}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines lineskip + slot if slotsorted versionlines are used.
+FORMAT_SLOTLINESKIP_VERSIONLINES="%{FORMAT_NEWLINE}\\C<%{COLUMN_SLOT}>%{FORMAT_SLOT}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines lineskip + slot if slotsort but no versionlines are used.
+FORMAT_SLOTLINESKIP="%{FORMAT_NEWLINE}\\C<%{COLUMN_SLOT}>%{FORMAT_SLOT} \\C<%{COLUMN_SLOT_AFTER}>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines lineskip + stability if lineskip is used.
+FORMAT_VERSLINESKIP="%{FORMAT_NEWLINE}\\C<%{COLUMN_STABILITY}>%{FORMAT_STABILITY} \\C<%{COLUMN_STABILITY_AFTER}>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the lineskip for installed versions.
+FORMAT_INST_LINESKIP="%{FORMAT_NEWLINE}\\C<%{COLUMN_INST_TITLE}>"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the format for a version; versionsorted with versionlines.
+VSORTL="%{FORMAT_VERSLINESKIP}{*sep=\\ \\C<%{COLUMN_SLOT_APPEND}>}%{PVERSIONS_VERBOSE}{!*sep}%{FORMAT_VERSION_APPENDIX}{last}{*sorted=version}{}"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the format for a version; versionsorted without versionlines.
+VSORT="%{AVERSIONS_VERBOSE}{last}{*sorted=version}{else} {}"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the format for a version; slotsorted with versionlines.
+SSORTL="{slotfirst}%{FORMAT_SLOTLINESKIP_VERSIONLINES}{}%{FORMAT_VERSLINESKIP}{*sep=\\ \\C<%{COLUMN_VER_APPEND}>}%{PVERSIONO_VERBOSE}{!*sep}%{FORMAT_VERSION_APPENDIX}{last}{*sorted=slot}{}"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the format for a version; slotsorted without versionlines.
+SSORT="{slotfirst}{oneslot}%{FORMAT_SLOT} {else}%{FORMAT_SLOTLINESKIP}{}{else} {}%{AVERSIONO_VERBOSE}{last}{*sorted=slot}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for collected IUSE data in one line.
+FORMAT_COLL="%{FORMAT_BEFORE_COLL}%{FORMAT_COLLIUSE}%{FORMAT_AFTER_COLL}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for collected IUSE data in a separate line.
+FORMAT_COLL_SEP="%{FORMAT_BEFORE_COLL_SEP}%{FORMAT_COLLIUSE}%{FORMAT_AFTER_COLL_SEP}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the format for package IUSE in single-line verbose mode.
+FORMAT_COLL_VERBOSE="%{!PRINT_ALWAYS}{havecolliuse}%{}%{FORMAT_NEWLINE}     (%{COLOR_TITLE})IUSE \\(all versions\\):(%{COLOR_RESET})%{?PRINT_ALWAYS}{havecolliuse}%{} %{FORMAT_COLLIUSE}(%{COLOR_RESET}){}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It is the format for package IUSE in multiline verbose mode.
+FORMAT_COLL_VERBOSE_SEP="%{FORMAT_COLL_VERBOSE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for collected IUSE data.
+FORMAT_COLL_IUSE="%{?PRINT_IUSE}{\$modus=verbose}{\$sorted=version}%{FORMAT_COLL_VERBOSE}{else}%{FORMAT_COLL_VERBOSE_SEP}{}{else}{havecolliuse}{\$sorted=version}%{FORMAT_COLL}{else}%{FORMAT_COLL_SEP}{}{}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for collected IUSE data with --versionlines.
+FORMAT_COLL_IUSE_LIST="%{?PRINT_IUSE}%{!VERSION_IUSE_NORMAL}{\$modus=normal}{havecolliuse}%{FORMAT_COLL_SEP}{}%{?VERSION_IUSE_VERBOSE}{}%{else}{else}%{}%{else}%{!VERSION_IUSE_VERBOSE}{\$modus=verbose}%{}%{}%{!VERSION_IUSE_VERBOSE}%{FORMAT_COLL_VERBOSE_SEP}{}%{}%{}"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the normal format of installed versions.
+INORMAL="%{IVERSIONS_VERBOSE}(%{COLOR_DATE})\\(<date:FORMAT_INSTALLATION_DATE>\\)(%{COLOR_RESET})%{FORMAT_INST_USEFLAGS}{!last}{versionlines}%{FORMAT_INST_LINESKIP}{else} {}{}"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the compact format of installed versions.
+ICOMPACT="%{IVERSIONS_COMPACT}(%{COLOR_NORMAL})@(%{COLOR_DATE})<date:FORMAT_SHORT_INSTALLATION_DATE>(%{COLOR_RESET}){!last} {}"
+
+# STRING
+# This variable is used as a version formatter.
+# It defines the verbose format of installed versions.
+IVERBOSE="(%{COLOR_INST_TITLE})Version:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>%{IVERSIONS_VERBOSE}(%{COLOR_RESET})%{FORMAT_INST_LINESKIP}(%{COLOR_INST_TITLE})Date:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>(%{COLOR_DATE})<date:FORMAT_INSTALLATION_DATE>(%{COLOR_RESET}){haveuse}%{FORMAT_INST_LINESKIP}(%{COLOR_INST_TITLE})USE:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>%{?EIX_USE_EXPAND}<use*>%{else}<use>%{}{}%{?DEP}{havedepend}%{FORMAT_INST_LINESKIP}(%{COLOR_INST_TITLE})DEPEND:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>%{FORMAT_DEPEND_VERBOSE}{}{haverdepend}%{FORMAT_INST_LINESKIP}(%{COLOR_INST_TITLE})RDEPEND:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>%{FORMAT_RDEPEND_VERBOSE}{}{havepdepend}%{FORMAT_INST_LINESKIP}(%{COLOR_INST_TITLE})PDEPEND:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>%{FORMAT_PDEPEND_VERBOSE}{}{havehdepend}%{FORMAT_INST_LINESKIP}(%{COLOR_INST_TITLE})HDEPEND:(%{COLOR_RESET})\\C<%{COLUMN_INST_CONTENT}>%{FORMAT_HDEPEND_VERBOSE}{}%{}{!last}%{FORMAT_INST_LINESKIP}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the verbose format for printing available versions.
+FORMAT_AVAILABLEVERSIONS="{versionlines}{slotsorted}<availableversions:VSORTL:SSORTL>{else}<availableversions:VSORTL>{}%{FORMAT_COLL_IUSE_LIST}{else}{slotsorted}<availableversions:VSORT:SSORT>{else}<availableversions:VSORT>{}%{FORMAT_COLL_IUSE}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for useflags in installed versions.
+FORMAT_INST_USEFLAGS="{haveuse}(%{COLOR_NORMAL})\\(%{?EIX_USE_EXPAND}<use*>%{else}<use>%{}(%{COLOR_NORMAL})\\)(%{COLOR_NORMAL_END}){}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format used for printing installed versions normally.
+INSTALLEDVERSIONS_NORMAL="<installedversions:INORMAL>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format used for printing installed versions compactly.
+INSTALLEDVERSIONS_COMPACT="<installedversions:ICOMPACT>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format used for printing installed versions verbosely.
+INSTALLEDVERSIONS_VERBOSE="<installedversions:IVERBOSE>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format used for printing installed versions.
+INSTALLEDVERSIONS="{\$modus=verbose}%{INSTALLEDVERSIONS_VERBOSE}{else}%{INSTALLEDVERSIONS_NORMAL}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with installed versions.
+FORMATLINE_INSTALLEDVERSIONS="%{!PRINT_ALWAYS}{installed}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Installed versions:(%{COLOR_RESET})%{?PRINT_ALWAYS}{installed}%{}\\C<%{COLUMN_CONTENT}>%{INSTALLEDVERSIONS}%{?PRINT_ALWAYS}{else}\\C<%{COLUMN_CONTENT}>None{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for eix-diff for installed versions.
+DIFF_FORMATLINE_INSTALLEDVERSIONS="{installed}%{INSTALLEDVERSIONS_COMPACT}(%{COLOR_NORMAL});(%{COLOR_NORMAL_END}) {}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It prints a newline at the end of a package.
+FORMAT_FINISH="()\\n"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the printing the package name.
+FORMAT_NAME="{system}(%{COLOR_CATEGORY_SYSTEM}){else}{world}(%{COLOR_CATEGORY_WORLD}){else}{world_sets}(%{COLOR_CATEGORY_WORLD_SETS}){else}(%{COLOR_CATEGORY}){}{}{}<category>(%{COLOR_NORMAL})/{marked}(%{COLOR_MARKED_NAME}){else}{world}(%{COLOR_WORLD}){else}{world_sets}(%{COLOR_WORLD_SETS}){else}(%{COLOR_NAME}){}{}{}<name>(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the normal header symbols.
+FORMAT_HEADER="{installed}(%{COLOR_NORMAL})[{!*updn}{upgrade}{*updn}%{TAG_UPGRADE}{}{downgrade}{*updn}%{TAG_DOWNGRADE}{}{!\$updn}%{TAG_INSTALLED}{}(%{COLOR_NORMAL})](%{COLOR_NORMAL_END}){else}(%{COLOR_UNINST_TAG})%{STRING_PLAIN_UNINSTALLED}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the verbose header symbols.
+FORMAT_HEADER_VERBOSE="{installed}(%{COLOR_INST_TAG})%{STRING_PLAIN_INSTALLED}{else}(%{COLOR_UNINST_TAG})%{STRING_PLAIN_UNINSTALLED}{}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the compact header symbols.
+FORMAT_HEADER_COMPACT="(%{COLOR_NORMAL})[{installed}{upgrade}{*upgrade}%{TAG_UPGRADE}{else}{!*upgrade}{}{downgrade}%{TAG_DOWNGRADE}{else}{!\$upgrade}%{TAG_INSTALLED}{}{}{else}%{TAG_UNINSTALLED}{}(%{COLOR_NORMAL})](%{COLOR_NORMAL_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the diff-new header symbols.
+DIFF_FORMAT_HEADER_NEW="(%{COLOR_NORMAL})[{havebest}%{TAG_STABILIZE}{}{upgrade}{*upgrade}%{TAG_UPGRADE}{else}{!*upgrade}{}{downgrade}%{TAG_DOWNGRADE}{else}{!\$upgrade}%{TAG_NEW}{}{}(%{COLOR_NORMAL})](%{COLOR_NORMAL_END})\\C<%{DIFF_COLUMNA}>(%{DIFF_COLOR_NEW})%{DIFF_STRING_NEW}(%{COLOR_RESET})\\C<%{DIFF_COLUMNB}>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the diff-delete header symbols.
+DIFF_FORMAT_HEADER_DELETE="{installed}(%{COLOR_NORMAL})[(%{COLOR_DOWNGRADE})%{CHAR_DOWNGRADE}(%{COLOR_NORMAL})](%{COLOR_NORMAL_END}){}\\C<%{DIFF_COLUMNA}>(%{DIFF_COLOR_DELETE})%{DIFF_STRING_DELETE}(%{COLOR_RESET})\\C<%{DIFF_COLUMNB}>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the diff-changed header symbols.
+DIFF_FORMAT_HEADER_CHANGED="(%{COLOR_NORMAL})[{havebest}{!oldhavebest}%{TAG_STABILIZE}{}{}{!*better}{!*worse}{upgrade}%{TAG_UPGRADE}{else}{better}{*better}{}{}{downgrade}%{TAG_DOWNGRADE}{else}{worse}{*worse}{}{}{\$better}%{TAG_BETTER}{}{\$worse}%{TAG_WORSE}{}(%{COLOR_NORMAL})](%{COLOR_NORMAL_END})\\C<%{DIFF_COLUMNA}>(%{DIFF_COLOR_CHANGED})%{DIFF_STRING_CHANGED}(%{COLOR_RESET})\\C<%{DIFF_COLUMNB}>"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the compact format for the best version(s).
+FORMAT_BEST_COMPACT="{havebest}<bestversion:AVERSIONS_COMPACT>{else}{havebest*}<bestversion*:AVERSIONS_COMPACT>{else}%{?NOBEST_COMPACT}%{FORMAT_NOBEST}%{else}<availableversions:VSORT>%{}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the compact format for the best version(s) in case of changes.
+FORMAT_BEST_CHANGE="{havebest}<bestslotversions:VSORT>{else}{havebest*}<bestslotversions*:VSORT>{else}%{?NOBEST_CHANGE}%{FORMAT_NOBEST_CHANGE}%{else}<availableversions:VSORT>%{}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the eix-diff format for the best version(s).
+DIFF_FORMAT_BEST="{havebest}<bestversion:AVERSIONS_COMPACT>{else}{havebest*}<bestversion*:AVERSIONS_COMPACT>{else}%{?DIFF_NOBEST}%{FORMAT_NOBEST}%{else}<availableversions:VSORT>%{}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the eix-diff format for the best version(s) in case of changes.
+DIFF_FORMAT_BEST_CHANGE="{havebest}<bestslotversions:VSORT>{else}{havebest*}<bestslotversions*:VSORT>{else}%{?DIFF_NOBEST_CHANGE}%{FORMAT_NOBEST_CHANGE}%{else}<availableversions:VSORT>%{}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the eix-diff format for the old best versions in case of changes.
+DIFF_FORMAT_OLDBEST_CHANGE="{oldhavebest}<oldbestslotversions:VSORT>{else}{oldhavebest*}<oldbestslotversions*:VSORT>{else}%{?DIFF_NOBEST_CHANGE}%{FORMAT_NOBEST_CHANGE}%{else}<oldavailableversions:VSORT>%{}{}{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the eix-diff format for changed versions.
+DIFF_FORMAT_CHANGED_VERSIONS="%{?DIFF_PRINT_INSTALLED}%{DIFF_FORMATLINE_INSTALLEDVERSIONS}%{}%{DIFF_FORMAT_OLDBEST_CHANGE} (%{COLOR_NORMAL})->(%{COLOR_NORMAL_END}) %{DIFF_FORMAT_BEST_CHANGE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the printing the optional overlay key.
+FORMAT_OVERLAYKEY="{overlaykey} <overlaykey>{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the normal header line.
+FORMATLINE_NAME="%{FORMAT_HEADER} %{FORMAT_NAME}%{FORMAT_OVERLAYKEY}%{FORMAT_NEWLINE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the verbose header line.
+FORMATLINE_NAME_VERBOSE="%{FORMAT_HEADER_VERBOSE} %{FORMAT_NAME}%{FORMAT_OVERLAYKEY}%{FORMAT_NEWLINE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the compact header line.
+FORMATLINE_NAME_COMPACT="%{FORMAT_HEADER_COMPACT} %{FORMAT_NAME}%{FORMAT_OVERLAYKEY}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the diff-new header.
+DIFF_FORMATLINE_NAME_NEW="%{DIFF_FORMAT_HEADER_NEW}%{FORMAT_NAME} "
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the diff-delete header.
+DIFF_FORMATLINE_NAME_DELETE="%{DIFF_FORMAT_HEADER_DELETE}%{FORMAT_NAME} "
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for the diff-changed header.
+DIFF_FORMATLINE_NAME_CHANGED="%{DIFF_FORMAT_HEADER_CHANGED}%{FORMAT_NAME} "
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with installed versions.
+FORMATLINE_AVAILABLEVERSIONS="\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Available versions:(%{COLOR_RESET})\\C<%{COLUMN_CONTENT}>%{FORMAT_AVAILABLEVERSIONS}%{FORMAT_NEWLINE}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the eix-diff line for the best versions/slots.
+DIFF_FORMATLINE_BEST="(%{COLOR_NORMAL})\\(%{DIFF_FORMAT_BEST}(%{COLOR_NORMAL}))(%{COLOR_NORMAL_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the eix-diff line for changed versions.
+DIFF_FORMATLINE_CHANGED_VERSIONS="(%{COLOR_NORMAL})\\(%{DIFF_FORMAT_CHANGED_VERSIONS}(%{COLOR_NORMAL}))(%{COLOR_NORMAL_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with marked versions.
+FORMATLINE_MARKEDVERSIONS="%{!PRINT_ALWAYS}{havemarkedversion}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Marked:(%{COLOR_RESET})%{?PRINT_ALWAYS}{havemarkedversion}%{}\\C<%{COLUMN_CONTENT}><markedversions:MARKEDVERSION>%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with package sets.
+FORMATLINE_PACKAGESETS="%{!PRINT_ALWAYS}{%{PRINT_SETNAMES}}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Package sets:(%{COLOR_RESET})%{?PRINT_ALWAYS}{%{PRINT_SETNAMES}}%{}\\C<%{COLUMN_CONTENT}>(%{COLOR_PACKAGESETS})<%{PRINT_SETNAMES}>%{!RESET_ALL_LINES}(%{COLOR_RESET})%{}%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with the package homepage.
+FORMATLINE_HOMEPAGE="%{!PRINT_ALWAYS}{homepage}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Homepage:(%{COLOR_RESET})%{?PRINT_ALWAYS}{homepage}%{}\\C<%{COLUMN_CONTENT}>(%{COLOR_NORMAL})<homepage>%{!RESET_ALL_LINES}(%{COLOR_NORMAL_END})%{}%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with the package bug-reference.
+FORMATLINE_BUGS="%{?PRINT_BUGS}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Find open bugs:(%{COLOR_RESET})\\C<%{COLUMN_CONTENT}>(%{COLOR_NORMAL})http://bugs.gentoo.org/buglist.cgi?quicksearch=<category>%2F<name>%{!RESET_ALL_LINES}(%{COLOR_NORMAL_END})%{}%{FORMAT_NEWLINE}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with the package description.
+FORMATLINE_DESCRIPTION="%{!PRINT_ALWAYS}{description}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Description:(%{COLOR_RESET})%{?PRINT_ALWAYS}{description}%{}\\C<%{COLUMN_CONTENT}>(%{COLOR_NORMAL})<description>%{!RESET_ALL_LINES}(%{COLOR_NORMAL_END})%{}%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with the best versions/slots.
+FORMATLINE_BEST="%{!PRINT_ALWAYS}{havebest}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Best versions/slot:(%{COLOR_RESET})%{?PRINT_ALWAYS}{havebest}%{}\\C<%{COLUMN_CONTENT}><bestslotversions:VSORT>%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with the up-/downgrade recommendations.
+FORMATLINE_RECOMMEND="%{!PRINT_ALWAYS}{recommend}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})Recommendation:(%{COLOR_RESET})%{?PRINT_ALWAYS}{recommend}%{}\\C<%{COLUMN_CONTENT}>{upgrade}(%{COLOR_UPGRADE_TEXT})Upgrade(%{COLOR_RESET}){downgrade} and {}{}{downgrade}(%{COLOR_DOWNGRADE_TEXT})Downgrade%{!RESET_ALL_LINES}(%{COLOR_RESET})%{}{}%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for a line with the package licenses.
+FORMATLINE_LICENSES="%{!PRINT_ALWAYS}{licenses}%{}\\C<%{COLUMN_TITLE}>(%{COLOR_TITLE})License:(%{COLOR_RESET})%{?PRINT_ALWAYS}{licenses}%{}\\C<%{COLUMN_CONTENT}>(%{COLOR_NORMAL})<licenses>%{!RESET_ALL_LINES}(%{COLOR_NORMAL_END})%{}%{?PRINT_ALWAYS}{}%{FORMAT_NEWLINE}%{else}%{FORMAT_NEWLINE}{}%{}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format for eix-diff after the versions.
+DIFF_FORMATLINE="%{FORMAT_OVERLAYKEY}(%{COLOR_NORMAL}): <description>(%{COLOR_NORMAL_END})%{FORMAT_FINISH}"
+
+# STRING
+# This format is only used for delayed substitution in FORMAT.
+# It defines the format of the normal output of eix.
+FORMAT_ALL="{*modus=normal}%{FORMATLINE_NAME}%{FORMATLINE_AVAILABLEVERSIONS}%{FORMATLINE_INSTALLEDVERSIONS}%{FORMATLINE_MARKEDVERSIONS}%{FORMATLINE_HOMEPAGE}%{FORMATLINE_DESCRIPTION}%{FORMAT_FINISH}"
+
+# STRING
+# This format is only used for delayed substitution in FORMAT_COMPACT.
+# It defines the format of the compact output of eix (option -c).
+FORMAT_ALL_COMPACT="{*modus=compact}%{FORMATLINE_NAME_COMPACT} (%{COLOR_NORMAL})\\((%{COLOR_NORMAL_END}){havemarkedversion}<markedversions:MARKEDVERSION>; {}{installed}%{INSTALLEDVERSIONS_COMPACT}{recommend} -> %{FORMAT_BEST_CHANGE}{}{else}%{FORMAT_BEST_COMPACT}{}(%{COLOR_NORMAL})\\): <description>(%{COLOR_NORMAL_END})%{FORMAT_FINISH}"
+
+# STRING
+# This format is only used for delayed substitution in FORMAT_VERBOSE.
+# It defines the format of the verbose output of eix (option -v).
+FORMAT_ALL_VERBOSE="{*modus=verbose}%{FORMATLINE_NAME_VERBOSE}%{FORMATLINE_AVAILABLEVERSIONS}%{FORMATLINE_INSTALLEDVERSIONS}%{FORMATLINE_BEST}%{FORMATLINE_RECOMMEND}%{FORMATLINE_MARKEDVERSIONS}%{FORMATLINE_PACKAGESETS}%{FORMATLINE_HOMEPAGE}%{FORMATLINE_BUGS}%{FORMATLINE_DESCRIPTION}%{FORMATLINE_LICENSES}%{FORMAT_FINISH}"
+
+# STRING
+# The format of the normal output of eix.
+# Do not modify it in a config file; modify FORMAT_ALL instead.
+FORMAT="%{FORMAT_ALL}"
+
+# STRING
+# The format of the compact output of eix (option -c).
+# Do not modify it in a config file; modify FORMAT_ALL_COMPACT instead.
+FORMAT_COMPACT="%{FORMAT_ALL_COMPACT}"
+
+# STRING
+# The format of the verbose output of eix (option -v).
+# Do not modify it in a config file; modify FORMAT_ALL_VERBOSE instead.
+FORMAT_VERBOSE="%{FORMAT_ALL_VERBOSE}"
+
+# STRING
+# The format used for output by the eix-test-obsolete script.
+# The value %{FORMAT} is not allowed here; use %{FORMAT_ALL} instead.
+FORMAT_TEST_OBSOLETE="%{FORMAT_ALL_COMPACT}"
+
+# STRING
+# This format is only used for delayed substitution in DIFF_FORMAT_NEW.
+# It defines the format used for new packages (eix-diff).
+DIFF_FORMAT_ALL_NEW="%{DIFF_FORMATLINE_NAME_NEW}%{DIFF_FORMATLINE_BEST}%{DIFF_FORMATLINE}"
+
+# STRING
+# This format is only used for delayed substitution in DIFF_FORMAT_DELETE.
+# It defines the format used for packages that were deleted (eix-diff).
+DIFF_FORMAT_ALL_DELETE="%{DIFF_FORMATLINE_NAME_DELETE}%{DIFF_FORMATLINE_BEST}%{DIFF_FORMATLINE}"
+
+# STRING
+# This format is only used for delayed substitution in DIFF_FORMAT_CHANGED.
+# It defines the format used for packages that were changed (eix-diff).
+DIFF_FORMAT_ALL_CHANGED="%{DIFF_FORMATLINE_NAME_CHANGED}%{DIFF_FORMATLINE_CHANGED_VERSIONS}%{DIFF_FORMATLINE}"
+
+# STRING
+# The format used for new packages (eix-diff).
+# Do not modify it in a config file; modify DIFF_FORMAT_ALL_NEW instead.
+DIFF_FORMAT_NEW="%{DIFF_FORMAT_ALL_NEW}"
+
+# STRING
+# The format used for packages that were deleted (eix-diff).
+# Do not modify it in a config file; modify DIFF_FORMAT_ALL_DELETE instead.
+DIFF_FORMAT_DELETE="%{DIFF_FORMAT_ALL_DELETE}"
+
+# STRING
+# The format used for packages that were changed (eix-diff).
+# Do not modify it in a config file; modify DIFF_FORMAT_ALL_CHANGED instead.
+DIFF_FORMAT_CHANGED="%{DIFF_FORMAT_ALL_CHANGED}"
+
+# STRING
+# strftime() format for printing the installation date in long form
+FORMAT_INSTALLATION_DATE="%X %x"
+
+# STRING
+# strftime() format for printing the installation date in short form
+FORMAT_SHORT_INSTALLATION_DATE="%x"
+
+# STRING
+# Can be full/effective/both/full*/effective*/none.
+# Depending on the value, with --xml the full/effective (or both types)
+# KEYWORDS string is output for each version.
+# With full*/effective* also both types are output if they differ.
+XML_KEYWORDS="none"
+
+# STRING
+# If false, the overlay is not output with --xml.
+# For overlays without label (repository name) the overlay is output anyway.
+XML_OVERLAY="false"
+
+# STRING
+# strftime() format for printing the installation date with --xml.
+XML_DATE="%s"
+
+# STRING
+# This string is printed as line separator in <maskreasons>.
+FORMAT_MASKREASONS_LINESKIP="%{?WIDETERM} %{else}%{FORMAT_NEWLINE}(%{COLOR_MASKREASONS})%{}"
+
+# STRING
+# This string is printed as separator for different <maskreasons>.
+FORMAT_MASKREASONS_SEP="%{?WIDETERM} - %{else}%{FORMAT_NEWLINE}%{FORMAT_NEWLINE}(%{COLOR_MASKREASONS})%{}"
+
+# STRING
+# This string is printed as line separator in <maskreasons*>.
+FORMAT_MASKREASONSS_LINESKIP="%{?WIDETERM}%{FORMAT_VER_LINESKIP}\\C<%{COLUMN_AVAILABLE_CONTENT}>%{else}%{FORMAT_NEWLINE}%{}(%{COLOR_MASKREASONS})"
+
+# STRING
+# This string is printed as separator for different <maskreasons*>.
+FORMAT_MASKREASONSS_SEP="%{FORMAT_NEWLINE}%{FORMAT_MASKREASONSS_LINESKIP}"
+
+# STRING
+# This string is printed before each set USE flag of an installed version.
+FORMAT_BEFORE_SET_USE="(%{COLOR_SET_USE})"
+
+# STRING
+# This string is printed after each set USE flag of an installed version.
+FORMAT_AFTER_SET_USE="(%{COLOR_RESET})"
+
+# STRING
+# This string is printed before each unset USE flag of an installed version.
+FORMAT_BEFORE_UNSET_USE="(%{COLOR_UNSET_USE})-"
+
+# STRING
+# This string is printed after each unset USE flag of an installed version.
+FORMAT_AFTER_UNSET_USE="(%{COLOR_RESET})"
+
+# STRING
+# This string is printed before the variable name of an USE_EXPAND use value.
+FORMAT_BEFORE_USE_EXPAND_START="(%{COLOR_USE_EXPAND_START})"
+
+# STRING
+# This string is printed after the variable name of an USE_EXPAND use value.
+FORMAT_BEFORE_USE_EXPAND_END="=\""
+
+# STRING
+# This string is printed at the end of a USE_EXPAND use value.
+FORMAT_AFTER_USE_EXPAND="(%{COLOR_USE_EXPAND_START})\"(%{COLOR_USE_EXPAND_END})"
+
+# STRING
+# This string is printed before the variable name of an USE_EXPAND iuse value.
+FORMAT_BEFORE_IUSE_EXPAND_START="(%{COLOR_USE_EXPAND_START})"
+
+# STRING
+# This string is printed after the variable name of an USE_EXPAND iuse value.
+FORMAT_BEFORE_IUSE_EXPAND_END="=\"(%{COLOR_VERSION_IUSE})"
+
+# STRING
+# This string is printed at the end of a USE_EXPAND iuse value.
+FORMAT_AFTER_IUSE_EXPAND="(%{COLOR_USE_EXPAND_START})\"(%{COLOR_USE_EXPAND_END})"
+
+# STRING
+# This string is printed before the variable name of an USE_EXPAND collected
+# iuse value.
+FORMAT_BEFORE_COLL_EXPAND_START="(%{COLOR_USE_EXPAND_START})"
+
+# STRING
+# This string is printed after the variable name of an USE_EXPAND collected
+# iuse value.
+FORMAT_BEFORE_COLL_EXPAND_END="=\"(%{COLOR_COLL_IUSE})"
+
+# STRING
+# This string is printed at the end of a USE_EXPAND collected iuse value.
+FORMAT_AFTER_COLL_EXPAND="(%{COLOR_USE_EXPAND_START})\"(%{COLOR_USE_EXPAND_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed before IUSE data for a version is output.
+# (Normally, this is only used when --versionlines is active)
+FORMAT_BEFORE_IUSE="{!*colliuse}\\t(%{COLOR_NORMAL})[(%{COLOR_NORMAL_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed after IUSE data for a version is output.
+# (Normally, this is only used when --versionlines is active)
+FORMAT_AFTER_IUSE="(%{COLOR_NORMAL})](%{COLOR_NORMAL_END})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed before IUSE data for all versions is output.
+# (This is meant for printing after all versions in a line)
+FORMAT_BEFORE_COLL="{*colliuse} (%{COLOR_USE_COLL})\\{"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed after IUSE data for all versions is output.
+# (This is meant for printing after all versions in a line)
+FORMAT_AFTER_COLL="(%{COLOR_USE_COLL})\\}(%{COLOR_RESET})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed before IUSE data for all versions is output.
+# (This is meant for printing in a separate line)
+FORMAT_BEFORE_COLL_SEP="%{FORMAT_NEWLINE}\\C<%{COLUMN_USE}>(%{COLOR_USE_COLL})\\{"
+
+# STRING
+# This variable is only used for delayed substitution.
+# This string is printed after IUSE data for all versions is output.
+# (This is meant for printing in a separate line)
+FORMAT_AFTER_COLL_SEP="%{FORMAT_AFTER_COLL}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color for masked versions.
+COLOR_MASKED="red;%{BG0S}|196;%{BG1}|red;%{BG2}|196;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color for unstable versions.
+COLOR_UNSTABLE="yellow;%{BG0S}|190;%{BG1}|blue;%{BG2}|21;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the color for stable versions.
+COLOR_STABLE="green;%{BG0S}|46;%{BG1}|;%{BG2}|58;%{BG3}"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format to change the color for masked versions.
+FORMAT_COLOR_MASKED="(%{COLOR_MASKED})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format to change the color for unstable versions.
+FORMAT_COLOR_UNSTABLE="(%{COLOR_UNSTABLE})"
+
+# STRING
+# This variable is only used for delayed substitution.
+# It defines the format to change the color for stable versions.
+FORMAT_COLOR_STABLE="(%{COLOR_STABLE})"
+
+# STRING
+# This variable is ignored. You can use it to collect delayed references to
+# locally added (unused) variables so that they are printed with --dump.
+DUMMY=""
+

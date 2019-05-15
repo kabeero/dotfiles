@@ -1,0 +1,11 @@
+###    lovelybacon.deviantart.com   ####
+
+background no
+out_to_x no
+out_to_console yes
+update_interval 1
+total_run_times 0
+use_spacer none
+
+TEXT
+Net:  ${if_up wlp3s0}${downspeedf wlp3s0}  -  ${upspeedf wlp3s0}${endif}   |   Wireless:  ${if_up wlp3s0}${wireless_link_qual_perc wlp3s0}%   |   Volume: ${exec amixer get Master -M | grep -oE "[[:digit:]]*%"}   |   Battery: ${battery_percent BAT0}%   |   ${time %a %b %d  %k:%M}

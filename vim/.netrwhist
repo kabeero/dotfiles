@@ -1,0 +1,7 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =5
+let g:netrw_dirhist_1='/etc/portage/repos.conf'
+let g:netrw_dirhist_2='/home/kabeero/.config/gtk-3.0'
+let g:netrw_dirhist_3='/home/kabeero/work/stryker/perforce/0590-090-711 Universal Charger App_3.1.1'
+let g:netrw_dirhist_4='/home/kabeero/.ncmpcpp'
+let g:netrw_dirhist_5='/etc/fail2ban/jail.d'

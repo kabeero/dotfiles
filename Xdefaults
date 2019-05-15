@@ -1,0 +1,145 @@
+! updated
+! Wed Dec  2 21:14:47 CST 2015
+
+! arch wiki: enable clipboard, need xsel ...
+! URxvt.perl-lib:	/usr/lib/urxvt/perl
+! URxvt.perl-ext-common: default, clipboard, tabbed
+
+URxvt.perl-ext-common: selection-to-clipboard,font-size,digital-clock,clipboard,background,url-select
+
+URxvt.geometry:		100x30
+
+! XFT settings
+!  96 dpi: retina
+! 120 dpi: medium
+! 144 dpi: big
+Xft*dpi:			96
+Xft*hinting:		true
+!Xft*hintStyle:		hintslight
+!Xft*hintStyle:		hintmedium
+Xft*hintStyle:		hintfull
+
+! URxvt
+URxvt*termName: 	rxvt-unicode
+URxvt*borderless:	true
+URxvt*cursorBlink:	true
+URxvt*depth:		32
+! when focus is lost, fade by this amount
+URxvt*fading:		10
+URxvt*fadeColor:	[50]#000000
+URxvt*saveLines:	65535
+URxvt*scrollStyle:	plain
+URxvt*scrollBar:	false
+
+! antialias and xft fonts can lag
+! URxvt*antialias:	true
+URxvt*antialias:	false
+
+! fake transparency
+!URxvt*shading:		100
+!URxvt*transparent:	false
+
+! real transparency
+!urxvt.background:	[65]#000000
+!urxvt.background:	[75]#000000
+urxvt.background:	[85]#000000
+!   or
+! 65.000% opacity
+! urxvt*background:	rgba:0000/0000/0000/a666
+
+
+! good looking fonts
+
+!   crisp
+!URxvt*font:			xft:Terminus:regular:pixelsize=13
+!URxvt*boldFont:		xft:Terminus:regular:pixelsize=13
+
+!URxvt*font:			xft:Terminus:bold:pixelsize=16
+!URxvt*boldFont:		xft:Terminus:bold:pixelsize=16
+
+!URxvt*font:			xft:Terminus:regular:pixelsize=17
+!URxvt*boldFont:		xft:Terminus:regular:pixelsize=17
+
+!URxvt*font:			xft:Terminus:regular:pixelsize=14
+!URxvt*boldFont:		xft:Terminus:regular:pixelsize=14
+
+!   anti aliased
+!URxvt*font:			xft:DejaVu Sans Mono:size=12
+!URxvt*boldFont:		xft:DejaVu Sans Mono:size=12
+URxvt*font: 			xft:Droid Sans Mono:size=12
+URxvt*boldFont: 		xft:Droid Sans Mono:size=12
+
+
+! good for retina
+! URxvt*font: 			xft:Source Code Pro:regular:pixelsize=18
+! URxvt*boldFont: 		xft:Source Code Pro:regular:pixelsize=18
+
+
+! nice and readable, but big ...
+!URxvt*font: 			xft:Source Code Pro:regular:pixelsize=22
+!URxvt*boldFont: 		xft:Source Code Pro:bold:pixelsize=22
+
+
+! performance  fonts
+
+!urxvt.font:			-windows-proggycleancp-medium-r-normal-sans-13-80-96-96-c-70-iso8859-1
+!urxvt.boldFont:		-windows-proggycleancp-medium-r-normal-sans-13-80-96-96-c-70-iso8859-1
+!urxvt.font:			-windows-proggycleanszcp-medium-r-normal--13-80-96-96-c-70-iso8859-1
+!urxvt.boldFont:		-windows-proggycleanszcp-medium-r-normal--13-80-96-96-c-70-iso8859-1
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!           dina font
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+! sourced from http://s9w.github.io/font_compare/
+! sizes: 8, 9, 10
+! types: medium-r, medium-i, bold-r, bold-i (medium, italic, bold, bold italic)
+
+! 8: proggy looks better
+!urxvt.font:			-*-dina-medium-r-normal-*-13-*-*-*-*-*-*-*
+!urxvt.boldFont:		-*-dina-medium-r-normal-*-13-*-*-*-*-*-*-*
+! 9: weird
+!urxvt.font:			-*-dina-medium-r-normal-*-15-*-*-*-*-*-*-*
+!urxvt.boldFont:		-*-dina-medium-r-normal-*-15-*-*-*-*-*-*-*
+! 10: good
+! urxvt.font:			-*-dina-medium-r-normal-*-16-*-*-*-*-*-*-*
+! urxvt.boldFont:		-*-dina-medium-r-normal-*-16-*-*-*-*-*-*-*
+
+urxvt.font:				xft:Dina:regular:size=10
+urxvt.boldFont:			xft:Dina:regular:size=10
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+!urxvt.font:			6x13
+!urxvt.boldfont:		6x13
+
+!urxvt.font:			7x13bold
+!urxvt.boldfont:		7x13bold
+
+!urxvt.font:			xft:Bok MonteCarlo:pixelsize=18
+!urxvt.boldFont:		xft:Bok MonteCarlo:pixelsize=18
+
+! these can make a fast font slow :(
+!URxvt.letterSpace: -1
+URxvt.lineSpace: 5
+!URxvt.blurRadius: 10x10
+!URxvt.visualBell: true
+URxvt.buffered: true
+
+! ir_black
+URxvt.foreground: #ffffff
+URxvt.color0: #7C7C7C
+URxvt.color1: #e18964
+URxvt.color2: #a8ff60
+URxvt.color3: #ffffb6
+URxvt.color4: #6699cc
+URxvt.color5: #ff73fd
+URxvt.color6: #96cdfe
+URxvt.color7: #eeeeee
+URxvt.color8: #7C7C7C
+URxvt.color9: #e18964
+URxvt.color10: #a8ff60
+URxvt.color11: #ffffb6
+URxvt.color12: #6699cc
+URxvt.color13: #ff73fd
+URxvt.color14: #96cdfe
+URxvt.color15: #eeeeee

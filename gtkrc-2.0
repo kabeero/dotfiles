@@ -1,0 +1,10 @@
+# created by KDE Plasma, Wed May 15 09:03:38 2019
+#
+# If you do not want Plasma to override your GTK settings, select
+# Colors in the System Settings and disable the checkbox
+# "Apply colors to non-Qt applications"
+#
+#
+
+gtk-alternative-button-order = 1
+
