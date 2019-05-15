@@ -1,8 +1,7 @@
 # dotfiles and desktop config
 
-## General
+## Setup
 
-My setup
 - window manager: [plasma (kde5)](https://wiki.gentoo.org/wiki/KDE) with [i3wm](https://i3wm.org/docs/userguide.html)
 - login manager: sddm
 - compsition manager: compton
