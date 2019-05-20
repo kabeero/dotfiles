@@ -232,6 +232,7 @@ mode "resize" {
 # client.focused 			#f47442  #ea4812 #222222 #c8321e
 #client.focused 			#f47442  #ea4812 #ffffff #c8321e
 client.focused 			#09f904  #19a517 #111111 #42f442
+client.focused_inactive	#333333  #5f676a #111111 #333333
 
 # default bar colors
 bar {
@@ -308,7 +309,7 @@ exec --no-startup-id background
 #exec --no-startup-id pulseaudio --start
 #exec --no-startup-id redshift-gtk
 #exec --no-startup-id synclient horiztwofingerscroll=1
-exec --no-startup-id xset m 3/2 1
+exec --no-startup-id xset m 1/4 1
 #exec --no-startup-id xset +fp /usr/share/fonts/proggy-fonts
 exec --no-startup-id xset +fp /usr/share/fonts/dina
 #exec --no-startup-id feh --recursive --randomize --bg-fill ~/pictures/backgrounds
