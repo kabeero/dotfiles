@@ -33,9 +33,13 @@ servers = (
     chatnet = "Undernet";
     port = "6667";
   }
+  { address = "0.0.0.0"; port = "4242"; chatnet = "quassel"; password = "***REMOVED***"; use_ssl="yes"; }
 );
 
 chatnets = {
+  quassel = {
+    type = "Quassel";
+  };
   DALnet = {
     type = "IRC";
     max_kicks = "4";
@@ -372,9 +376,9 @@ statusbar = {
 };
 settings = {
   core = {
-    real_name = "***REMOVED***";
-    user_name = "***REMOVED***";
-    nick = "***REMOVED***";
+    real_name = "kabeero";
+    user_name = "kabeero";
+    nick = "kabeero";
   };
   "fe-text" = { actlist_sort = "refnum"; };
   "fe-common/core" = { print_active_channel = "yes"; };
