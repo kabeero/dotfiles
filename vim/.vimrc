@@ -29,3 +29,8 @@ filetype plugin on
 " vimwiki-option-syntax : default , markdown , media
 " only default -> wiki2html
 let g:vimwiki_list = [{'path': '~/work/wiki/', 'path_html': '~/work/wiki/html/', 'syntax': 'default'}]
+
+let g:airline_theme='serene'
+" default is dark_minimal
+" badcat badwolf behelit kolor murmur onedark powerlineish raven serene simple vice
+" minimalist peaksea ubaryd wombat
