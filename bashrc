@@ -18,8 +18,8 @@ fi
 # Put your fun stuff here.
 
 #lias ls='ls --group-directories-first'
-alias lll='ls -lh'
-alias ll='ls -1'
+alias ll='ls -lh'
+#alias ll='ls -1'
 alias l='ls'
 alias mv='mv -i'
 alias rm='rm -i'
@@ -32,10 +32,12 @@ alias irssi='TERM=screen-256color irssi'
 
 # default
 #export PS1='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
+# dard blue
+export PS1='\[\033[01;30m\][\[\033[38;5;39m\]\w\[\033[01;30m\]]\n\[\033[37m\]\u\[\033[01;30m\]@\[\033[38;5;39m\]\h \[\033[1;30m\]\$ \[\033[00m\]'
 # light blue
 #export PS1='\[\033[01;30m\][\[\033[01;36m\]\w\[\033[01;30m\]]\n\[\033[37m\]\u\[\033[01;30m\]@\[\033[01;36m\]\h \[\033[1;30m\]\$ \[\033[00m\]'
 # green
-export PS1='\[\033[01;30m\][\[\033[38;5;82m\]\w\[\033[01;30m\]]\n\[\033[37m\]\u\[\033[01;30m\]@\[\033[38;5;82m\]\h \[\033[1;30m\]\$ \[\033[00m\]'
+#export PS1='\[\033[01;30m\][\[\033[38;5;82m\]\w\[\033[01;30m\]]\n\[\033[37m\]\u\[\033[01;30m\]@\[\033[38;5;82m\]\h \[\033[1;30m\]\$ \[\033[00m\]'
 
 export LM_LICENSE_FILE=50000@poseidon
 

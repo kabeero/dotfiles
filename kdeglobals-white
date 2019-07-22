@@ -107,6 +107,10 @@ ForegroundNormal=220,220,220
 ForegroundPositive=128,255,128
 ForegroundVisited=192,128,255
 
+[DirSelect Dialog]
+DirSelectDialog Size=640,480
+History Items[$e]=file:$HOME
+
 [General]
 ColorScheme=Zion (Green)
 Name=Breeze Dark
