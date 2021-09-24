@@ -1,0 +1,33 @@
+# 2021-09-23 17:33:10
+
+set guioptions none
+set selection-clipboard clipboard
+set selection-notification false
+set adjust-open width
+#et adjust-open best-fit
+#et recolor true
+set recolor-keephue true
+
+map , navigate previous
+map . navigate next
+map i recolor
+map f toggle_fullscreen
+map h adjust_window best-fit
+map w adjust_window width
+map H adjust_window best-fit
+map W adjust_window width
+
+map [fullscreen] , navigate previous
+map [fullscreen] . navigate next
+map [fullscreen] i recolor
+map [fullscreen] f toggle_fullscreen
+map [fullscreen] h adjust_window best-fit
+map [fullscreen] w adjust_window width
+map [fullscreen] H adjust_window best-fit
+map [fullscreen] W adjust_window width
+
+# https://manpages.ubuntu.com/manpages/disco/man5/zathurarc.5.html
+# guioptions
+#     Shows  or  hides  GUI elements.  If it contains 'c', the command line is displayed.  If it
+#     contains 's', the statusbar is displayed.  If it contains 'h', the horizontal scrollbar is
+#     displayed.  If it contains 'v', the vertical scrollbar is displayed.
