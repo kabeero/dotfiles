@@ -1,15 +1,26 @@
 # 2021-09-23 17:33:10
 
-set guioptions none
-set selection-clipboard clipboard
-set selection-notification false
+# https://man.archlinux.org/man/zathurarc.5
+
+# zathura has a sandbox mode that provides a secure environment by using a strict seccomp filter. The mode can be set in zathurarc like this: 
+# Some features are disabled when using strict sandbox mode, such as writing files, printing and bookmarks 
+#et sandbox strict
+
 set adjust-open width
 #et adjust-open best-fit
-#et recolor true
+set guioptions none
+set recolor true
 set recolor-keephue true
+set recolor-reverse-video true
+set render-loading false
+set selection-clipboard clipboard
+set selection-notification false
+set scroll-step 345
 
-map , navigate previous
-map . navigate next
+map \' navigate previous
+map , scroll up
+map . scroll down
+map p navigate next
 map i recolor
 map f toggle_fullscreen
 map h adjust_window best-fit
@@ -17,8 +28,10 @@ map w adjust_window width
 map H adjust_window best-fit
 map W adjust_window width
 
-map [fullscreen] , navigate previous
-map [fullscreen] . navigate next
+map [fullscreen] \' navigate previous
+map [fullscreen] , scroll up
+map [fullscreen] . scroll down
+map [fullscreen] p navigate next
 map [fullscreen] i recolor
 map [fullscreen] f toggle_fullscreen
 map [fullscreen] h adjust_window best-fit
