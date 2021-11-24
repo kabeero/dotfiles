@@ -1,0 +1,82 @@
+#!/usr/bin/env sh
+
+# the scripting-addition must be loaded manually if
+# you are running yabai on macOS Big Sur. Uncomment
+# the following line to have the injection performed
+# when the config is executed during startup.
+#
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+#
+# see this wiki page for information:
+#  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
+#
+sudo yabai --load-sa
+yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+
+###########################
+#  Window modifications
+###########################
+
+yabai -m config window_origin_display        default
+yabai -m config window_placement             second_child
+yabai -m config window_topmost               off
+
+# modify window shadows (default: on, options: on, off, float)
+yabai -m config window_shadow                float
+yabai -m config window_opacity               on
+yabai -m config window_opacity_duration      0.0
+yabai -m config active_window_opacity        1.0
+yabai -m config normal_window_opacity        0.9
+
+yabai -m config window_border                off
+yabai -m config window_border_width          6
+yabai -m config active_window_border_color   0xff775759
+yabai -m config normal_window_border_color   0xff555555
+yabai -m config insert_feedback_color        0xffd75f5f
+
+## Split Ratios
+
+# If auto balance is disabled, the split ratio defines how much space each window occupies after a new split is created. A value of 0.5 means that both old and new window occupy the same space; a value of 0.2 means that the old window occupies 20% of the available space and the new window occupies 80% of the available space. New windows are inserted at the right or bottom side. The ratio needs to be between 0 and 1.
+yabai -m config split_ratio                  0.50
+
+# Auto balance makes it so all windows always occupy the same space, independent of how deeply nested they are in the window tree. When a new window is inserted or a window is removed, the split ratios will be automatically adjusted.
+yabai -m config auto_balance                 on
+
+###########################
+#     Mouse Support
+###########################
+
+# When you drag a tiled window onto another, yabai swaps their positions in the window tree. If you resize a tiled window, yabai will adjust splits to fit automatically.
+# set mouse interaction modifier key (default: fn)
+yabai -m config mouse_modifier               ctrl
+# set modifier + left-click drag to move window (default: move)
+yabai -m config mouse_action1                move
+# set modifier + right-click drag to resize window (default: resize)
+yabai -m config mouse_action2                resize
+yabai -m config mouse_drop_action            swap
+
+# With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on). Focus follows mouse is disabled while holding the mouse modifier key so that you can access the menu bar easily.
+yabai -m config focus_follows_mouse          autofocus
+# Mouse follows focus makes it so that when yabai focuses another window (e.g. through a focus command), the mouse cursor gets moved to the center of the focused window.
+yabai -m config mouse_follows_focus          off
+
+###########################
+#     Tiling options
+###########################
+
+## Layout
+
+# Layout defines whether windows are tiled ("managed", "bsp") by yabai or left alone ("float"). This setting can be defined on a per–space basis.
+yabai -m config layout                       bsp
+
+## Padding and gaps
+
+# When tiling windows, yabai can maintain gaps between windows and padding towards menu bar, dock and screen edges. This setting can be defined on a per–space basis.
+yabai -m config top_padding                  16
+yabai -m config bottom_padding               16
+yabai -m config left_padding                 16
+yabai -m config right_padding                16
+yabai -m config window_gap                   16
+
+echo "yabai configuration loaded…"

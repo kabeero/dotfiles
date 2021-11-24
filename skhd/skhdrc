@@ -1,0 +1,131 @@
+# debugging:
+# skhd --verbose
+# skhd --observe
+
+# .blacklist [
+# 	"kitty"
+# 	"terminal"
+# ]
+
+# cmd - * -> ; float
+
+# close window
+# 0x0C == '
+alt - 0x0C : yabai -m window --close
+# alt - 0x0C : osascript -e 'tell application "System Events" to perform action "AXPress" of (first button whose subrole is "AXCloseButton") of (first window whose subrole is "AXStandardWindow") of (first process whose frontmost is true)'
+
+# spawn terminal
+alt - return : /Applications/kitty.app/Contents/MacOS/kitty -1
+
+# focus window
+alt - 0x06 : yabai -m window --focus north
+alt - j : yabai -m window --focus west
+alt - k : yabai -m window --focus east
+alt - q : yabai -m window --focus south
+
+# move managed window
+shift + alt - 0x06 : yabai -m window --warp north
+shift + alt - j : yabai -m window --warp west
+shift + alt - k : yabai -m window --warp east
+shift + alt - q : yabai -m window --warp south
+
+# grow window by 100 to the right, shrink by 200 at the bottom
+#   (options: top, left, bottom, right, top_left, top_right, bottom_right, bottom_left)
+# yabai -m window --resize bottom_right:100:-200
+
+# move focused window 100 to the right, 200 up
+# yabai -m window --move rel:100:-200
+
+# change window size
+shift + alt - h : yabai -m window --resize right:-100:0
+shift + alt - c : yabai -m window --resize bottom:0:-100
+shift + alt - t : yabai -m window --resize bottom:0:100
+shift + alt - n : yabai -m window --resize right:100:0
+
+# balance size of windows (reset micro movements)
+shift + alt - 0 : yabai -m space --balance
+
+# toggle window split type
+alt - e : yabai -m window --toggle split
+
+# send window to desktop
+shift + alt - 1 : yabai -m window --space  1
+shift + alt - 2 : yabai -m window --space  2
+shift + alt - 3 : yabai -m window --space  3
+shift + alt - 4 : yabai -m window --space  4
+shift + alt - 5 : yabai -m window --space  5
+shift + alt - 6 : yabai -m window --space  6
+shift + alt - 7 : yabai -m window --space  7
+shift + alt - 8 : yabai -m window --space  8
+
+# TODO: why is this better than move?
+# swap managed window
+#ctrl + shift + alt - ; : yabai -m window --swap north
+#ctrl + shift + alt - j : yabai -m window --swap west
+#ctrl + shift + alt - k : yabai -m window --swap east
+#ctrl + shift + alt - q : yabai -m window --swap south
+
+# create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
+# shift + cmd - n : yabai -m space --create && \
+#                   index="$(yabai -m query --spaces --display | jq 'map(select(."native-fullscreen" == 0))[-1].index')" && \
+#                   yabai -m window --space "${index}" && \
+#                   yabai -m space --focus "${index}"
+
+# fast focus desktop
+# cmd + alt - x : yabai -m space --focus recent
+# cmd + alt - 1 : yabai -m space --focus 1
+
+# send window to desktop and follow focus
+# shift + cmd - z : yabai -m window --space next; yabai -m space --focus next
+# shift + cmd - 2 : yabai -m window --space  2; yabai -m space --focus 2
+
+# send window to desktop and follow focus
+# shift + cmd - z : yabai -m window --space next; yabai -m space --focus next
+# shift + cmd - 2 : yabai -m window --space  2; yabai -m space --focus 2
+
+# set insertion point in focused container
+# ctrl + alt - h : yabai -m window --insert west
+
+
+## ZOOM
+
+# toggle window zoom
+shift + alt - f : yabai -m window --toggle zoom-parent
+        alt - f : yabai -m window --toggle zoom-fullscreen
+
+
+## FLOATING
+
+# float / unfloat window and center on screen
+alt - space : yabai -m window --toggle float;\
+              yabai -m window --grid 4:4:1:1:2:2
+
+# TODO: not working
+# toggle sticky(+float), topmost, picture-in-picture
+shift + alt - space : yabai -m window --toggle sticky;\
+                      yabai -m window --toggle topmost;\
+                      yabai -m window --toggle pip
+
+# TODO: doesn't toggle
+# make floating window fill screen
+# shift + alt - f     : yabai -m window --grid 1:1:0:0:1:1
+
+# make floating window fill left-half of screen
+# shift + alt - left   : yabai -m window --grid 1:2:0:0:1:1
+
+# move floating window
+# shift + ctrl - a : yabai -m window --move rel:-20:0
+# shift + ctrl - s : yabai -m window --move rel:0:20
+
+
+
+## MULTI-MONITOR
+
+# focus monitor
+# ctrl + alt - z  : yabai -m display --focus prev
+# ctrl + alt - 3  : yabai -m display --focus 3
+
+# send window to monitor and follow focus
+# ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
+# ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
+
