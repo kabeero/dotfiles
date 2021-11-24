@@ -79,4 +79,12 @@ yabai -m config left_padding                 16
 yabai -m config right_padding                16
 yabai -m config window_gap                   16
 
+###########################
+##        Rules
+###########################
+
+yabai -m rule --add app="^IINA$" manage=off
+yabai -m rule --add app="^System Preferences$" manage=off
+
+
 echo "yabai configuration loaded…"

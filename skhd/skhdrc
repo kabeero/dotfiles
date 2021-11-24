@@ -15,7 +15,7 @@ alt - 0x0C : yabai -m window --close
 # alt - 0x0C : osascript -e 'tell application "System Events" to perform action "AXPress" of (first button whose subrole is "AXCloseButton") of (first window whose subrole is "AXStandardWindow") of (first process whose frontmost is true)'
 
 # spawn terminal
-alt - return : /Applications/kitty.app/Contents/MacOS/kitty -1
+alt - return : /Applications/kitty.app/Contents/MacOS/kitty -1 -d ~
 
 # focus window
 alt - 0x06 : yabai -m window --focus north
@@ -97,13 +97,13 @@ shift + alt - f : yabai -m window --toggle zoom-parent
 ## FLOATING
 
 # float / unfloat window and center on screen
-alt - space : yabai -m window --toggle float;\
+alt - space : yabai -m window --toggle float; \
               yabai -m window --grid 4:4:1:1:2:2
 
 # TODO: not working
 # toggle sticky(+float), topmost, picture-in-picture
-shift + alt - space : yabai -m window --toggle sticky;\
-                      yabai -m window --toggle topmost;\
+shift + alt - space : yabai -m window --toggle sticky; \
+                      yabai -m window --toggle topmost; \
                       yabai -m window --toggle pip
 
 # TODO: doesn't toggle
