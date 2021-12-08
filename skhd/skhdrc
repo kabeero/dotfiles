@@ -63,10 +63,10 @@ shift + alt - 7 : yabai -m window --space  7
 shift + alt - 8 : yabai -m window --space  8
 
 # set insertion point for focused container
-ctrl + shift + alt - h : yabai -m window --insert west
-ctrl + shift + alt - c : yabai -m window --insert north
-ctrl + shift + alt - t : yabai -m window --insert south
-ctrl + shift + alt - n : yabai -m window --insert east
+ctrl + alt - h : yabai -m window --insert west
+ctrl + alt - c : yabai -m window --insert north
+ctrl + alt - t : yabai -m window --insert south
+ctrl + alt - n : yabai -m window --insert east
 
 # enable / disable gaps in current space
 shift + alt - g : yabai -m space --toggle padding; \
@@ -80,8 +80,8 @@ shift + alt - r : yabai -m space --rotate  90
 shift + alt - s : yabai -m space --mirror x-axis
 shift + alt - l : yabai -m space --mirror y-axis
 
-# TODO: why is this better than move?
 # swap managed window
+# why is this better than move?
 #ctrl + shift + alt - ; : yabai -m window --swap north
 #ctrl + shift + alt - j : yabai -m window --swap west
 #ctrl + shift + alt - k : yabai -m window --swap east
@@ -105,9 +105,6 @@ shift + alt - l : yabai -m space --mirror y-axis
 # shift + cmd - z : yabai -m window --space next; yabai -m space --focus next
 # shift + cmd - 2 : yabai -m window --space  2; yabai -m space --focus 2
 
-# set insertion point in focused container
-# ctrl + alt - h : yabai -m window --insert west
-
 
 ## ZOOM
 
@@ -119,17 +116,18 @@ shift + alt - f : yabai -m window --toggle zoom-parent
 
 ## FLOATING
 
-# float / unfloat window and center on screen
-alt - space : yabai -m window --toggle float; \
-              yabai -m window --grid 4:4:1:1:2:2
+# toggle float / unfloat window and center on screen
+        alt - space : yabai -m window --toggle float; \
+                      yabai -m window --grid 4:4:1:1:2:2
 
-# TODO: not working
-# toggle sticky(+float), topmost, picture-in-picture
+# +always on top
 shift + alt - space : yabai -m window --toggle sticky; \
+                      yabai -m window --toggle topmost;
+# +pip
+ctrl  + alt - space : yabai -m window --toggle sticky; \
                       yabai -m window --toggle topmost; \
                       yabai -m window --toggle pip
 
-# TODO: doesn't toggle
 # make floating window fill screen
 # shift + alt - f     : yabai -m window --grid 1:1:0:0:1:1
 
