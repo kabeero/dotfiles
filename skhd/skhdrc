@@ -11,23 +11,27 @@
 
 # close window
 # 0x0C == '
-alt - 0x0C : yabai -m window --close
+        alt - 0x0C : yabai -m window --close
 # alt - 0x0C : osascript -e 'tell application "System Events" to perform action "AXPress" of (first button whose subrole is "AXCloseButton") of (first window whose subrole is "AXStandardWindow") of (first process whose frontmost is true)'
 
 # spawn terminal
-alt - return : /Applications/kitty.app/Contents/MacOS/kitty -1 -d ~
+      alt - return : /Applications/kitty.app/Contents/MacOS/kitty -1 -d ~
 
 # focus window
-alt - 0x06 : yabai -m window --focus north
-alt -  j   : yabai -m window --focus west
-alt -  k   : yabai -m window --focus east
-alt -  q   : yabai -m window --focus south
+        alt - 0x06 : yabai -m window --focus north
+        alt -  q   : yabai -m window --focus south
+        alt -  j   : yabai -m window --focus stack.prev || yabai -m window --focus prev || yabai -m window --focus last  || yabai -m window --focus west
+        alt -  k   : yabai -m window --focus stack.next || yabai -m window --focus next || yabai -m window --focus first || yabai -m window --focus east
 
-# move managed window
+# move managed window: swap: non-hierarchical, warp: into bsp tree
+ ctrl + alt - 0x06 : yabai -m window --swap north
+ ctrl + alt -  q   : yabai -m window --swap south
+ ctrl + alt -  j   : yabai -m window --swap west
+ ctrl + alt -  k   : yabai -m window --swap east
 shift + alt - 0x06 : yabai -m window --warp north
+shift + alt -  q   : yabai -m window --warp south
 shift + alt -  j   : yabai -m window --warp west
 shift + alt -  k   : yabai -m window --warp east
-shift + alt -  q   : yabai -m window --warp south
 
 # grow window by 100 to the right, shrink by 200 at the bottom
 #   (options: top, left, bottom, right, top_left, top_right, bottom_right, bottom_left)
@@ -37,20 +41,23 @@ shift + alt -  q   : yabai -m window --warp south
 # yabai -m window --move rel:100:-200
 
 # change window size
-shift + alt - h : yabai -m window --resize right:-100:0  ; \
-                  yabai -m window --resize  left:-100:0
-shift + alt - c : yabai -m window --resize bottom:0:-100 ; \
-                  yabai -m window --resize    top:0:-100
 shift + alt - t : yabai -m window --resize bottom:0:100  ; \
                   yabai -m window --resize    top:0:100
-shift + alt - n : yabai -m window --resize right:100:0   ; \
-                  yabai -m window --resize  left:100:0
+shift + alt - c : yabai -m window --resize bottom:0:-100 ; \
+                  yabai -m window --resize    top:0:-100
+shift + alt - h : yabai -m window --resize  right:-100:0 ; \
+                  yabai -m window --resize   left:-100:0
+shift + alt - n : yabai -m window --resize  right:100:0  ; \
+                  yabai -m window --resize   left:100:0
 
 # balance size of windows (reset micro movements)
 shift + alt - 0 : yabai -m space --balance
 
 # toggle window split type
-alt - e : yabai -m window --toggle split
+        alt - e : yabai -m window --toggle split
+
+# stack
+        alt - w : yabai -m window --stack south || yabai -m window --stack north || yabai -m window --stack east || yabai -m window --stack west
 
 # send window to desktop
 shift + alt - 1 : yabai -m window --space  1
@@ -63,10 +70,10 @@ shift + alt - 7 : yabai -m window --space  7
 shift + alt - 8 : yabai -m window --space  8
 
 # set insertion point for focused container
-ctrl + alt - h : yabai -m window --insert west
-ctrl + alt - c : yabai -m window --insert north
-ctrl + alt - t : yabai -m window --insert south
-ctrl + alt - n : yabai -m window --insert east
+ ctrl + alt - c : yabai -m window --insert north
+ ctrl + alt - t : yabai -m window --insert south
+ ctrl + alt - h : yabai -m window --insert west
+ ctrl + alt - n : yabai -m window --insert east
 
 # enable / disable gaps in current space
 shift + alt - g : yabai -m space --toggle padding; \
@@ -79,13 +86,6 @@ shift + alt - r : yabai -m space --rotate  90
 # rotate on x and y axis
 shift + alt - s : yabai -m space --mirror x-axis
 shift + alt - l : yabai -m space --mirror y-axis
-
-# swap managed window
-# why is this better than move?
-#ctrl + shift + alt - ; : yabai -m window --swap north
-#ctrl + shift + alt - j : yabai -m window --swap west
-#ctrl + shift + alt - k : yabai -m window --swap east
-#ctrl + shift + alt - q : yabai -m window --swap south
 
 # create desktop, move window and follow focus - uses jq for parsing json (brew install jq)
 # shift + cmd - n : yabai -m space --create && \
@@ -109,9 +109,9 @@ shift + alt - l : yabai -m space --mirror y-axis
 ## ZOOM
 
 # toggle window zoom
-shift + alt - f : yabai -m window --toggle zoom-parent
- ctrl + alt - f : yabai -m window --toggle native-fullscreen
-        alt - f : yabai -m window --toggle zoom-fullscreen
+shift + alt - f : yabai -m window --toggle border; yabai -m window --toggle zoom-parent
+ ctrl + alt - f : yabai -m window --toggle border; yabai -m window --toggle native-fullscreen
+        alt - f : yabai -m window --toggle border; yabai -m window --toggle zoom-fullscreen
 
 
 ## FLOATING
@@ -122,11 +122,13 @@ shift + alt - f : yabai -m window --toggle zoom-parent
 
 # +always on top
 shift + alt - space : yabai -m window --toggle sticky; \
-                      yabai -m window --toggle topmost;
+                      yabai -m window --toggle topmost; \
+                      yabai -m window --toggle border;
 # +pip
 ctrl  + alt - space : yabai -m window --toggle sticky; \
                       yabai -m window --toggle topmost; \
-                      yabai -m window --toggle pip
+                      yabai -m window --toggle pip; \
+                      yabai -m window --toggle border;
 
 # make floating window fill screen
 # shift + alt - f     : yabai -m window --grid 1:1:0:0:1:1
@@ -149,4 +151,34 @@ ctrl  + alt - space : yabai -m window --toggle sticky; \
 # send window to monitor and follow focus
 # ctrl + cmd - c  : yabai -m window --display next; yabai -m display --focus next
 # ctrl + cmd - 1  : yabai -m window --display 1; yabai -m display --focus 1
+
+## QUERY + INDEXED LOOKUP
+
+# swap left / right
+
+alt + shift - j : yabai -m query --spaces --space \
+  | jq -re ".index" \
+  | xargs -I{} yabai -m query --windows --space {} \
+  | jq -sre 'add | map(select(."is-minimized"==false)) | . as $array | length as $array_length | index(map(select(."has-focus"==true))) as $has_index | if $array_length - 1 > $has_index then nth($has_index + 1).id else nth(0).id end' \
+  | xargs -I{} yabai -m window --swap {}
+
+alt + shift - k : yabai -m query --spaces --space \
+  | jq -re ".index" \
+  | xargs -I{} yabai -m query --windows --space {} \
+  | jq -sre 'add | map(select(."is-minimized"==false)) | . as $array | length as $array_length | index(map(select(."has-focus"==true))) as $has_index | if $has_index > 0 then nth($has_index - 1).id else nth($array_length - 1).id end'  \
+  | xargs -I{} yabai -m window --swap {}
+
+# focus left / right
+
+alt - j : yabai -m query --spaces --space \
+  | jq -re ".index" \
+  | xargs -I{} yabai -m query --windows --space {} \
+  | jq -sre 'add | map(select(."is-minimized"==false)) | . as $array | length as $array_length | index(map(select(."has-focus"==true))) as $has_index | if $array_length - 1 > $has_index then nth($has_index + 1).id else nth(0).id end' \
+  | xargs -I{} yabai -m window --focus {}
+
+alt - k : yabai -m query --spaces --space \
+  | jq -re ".index" \
+  | xargs -I{} yabai -m query --windows --space {} \
+  | jq -sre 'add | map(select(."is-minimized"==false)) | . as $array | length as $array_length | index(map(select(."has-focus"==true))) as $has_index | if $has_index > 0 then nth($has_index - 1).id else nth($array_length - 1).id end'  \
+  | xargs -I{} yabai -m window --focus {}
 

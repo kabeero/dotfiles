@@ -22,18 +22,20 @@ yabai -m config window_origin_display        default
 yabai -m config window_placement             second_child
 yabai -m config window_topmost               off
 
+# floating windows are always on top (default: off)
+yabai -m config window_topmost on
 # modify window shadows (default: on, options: on, off, float)
 yabai -m config window_shadow                float
-yabai -m config window_opacity               on
+yabai -m config window_opacity               off
 yabai -m config window_opacity_duration      0.0
 yabai -m config active_window_opacity        1.0
 yabai -m config normal_window_opacity        0.9
 
-yabai -m config window_border                off
+yabai -m config window_border                on
 yabai -m config window_border_width          6
-yabai -m config active_window_border_color   0xff775759
-yabai -m config normal_window_border_color   0xff555555
-yabai -m config insert_feedback_color        0xffd75f5f
+yabai -m config active_window_border_color   0xff006ca5
+yabai -m config normal_window_border_color   0x00555555
+yabai -m config insert_feedback_color        0x88006ca5
 
 ## Split Ratios
 
@@ -49,7 +51,7 @@ yabai -m config auto_balance                 on
 
 # When you drag a tiled window onto another, yabai swaps their positions in the window tree. If you resize a tiled window, yabai will adjust splits to fit automatically.
 # set mouse interaction modifier key (default: fn)
-yabai -m config mouse_modifier               ctrl
+yabai -m config mouse_modifier               alt
 # set modifier + left-click drag to move window (default: move)
 yabai -m config mouse_action1                move
 # set modifier + right-click drag to resize window (default: resize)
@@ -83,8 +85,13 @@ yabai -m config window_gap                   16
 ##        Rules
 ###########################
 
+yabai -m rule --add app="^Amazon Chime$" manage=off
+yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" manage=off
 yabai -m rule --add app="^IINA$" manage=off
+yabai -m rule --add app="^Inkscape$" manage=off
+yabai -m rule --add app="^mpv$" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
+yabai -m rule --add app="^[zZ]athura$" manage=off
 
 
 echo "yabai configuration loaded…"
