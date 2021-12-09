@@ -87,8 +87,10 @@ yabai -m config window_gap                   16
 
 yabai -m rule --add app="^Amazon Chime$" manage=off
 yabai -m rule --add app="^Cisco AnyConnect Secure Mobility Client$" manage=off
+yabai -m rule --add app="^Fiji$" manage=off
 yabai -m rule --add app="^IINA$" manage=off
 yabai -m rule --add app="^Inkscape$" manage=off
+yabai -m rule --add app="^kitty$" manage=off
 yabai -m rule --add app="^mpv$" manage=off
 yabai -m rule --add app="^System Preferences$" manage=off
 yabai -m rule --add app="^[zZ]athura$" manage=off
