@@ -75,7 +75,9 @@ set $mod Mod4
 #font pango:Source Sans Pro regular 20px
 #font pango:DejaVu Sans Condensed regular 20px
 #font pango:DejaVu Sans Condensed regular 16px
-font pango:Source Sans Pro regular 16px
+#font pango:Source Sans Pro regular 16px
+font pango:Noto Sans regular 16px
+#ont pango:Roboto Sans Mono regular 16px
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -93,7 +95,8 @@ floating_modifier $mod
 
 # start a terminal
 #bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec urxvt
+#bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec "kitty -1"
 
 # kill focused window
 bindsym $mod+apostrophe kill
@@ -110,6 +113,9 @@ bindsym $mod+apostrophe kill
 
 # use Rofi
 bindsym $mod+r exec "rofi -i -show run -width 40 -font 'Source Sans Pro 16'"
+
+# use krunner
+#bindsym $mod+r exec "krunner"
 
 # change focus
 bindsym $mod+j focus left
@@ -150,8 +156,11 @@ bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
-# bindsym $mod+Shift+space floating toggle
 bindsym $mod+space floating toggle
+bindsym $mod+Shift+space sticky toggle
+
+# appear on all workspaces
+bindsym $mod+t sticky toggle
 
 # change focus between tiling / floating windows
 # bindsym $mod+space focus mode_toggle
@@ -228,21 +237,27 @@ mode "resize" {
 # client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 # client.background       #ffffff
 
-# orange borders (other columns are for tabbed mode text / bg)
+# green borders (other columns are for tabbed mode text / bg)
+# client.focused 			#09f904  #19a517 #111111 #42f442
+# client.focused_inactive	#333333  #5f676a #111111 #333333
+# orange borders
 # client.focused 			#f47442  #ea4812 #222222 #c8321e
-#client.focused 			#f47442  #ea4812 #ffffff #c8321e
-client.focused 			#09f904  #19a517 #111111 #42f442
+
+# sky blue borders
+#lient.focused 			#00a2ff  #145ba3 #111111 #1834a4
+client.focused 			#145ba3  #041b83 #aaaaaa #1834a4
 client.focused_inactive	#333333  #5f676a #111111 #333333
 
-# default bar colors
+# i3status bar colors
 bar {
+	mode hide
 	position bottom
     status_command i3status
     
     colors {
         background #000000
         statusline #ffffff
-        separator #666666
+        separator  #666666
                            # border  bg      text
         # focused_workspace  #c8321e #ea4812 #222222
         # active_workspace   #333333 #5f676a #ffffff
@@ -250,7 +265,11 @@ bar {
         # urgent_workspace   #2f343a #900000 #ffffff
         # binding_mode       #2f343a #900000 #ffffff
         
-        focused_workspace  #09f904 #19a517 #111111
+        # green
+        # focused_workspace  #09f904 #19a517 #111111
+        # sky blue
+        #ocused_workspace  #00a2ff #145ba3 #111111
+        focused_workspace  #145ba3 #041b83 #aaaaaa
         active_workspace   #333333 #5f676a #ffffff
         inactive_workspace #333333 #222222 #888888
         urgent_workspace   #2f343a #900000 #ffffff
@@ -271,7 +290,7 @@ new_window 1pixel
 # >>> Plasma Integration <<<
 
 # dont steal focus
-no_focus [class=”plasmashell”]
+no_focus [class="plasmashell"]
 
 # Try to kill the wallpaper set by Plasma (it takes up the entire workspace and hides everythiing)
 exec --no-startup-id wmctrl -c Plasma
@@ -301,20 +320,24 @@ for_window [window_type="menu"] floating enable
 # exec --no-startup-id xcompmgr -n -cC
 
 #exec --no-startup-id blueman-applet
-# seems to have more features than xcompmgr
-exec --no-startup-id compton --config ~/.config/compton/compton.conf
+# xcompmgr -> compton -> picom
+#xec --no-startup-id compton --config ~/.config/compton/compton.conf
+exec --no-startup-id picom --config ~/.config/picom/picom.conf
 #exec --no-startup-id nitrogen --restore
 exec --no-startup-id background
+exec --no-startup-id dunst
 #exec --no-startup-id parcellite
 #exec --no-startup-id pulseaudio --start
 #exec --no-startup-id redshift-gtk
 #exec --no-startup-id synclient horiztwofingerscroll=1
 exec --no-startup-id xset m 1/4 1
-#exec --no-startup-id xset +fp /usr/share/fonts/proggy-fonts
+exec --no-startup-id hero n 1
+exec --no-startup-id hero s 1
 exec --no-startup-id xset +fp /usr/share/fonts/dina
+exec --no-startup-id xset +fp /usr/share/fonts/proggy-fonts
 #exec --no-startup-id feh --recursive --randomize --bg-fill ~/pictures/backgrounds
 
-for_window [class="Firefox|qpdfview|feh|MuPDF|mpv|Vlc|Pavucontrol|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma"] floating enable
+for_window [class="Firefox|qpdfview|feh|MuPDF|mpv|vlc|Pavucontrol|Pulseeffects|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma|libreoffice-writer|kitty|Xpra"] floating enable
 for_window [class="LibManager|LibSelect|Virtuoso|Qt-subapplication|logic|Vncviewer|com-oracle-vdc-gui-OVDC"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
