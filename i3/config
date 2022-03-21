@@ -112,7 +112,8 @@ bindsym $mod+apostrophe kill
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # use Rofi
-bindsym $mod+r exec "rofi -i -show run -width 40 -font 'Source Sans Pro 16'"
+#indsym $mod+r exec "rofi -i -show run -width 40 -font 'Source Sans Pro 16'"
+bindsym $mod+r exec "rofi -combi-modi window#drun#ssh -show combi -width 40 -font 'Source Sans Pro 18' -theme solarized -icon-theme 'Papirus' -show-icons"
 
 # use krunner
 #bindsym $mod+r exec "krunner"
