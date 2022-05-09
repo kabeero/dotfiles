@@ -113,7 +113,7 @@ bindsym $mod+apostrophe kill
 
 # use Rofi
 #indsym $mod+r exec "rofi -i -show run -width 40 -font 'Source Sans Pro 16'"
-bindsym $mod+r exec "rofi -combi-modi window#drun#ssh -show combi -width 40 -font 'Source Sans Pro 18' -theme solarized -icon-theme 'Papirus' -show-icons"
+bindsym $mod+r exec "rofi -combi-modi window#run#ssh#combi -show combi -width 40 -font 'Source Sans Pro 18' -theme solarized -icon-theme 'Papirus' -show-icons"
 
 # use krunner
 #bindsym $mod+r exec "krunner"
@@ -121,7 +121,7 @@ bindsym $mod+r exec "rofi -combi-modi window#drun#ssh -show combi -width 40 -fon
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus right
-bindsym $mod+l focus up
+bindsym $mod+q focus up
 bindsym $mod+semicolon focus down
 
 # alternatively, you can use the cursor keys:
@@ -132,9 +132,9 @@ bindsym $mod+Right focus right
 
 # move focused window
 bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+k move right
+bindsym $mod+Shift+q move up
+bindsym $mod+Shift+semicolon move down
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -339,6 +339,6 @@ exec --no-startup-id xset +fp /usr/share/fonts/proggy-fonts
 #exec --no-startup-id feh --recursive --randomize --bg-fill ~/pictures/backgrounds
 
 for_window [class="Firefox|qpdfview|feh|MuPDF|mpv|vlc|Pavucontrol|Pulseeffects|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma|libreoffice-writer|kitty|Xpra"] floating enable
-for_window [class="LibManager|LibSelect|Virtuoso|Qt-subapplication|logic|Vncviewer|com-oracle-vdc-gui-OVDC"] floating enable
+for_window [class="LibManager|LibSelect|Virtuoso|Qt-subapplication|logic|Vncviewer|com-oracle-vdc-gui-OVDC|Helix P4V|Wireshark|Virt-manager|QEMU|Spicy|Thunderbird|GNU Octave|Atom|Microsoft Teams - Preview|openrgb|fusion360.exe|^[lL]ooking|"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
