@@ -1,5 +1,7 @@
 # ~/.config/starship.toml
 
+add_newline = true
+
 # A minimal left prompt
 format = """$directory$character"""
 
@@ -11,7 +13,7 @@ truncation_length = 8
 truncation_symbol = "…/"
 
 [aws]
-format = "on [$symbol$profile]($style) "
+format = "([$symbol $profile]($style))"
 style = "bold yellow"
 symbol = "☁️ "
-disabled = true
+# disabled = true
