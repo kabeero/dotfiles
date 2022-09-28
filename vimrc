@@ -18,12 +18,12 @@ set smartcase
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+set expandtab
 "olorscheme ir_black
 "olorscheme one " https://github./rark/vim-one.git
 "et background=dark  " for the dark version
 " t background=light " for the lite version
 syntax on
-set expandtab
 " set formatoptions=croqlt
 let mapleader=","
 
@@ -290,3 +290,6 @@ nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " Git Blame
 nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
+
+" F3: Toggle list (display unprintable characters).
+nnoremap <F3> :set list!<CR>
