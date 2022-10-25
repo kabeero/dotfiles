@@ -114,6 +114,7 @@ bindsym $mod+apostrophe kill
 # use Rofi
 #indsym $mod+r exec "rofi -i -show run -width 40 -font 'Source Sans Pro 16'"
 bindsym $mod+r exec "rofi -combi-modi window#run#ssh#combi -show combi -width 40 -font 'Source Sans Pro 18' -theme solarized -icon-theme 'Papirus' -show-icons"
+bindsym $mod+o exec "maim-clip"
 
 # use krunner
 #bindsym $mod+r exec "krunner"
@@ -251,8 +252,8 @@ client.focused_inactive	#333333  #5f676a #111111 #333333
 
 # i3status bar colors
 bar {
-	mode hide
-	position bottom
+    mode hide
+    position bottom
     status_command i3status
     
     colors {
@@ -265,7 +266,7 @@ bar {
         # inactive_workspace #333333 #222222 #888888
         # urgent_workspace   #2f343a #900000 #ffffff
         # binding_mode       #2f343a #900000 #ffffff
-        
+
         # green
         # focused_workspace  #09f904 #19a517 #111111
         # sky blue
