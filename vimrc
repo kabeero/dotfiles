@@ -27,7 +27,7 @@ syntax on
 " set formatoptions=croqlt
 let mapleader=","
 
-set tw=120
+set tw=100
 
 set mouse=a
 
@@ -70,6 +70,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 "lug 'vimwiki/vimwiki'
 Plug 'JuliaEditorSupport/julia-vim'
 "lug 'davidhalter/jedi-vim'
+Plug 'mechatroner/rainbow_csv'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'wadackel/vim-dogrun'
 Plug 'joshdick/onedark.vim'
@@ -287,9 +288,22 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" References
+nnoremap <Leader>r <Plug>(coc-references)
 
 " Git Blame
 nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
 
 " F3: Toggle list (display unprintable characters).
 nnoremap <F3> :set list!<CR>
+
+" Pane navigate
+nnoremap <C-h> gT
+nnoremap <C-l> gt
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-c> <C-w>c
+nnoremap H <C-w>W
+nnoremap L <C-w>w
+nnoremap <silent><nowait> t :<C-u>tabnew<CR>
+nnoremap <silent><nowait> T :<C-u>NERDTreeToggle<CR>
