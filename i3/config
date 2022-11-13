@@ -255,7 +255,7 @@ bar {
     mode hide
     position bottom
     status_command i3status
-    
+
     colors {
         background #000000
         statusline #ffffff
