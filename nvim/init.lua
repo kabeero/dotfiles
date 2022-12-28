@@ -46,6 +46,25 @@ require('packer').startup(function(use)
   -- File explorer
   use 'nvim-tree/nvim-tree.lua'
 
+  -- Scrollbar
+  use("petertriho/nvim-scrollbar")
+  use("folke/tokyonight.nvim")
+  local colors = require("tokyonight.colors").setup()
+
+  require("scrollbar").setup({
+    handle = {
+        color = colors.bg_highlight,
+    },
+    marks = {
+        Search = { color = colors.orange },
+        Error = { color = colors.error },
+        Warn = { color = colors.warning },
+        Info = { color = colors.info },
+        Hint = { color = colors.hint },
+        Misc = { color = colors.purple },
+    }
+  })
+
   -- Practice vim
   use 'ThePrimeagen/vim-be-good'
 
@@ -55,7 +74,7 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'f-person/git-blame.nvim'
 
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+  -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
@@ -154,9 +173,10 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd [[colorscheme onedark]]
--- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
--- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+vim.cmd[[colorscheme tokyonight-night]]
+-- vim.cmd [[colorscheme onedark]]
+vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -171,6 +191,18 @@ vim.g.maplocalleader = ' '
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Makes * and # work on visual mode too.
+vim.cmd([[
+  function! g:VSetSearch(cmdtype)
+    let temp = @s
+    norm! gv"sy
+    let @/ = '\V' . substitute(escape(@s, a:cmdtype.'\'), '\n', '\\n', 'g')
+    let @s = temp
+  endfunction
+  xnoremap * :<C-u>call g:VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
+  xnoremap # :<C-u>call g:VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
+]])
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -196,6 +228,10 @@ vim.keymap.set('n', '<leader>$', function()
 	end
 end, { desc = 'Toggle tab expansion' })
 
+-- Dvorak navigation
+vim.keymap.set('n', ',', 'j', { desc = 'Move down' })
+vim.keymap.set('n', '.', 'k', { desc = 'Move up' })
+
 -- Pane navigation
 vim.keymap.set('n', '<C-c>', '<C-w>c', { desc = 'Close pane' })
 vim.keymap.set('n', '<C-h>', 'gT', { desc = 'Cycle pane left' })
@@ -218,9 +254,21 @@ vim.keymap.set("n", "<leader>y", "\"+y", { desc = 'Yank to system clipboard' })
 vim.keymap.set("v", "<leader>y", "\"+y", { desc = 'Yank to system clipboard' })
 vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = 'Yank to system clipboard' })
 
+-- Indent selection
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
 -- Move lines around
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Move lines down' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move lines up' })
+
+-- Move lines (more)
+-- vim.keymap.set("n", "<A-j>", ":m .+1<CR>==")
+-- vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv")
+-- vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv")
+-- vim.keymap.set("i", "<A-j>", "<Esc>:m .+1<CR>==gi")
+-- vim.keymap.set("n", "<A-k>", ":m .-2<CR>==")
+-- vim.keymap.set("i", "<A-k>", "<Esc>:m .-2<CR>==gi")
 
 -- Join lines without moving cursor
 vim.keymap.set("n", "J", "mzJ`z", { desc = 'Join lines and keep cursor position' })
@@ -239,6 +287,38 @@ vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz", { desc = 'Quickfix navigate
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace hovered word' })
 vim.keymap.set("v", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace highlighted word' })
 vim.keymap.set("n", "<leader>x", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = 'Replace highlighted word' })
+
+-- GUID Create
+vim.keymap.set("n", "<leader>cu", function()
+  local number = math.random(math.pow(2, 127) + 1, math.pow(2, 128))
+  return "i" .. string.format("%.0f", number)
+end, {
+  expr = true,
+  desc = "GUID",
+})
+
+-- Clear search with <esc>
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
+vim.keymap.set("n", "gw", "*N")
+vim.keymap.set("x", "gw", "*N")
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true })
+vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true })
+vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true })
+
+-- Add undo break-points
+vim.keymap.set("i", ",", ",<c-g>u")
+vim.keymap.set("i", ".", ".<c-g>u")
+vim.keymap.set("i", ";", ";<c-g>u")
+
+-- Save in insert mode
+vim.keymap.set("i", "<C-s>", "<cmd>:w<cr><esc>")
+vim.keymap.set("n", "<C-s>", "<cmd>:w<cr><esc>")
+-- vim.keymap.set("n", "<C-c>", "<cmd>normal ciw<cr>a")
 
 -- File explorer
 require("nvim-tree").setup({
@@ -280,7 +360,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 require('lualine').setup {
   options = {
     icons_enabled = false,
-    theme = 'onedark',
+    theme = 'tokyonight',
+    -- theme = 'onedark',
     component_separators = '|',
     section_separators = '',
   },
