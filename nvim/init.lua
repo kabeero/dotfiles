@@ -219,8 +219,8 @@ vim.keymap.set("v", "<leader>y", "\"+y", { desc = 'Yank to system clipboard' })
 vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = 'Yank to system clipboard' })
 
 -- Move lines around
-vim.keymap.set("v", "K", ":m '>+1<CR>gv=gv", { desc = 'Move lines up' })
-vim.keymap.set("v", "J", ":m '<-2<CR>gv=gv", { desc = 'Move lines down' })
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Move lines down' })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Move lines up' })
 
 -- Join lines without moving cursor
 vim.keymap.set("n", "J", "mzJ`z", { desc = 'Join lines and keep cursor position' })
