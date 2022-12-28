@@ -236,10 +236,9 @@ vim.keymap.set("n", "<leader>j", "<cmd>lnext<CR>zz", { desc = 'Quickfix navigate
 vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz", { desc = 'Quickfix navigate prev' })
 
 -- Replace text under cursor
-vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace highlighted word' })
-
--- Make file executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { desc = 'Replace highlighted word' })
+vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace hovered word' })
+vim.keymap.set("v", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace highlighted word' })
+vim.keymap.set("n", "<leader>x", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = 'Replace highlighted word' })
 
 -- File explorer
 require("nvim-tree").setup({
