@@ -222,7 +222,7 @@ end, { desc = 'Toggle relative line numbers' })
 vim.keymap.set('n', '<leader>$', function()
     vim.o.expandtab = not vim.o.expandtab
 	if vim.o.expandtab == true then
-		print 'Tab expansion enabled'
+        print 'Tab expansion enabled'
 	else
 		print 'Tab expansion disabled'
 	end
@@ -230,7 +230,15 @@ end, { desc = 'Toggle tab expansion' })
 
 -- Dvorak navigation
 vim.keymap.set('n', ',', 'j', { desc = 'Move down' })
+vim.keymap.set('v', ',', 'j', { desc = 'Move down (visual)' })
 vim.keymap.set('n', '.', 'k', { desc = 'Move up' })
+vim.keymap.set('v', '.', 'k', { desc = 'Move up (visual)' })
+
+-- Dvorak find jump
+vim.keymap.set('n', 'j', ',', { desc = 'Find previous occurrence' })
+vim.keymap.set('n', 'k', ';', { desc = 'Find next occurrence' })
+vim.keymap.set('v', 'j', ',', { desc = 'Find previous occurrence' })
+vim.keymap.set('v', 'k', ';', { desc = 'Find next occurrence' })
 
 -- Pane navigation
 vim.keymap.set('n', '<C-c>', '<C-w>c', { desc = 'Close pane' })
