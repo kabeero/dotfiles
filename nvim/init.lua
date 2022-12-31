@@ -220,9 +220,9 @@ end, { desc = 'Toggle relative line numbers' })
 
 -- Toggle tab expansion
 vim.keymap.set('n', '<leader>$', function()
-    vim.o.expandtab = not vim.o.expandtab
+  vim.o.expandtab = not vim.o.expandtab
   if vim.o.expandtab == true then
-        print 'Tab expansion enabled'
+    print 'Tab expansion enabled'
   else
     print 'Tab expansion disabled'
   end
