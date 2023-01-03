@@ -65,6 +65,31 @@ require('packer').startup(function(use)
     }
   })
 
+  use ({"ziontee113/color-picker.nvim",
+    config = function()
+        require("color-picker")
+    end,
+  })
+
+  local opts = { desc = "Color Picker", noremap = true, silent = true }
+
+  vim.keymap.set("n", "<leader>pc", "<cmd>PickColor<cr>", opts)
+  vim.keymap.set("i", "<leader>pc", "<cmd>PickColorInsert<cr>", opts)
+
+  require("color-picker").setup({
+      ["icons"] = { "ﱢ", "" },
+      ["border"] = "rounded", -- none | single | double | rounded | solid | shadow
+      ["keymap"] = {
+          ["H"] = "<Plug>ColorPickerSlider5Decrease",
+          ["L"] = "<Plug>ColorPickerSlider5Increase",
+      },
+      ["background_highlight_group"] = "Normal",
+      ["border_highlight_group"] = "FloatBorder",
+    ["text_highlight_group"] = "Normal",
+  })
+
+  vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
+
   -- Practice vim
   use 'ThePrimeagen/vim-be-good'
 
