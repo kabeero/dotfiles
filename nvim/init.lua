@@ -65,16 +65,12 @@ require('packer').startup(function(use)
     }
   })
 
+  -- Color picker 
   use ({"ziontee113/color-picker.nvim",
     config = function()
         require("color-picker")
     end,
   })
-
-  local opts = { desc = "Color Picker", noremap = true, silent = true }
-
-  vim.keymap.set("n", "<leader>pc", "<cmd>PickColor<cr>", opts)
-  vim.keymap.set("i", "<leader>pc", "<cmd>PickColorInsert<cr>", opts)
 
   require("color-picker").setup({
       ["icons"] = { "ﱢ", "" },
@@ -255,9 +251,9 @@ end, { desc = 'Toggle tab expansion' })
 
 -- Dvorak navigation
 vim.keymap.set('n', ',', 'j', { desc = 'Move down' })
-vim.keymap.set('v', ',', 'j', { desc = 'Move down (visual)' })
+vim.keymap.set('v', ',', 'j', { desc = 'Move down' })
 vim.keymap.set('n', '.', 'k', { desc = 'Move up' })
-vim.keymap.set('v', '.', 'k', { desc = 'Move up (visual)' })
+vim.keymap.set('v', '.', 'k', { desc = 'Move up' })
 
 -- Dvorak find jump
 vim.keymap.set('n', 'j', ',', { desc = 'Find previous occurrence' })
@@ -320,6 +316,15 @@ vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz", { desc = 'Quickfix navigate
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace hovered word' })
 vim.keymap.set("v", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace highlighted word' })
 vim.keymap.set("n", "<leader>x", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = 'Replace highlighted word' })
+  
+-- Telescope symbols
+vim.keymap.set("n", "<leader>ps", "<cmd>Telescope symbols<cr>", { desc = 'Telescope Symbols' })
+vim.keymap.set("i", "<leader>ps", "<cmd>Telescope symbols<cr>", { desc = 'Telescop Symbols' })
+
+-- Color picker
+local opts = { desc = 'Color Picker', noremap = true, silent = true }
+vim.keymap.set("n", "<leader>pc", "<cmd>PickColor<cr>", opts)
+vim.keymap.set("i", "<leader>pc", "<cmd>PickColorInsert<cr>", opts)
 
 -- GUID Create
 vim.keymap.set("n", "<leader>cu", function()
