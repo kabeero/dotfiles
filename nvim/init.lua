@@ -280,8 +280,13 @@ vim.keymap.set("x", "<leader>p", "\"_dP", { desc = 'Paste without losing buffer'
 
 -- Yank to system clipboard
 vim.keymap.set("n", "<leader>y", "\"+y", { desc = 'Yank to system clipboard' })
-vim.keymap.set("v", "<leader>y", "\"+y", { desc = 'Yank to system clipboard' })
-vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = 'Yank to system clipboard' })
+vim.keymap.set("v", "<leader>y", "\"+y", { desc = 'Yank to system clipboard' }) -- selection
+vim.keymap.set("n", "<leader>Y", "\"+Y", { desc = 'Yank to system clipboard' }) -- whole line
+
+-- Paste from system clipboard
+vim.keymap.set("n", "<leader>cp", "o<esc>\"+p", { desc = 'Paste from system clipboard' })
+vim.keymap.set("v", "<leader>cp", "o<esc>\"+p", { desc = 'Paste from system clipboard' }) -- paste inline
+vim.keymap.set("n", "<leader>cP", "O<esc>\"+P", { desc = 'Paste from system clipboard' }) -- paste above
 
 -- Indent selection
 vim.keymap.set("v", "<", "<gv")
