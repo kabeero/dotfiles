@@ -232,13 +232,13 @@ vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = tr
 -- Toggle expandtab
 vim.keymap.set('n', '<leader><tab>', function()
     vim.o.expandtab = not vim.o.expandtab
-	print("Tab expansion " .. (vim.o.expandtab and "enabled" or "disabled"))
+    print("Tab expansion " .. (vim.o.expandtab and "enabled" or "disabled"))
 end, { desc = 'Toggle tab expansion' })
 
 -- Toggle list (display unprintable characters)
 vim.keymap.set('n', '<leader>.', function()
     vim.o.list = not vim.o.list
-	print("Invisible characters " .. (vim.o.list and "enabled" or "disabled"))
+    print("Invisible characters " .. (vim.o.list and "enabled" or "disabled"))
 end, { desc = 'Toggle hidden characters' })
 
 -- Toggle relative line numbers
