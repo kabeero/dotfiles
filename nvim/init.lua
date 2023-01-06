@@ -186,7 +186,7 @@ vim.o.smartindent = true
 vim.o.scrolloff = 8
 
 -- List chars
-vim.o.listchars="eol:$,tab:»·,trail:·"
+vim.opt.listchars:append({ eol = '↵', tab = ' ⇢', trail = '·' })
 
 -- Decrease update time
 vim.o.updatetime = 250
@@ -229,14 +229,22 @@ vim.cmd([[
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Toggle expandtab
+vim.keymap.set('n', '<leader><tab>', function()
+    vim.o.expandtab = not vim.o.expandtab
+	print("Tab expansion " .. (vim.o.expandtab and "enabled" or "disabled"))
+end, { desc = 'Toggle tab expansion' })
+
 -- Toggle list (display unprintable characters)
 vim.keymap.set('n', '<leader>.', function()
     vim.o.list = not vim.o.list
+	print("Invisible characters " .. (vim.o.list and "enabled" or "disabled"))
 end, { desc = 'Toggle hidden characters' })
 
 -- Toggle relative line numbers
 vim.keymap.set('n', '<leader>#', function()
     vim.o.relativenumber = not vim.o.relativenumber
+    print("Relative line numbers " .. (vim.o.relativenumber and "enabled" or "disabled"))
 end, { desc = 'Toggle relative line numbers' })
 
 -- Toggle tab expansion
@@ -251,9 +259,9 @@ end, { desc = 'Toggle tab expansion' })
 
 -- Dvorak navigation
 vim.keymap.set('n', ',', 'j', { desc = 'Move down' })
-vim.keymap.set('v', ',', 'j', { desc = 'Move down' })
+vim.keymap.set('v', ',', 'j', { desc = 'Move down (visual)' })
 vim.keymap.set('n', '.', 'k', { desc = 'Move up' })
-vim.keymap.set('v', '.', 'k', { desc = 'Move up' })
+vim.keymap.set('v', '.', 'k', { desc = 'Move up (visual)' })
 
 -- Dvorak find jump
 vim.keymap.set('n', 'j', ',', { desc = 'Find previous occurrence' })
@@ -321,7 +329,7 @@ vim.keymap.set("n", "<leader>k", "<cmd>lprev<CR>zz", { desc = 'Quickfix navigate
 vim.keymap.set("n", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace hovered word' })
 vim.keymap.set("v", "<leader>s", ":%s/\\<<C-r><C-w>\\>/<C-r><C-w>/gI<Left><Left><Left>", { desc = 'Replace highlighted word' })
 vim.keymap.set("n", "<leader>x", "<cmd>lua vim.lsp.buf.rename()<CR>", { desc = 'Replace highlighted word' })
-  
+
 -- Telescope symbols
 vim.keymap.set("n", "<leader>ps", "<cmd>Telescope symbols<cr>", { desc = 'Telescope Symbols' })
 vim.keymap.set("i", "<leader>ps", "<cmd>Telescope symbols<cr>", { desc = 'Telescop Symbols' })
@@ -383,6 +391,9 @@ require("nvim-tree").setup({
   },
 })
 vim.keymap.set('n', '<leader>,', vim.cmd.NvimTreeToggle, { desc = 'NvimTree toggle' })
+
+-- Git status
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
 
 -- Toggle blame
 vim.keymap.set('n', '<leader>b', vim.cmd.GitBlameToggle, { desc = 'Git blame toggle' })
