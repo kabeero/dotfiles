@@ -46,6 +46,21 @@ require('packer').startup(function(use)
   -- File explorer
   use 'nvim-tree/nvim-tree.lua'
 
+  -- Trouble browser
+  use {
+    "folke/trouble.nvim",
+    requires = "kyazdani42/nvim-web-devicons",
+    config = function()
+      require("trouble").setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  -- File outline
+  use 'preservim/tagbar'
+
   -- Scrollbar
   use("petertriho/nvim-scrollbar")
   use("folke/tokyonight.nvim")
@@ -397,6 +412,12 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
 
 -- Toggle blame
 vim.keymap.set('n', '<leader>b', vim.cmd.GitBlameToggle, { desc = 'Git blame toggle' })
+
+-- Toggle trouble
+vim.keymap.set('n', '<leader>T', vim.cmd.TroubleToggle, { desc = 'Trouble toggle' })
+
+-- Toggle tagbar
+vim.keymap.set('n', '<leader>\'', vim.cmd.TagbarToggle, { desc = 'Tagbar toggle' })
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
