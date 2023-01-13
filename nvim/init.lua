@@ -209,10 +209,12 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 vim.o.termguicolors = true
-vim.cmd[[colorscheme tokyonight-night]]
--- vim.cmd [[colorscheme onedark]]
-vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+-- vim.cmd[[colorscheme tokyonight-night]]
+-- vim.cmd[[colorscheme onedark]]
+
+-- Transparent background
+-- vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+-- vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -332,7 +334,7 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = 'Join lines and keep cursor position'
 
 -- Centered text search
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Go to next search result (centered)' })
-vim.keymap.set("n", "N", "nzzzv", { desc = 'Go to prev search result (centered)' })
+vim.keymap.set("n", "N", "Nzzzv", { desc = 'Go to prev search result (centered)' })
 
 -- Quickfix list navigation
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", { desc = 'Quickfix navigate next' })
@@ -418,6 +420,26 @@ vim.keymap.set('n', '<leader>T', vim.cmd.TroubleToggle, { desc = 'Trouble toggle
 
 -- Toggle tagbar
 vim.keymap.set('n', '<leader>\'', vim.cmd.TagbarToggle, { desc = 'Tagbar toggle' })
+
+-- Rotate theme
+vim.keymap.set('n', '<leader>I', function()
+        if (vim.colorscheme == nil or vim.colorscheme == 'light') then
+            vim.colorscheme = 'storm'
+            vim.cmd[[colorscheme tokyonight-storm]]
+        elseif (vim.colorscheme == 'storm') then
+            vim.colorscheme = 'moon'
+            vim.cmd[[colorscheme tokyonight-moon]]
+        elseif (vim.colorscheme == 'moon') then
+            vim.colorscheme = 'night'
+            vim.cmd[[colorscheme tokyonight-night]]
+        elseif (vim.colorscheme == 'night') then
+            vim.colorscheme = 'light'
+            vim.cmd[[colorscheme tokyonight-day]]
+        end
+        print("Colorscheme: " .. vim.colorscheme)
+    end,
+    { desc = 'Rotate theme colors' }
+)
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
