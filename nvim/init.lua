@@ -440,8 +440,14 @@ vim.keymap.set('n', '<leader>\'',
 )
 vim.keymap.set('n', '<leader>\"',
     function()
-        vim.cmd.SymbolsOutlineClose()
-        vim.cmd.TagbarClose()
+        if (vim.outline_mode == nil or vim.outline_mode == 'none') then
+            return
+        elseif (vim.outline_mode == 'symbols') then
+            vim.cmd.SymbolsOutlineClose()
+        elseif (vim.outline_mode == 'tagbar') then
+            vim.cmd.TagbarClose()
+        end
+        vim.outline_mode = 'none'
     end
     ,
     { desc = 'Close symbols outline' }
