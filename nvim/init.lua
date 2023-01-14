@@ -58,50 +58,20 @@ require('packer').startup(function(use)
       }
     end
   }
+
   -- File outline
   use 'preservim/tagbar'
   use 'simrat39/symbols-outline.nvim'
-  require("symbols-outline").setup()
+
+  -- Winbar
+  use 'fgheng/winbar.nvim'
 
   -- Scrollbar
   use("petertriho/nvim-scrollbar")
   use("folke/tokyonight.nvim")
-  local colors = require("tokyonight.colors").setup()
-
-  require("scrollbar").setup({
-    handle = {
-        color = colors.bg_highlight,
-    },
-    marks = {
-        Search = { color = colors.orange },
-        Error = { color = colors.error },
-        Warn = { color = colors.warning },
-        Info = { color = colors.info },
-        Hint = { color = colors.hint },
-        Misc = { color = colors.purple },
-    }
-  })
 
   -- Color picker 
-  use ({"ziontee113/color-picker.nvim",
-    config = function()
-        require("color-picker")
-    end,
-  })
-
-  require("color-picker").setup({
-      ["icons"] = { "ﱢ", "" },
-      ["border"] = "rounded", -- none | single | double | rounded | solid | shadow
-      ["keymap"] = {
-          ["H"] = "<Plug>ColorPickerSlider5Decrease",
-          ["L"] = "<Plug>ColorPickerSlider5Increase",
-      },
-      ["background_highlight_group"] = "Normal",
-      ["border_highlight_group"] = "FloatBorder",
-    ["text_highlight_group"] = "Normal",
-  })
-
-  vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
+  use ("ziontee113/color-picker.nvim")
 
   -- Practice vim
   use 'ThePrimeagen/vim-be-good'
@@ -390,7 +360,7 @@ vim.keymap.set("i", "<C-s>", "<cmd>:w<cr><esc>")
 vim.keymap.set("n", "<C-s>", "<cmd>:w<cr><esc>")
 -- vim.keymap.set("n", "<C-c>", "<cmd>normal ciw<cr>a")
 
--- File explorer
+-- Setup plugins
 require("nvim-tree").setup({
   sort_by = "case_insensitive",
   view = {
@@ -410,6 +380,71 @@ require("nvim-tree").setup({
   },
 })
 vim.keymap.set('n', '<leader>,', vim.cmd.NvimTreeToggle, { desc = 'NvimTree toggle' })
+
+require("symbols-outline").setup()
+
+require("color-picker").setup({
+    ["icons"] = { "ﱢ", "" },
+    ["border"] = "rounded", -- none | single | double | rounded | solid | shadow
+    ["keymap"] = {
+        ["H"] = "<Plug>ColorPickerSlider5Decrease",
+        ["L"] = "<Plug>ColorPickerSlider5Increase",
+    },
+    ["background_highlight_group"] = "Normal",
+    ["border_highlight_group"] = "FloatBorder",
+  ["text_highlight_group"] = "Normal",
+})
+vim.cmd([[hi FloatBorder guibg=NONE]]) -- if you don't want weird border background colors around the popup.
+
+local colors = require("tokyonight.colors").setup()
+require("scrollbar").setup({
+  handle = {
+      color = colors.bg_highlight,
+  },
+  marks = {
+      Search = { color = colors.orange },
+      Error = { color = colors.error },
+      Warn = { color = colors.warning },
+      Info = { color = colors.info },
+      Hint = { color = colors.hint },
+      Misc = { color = colors.purple },
+  }
+})
+
+require('winbar').setup({
+    enabled = true,
+    show_file_path = true,
+    show_symbols = true,
+
+    colors = {
+        path = '', -- You can customize colors like #c946fd
+        file_name = '',
+        symbols = '',
+    },
+
+    icons = {
+        file_icon_default = '',
+        seperator = '>',
+        editor_state = '●',
+        lock_icon = '',
+    },
+
+    exclude_filetype = {
+        'help',
+        'startify',
+        'dashboard',
+        'packer',
+        'neogitstatus',
+        'NvimTree',
+        'Trouble',
+        'alpha',
+        'lir',
+        'Outline',
+        'spectre_panel',
+        'toggleterm',
+        'qf',
+    }
+})
 
 -- Git status
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
