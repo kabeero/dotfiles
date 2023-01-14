@@ -60,6 +60,8 @@ require('packer').startup(function(use)
   }
   -- File outline
   use 'preservim/tagbar'
+  use 'simrat39/symbols-outline.nvim'
+  require("symbols-outline").setup()
 
   -- Scrollbar
   use("petertriho/nvim-scrollbar")
@@ -419,10 +421,35 @@ vim.keymap.set('n', '<leader>b', vim.cmd.GitBlameToggle, { desc = 'Git blame tog
 vim.keymap.set('n', '<leader>T', vim.cmd.TroubleToggle, { desc = 'Trouble toggle' })
 
 -- Toggle tagbar
-vim.keymap.set('n', '<leader>\'', vim.cmd.TagbarToggle, { desc = 'Tagbar toggle' })
+vim.keymap.set('n', '<leader>\'',
+    function()
+        if (vim.outline_mode == nil or vim.outline_mode == 'none') then
+            vim.outline_mode = 'symbols'
+            vim.cmd.SymbolsOutlineOpen()
+        elseif (vim.outline_mode == 'symbols') then
+            vim.outline_mode = 'tagbar'
+            vim.cmd.SymbolsOutlineClose()
+            vim.cmd.TagbarOpen()
+        elseif (vim.outline_mode == 'tagbar') then
+            vim.outline_mode = 'none'
+            vim.cmd.TagbarClose()
+        end
+    end
+    ,
+    { desc = 'Symbols outline toggle' }
+)
+vim.keymap.set('n', '<leader>\"',
+    function()
+        vim.cmd.SymbolsOutlineClose()
+        vim.cmd.TagbarClose()
+    end
+    ,
+    { desc = 'Close symbols outline' }
+)
 
 -- Rotate theme
-vim.keymap.set('n', '<leader>I', function()
+vim.keymap.set('n', '<leader>I',
+    function()
         if (vim.colorscheme == nil or vim.colorscheme == 'light') then
             vim.colorscheme = 'storm'
             vim.cmd[[colorscheme tokyonight-storm]]
