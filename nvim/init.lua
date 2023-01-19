@@ -308,6 +308,11 @@ vim.keymap.set("n", "J", "mzJ`z", { desc = 'Join lines and keep cursor position'
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Go to next search result (centered)' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Go to prev search result (centered)' })
 
+-- Toggle scroll offset
+vim.keymap.set("n", "zT", function()
+    vim.o.scrolloff = (vim.o.scrolloff + 8) % 16
+end, { desc = 'Toggle scroll offset' })
+
 -- Quickfix list navigation
 vim.keymap.set("n", "<C-j>", "<cmd>cnext<CR>zz", { desc = 'Quickfix navigate next' })
 vim.keymap.set("n", "<C-k>", "<cmd>cprev<CR>zz", { desc = 'Quickfix navigate prev' })
