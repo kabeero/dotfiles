@@ -66,6 +66,9 @@ require('packer').startup(function(use)
   -- Winbar
   use 'fgheng/winbar.nvim'
 
+  -- Tab styling
+  use("nanozuki/tabby.nvim")
+
   -- Scrollbar
   use("petertriho/nvim-scrollbar")
   use("folke/tokyonight.nvim")
@@ -450,6 +453,7 @@ require('winbar').setup({
         'qf',
     }
 })
+require('tabby').setup()
 
 -- Git status
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
