@@ -67,14 +67,14 @@ require('packer').startup(function(use)
   use 'fgheng/winbar.nvim'
 
   -- Tab styling
-  use("nanozuki/tabby.nvim")
+  use 'nanozuki/tabby.nvim'
 
   -- Scrollbar
-  use("petertriho/nvim-scrollbar")
-  use("folke/tokyonight.nvim")
+  use 'petertriho/nvim-scrollbar'
+  use 'folke/tokyonight.nvim'
 
   -- Color picker 
-  use ("ziontee113/color-picker.nvim")
+  use 'ziontee113/color-picker.nvim'
 
   -- Practice vim
   use 'ThePrimeagen/vim-be-good'
