@@ -224,6 +224,12 @@ vim.cmd([[
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
+-- Toggle wordwrap
+vim.keymap.set('n', '<leader>W', function()
+    vim.o.wrap = not vim.o.wrap
+    print("Wordwrap " .. (vim.o.wrap and "enabled" or "disabled"))
+end, { desc = 'Toggle hidden characters' })
+
 -- Toggle expandtab
 vim.keymap.set('n', '<leader><tab>', function()
     vim.o.expandtab = not vim.o.expandtab
@@ -277,6 +283,10 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Half page down, centered' })
 
 -- Tabs
 vim.keymap.set('n', '<leader>t', vim.cmd.tabnew, { desc = 'Create new [t]ab' })
+
+-- Buffers
+vim.keymap.set('n', '<leader>n', vim.cmd.bnext, { desc = '[N]ext buffer' })
+vim.keymap.set('n', '<leader>N', vim.cmd.bprev, { desc = 'Prev buffer' })
 
 -- Paste without losing buffer
 vim.keymap.set("x", "<leader>p", "\"_dP", { desc = 'Paste without losing buffer' })
