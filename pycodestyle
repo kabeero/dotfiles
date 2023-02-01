@@ -1,0 +1,9 @@
+[pycodestyle]
+
+# cli options
+count = True
+statistics = True
+
+# lint options
+max-line-length = 100
+# ignore = E100
