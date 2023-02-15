@@ -1,4 +1,5 @@
 from ranger.api.commands import Command
+import os
 
 class fzf_select(Command):
     """
