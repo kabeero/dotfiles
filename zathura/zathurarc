@@ -18,10 +18,10 @@ set selection-notification false
 set scroll-step 345
 set smooth-scroll true
 
-map \' navigate previous
-map , navigate next
-map . scroll up
-map p scroll down
+map \' navigate next
+map , navigate previous
+map . scroll down
+map p scroll up
 map i recolor
 map f toggle_fullscreen
 map h adjust_window best-fit
@@ -29,10 +29,10 @@ map w adjust_window width
 map H adjust_window best-fit
 map W adjust_window width
 
-map [fullscreen] \' navigate previous
-map [fullscreen] , navigate next
-map [fullscreen] . scroll up
-map [fullscreen] p scroll down
+map [fullscreen] \' navigate next
+map [fullscreen] , navigate previous
+map [fullscreen] . scroll down
+map [fullscreen] p scroll up
 map [fullscreen] i recolor
 map [fullscreen] f toggle_fullscreen
 map [fullscreen] h adjust_window best-fit
