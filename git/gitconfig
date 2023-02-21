@@ -7,6 +7,10 @@
 	ll = log --color --stat -p
 	lg = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
 
+[push]
+	default = simple
+	autoSetupRemote = true
+
 [pull]
 	rebase = false
 	ff     = only
