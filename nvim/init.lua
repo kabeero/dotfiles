@@ -475,7 +475,22 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
 vim.keymap.set('n', '<leader>b', vim.cmd.GitBlameToggle, { desc = 'Git blame toggle' })
 
 -- Toggle trouble
-vim.keymap.set('n', '<leader>T', vim.cmd.TroubleToggle, { desc = 'Trouble toggle' })
+vim.keymap.set('n', '<leader>Tt', vim.cmd.TroubleToggle, { desc = 'Trouble toggle' })
+
+-- Toggle diagnostics
+local diagnostics_active = true
+vim.keymap.set('n', '<leader>Ts',
+    function()
+        diagnostics_active = not diagnostics_active
+        if diagnostics_active then
+            vim.diagnostic.show()
+        else
+            vim.diagnostic.hide()
+        end
+        print("Diagnostics: " .. tostring(diagnostics_active))
+    end,
+    { desc = 'Show trouble messages' }
+)
 
 -- Toggle tagbar
 vim.keymap.set('n', '<leader>\'',
