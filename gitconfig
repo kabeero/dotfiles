@@ -5,6 +5,14 @@
 [alias]
 	l  = log --color --stat
 	ll = log --color --stat -p
+	lg = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
+	lgg = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)"%an" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+	pu  = push
+	pl  = pull
+
+[push]
+	default = simple
+	autoSetupRemote = true
 
 [pull]
 	rebase = false
