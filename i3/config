@@ -317,29 +317,28 @@ for_window [window_role="About"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
-# fading, client, simple
-# exec --no-startup-id xcompmgr -c -f -n -D 3
-# exec --no-startup-id xcompmgr -n -cC
-
-#exec --no-startup-id blueman-applet
-# xcompmgr -> compton -> picom
-#xec --no-startup-id compton --config ~/.config/compton/compton.conf
 exec --no-startup-id picom --config ~/.config/picom/picom.conf
-#exec --no-startup-id nitrogen --restore
 exec --no-startup-id background
 exec --no-startup-id dunst
-#exec --no-startup-id parcellite
-#exec --no-startup-id pulseaudio --start
-#exec --no-startup-id redshift-gtk
-#exec --no-startup-id synclient horiztwofingerscroll=1
 exec --no-startup-id xset m 1/4 1
-exec --no-startup-id hero n 1
-exec --no-startup-id hero s 1
-exec --no-startup-id xset +fp /usr/share/fonts/dina
-exec --no-startup-id xset +fp /usr/share/fonts/proggy-fonts
-#exec --no-startup-id feh --recursive --randomize --bg-fill ~/pictures/backgrounds
+exec --no-startup-id dpms
+exec --no-startup-id trackpad n 1
+exec --no-startup-id trackpad t 1
+exec --no-startup-id trackpad kbr 180 120
+exec --no-startup-id sudo powertop --auto-tune
 
 for_window [class="Firefox|qpdfview|feh|MuPDF|mpv|vlc|Pavucontrol|Pulseeffects|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma|libreoffice-writer|kitty|Xpra"] floating enable
 for_window [class="LibManager|LibSelect|Virtuoso|Qt-subapplication|logic|Vncviewer|com-oracle-vdc-gui-OVDC|Helix P4V|Wireshark|Virt-manager|QEMU|Spicy|Thunderbird|GNU Octave|Atom|Microsoft Teams - Preview|openrgb|fusion360.exe|^[lL]ooking|"] floating enable
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
+
+## Media Keys
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl -- set-sink-mute @DEFAULT_SINK@ toggle
+
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioPause exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
