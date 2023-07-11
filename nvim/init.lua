@@ -18,12 +18,15 @@ require('packer').startup(function(use)
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
 
-      -- Useful status updates for LSP
-      'j-hui/fidget.nvim',
-
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
+  }
+
+  use {
+    -- Useful status updates for LSP
+    'j-hui/fidget.nvim',
+    tag = 'legacy'
   }
 
   use { -- Autocompletion
@@ -99,6 +102,32 @@ require('packer').startup(function(use)
 
   -- Go
   use 'ray-x/go.nvim'
+
+  -- -- Copilot
+  -- use 'github/copilot.vim'
+  use 'Exafunction/codeium.vim'
+
+  -- Rainbow CSV
+  use {
+    'cameron-wags/rainbow_csv.nvim',
+    config = function()
+        require 'rainbow_csv'.setup()
+    end,
+    -- optional lazy-loading below
+    module = {
+        'rainbow_csv',
+        'rainbow_csv.fns'
+    },
+    ft = {
+        'csv',
+        'tsv',
+        'csv_semicolon',
+        'csv_whitespace',
+        'csv_pipe',
+        'rfc_csv',
+        'rfc_semicolon'
+    }
+}
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
