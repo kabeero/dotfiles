@@ -240,15 +240,15 @@ mode "resize" {
 # client.background       #ffffff
 
 # green borders (other columns are for tabbed mode text / bg)
-# client.focused 			#09f904  #19a517 #111111 #42f442
-# client.focused_inactive	#333333  #5f676a #111111 #333333
+# client.focused                #09f904  #19a517 #111111 #42f442
+# client.focused_inactive       #333333  #5f676a #111111 #333333
 # orange borders
-# client.focused 			#f47442  #ea4812 #222222 #c8321e
+# client.focused                #f47442  #ea4812 #222222 #c8321e
 
 # sky blue borders
-#lient.focused 			#00a2ff  #145ba3 #111111 #1834a4
-client.focused 			#145ba3  #041b83 #aaaaaa #1834a4
-client.focused_inactive	#333333  #5f676a #111111 #333333
+#lient.focused                  #00a2ff  #145ba3 #111111 #1834a4
+client.focused                  #145ba3  #041b83 #aaaaaa #1834a4
+client.focused_inactive	        #333333  #5f676a #111111 #333333
 
 # i3status bar colors
 bar {
@@ -270,7 +270,8 @@ bar {
         # green
         # focused_workspace  #09f904 #19a517 #111111
         # sky blue
-        #ocused_workspace  #00a2ff #145ba3 #111111
+        # focused_workspace  #00a2ff #145ba3 #111111
+        # dark blue
         focused_workspace  #145ba3 #041b83 #aaaaaa
         active_workspace   #333333 #5f676a #ffffff
         inactive_workspace #333333 #222222 #888888
@@ -326,6 +327,7 @@ exec --no-startup-id trackpad n 1
 exec --no-startup-id trackpad t 1
 exec --no-startup-id trackpad kbr 180 120
 exec --no-startup-id sudo powertop --auto-tune
+# exec "xautolock -detectsleep -time 10 -locker \"i3lock -c 000000\""
 
 for_window [class="Firefox|qpdfview|feh|MuPDF|mpv|vlc|Pavucontrol|Pulseeffects|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma|libreoffice-writer|kitty|Xpra"] floating enable
 for_window [class="LibManager|LibSelect|Virtuoso|Qt-subapplication|logic|Vncviewer|com-oracle-vdc-gui-OVDC|Helix P4V|Wireshark|Virt-manager|QEMU|Spicy|Thunderbird|GNU Octave|Atom|Microsoft Teams - Preview|openrgb|fusion360.exe|^[lL]ooking|"] floating enable

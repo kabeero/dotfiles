@@ -5,6 +5,7 @@ if status is-interactive
     alias l1="ls -1"
     alias vim="nvim"
     alias vimdiff="nvim -d"
+    alias diffk='kitty +kitten diff'
 
     # pip --user paths
     #set -Ux PYTHONPATH (python -c "import site; print(site.USER_SITE)")
@@ -17,6 +18,7 @@ if status is-interactive
     # macos
     #echo -e "\033[0;32m"(date +%c)"\x1b[0m"
 
-    # starship init
-    #source (/usr/local/bin/starship init fish --print-full-init | psub)
+    starship init fish | source
+    zoxide init fish | source
+
 end
