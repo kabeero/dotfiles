@@ -46,15 +46,20 @@ require('packer').startup(function(use)
     after = 'nvim-treesitter',
   }
 
+  -- Highlight words and lines on the cursor
+  -- use 'yamatsum/nvim-cursorline'
+  use 'RRethy/vim-illuminate'
+
   -- File explorer
   use 'nvim-tree/nvim-tree.lua'
+  use 'kevinhwang91/rnvimr'
 
   -- Trouble browser
   use {
-    "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    'folke/trouble.nvim',
+    requires = 'nvim-tree/nvim-web-devicons',
     config = function()
-      require("trouble").setup {
+      require('trouble').setup {
         -- your configuration comes here
         -- or leave it empty to use the default settings
         -- refer to the configuration section below
@@ -66,8 +71,9 @@ require('packer').startup(function(use)
   use 'preservim/tagbar'
   use 'simrat39/symbols-outline.nvim'
 
-  -- Winbar
-  use 'fgheng/winbar.nvim'
+  -- Tab bar
+  -- use 'fgheng/winbar.nvim'
+  use 'Bekaboo/dropbar.nvim'
 
   -- Tab styling
   use 'nanozuki/tabby.nvim'
@@ -82,6 +88,9 @@ require('packer').startup(function(use)
   -- Practice vim
   use 'ThePrimeagen/vim-be-good'
 
+  -- webdev icons
+  use 'nvim-tree/nvim-web-devicons'
+
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
@@ -93,6 +102,7 @@ require('packer').startup(function(use)
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  use 'folke/twilight.nvim' -- dims inactive portions of code
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-symbols.nvim' } }
@@ -103,7 +113,7 @@ require('packer').startup(function(use)
   -- Go
   use 'ray-x/go.nvim'
 
-  -- -- Copilot
+  -- Copilot
   -- use 'github/copilot.vim'
   use 'Exafunction/codeium.vim'
 
@@ -127,7 +137,10 @@ require('packer').startup(function(use)
         'rfc_csv',
         'rfc_semicolon'
     }
-}
+  }
+
+  -- README.md preview
+  use 'ellisonleao/glow.nvim'
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
@@ -431,6 +444,17 @@ require("nvim-tree").setup({
 })
 vim.keymap.set('n', '<leader>,', vim.cmd.NvimTreeToggle, { desc = 'NvimTree toggle' })
 
+
+-- Ranger file browser
+-- require("rnvimr").setup({
+--     rnvimr_enable_ex = 1,
+--     rnvimr_enable_picker = 1,
+--     rnvimr_edit_cmd = 'drop',
+--     rnvimr_draw_border = 1,
+--     rnvimr_hide_gitignore = 0,
+-- })
+vim.keymap.set('n', '<leader>r', vim.cmd.RnvimrToggle, { desc = 'Ranger toggle' })
+
 require("symbols-outline").setup()
 
 require("color-picker").setup({
@@ -461,40 +485,40 @@ require("scrollbar").setup({
   }
 })
 
-require('winbar').setup({
-    enabled = true,
-    show_file_path = true,
-    show_symbols = true,
-
-    colors = {
-        path = '', -- You can customize colors like #c946fd
-        file_name = '',
-        symbols = '',
-    },
-
-    icons = {
-        file_icon_default = '',
-        seperator = '>',
-        editor_state = '●',
-        lock_icon = '',
-    },
-
-    exclude_filetype = {
-        'help',
-        'startify',
-        'dashboard',
-        'packer',
-        'neogitstatus',
-        'NvimTree',
-        'Trouble',
-        'alpha',
-        'lir',
-        'Outline',
-        'spectre_panel',
-        'toggleterm',
-        'qf',
-    }
-})
+-- require('winbar').setup({
+--     enabled = true,
+--     show_file_path = true,
+--     show_symbols = true,
+--
+--     colors = {
+--         path = '', -- You can customize colors like #c946fd
+--         file_name = '',
+--         symbols = '',
+--     },
+--
+--     icons = {
+--         file_icon_default = '',
+--         seperator = '>',
+--         editor_state = '●',
+--         lock_icon = '',
+--     },
+--
+--     exclude_filetype = {
+--         'help',
+--         'startify',
+--         'dashboard',
+--         'packer',
+--         'neogitstatus',
+--         'NvimTree',
+--         'Trouble',
+--         'alpha',
+--         'lir',
+--         'Outline',
+--         'spectre_panel',
+--         'toggleterm',
+--         'qf',
+--     }
+-- })
 require('tabby').setup()
 
 -- Git status
@@ -502,6 +526,8 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
 
 -- Toggle blame
 vim.keymap.set('n', '<leader>b', vim.cmd.GitBlameToggle, { desc = 'Git blame toggle' })
+local git_blame = require('gitblame')
+git_blame.disable()
 
 -- Toggle trouble
 vim.keymap.set('n', '<leader>Tt', vim.cmd.TroubleToggle, { desc = 'Trouble toggle' })
