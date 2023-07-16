@@ -97,12 +97,10 @@ require('packer').startup(function(use)
   use 'lewis6991/gitsigns.nvim'
   use 'f-person/git-blame.nvim'
 
-  -- use 'navarasu/onedark.nvim' -- Theme inspired by Atom
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
   use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
   use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
   use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
-  use 'folke/twilight.nvim' -- dims inactive portions of code
 
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-symbols.nvim' } }
@@ -116,6 +114,10 @@ require('packer').startup(function(use)
   -- Copilot
   -- use 'github/copilot.vim'
   use 'Exafunction/codeium.vim'
+
+  -- Aesthetic
+  use 'folke/twilight.nvim' -- Dims inactive portions of code
+  use 'folke/zen-mode.nvim' -- Float buffer for focus
 
   -- Rainbow CSV
   use {
@@ -520,6 +522,17 @@ require("scrollbar").setup({
 --     }
 -- })
 require('tabby').setup()
+
+-- Toggle Twilight
+require('twilight').setup({ context = 30 })
+vim.keymap.set('n', '<leader>ht', vim.cmd.Twilight, { desc = 'Toggle Twilight' })
+
+-- Toggle ZenMode
+require('zen-mode').setup({ plugins = { twilight = { enabled = false }, kitty = { enabled = true} } })
+vim.keymap.set('n', '<leader>hz', vim.cmd.ZenMode, { desc = 'Toggle ZenMode' })
+
+-- Toggle Glow
+vim.keymap.set('n', '<leader>hg', vim.cmd.Glow, { desc = 'Toggle Glow' })
 
 -- Git status
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Git status' })
