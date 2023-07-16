@@ -139,8 +139,8 @@ require('packer').startup(function(use)
     }
   }
 
-  -- README.md preview
-  use 'ellisonleao/glow.nvim'
+  -- Glow
+  use {'ellisonleao/glow.nvim', config = function() require('glow').setup() end}
 
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
