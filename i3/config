@@ -248,7 +248,7 @@ mode "resize" {
 # sky blue borders
 #lient.focused                  #00a2ff  #145ba3 #111111 #1834a4
 client.focused                  #145ba3  #041b83 #aaaaaa #1834a4
-client.focused_inactive	        #333333  #5f676a #111111 #333333
+client.focused_inactive         #333333  #5f676a #111111 #333333
 
 # i3status bar colors
 bar {
@@ -257,9 +257,9 @@ bar {
     status_command i3status
 
     colors {
-        background #000000
-        statusline #ffffff
-        separator  #666666
+        background           #000000
+        statusline           #ffffff
+        separator            #666666
                            # border  bg      text
         # focused_workspace  #c8321e #ea4812 #222222
         # active_workspace   #333333 #5f676a #ffffff
