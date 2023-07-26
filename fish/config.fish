@@ -6,6 +6,7 @@ if status is-interactive
     alias vim="nvim"
     alias vimdiff="nvim -d"
     alias diffk='kitty +kitten diff'
+    set -g EDITOR nvim
 
     set -U GOPATH {$HOME}/Code/go/bin
 
