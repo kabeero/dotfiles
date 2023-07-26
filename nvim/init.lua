@@ -76,7 +76,7 @@ require('packer').startup(function(use)
   use 'Bekaboo/dropbar.nvim'
 
   -- Tab styling
-  use 'nanozuki/tabby.nvim'
+  use 'romgrk/barbar.nvim'
 
   -- Scrollbar
   use 'petertriho/nvim-scrollbar'
@@ -521,7 +521,7 @@ require("scrollbar").setup({
 --         'qf',
 --     }
 -- })
-require('tabby').setup()
+require('barbar').setup()
 
 -- Toggle Twilight
 require('twilight').setup({ context = 30 })
