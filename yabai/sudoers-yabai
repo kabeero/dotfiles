@@ -1,0 +1,1 @@
+mkgz ALL=(root) NOPASSWD: sha256:f189a3efdb87faa4539ff522633474250af3f193d93e5817ffa8e8e1d1c416fa /usr/local/bin/yabai --load-sa
