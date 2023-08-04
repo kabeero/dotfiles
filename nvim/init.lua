@@ -116,6 +116,7 @@ require('packer').startup(function(use)
   use 'Exafunction/codeium.vim'
 
   -- Aesthetic
+  use 'xiyaowong/transparent.nvim' -- Transparent background
   use 'folke/twilight.nvim' -- Dims inactive portions of code
   use 'folke/zen-mode.nvim' -- Float buffer for focus
 
@@ -522,6 +523,10 @@ require("scrollbar").setup({
 --     }
 -- })
 require('barbar').setup()
+
+-- Toggle transparent background
+require('transparent').setup()
+vim.keymap.set('n', '<leader>hb', vim.cmd.TransparentToggle, { desc = 'Toggle Transparent' })
 
 -- Toggle Twilight
 require('twilight').setup({ context = 30 })
