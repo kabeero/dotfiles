@@ -80,7 +80,10 @@ require('packer').startup(function(use)
 
   -- Scrollbar
   use 'petertriho/nvim-scrollbar'
+
+  -- Themes
   use 'folke/tokyonight.nvim'
+  use 'whatyouhide/vim-gotham'
 
   -- Color picker 
   use 'ziontee113/color-picker.nvim'
@@ -611,6 +614,9 @@ vim.keymap.set('n', '<leader>I',
             vim.colorscheme = 'night'
             vim.cmd[[colorscheme tokyonight-night]]
         elseif (vim.colorscheme == 'night') then
+            vim.colorscheme = 'gotham'
+            vim.cmd[[colorscheme gotham]]
+        elseif (vim.colorscheme == 'gotham') then
             vim.colorscheme = 'light'
             vim.cmd[[colorscheme tokyonight-day]]
         end
