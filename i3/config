@@ -352,7 +352,7 @@ bindsym Cancel exec --no-startup-id playerctl next
 
 # Generic
 
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-bindsym XF86AudioPause exec --no-startup-id playerctl play-pause
-bindsym XF86AudioNext exec --no-startup-id playerctl next
-bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause || mpc toggle
+bindsym XF86AudioPause exec --no-startup-id playerctl play-pause || mpc toggle
+bindsym XF86AudioNext exec --no-startup-id playerctl next || mpc next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous || mpc prev
