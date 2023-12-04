@@ -15,8 +15,8 @@ vim.keymap.set({ "n", "v" }, ".", "k", { desc = "Move up" })
 -- vim.keymap.set("v", "k", ";", { desc = "Find next occurrence" })
 
 -- Create tab
-vim.keymap.set({ "n", "v" }, "<leader>t", vim.cmd.tabnew, { desc = "Create new tab" })
-vim.keymap.set("n", "<C-c>", "<C-w>c", { desc = "Close pane" })
+-- vim.keymap.set({ "n", "v" }, "<leader>t", vim.cmd.tabnew, { desc = "Create new tab" })
+-- vim.keymap.set("n", "<C-c>", "<C-h>:BufferLineCloseRight<Return>", { desc = "Close pane" })
 
 -- Move to window using the <shift> hjkl keys
 vim.keymap.set("n", "H", "<C-w>W", { desc = "Go to left window", remap = true })
@@ -24,9 +24,11 @@ vim.keymap.set("n", "J", "<C-w>j", { desc = "Go to lower window", remap = true }
 vim.keymap.set("n", "K", "<C-w>k", { desc = "Go to upper window", remap = true })
 vim.keymap.set("n", "L", "<C-w>w", { desc = "Go to right window", remap = true })
 
--- Move to tab using the <ctrl> hjkl keys
-vim.keymap.set("n", "<C-l>", "gt", { desc = "Go to right tab", remap = true })
-vim.keymap.set("n", "<C-h>", "gT", { desc = "Go to left tab", remap = true })
+-- Buffer movements
+vim.keymap.set("n", "<C-h>", vim.cmd.bprevious, { desc = "Go to left buffer", remap = true })
+vim.keymap.set("n", "<C-l>", vim.cmd.bnext, { desc = "Go to right buffer", remap = true })
+vim.keymap.set("n", "<C-c>", vim.cmd.bd, { desc = "Close buffer" })
+vim.keymap.set("n", "<leader>t", vim.cmd.enew, { desc = "Create buffer" })
 
 -- Increment/decrement
 vim.keymap.set("n", "+", "<C-a>", { desc = "Increment" })
