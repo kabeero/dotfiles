@@ -26,6 +26,9 @@ if status is-interactive
     # asdf
     source {$HOME}/.asdf/asdf.fish
 
+    # brew
+    # eval "$(/opt/homebrew/bin/brew shellenv)"
+
     starship init fish | source
     zoxide init fish | source
 
@@ -34,4 +37,48 @@ if status is-interactive
     fish_add_path {$HOME}/go/bin
 
     pfetch
+end
+
+# jump to directory
+function d
+
+    set apps fzf
+
+    for a in $apps
+        if ! command -v $a >/dev/null
+            echo "❗ Please install $a"
+            return
+        end
+    end
+
+    set flags +s -e
+
+    if test $status -gt 0
+        cd $(dirname $(echo $1 | fzf $flags))
+    else
+        cd $(dirname $(fzf $flags))
+    end
+
+end
+
+# edit file
+function e
+
+    set apps fzf nvim
+
+    for a in $apps
+        if ! command -v $a >/dev/null
+            echo "❗ Please install $a"
+            return
+        end
+    end
+
+    set flags +s -e
+
+    if test $status -gt 0
+        nvim $(echo $1 | fzf $flags)
+    else
+        nvim $(fzf $flags)
+    end
+
 end
