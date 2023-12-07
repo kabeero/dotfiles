@@ -43,7 +43,6 @@ end
 function d
 
     set apps fzf
-
     for a in $apps
         if ! command -v $a >/dev/null
             echo "❗ Please install $a"
@@ -52,20 +51,23 @@ function d
     end
 
     set flags +s -e
+    set chosen ""
 
-    if test $status -gt 0
-        cd $(dirname $(echo $1 | fzf $flags))
+    if test (count $argv) -gt 0
+        set chosen (fzf $flags -q $argv[1])
     else
-        cd $(dirname $(fzf $flags))
+        set chosen (fzf $flags)
     end
 
+    if set -q chosen && test -n "$chosen"
+        cd (dirname $chosen)
+    end
 end
 
 # edit file
 function e
 
     set apps fzf nvim
-
     for a in $apps
         if ! command -v $a >/dev/null
             echo "❗ Please install $a"
@@ -74,11 +76,15 @@ function e
     end
 
     set flags +s -e
+    set chosen ""
 
-    if test $status -gt 0
-        nvim $(echo $1 | fzf $flags)
+    if test (count $argv) -gt 0
+        set chosen (fzf $flags -q $argv[1])
     else
-        nvim $(fzf $flags)
+        set chosen (fzf $flags)
     end
 
+    if set -q chosen && test -n "$chosen"
+        nvim $chosen
+    end
 end
