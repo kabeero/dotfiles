@@ -3,6 +3,7 @@ if status is-interactive
     alias l="ls"
     alias ll="ls -l"
     alias l1="ls -1"
+    alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
     alias diffk="kitty +kitten diff"
@@ -27,6 +28,7 @@ if status is-interactive
     source {$HOME}/.asdf/asdf.fish
 
     # brew
+    # source /opt/homebrew/opt/asdf/libexec/asdf.fish
     # eval "$(/opt/homebrew/bin/brew shellenv)"
 
     starship init fish | source
@@ -50,7 +52,7 @@ function d
         end
     end
 
-    set flags +s -e
+    set flags -e -1
     set chosen ""
 
     if test (count $argv) -gt 0
@@ -75,7 +77,7 @@ function e
         end
     end
 
-    set flags +s -e
+    set flags -e -1
     set chosen ""
 
     if test (count $argv) -gt 0
