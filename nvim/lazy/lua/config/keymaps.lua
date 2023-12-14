@@ -66,7 +66,7 @@ end, { desc = "Toggle scroll offset" })
 vim.keymap.set("n", "<leader>W", function()
   vim.o.wrap = not vim.o.wrap
   print("Wordwrap " .. (vim.o.wrap and "enabled" or "disabled"))
-end, { desc = "Toggle hidden characters" })
+end, { desc = "Toggle word wrap" })
 
 -- Toggle expandtab
 vim.keymap.set("n", "<leader><tab>", function()
