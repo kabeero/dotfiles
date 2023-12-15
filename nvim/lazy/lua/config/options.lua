@@ -30,3 +30,6 @@ vim.o.scrolloff = 8
 -- List chars
 vim.opt.listchars:append({ eol = "↵", tab = " ⇢", trail = "·" })
 vim.o.list = false
+
+-- Decreate update time
+vim.o.updatetime = 250

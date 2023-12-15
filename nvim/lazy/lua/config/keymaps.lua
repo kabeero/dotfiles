@@ -121,12 +121,18 @@ vim.keymap.set("n", "<leader>I", function()
 end, { desc = "Rotate theme colors" })
 
 -- GitUI
-vim.keymap.set("n", "<leader>gg", function()
+vim.keymap.set("n", "<leader>gu", function()
   Util.terminal({ "gitui" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
 end, { desc = "GitUI (root dir)" })
-vim.keymap.set("n", "<leader>gG", function()
+vim.keymap.set("n", "<leader>gU", function()
   Util.terminal({ "gitui" }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "GitUI (cwd)" })
+
+-- Neogit
+vim.keymap.set("n", "<leader>gg", vim.cmd.Neogit, { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gG", function()
+  vim.cmd.Neogit({ args = { "cwd=" .. Util.root() } })
+end, { desc = "Neogit (root)" })
 
 -- Git status
 vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status" })
@@ -138,3 +144,8 @@ git_blame.disable()
 
 -- Toggle trouble
 vim.keymap.set("n", "<leader>Tt", vim.cmd.TroubleToggle, { desc = "Trouble toggle" })
+
+-- Ranger
+vim.keymap.set("n", "<leader>fg", function()
+  Util.terminal({ "ranger" }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Ranger (project)" })
