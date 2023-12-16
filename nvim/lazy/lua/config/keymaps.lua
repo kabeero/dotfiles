@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 local Util = require("lazyvim.util")
+local builtin = require("telescope.builtin")
 
 -- Dvorak navigation
 vim.keymap.set({ "n", "v" }, ",", "j", { desc = "Move down" })
@@ -97,7 +98,8 @@ vim.keymap.set("n", "<leader>$", function()
 end, { desc = "Toggle tab expansion" })
 
 -- Rotate theme
-vim.keymap.set("n", "<leader>i", function()
+vim.keymap.set("n", "<leader>i", builtin.colorscheme, { desc = "Select Colorscheme" })
+vim.keymap.set("n", "<leader>I", function()
   if vim.colorscheme == nil or vim.colorscheme == "light" then
     vim.colorscheme = "storm"
     vim.cmd([[colorscheme tokyonight-storm]])
@@ -121,7 +123,7 @@ vim.keymap.set("n", "<leader>i", function()
     vim.cmd([[colorscheme tokyonight-day]])
   end
   print("Colorscheme: " .. vim.colorscheme)
-end, { desc = "Rotate theme colors" })
+end, { desc = "Rotate Colorscheme" })
 
 -- GitUI
 vim.keymap.set("n", "<leader>gu", function()
