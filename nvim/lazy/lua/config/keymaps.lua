@@ -97,7 +97,7 @@ vim.keymap.set("n", "<leader>$", function()
 end, { desc = "Toggle tab expansion" })
 
 -- Rotate theme
-vim.keymap.set("n", "<leader>I", function()
+vim.keymap.set("n", "<leader>i", function()
   if vim.colorscheme == nil or vim.colorscheme == "light" then
     vim.colorscheme = "storm"
     vim.cmd([[colorscheme tokyonight-storm]])
@@ -114,6 +114,9 @@ vim.keymap.set("n", "<leader>I", function()
     vim.colorscheme = "catppuccin"
     vim.cmd([[colorscheme catppuccin]])
   elseif vim.colorscheme == "catppuccin" then
+    vim.colorscheme = "monet"
+    vim.cmd([[colorscheme monet]])
+  elseif vim.colorscheme == "monet" then
     vim.colorscheme = "light"
     vim.cmd([[colorscheme tokyonight-day]])
   end
@@ -149,3 +152,17 @@ vim.keymap.set("n", "<leader>Tt", vim.cmd.TroubleToggle, { desc = "Trouble toggl
 vim.keymap.set("n", "<leader>fg", function()
   Util.terminal({ "ranger" }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "Ranger (project)" })
+
+vim.keymap.set("n", "<leader>fG", function()
+  Util.terminal({ "ranger", vim.uv.os_homedir() }, { esc_esc = false, ctrl_hjkl = false })
+end, { desc = "Ranger (~)" })
+
+-- jless
+vim.keymap.set("n", "<leader>fj", function()
+  local name = string.gsub(vim.api.nvim_buf_get_name(0), vim.uv.cwd(), "")
+  Util.terminal({ "jless", "-r", "-m", "line", name })
+end, { desc = "jless (line)" })
+vim.keymap.set("n", "<leader>fJ", function()
+  local name = string.gsub(vim.api.nvim_buf_get_name(0), vim.uv.cwd(), "")
+  Util.terminal({ "jless", "-r", "-m", "data", name })
+end, { desc = "jless (data)" })

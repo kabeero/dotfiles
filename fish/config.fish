@@ -3,6 +3,7 @@ if status is-interactive
     alias l="ls"
     alias ll="ls -l"
     alias l1="ls -1"
+    alias r="ranger"
     alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
