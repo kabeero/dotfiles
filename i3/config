@@ -325,7 +325,7 @@ exec --no-startup-id xset m 1/4 1
 exec --no-startup-id dpms
 exec --no-startup-id trackpad n 1
 exec --no-startup-id trackpad t 1
-exec --no-startup-id trackpad kbr 180 120
+exec --no-startup-id kbr 180 120
 exec --no-startup-id sudo powertop --auto-tune
 # exec "xautolock -detectsleep -time 10 -locker \"i3lock -c 000000\""
 
