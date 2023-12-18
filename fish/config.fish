@@ -1,5 +1,5 @@
 if status is-interactive
-    alias ls="exa"
+    alias ls="eza"
     alias l="ls"
     alias ll="ls -l"
     alias l1="ls -1"
