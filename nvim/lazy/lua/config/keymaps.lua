@@ -152,19 +152,35 @@ vim.keymap.set("n", "<leader>Tt", vim.cmd.TroubleToggle, { desc = "Trouble toggl
 
 -- Ranger
 vim.keymap.set("n", "<leader>fg", function()
-  Util.terminal({ "ranger" }, { esc_esc = false, ctrl_hjkl = false })
+  Util.terminal({ "ranger", Util.root() }, { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } })
 end, { desc = "Ranger (project)" })
 
 vim.keymap.set("n", "<leader>fG", function()
-  Util.terminal({ "ranger", vim.uv.os_homedir() }, { esc_esc = false, ctrl_hjkl = false })
+  Util.terminal(
+    { "ranger", vim.uv.os_homedir() },
+    { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
+  )
 end, { desc = "Ranger (~)" })
 
 -- jless
 vim.keymap.set("n", "<leader>fj", function()
-  local name = string.gsub(vim.api.nvim_buf_get_name(0), vim.uv.cwd(), "")
-  Util.terminal({ "jless", "-r", "-m", "line", name })
+  local name = vim.api.nvim_buf_get_name(0)
+  Util.terminal(
+    { "jless", "-r", "-m", "line", name },
+    { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } }
+  )
 end, { desc = "jless (line)" })
 vim.keymap.set("n", "<leader>fJ", function()
-  local name = string.gsub(vim.api.nvim_buf_get_name(0), vim.uv.cwd(), "")
-  Util.terminal({ "jless", "-r", "-m", "data", name })
+  local name = vim.api.nvim_buf_get_name(0)
+  Util.terminal(
+    { "jless", "-r", "-m", "data", name },
+    { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } }
+  )
 end, { desc = "jless (data)" })
+
+-- lnav
+vim.keymap.set("n", "<leader>fl", function()
+  -- local name = string.gsub(vim.api.nvim_buf_get_name(0), vim.uv.cwd(), "")
+  local name = vim.api.nvim_buf_get_name(0)
+  Util.terminal({ "lnav", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
+end, { desc = "lnav" })
