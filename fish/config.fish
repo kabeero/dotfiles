@@ -10,10 +10,10 @@ if status is-interactive
     alias diffk="kitty +kitten diff"
     alias jless="jless -r"
 
-    set -g EDITOR nvim
+    set -Ux EDITOR nvim
 
-    set -U GOPATH {$HOME}/Code/go
-    set -U GOBIN {$GOPATH}/bin
+    set -Ux GOPATH {$HOME}/Code/go
+    set -Ux GOBIN {$GOPATH}/bin
 
     # pip --user paths
     #set -Ux PYTHONPATH (python -c "import site; print(site.USER_SITE)")
