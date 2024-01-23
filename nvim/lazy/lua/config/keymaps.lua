@@ -56,7 +56,7 @@ vim.keymap.set("n", "N", "Nzzzv", { desc = "Go to prev search result (centered)"
 
 -- Toggle scroll offset
 vim.keymap.set("n", "zT", function()
-  vim.o.scrolloff = (vim.o.scrolloff + 8) % 16
+  vim.o.scrolloff = (vim.o.scrolloff + 4) % 8
 end, { desc = "Toggle scroll offset" })
 
 -- NvimTree
@@ -184,3 +184,9 @@ vim.keymap.set("n", "<leader>fl", function()
   local name = vim.api.nvim_buf_get_name(0)
   Util.terminal({ "lnav", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
 end, { desc = "lnav" })
+
+-- glow
+vim.keymap.set("n", "<leader>fm", function()
+  local name = vim.api.nvim_buf_get_name(0)
+  Util.terminal({ "glow", "-p", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
+end, { desc = "glow preview" })
