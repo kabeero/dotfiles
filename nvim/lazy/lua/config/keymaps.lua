@@ -188,5 +188,8 @@ end, { desc = "lnav" })
 -- glow
 vim.keymap.set("n", "<leader>fm", function()
   local name = vim.api.nvim_buf_get_name(0)
-  Util.terminal({ "glow", "-p", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
+  Util.terminal(
+    { "glow", "-p", name, "-w", math.floor(vim.api.nvim_win_get_width(0) * 0.7) },
+    { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
+  )
 end, { desc = "glow preview" })
