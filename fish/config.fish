@@ -45,7 +45,7 @@ end
 # jump to directory
 function d
 
-    set apps fzf
+    set apps bat fzf
     for a in $apps
         if ! command -v $a >/dev/null
             echo "❗ Please install $a"
@@ -53,7 +53,7 @@ function d
         end
     end
 
-    set flags -e -1
+    set flags -e -1 --preview='bat --color always -p {}' --bind shift-up:preview-page-up,shift-down:preview-page-down
     set chosen ""
 
     if test (count $argv) -gt 0
@@ -70,7 +70,7 @@ end
 # edit file
 function e
 
-    set apps fzf nvim
+    set apps bat fzf nvim
     for a in $apps
         if ! command -v $a >/dev/null
             echo "❗ Please install $a"
@@ -78,7 +78,7 @@ function e
         end
     end
 
-    set flags -e -1
+    set flags -e -1 --preview='bat --color always -p {}' --bind shift-up:preview-page-up,shift-down:preview-page-down
     set chosen ""
 
     if test (count $argv) -gt 0
