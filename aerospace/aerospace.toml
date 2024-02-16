@@ -36,30 +36,34 @@ gaps.outer.right      = 2
 # does not support dvorak
 [mode.main.binding]
 
-alt-enter = 'exec-and-forget open -n -a Kitty'
+alt-enter     = 'exec-and-forget open -n -a Kitty'
 
-alt-q = 'close'
+alt-q         = 'close'
 
-alt-c = 'focus left'
-alt-v = 'focus right'
-alt-z = 'focus down'
-alt-p = 'focus up'
+alt-shift-o   = 'reload-config'
 
-alt-shift-c = 'move left'
-alt-shift-v = 'move right'
-alt-shift-z = 'move down'
-alt-shift-p = 'move up'
+alt-o         = 'mode resize'
 
-alt-j = 'split horizontal'
-alt-period = 'split vertical'
+alt-c         = 'focus left'
+alt-v         = 'focus right'
+alt-z         = 'focus down'
+alt-p         = 'focus up'
 
-alt-y = 'fullscreen'
+alt-shift-c   = 'move left'
+alt-shift-v   = 'move right'
+alt-shift-z   = 'move down'
+alt-shift-p   = 'move up'
 
-alt-semicolon = 'layout v_accordion'       # 'layout stacking' in i3
-alt-comma = 'layout h_accordion'           # 'layout tabbed' in i3
-alt-d = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+alt-j         = 'split horizontal'
+alt-period    = 'split vertical'
 
-alt-space = 'layout floating tiling' # 'floating toggle' in i3
+alt-y         = 'fullscreen'
+
+alt-semicolon = 'layout v_accordion'               # 'layout stacking' in i3
+alt-comma     = 'layout h_accordion'               # 'layout tabbed' in i3
+alt-d         = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+alt-space     = 'layout floating tiling'           # 'floating toggle' in i3
 
 # Not supported, because this command is redundant in AeroSpace mental model.
 # See: https://nikitabobko.github.io/AeroSpace/guide.html#floating-windows
@@ -69,16 +73,16 @@ alt-space = 'layout floating tiling' # 'floating toggle' in i3
 # should be supported at all https://github.com/nikitabobko/AeroSpace/issues/5
 # alt-a = 'focus parent'
 
-alt-1 = 'workspace 1'
-alt-2 = 'workspace 2'
-alt-3 = 'workspace 3'
-alt-4 = 'workspace 4'
-alt-5 = 'workspace 5'
-alt-6 = 'workspace 6'
-alt-7 = 'workspace 7'
-alt-8 = 'workspace 8'
-alt-9 = 'workspace 9'
-alt-0 = 'workspace 10'
+alt-1       = 'workspace 1'
+alt-2       = 'workspace 2'
+alt-3       = 'workspace 3'
+alt-4       = 'workspace 4'
+alt-5       = 'workspace 5'
+alt-6       = 'workspace 6'
+alt-7       = 'workspace 7'
+alt-8       = 'workspace 8'
+alt-9       = 'workspace 9'
+alt-0       = 'workspace 10'
 
 alt-shift-1 = 'move-node-to-workspace 1'
 alt-shift-2 = 'move-node-to-workspace 2'
@@ -91,30 +95,115 @@ alt-shift-8 = 'move-node-to-workspace 8'
 alt-shift-9 = 'move-node-to-workspace 9'
 alt-shift-0 = 'move-node-to-workspace 10'
 
-alt-shift-o = 'reload-config'
-
-alt-o = 'mode resize'
-
 
 [mode.resize.binding]
 
-j = 'resize width -50'
-x = 'resize height -50'
-c = 'resize height +50'
-p = 'resize width +50'
-enter = 'mode main'
-esc = 'mode main'
+j      = 'resize width -50'
+x      = 'resize height -50'
+c      = 'resize height +50'
+p      = 'resize width +50'
+enter  = 'mode main'
+esc    = 'mode main'
 
 
 [workspace-to-monitor-force-assignment]
 
-1 = ['main', 'built-in']
-2 = ['main', 'built-in']
-3 = ['main', 'built-in']
-4 = ['main', 'built-in']
-5 = ['main', 'built-in']
-6 = ['main', 'built-in']
-7 = ['secondary', 'built-in']
-8 = ['secondary', 'built-in']
-9 = ['secondary', 'built-in']
+1  = ['main', 'built-in']
+2  = ['main', 'built-in']
+3  = ['main', 'built-in']
+4  = ['main', 'built-in']
+5  = ['main', 'built-in']
+6  = ['main', 'built-in']
+7  = ['secondary', 'built-in']
+8  = ['secondary', 'built-in']
+9  = ['secondary', 'built-in']
 10 = ['secondary', 'built-in']
+
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Activity Monitor$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Cisco AnyConnect Secure Mobility Client$"
+run = ['layout floating', 'move-node-to-workspace 6']
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Code$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^eqMac$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Fiji$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Finder$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Firefox"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^GIMP$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^IINA$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Intel Power Gadget$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Inkscape$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Microsoft Outlook$"
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Microsoft Teams"
+run = ['move-node-to-workspace 4']
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^mpv$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Preview$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^sioyek$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Slack$"
+run = ['move-node-to-workspace 5']
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^Telegram$"
+run = ['layout floating', 'move-node-to-workspace 6']
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^System Information$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^System Settings$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^System Preferences$"
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-name-regex-substring = "^[zZ]athura$"
+run = 'layout floating'
