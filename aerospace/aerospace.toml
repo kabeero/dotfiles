@@ -12,20 +12,20 @@ start-at-login = true
 after-login-command = []
 after-startup-command = [
     # 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
-    'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xaa00a56c inactive_color=0x00333333 width=6'
+    'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xaa00a56c inactive_color=0x00333333 width=6',
 ]
 # exec-on-workspace-change = ['/bin/bash', '-c',
 #     '/opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 # ]
 
-accordion-padding     = 0
+accordion-padding = 0
 
-gaps.inner.horizontal = 8
-gaps.inner.vertical =   8
-gaps.outer.left =       8
-gaps.outer.bottom =     8
-gaps.outer.top =        8
-gaps.outer.right =      8
+gaps.inner.horizontal = 6
+gaps.inner.vertical = 6
+gaps.outer.left = 2
+gaps.outer.bottom = 2
+gaps.outer.top = 2
+gaps.outer.right = 2
 
 
 # does not support dvorak
@@ -50,8 +50,8 @@ alt-period = 'split vertical'
 
 alt-y = 'fullscreen'
 
-alt-semicolon = 'layout v_accordion' # 'layout stacking' in i3
-alt-comma = 'layout h_accordion' # 'layout tabbed' in i3
+alt-semicolon = 'layout v_accordion'       # 'layout stacking' in i3
+alt-comma = 'layout h_accordion'           # 'layout tabbed' in i3
 alt-d = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
 
 alt-space = 'layout floating tiling' # 'floating toggle' in i3
@@ -113,4 +113,3 @@ esc = 'mode main'
 8 = ['secondary', 'built-in']
 9 = ['secondary', 'built-in']
 10 = ['secondary', 'built-in']
-
