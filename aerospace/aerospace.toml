@@ -5,6 +5,10 @@
 # defaults write -g NSWindowShouldDragOnGesture YES
 # defaults write -g NSAutomaticWindowAnimationsEnabled -bool false
 
+# https://github.com/sbmpost/AutoRaise.git
+# https://github.com/FelixKratz/JankyBorders
+# https://github.com/FelixKratz/SketchyBar
+
 enable-normalization-flatten-containers = false
 enable-normalization-opposite-orientation-for-nested-containers = false
 
@@ -13,19 +17,20 @@ after-login-command = []
 after-startup-command = [
     # 'exec-and-forget /opt/homebrew/opt/sketchybar/bin/sketchybar',
     'exec-and-forget /opt/homebrew/opt/borders/bin/borders active_color=0xaa00a56c inactive_color=0x00333333 width=6',
+    'exec-and-forget autoraise',
 ]
 # exec-on-workspace-change = ['/bin/bash', '-c',
 #     '/opt/homebrew/opt/sketchybar/bin/sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE'
 # ]
 
-accordion-padding = 0
+accordion-padding     = 0
 
 gaps.inner.horizontal = 6
-gaps.inner.vertical = 6
-gaps.outer.left = 2
-gaps.outer.bottom = 2
-gaps.outer.top = 2
-gaps.outer.right = 2
+gaps.inner.vertical   = 6
+gaps.outer.left       = 2
+gaps.outer.bottom     = 2
+gaps.outer.top        = 2
+gaps.outer.right      = 2
 
 
 # does not support dvorak
