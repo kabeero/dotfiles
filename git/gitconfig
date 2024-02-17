@@ -6,6 +6,15 @@
 	l  = log --color --stat
 	ll = log --color --stat -p
 	lg = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
+	lgg = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)"%an" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+	pu  = push
+	pl  = pull
+
+[init]
+	defaultBranch = main
+
+[core]
+	pager = "delta --dark"
 
 [push]
 	default = simple
@@ -15,8 +24,22 @@
 	rebase = false
 	ff     = only
 
-[core]
-	pager = "delta --line-numbers --dark"
+[branch]
+	sort = -committerdate
+
+[diff]
+	algorithm = histogram
 
 [delta]
 	side-by-side = true
+    line-numbers = true
+
+[merge]
+	tool = meld
+	conflictstyle = zdiff3
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
