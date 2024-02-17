@@ -1,45 +1,51 @@
 [user]
-	name  = M K Gharzai
-	email = kabeer@gharzai.net
+    name  = M K Gharzai
+    email = kabeer@gharzai.net
+    useConfigOnly = true
 
 [alias]
-	l  = log --color --stat
-	ll = log --color --stat -p
-	lg = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
-	lgg = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)"%an" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
-	pu  = push
-	pl  = pull
+    l   = log --color --stat
+    ll  = log --color --stat -p
+    lg  = log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"
+    lgg = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)"%an" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
+    pu  = push
+    pl  = pull
 
 [init]
-	defaultBranch = main
+    defaultBranch = main
 
 [core]
-	pager = "delta --dark"
+    pager = "delta --dark"
 
-[push]
-	default = simple
-	autoSetupRemote = true
+[log]
+    date = iso-local
 
 [pull]
-	rebase = false
-	ff     = only
+    rebase = false
+    ff     = only
+
+[push]
+    default = simple
+    autoSetupRemote = true
+    followtags = true
 
 [branch]
-	sort = -committerdate
+    sort = -committerdate
 
 [diff]
-	algorithm = histogram
+    algorithm = histogram
+    colorMoved = default
 
 [delta]
-	side-by-side = true
+    side-by-side = true
     line-numbers = true
 
 [merge]
-	tool = meld
-	conflictstyle = zdiff3
+    tool = difftastic
+    conflictstyle = zdiff3
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
