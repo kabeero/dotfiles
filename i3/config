@@ -311,11 +311,11 @@ for_window [class="Plasmoidviewer"] floating enable
 # >>> Window Rules <<<
 
 # >>> Avoid tiling for non-Plasma stuff <<<
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="bubble"] floating enable
-for_window [window_role="task_dialog"] floating enable
+for_window [window_role="About"] floating enable 
 for_window [window_role="Preferences"] floating enable
-for_window [window_role="About"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="menu"] floating enable
 
@@ -330,10 +330,9 @@ exec --no-startup-id trackpad t 1
 exec --no-startup-id sudo powertop --auto-tune
 # exec "xautolock -detectsleep -time 10 -locker \"i3lock -c 000000\""
 
-for_window [class="Firefox|qpdfview|feh|MuPDF|mpv|vlc|Pavucontrol|Pulseeffects|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma|libreoffice-writer|kitty|Xpra"] floating enable
+for_window [class="qpdfview|feh|MuPDF|mpv|vlc|Pavucontrol|Pulseeffects|URxvt|Spacefm|Blueman-manager|Hexchat|Vim|Pluma|libreoffice-writer|kitty|Xpra"] floating enable
 for_window [class="LibManager|LibSelect|Virtuoso|Qt-subapplication|logic|Vncviewer|com-oracle-vdc-gui-OVDC|Helix P4V|Wireshark|Virt-manager|QEMU|Spicy|Thunderbird|GNU Octave|Atom|Microsoft Teams - Preview|openrgb|fusion360.exe|^[lL]ooking|"] floating enable
-for_window [window_role="pop-up"] floating enable
-for_window [window_role="task_dialog"] floating enable
+for_window [class="firefox"] floating disable
 
 ## Media Keys
 
