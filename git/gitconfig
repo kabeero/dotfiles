@@ -10,6 +10,7 @@
     lgg = log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)"%an" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order
     pu  = push
     pl  = pull
+    s   = status
 
 [init]
     defaultBranch = main
@@ -43,6 +44,9 @@
 [merge]
     tool = difftastic
     conflictstyle = zdiff3
+
+[rerere]
+	enabled = 1
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
