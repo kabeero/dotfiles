@@ -24,8 +24,8 @@ vim.o.shiftwidth = 4
 vim.o.expandtab = true
 vim.o.smartindent = true
 
--- Always print at least 8 lines
-vim.o.scrolloff = 8
+-- Always print at least 4 lines
+vim.o.scrolloff = 4
 
 -- List chars
 vim.opt.listchars:append({ eol = "↵", tab = " ⇢", trail = "·" })
