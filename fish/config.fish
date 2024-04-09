@@ -37,9 +37,10 @@ if status is-interactive
     starship init fish | source
     zoxide init fish | source
 
-    fish_add_path {$HOME}/.cargo/bin
     fish_add_path {$HOME}/.asdf/bin
-    fish_add_path {$HOME}/go/bin
+    fish_add_path {$HOME}/.cargo/bin
+    fish_add_path {$HOME}/.yarn/bin
+    fish_add_path {$HOME}/Code/go/bin
 end
 
 # jump to directory
@@ -90,4 +91,8 @@ function e
     if set -q chosen && test -n "$chosen"
         nvim $chosen
     end
+end
+
+function dockerls
+    docker ps --format "table {{.Image}}\t{{.Ports}}\t{{.Names}}"
 end
