@@ -1,2 +1,2 @@
-eval (ssh-agent -s) >/dev/null
+eval (ssh-agent -c) >/dev/null
 ssh-add -q
