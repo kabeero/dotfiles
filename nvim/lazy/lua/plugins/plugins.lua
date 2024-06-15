@@ -1,6 +1,8 @@
 return {
+  { "akinsho/bufferline.nvim" },
   { "catppuccin/nvim" },
   { "echasnovski/mini.pairs", enabled = false },
+  { "edeneast/nightfox.nvim" },
   { "f-person/git-blame.nvim" },
   { "folke/tokyonight.nvim" },
   { "fynnfluegge/monet.nvim" },
