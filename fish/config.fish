@@ -36,7 +36,7 @@ if status is-interactive
     # eval "$(/opt/homebrew/bin/brew shellenv)"
 
     starship init fish | source
-    zoxide init fish | source
+    # zoxide init fish | source
 
     fish_add_path {$HOME}/.asdf/bin
     fish_add_path {$HOME}/.cargo/bin
