@@ -44,7 +44,7 @@ if status is-interactive
     fish_add_path {$HOME}/.asdf/bin
     fish_add_path {$HOME}/.cargo/bin
     fish_add_path {$HOME}/.yarn/bin
-    fish_add_path {$HOME}/Code/go/bin
+    fish_add_path {$GOBIN}
 
     eval (ssh-agent -c) >/dev/null
     ssh-add -q
