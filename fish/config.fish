@@ -20,6 +20,9 @@ if status is-interactive
     #set -Ux PYTHONPATH (python -c "import site; print(site.USER_SITE)")
     #set -Ux SCIPY_PIL_IMAGE_VIEWER sxiv
 
+    # iex shell history
+    set -Ux ERL_AFLAGS "-kernel shell_history enabled"
+
     pfetch
 
     # gentoo
