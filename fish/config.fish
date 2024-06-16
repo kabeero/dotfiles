@@ -7,6 +7,7 @@ if status is-interactive
     alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
+    alias z="zellij"
     alias diffk="kitty +kitten diff"
     alias jless="jless -r"
 
@@ -41,6 +42,9 @@ if status is-interactive
     fish_add_path {$HOME}/.cargo/bin
     fish_add_path {$HOME}/.yarn/bin
     fish_add_path {$HOME}/Code/go/bin
+
+    eval (ssh-agent -c) >/dev/null
+    ssh-add -q
 end
 
 # jump to directory
