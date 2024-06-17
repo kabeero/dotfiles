@@ -124,7 +124,7 @@ keybinds clear-defaults=true {
     }
     tmux {
         bind "[" { SwitchToMode "Scroll"; }
-        bind "Ctrl u" { Write 2; SwitchToMode "Normal"; }
+        bind "Ctrl g" { Write 2; SwitchToMode "Normal"; }
         bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
@@ -182,7 +182,7 @@ keybinds clear-defaults=true {
         bind "Ctrl m" { SwitchToMode "Move"; }
     }
     shared_except "tmux" "locked" {
-        bind "Ctrl u" { SwitchToMode "Tmux"; }
+        bind "Ctrl g" { SwitchToMode "Tmux"; }
     }
 }
 
@@ -288,7 +288,7 @@ theme "catppuccin-mocha"
 // Default: "default"
 // Options: default, compact, disable-status-bar, strider
 //
-default_layout "compact"
+default_layout "compact-top"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
