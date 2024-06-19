@@ -4,7 +4,7 @@ layout {
             hide_frame_for_single_pane "true"
 
             format_left  "#[bg=#080825]{mode}#[fg=#424554,bg=#080825] 󱗿  {tabs}"
-            format_right "#[fg=#6C7086,bg=#080825]{session}#[fg=#424554,bg=#080825] 󱗿 {datetime}"
+            format_right "#[fg=#6C7086,bg=#080825]{session}#[fg=#424554,bg=#080825]  󱗿  {datetime}"
             format_space "#[bg=#080825]"
 
             mode_normal          "#[fg=#CCCCCC,bg=#080825,bold] {name} "

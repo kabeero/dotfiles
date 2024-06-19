@@ -68,6 +68,8 @@ keybinds clear-defaults=true {
         bind "8" { GoToTab 8; SwitchToMode "Normal"; }
         bind "9" { GoToTab 9; SwitchToMode "Normal"; }
         bind "Tab" { ToggleTab; }
+        bind "<" { MoveTab "Left"; }
+        bind ">" { MoveTab "Right"; }
     }
     scroll {
         bind "Ctrl s" { SwitchToMode "Normal"; }
