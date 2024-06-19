@@ -3,7 +3,7 @@ layout {
         plugin location="file:/${HOME}/.config/zellij/plugins/zjstatus.wasm" {
             hide_frame_for_single_pane "true"
 
-            format_left  "{mode}#[fg=#424554,bg=#181825] 󱗿 {tabs}"
+            format_left  "{mode}#[fg=#424554,bg=#181825] 󱗿  {tabs}"
             format_right "#[fg=#6C7086,bg=#181825]{session}#[fg=#424554,bg=#181825] 󱗿 {datetime}"
             format_space "#[bg=#181825]"
 
@@ -14,8 +14,10 @@ layout {
             mode_tmux            "#[fg=#000000,bg=#675FF0,bold] {name} "
             mode_default_to_mode "tmux" // if not listed above, which color to use
 
-            tab_normal               "#[fg=#6C7086,bg=#181825] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}  "
-            tab_active               "#[fg=#22AAFF,bg=#181825,bold] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}  "
+            // tab_normal               "#[fg=#6C7086,bg=#181825] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator} "
+            // tab_active               "#[fg=#22AAFF,bg=#181825,bold] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator} "
+            tab_normal "#[bg=#181825,fg=#181825] #[bg=#181825,fg=#6C7086,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#181825,fg=#181825]"
+            tab_active "#[bg=#22AAFF,fg=#181825] #[bg=#22AAFF,fg=#000000,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#181825,fg=#22AAFF]"
             tab_floating_indicator   "󰉈 "
             tab_fullscreen_indicator "□ "
             tab_sync_indicator       " "
