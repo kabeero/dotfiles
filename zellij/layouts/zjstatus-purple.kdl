@@ -1,0 +1,42 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="file:/${HOME}/.config/zellij/plugins/zjstatus.wasm" {
+            hide_frame_for_single_pane "true"
+
+            format_left  "#[bg=#150815]{mode}#[fg=#424554,bg=#150815] 󱗿  {tabs}"
+            format_right "#[fg=#6C7086,bg=#150815]{session}#[fg=#424554,bg=#150815] 󱗿 {datetime}"
+            format_space "#[bg=#150815]"
+
+            mode_normal          "#[fg=#CCCCCC,bg=#150815,bold] {name} "
+            mode_locked          "#[fg=#000000,bg=#FF0387,bold] {name} "
+            mode_resize          "#[fg=#000000,bg=#F75F00,bold] {name} "
+            mode_scroll          "#[fg=#000000,bg=#F75F00,bold] {name} "
+            mode_tmux            "#[fg=#000000,bg=#675FF0,bold] {name} "
+            mode_default_to_mode "tmux" // if not listed above, which color to use
+
+            tab_normal "#[bg=#250825,fg=#150815] #[bg=#250825,fg=#6C7086,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#150815,fg=#250825]"
+            tab_active "#[bg=#500072,fg=#150815] #[bg=#500072,fg=#CCCCCC,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#250825,fg=#500072]"
+            tab_floating_indicator   "󰉈 "
+            tab_fullscreen_indicator "□ "
+            tab_sync_indicator       " "
+
+            datetime          "#[fg=#9399B2,bg=#150815]{format}"
+            datetime_format   "%H:%M"
+            datetime_timezone "America/Los_Angeles"
+
+            // custom commands
+
+            command_kubectx_command  "kubectx -c"
+            command_kubectx_format   "#[fg=#6C7086,bg=#150815,italic] {stdout}"
+            command_kubectx_interval "2"
+
+            command_kubens_command  "kubens -c"
+            command_kubens_format   "#[fg=#6C7086,bg=#150815]{stdout} "
+            command_kubens_interval "2"
+        }
+    }
+
+    pane split_direction="vertical" {
+        pane
+    }
+}
