@@ -15,7 +15,7 @@ layout {
             mode_default_to_mode "tmux" // if not listed above, which color to use
 
             tab_normal "#[bg=#250825,fg=#150815] #[bg=#250825,fg=#6C7086,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#150815,fg=#250825]"
-            tab_active "#[bg=#500072,fg=#150815] #[bg=#500072,fg=#CCCCCC,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#250825,fg=#500072]"
+            tab_active "#[bg=#500072,fg=#150815] #[bg=#500072,fg=#CCCCCC,bold] {name} {fullscreen_indicator}{floating_indicator}{sync_indicator} #[bg=#150815,fg=#500072]"
             tab_floating_indicator   "󰉈 "
             tab_fullscreen_indicator "□ "
             tab_sync_indicator       " "
