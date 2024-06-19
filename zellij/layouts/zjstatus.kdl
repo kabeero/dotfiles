@@ -1,37 +1,42 @@
 layout {
-    default_tab_template {
-        pane size=1 borderless=true {
-            // "https://github.com/dj95/zjstatus/releases/latest/download/zjstatus.wasm"
-            plugin location="file:/${HOME}/.config/zellij/plugins/zjstatus.wasm" {
-                format_left   "{mode} #[fg=#6C7086,bold]{session} {mode}"
-                format_center "{tabs}"
-                format_right  "{command_git_branch} {datetime}"
-                format_space  ""
+    pane size=1 borderless=true {
+        plugin location="file:/${HOME}/.config/zellij/plugins/zjstatus.wasm" {
+            hide_frame_for_single_pane "true"
 
-                border_enabled  "false"
-                border_char     "─"
-                border_format   "#[fg=#6C7086]{char}"
-                border_position "top"
+            format_left  "{mode}#[fg=#424554,bg=#181825] 󱗿 {tabs}"
+            format_right "#[fg=#6C7086,bg=#181825]{session}#[fg=#424554,bg=#181825] 󱗿 {datetime}"
+            format_space "#[bg=#181825]"
 
-                hide_frame_for_single_pane "true"
+            mode_normal          "#[fg=#CCCCCC,bg=#181825,bold] {name} "
+            mode_locked          "#[fg=#000000,bg=#FF0387,bold] {name} "
+            mode_resize          "#[fg=#000000,bg=#F75F00,bold] {name} "
+            mode_scroll          "#[fg=#000000,bg=#F75F00,bold] {name} "
+            mode_tmux            "#[fg=#000000,bg=#675FF0,bold] {name} "
+            mode_default_to_mode "tmux" // if not listed above, which color to use
 
-                mode_normal  "#[bg=#0fc3f7] "
-                mode_tmux    "#[bg=#ffc387] "
-                mode_locked  "#[bg=#ff0387] "
+            tab_normal               "#[fg=#6C7086,bg=#181825] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}  "
+            tab_active               "#[fg=#22AAFF,bg=#181825,bold] {index} {name} {fullscreen_indicator}{sync_indicator}{floating_indicator}  "
+            tab_floating_indicator   "󰉈 "
+            tab_fullscreen_indicator "□ "
+            tab_sync_indicator       " "
 
-                tab_normal   "#[fg=#6C7086] {name} "
-                tab_active   "#[fg=#22aaff,bold,italic] {name} "
+            datetime          "#[fg=#9399B2,bg=#181825]{format}"
+            datetime_format   "%H:%M"
+            datetime_timezone "America/Los_Angeles"
 
-                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-                command_git_branch_format      "#[fg=blue] {stdout} "
-                command_git_branch_interval    "10"
-                command_git_branch_rendermode  "static"
+            // custom commands
 
-                datetime           "#[fg=#6C7086,bold] {format} "
-                datetime_format    "%H:%M"
-                datetime_timezone  "America/Los_Angeles"
-            }
+            command_kubectx_command  "kubectx -c"
+            command_kubectx_format   "#[fg=#6C7086,bg=#181825,italic] {stdout}"
+            command_kubectx_interval "2"
+
+            command_kubens_command  "kubens -c"
+            command_kubens_format   "#[fg=#6C7086,bg=#181825]{stdout} "
+            command_kubens_interval "2"
         }
-        children
+    }
+
+    pane split_direction="vertical" {
+        pane
     }
 }
