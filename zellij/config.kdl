@@ -68,6 +68,8 @@ keybinds clear-defaults=true {
         bind "Ctrl g" { Write 2; SwitchToMode "Normal"; }
         bind "-" { NewPane "Down"; SwitchToMode "Normal"; }
         bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
+        bind "{" { MovePane "Left"; }
+        bind "}" { MovePane; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "c" { NewTab; SwitchToMode "Normal"; }
         bind "," { SwitchToMode "RenameTab"; }
