@@ -18,18 +18,18 @@
       alt - return : /Applications/kitty.app/Contents/MacOS/kitty -1 -d ~
 
 # focus window
-        alt - 0x06 : yabai -m window --focus north
-        alt -  q   : yabai -m window --focus south
+        alt - 0x06 : yabai -m window --focus south
+        alt -  q   : yabai -m window --focus north
         alt -  j   : yabai -m window --focus stack.prev || yabai -m window --focus prev || yabai -m window --focus last  || yabai -m window --focus west
         alt -  k   : yabai -m window --focus stack.next || yabai -m window --focus next || yabai -m window --focus first || yabai -m window --focus east
 
 # move managed window: swap: non-hierarchical, warp: into bsp tree
- ctrl + alt - 0x06 : yabai -m window --swap north
- ctrl + alt -  q   : yabai -m window --swap south
+ ctrl + alt - 0x06 : yabai -m window --swap south
+ ctrl + alt -  q   : yabai -m window --swap north
  ctrl + alt -  j   : yabai -m window --swap west
  ctrl + alt -  k   : yabai -m window --swap east
-shift + alt - 0x06 : yabai -m window --warp north
-shift + alt -  q   : yabai -m window --warp south
+shift + alt - 0x06 : yabai -m window --warp south
+shift + alt -  q   : yabai -m window --warp north
 shift + alt -  j   : yabai -m window --warp west
 shift + alt -  k   : yabai -m window --warp east
 
