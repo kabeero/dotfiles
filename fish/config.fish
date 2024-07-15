@@ -7,7 +7,6 @@ if status is-interactive
     alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
-    alias z="zellij"
     alias diffk="kitty +kitten diff"
     alias jless="jless -r"
 
@@ -98,6 +97,11 @@ function e
     if set -q chosen && test -n "$chosen"
         nvim $chosen
     end
+end
+
+function z
+    zellij ls -s | sort | awk '{printf "\033[32m%15s\033[0m\n", $1}'
+    alias z="zellij"
 end
 
 function dockerls
