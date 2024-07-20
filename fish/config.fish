@@ -30,8 +30,8 @@ if status is-interactive
     # macos
     #echo -e "\033[0;32m"(date +%c)"\x1b[0m"
 
-    # asdf
     source {$HOME}/.asdf/asdf.fish
+    zellij setup --generate-completion fish | source
 
     # brew
     # source /opt/homebrew/opt/asdf/libexec/asdf.fish
