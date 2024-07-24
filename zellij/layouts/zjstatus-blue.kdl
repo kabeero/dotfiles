@@ -2,7 +2,7 @@ layout {
     default_tab_template {
         pane size=1 borderless=true {
             plugin location="file:${HOME}/.config/zellij/plugins/zjstatus.wasm" {
-                hide_frame_for_single_pane "true"
+                hide_frame_for_single_pane "false"
 
                 format_left  "#[bg=#080825]{mode}#[fg=#424554,bg=#080825] 󱗿  {tabs}"
                 format_right "#[fg=#6C7086,bg=#080825]{session}#[fg=#424554,bg=#080825]  󱗿  {datetime}"
