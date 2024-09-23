@@ -1,9 +1,10 @@
 if status is-interactive
     alias ls="eza"
     alias l="ls"
-    alias ll="ls -l"
     alias l1="ls -1"
+    alias ll="ls -l --icons --git"
     alias r="ranger"
+    alias y="yazi"
     alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
