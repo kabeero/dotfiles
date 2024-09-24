@@ -162,6 +162,18 @@ vim.keymap.set("n", "<leader>fG", function()
   )
 end, { desc = "Ranger (~)" })
 
+-- yazi
+vim.keymap.set("n", "<leader>fy", function()
+  Util.terminal({ "yazi", Util.root() }, { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } })
+end, { desc = "yazi (project)" })
+
+vim.keymap.set("n", "<leader>fY", function()
+  Util.terminal(
+    { "yazi", vim.uv.os_homedir() },
+    { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
+  )
+end, { desc = "yazi (~)" })
+
 -- jless
 vim.keymap.set("n", "<leader>fj", function()
   local name = vim.api.nvim_buf_get_name(0)
