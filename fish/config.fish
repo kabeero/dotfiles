@@ -10,6 +10,7 @@ if status is-interactive
     alias vimdiff="nvim -d"
     alias diffk="kitty +kitten diff"
     alias jless="jless -r"
+    alias sio="sioyek"
 
     set -Ux EDITOR nvim
 
