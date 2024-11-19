@@ -127,10 +127,10 @@ end, { desc = "Rotate Colorscheme" })
 
 -- GitUI
 vim.keymap.set("n", "<leader>gu", function()
-  Util.terminal({ "gitui" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
+  Snacks.terminal({ "gitui" }, { cwd = Util.root(), esc_esc = false, ctrl_hjkl = false })
 end, { desc = "GitUI (root dir)" })
 vim.keymap.set("n", "<leader>gU", function()
-  Util.terminal({ "gitui" }, { esc_esc = false, ctrl_hjkl = false })
+  Snacks.terminal({ "gitui" }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "GitUI (cwd)" })
 
 -- Neogit
@@ -152,11 +152,14 @@ vim.keymap.set("n", "<leader>Tt", vim.cmd.TroubleToggle, { desc = "Trouble toggl
 
 -- Ranger
 vim.keymap.set("n", "<leader>fg", function()
-  Util.terminal({ "ranger", Util.root() }, { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } })
+  Snacks.terminal(
+    { "ranger", Util.root() },
+    { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
+  )
 end, { desc = "Ranger (project)" })
 
 vim.keymap.set("n", "<leader>fG", function()
-  Util.terminal(
+  Snacks.terminal(
     { "ranger", vim.uv.os_homedir() },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
   )
@@ -164,11 +167,11 @@ end, { desc = "Ranger (~)" })
 
 -- yazi
 vim.keymap.set("n", "<leader>fy", function()
-  Util.terminal({ "yazi", Util.root() }, { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } })
+  Snacks.terminal({ "yazi", Util.root() }, { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } })
 end, { desc = "yazi (project)" })
 
 vim.keymap.set("n", "<leader>fY", function()
-  Util.terminal(
+  Snacks.terminal(
     { "yazi", vim.uv.os_homedir() },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
   )
@@ -177,14 +180,14 @@ end, { desc = "yazi (~)" })
 -- jless
 vim.keymap.set("n", "<leader>fj", function()
   local name = vim.api.nvim_buf_get_name(0)
-  Util.terminal(
+  Snacks.terminal(
     { "jless", "-r", "-m", "line", name },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } }
   )
 end, { desc = "jless (line)" })
 vim.keymap.set("n", "<leader>fJ", function()
   local name = vim.api.nvim_buf_get_name(0)
-  Util.terminal(
+  Snacks.terminal(
     { "jless", "-r", "-m", "data", name },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } }
   )
@@ -194,13 +197,13 @@ end, { desc = "jless (data)" })
 vim.keymap.set("n", "<leader>fl", function()
   -- local name = string.gsub(vim.api.nvim_buf_get_name(0), vim.uv.cwd(), "")
   local name = vim.api.nvim_buf_get_name(0)
-  Util.terminal({ "lnav", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
+  Snacks.terminal({ "lnav", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
 end, { desc = "lnav" })
 
 -- glow
 vim.keymap.set("n", "<leader>fm", function()
   local name = vim.api.nvim_buf_get_name(0)
-  Util.terminal(
+  Snacks.terminal(
     { "glow", "-p", name, "-w", math.floor(vim.api.nvim_win_get_width(0) * 0.7) },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
   )
