@@ -26,6 +26,8 @@ keybinds clear-defaults=true {
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
         bind "<" { NextSwapLayout; }
         bind ">" { PreviousSwapLayout; }
+        bind "[" { MovePane "Left"; }
+        bind "]" { MovePane; }
     }
     tab {
         bind "Ctrl t" { SwitchToMode "Normal"; }
