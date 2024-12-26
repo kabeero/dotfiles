@@ -15,6 +15,7 @@ return {
   { "f-person/git-blame.nvim" },
   { "folke/tokyonight.nvim", lazy = false },
   { "fynnfluegge/monet.nvim", lazy = false },
+  { "ibhagwan/fzf-lua", keys = { { "<leader>fg", false } } },
   { "lewis6991/gitsigns.nvim", opts = { _extmark_signs = false } },
   { "NeogitOrg/neogit", dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" }, config = true },
   { "nvim-telescope/telescope-symbols.nvim" },
