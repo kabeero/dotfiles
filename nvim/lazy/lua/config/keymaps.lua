@@ -208,3 +208,6 @@ vim.keymap.set("n", "<leader>fm", function()
     { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
   )
 end, { desc = "glow preview" })
+
+-- minimap
+vim.keymap.set("n", "<leader>cp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap" })

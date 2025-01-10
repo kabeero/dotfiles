@@ -33,3 +33,6 @@ vim.o.list = false
 
 -- Decreate update time
 vim.o.updatetime = 250
+
+-- minimap
+vim.g.neominimap = { auto_enable = false }
