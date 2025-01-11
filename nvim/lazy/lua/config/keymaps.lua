@@ -210,4 +210,10 @@ vim.keymap.set("n", "<leader>fm", function()
 end, { desc = "glow preview" })
 
 -- minimap
-vim.keymap.set("n", "<leader>cp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap" })
+vim.keymap.set(
+  "n",
+  "<leader>cP",
+  "<cmd>Neominimap on<cr><cmd>Neominimap bufToggle<cr>",
+  { desc = "Toggle Neominimap (buffer)" }
+)
+vim.keymap.set("n", "<leader>cp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap (global)" })
