@@ -2,6 +2,11 @@
 # If you encounter any issues, please make an issue at https://github.com/yazi-rs/schemas.
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
+# install plugins:
+#   ya pack -a AnirudhG07/nbpreview
+#   ya pack -a Reledia/glow
+#   ya pack -a Reledia/miller
+
 [manager]
 ratio          = [ 1, 4, 3 ]
 sort_by        = "alphabetical"
@@ -88,6 +93,11 @@ image_bound      = [ 0, 0 ]
 suppress_preload = false
 
 [plugin]
+prepend_previewers = [
+  { mime = "text/csv", run = "miller" },
+  { name = "*.ipynb", run = "nbpreview" },
+  { name = "*.md", run = "glow" },
+]
 
 fetchers = [
     # Mimetype

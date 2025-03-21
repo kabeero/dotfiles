@@ -55,11 +55,13 @@ keymap = [
     { on = "V", run = "visual_mode --unset", desc = "Enter visual mode (unset mode)" },
 
     # Seeking
-    { on = "K", run = "seek -5", desc = "Seek up 5 units in the preview" },
     { on = "J", run = "seek 5",  desc = "Seek down 5 units in the preview" },
+    { on = "<", run = "seek 5",  desc = "Seek down 5 units in the preview" },
+    { on = "K", run = "seek -5", desc = "Seek up 5 units in the preview" },
+    { on = ">", run = "seek -5", desc = "Seek up 5 units in the preview" },
 
     # Spotting
-    { on = "<Tab>", run = "spot", desc = "Spot hovered file" },
+    { on = "?", run = "spot", desc = "Spot hovered file" },
 
     # Operation
     { on = "o",         run = "open",                             desc = "Open selected files" },
@@ -108,7 +110,7 @@ keymap = [
 
     # Find
     { on = "/", run = "find --smart",            desc = "Find next file" },
-    { on = "?", run = "find --previous --smart", desc = "Find previous file" },
+    # { on = "?", run = "find --previous --smart", desc = "Find previous file" },
     { on = "n", run = "find_arrow",              desc = "Go to the next found" },
     { on = "N", run = "find_arrow --previous",   desc = "Go to the previous found" },
 
