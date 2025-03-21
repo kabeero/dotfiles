@@ -6,6 +6,7 @@
 #   ya pack -a AnirudhG07/nbpreview
 #   ya pack -a Reledia/glow
 #   ya pack -a Reledia/miller
+#   ya pack -a yazi-rs/plugins:toggle-pane
 
 [manager]
 ratio          = [ 1, 4, 3 ]
