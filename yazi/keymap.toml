@@ -169,6 +169,9 @@ keymap = [
     # Help
     { on = "~",    run = "help", desc = "Open help" },
     { on = "<F1>", run = "help", desc = "Open help" },
+
+    # Mount
+    { on = "M",    run = "plugin mount", desc = "Mount interactive" },
 ]
 
 [tasks]

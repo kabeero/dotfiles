@@ -6,6 +6,7 @@
 #   ya pack -a AnirudhG07/nbpreview
 #   ya pack -a Reledia/glow
 #   ya pack -a Reledia/miller
+#   ya pack -a yazi-rs/plugins:mount
 #   ya pack -a yazi-rs/plugins:toggle-pane
 
 [manager]
@@ -227,9 +228,9 @@ open_origin = "hovered"
 open_offset = [ 0, 1, 50, 7 ]
 
 [which]
-sort_by          = "none"
+sort_by        = "none"
 sort_sensitive = false
-sort_reverse     = false
+sort_reverse   = false
 sort_translit  = false
 
 [log]
