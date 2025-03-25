@@ -19,7 +19,7 @@ sudo yabai --load-sa
 # refresh Übersicht on yabai reload
 osascript -e 'tell application id "tracesOf.Uebersicht" to refresh'
 # https://www.jeantinland.com/toolbox/simple-bar/documentation/resolving-external-screen-overlapping-issue/
-yabai -m config external_bar all:34:0
+yabai -m config external_bar all:28:0
 
 ###########################
 #  Window modifications
