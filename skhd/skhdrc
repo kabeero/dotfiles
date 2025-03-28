@@ -60,14 +60,14 @@ shift + alt - 0 : yabai -m space --balance
         alt - w : yabai -m window --stack south || yabai -m window --stack north || yabai -m window --stack east || yabai -m window --stack west
 
 # send window to desktop
-shift + alt - 1 : yabai -m window --space 1 --focus
-shift + alt - 2 : yabai -m window --space 2 --focus
-shift + alt - 3 : yabai -m window --space 3 --focus
-shift + alt - 4 : yabai -m window --space 4 --focus
-shift + alt - 5 : yabai -m window --space 5 --focus
-shift + alt - 6 : yabai -m window --space 6 --focus
-shift + alt - 7 : yabai -m window --space 7 --focus
-shift + alt - 8 : yabai -m window --space 8 --focus
+shift + alt - 1 : yabai -m window --space 1
+shift + alt - 2 : yabai -m window --space 2
+shift + alt - 3 : yabai -m window --space 3
+shift + alt - 4 : yabai -m window --space 4
+shift + alt - 5 : yabai -m window --space 5
+shift + alt - 6 : yabai -m window --space 6
+shift + alt - 7 : yabai -m window --space 7
+shift + alt - 8 : yabai -m window --space 8
 
 # set insertion point for focused container
  ctrl + alt - c : yabai -m window --insert north

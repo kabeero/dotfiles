@@ -18,8 +18,26 @@ sudo yabai --load-sa
 
 # refresh Übersicht on yabai reload
 osascript -e 'tell application id "tracesOf.Uebersicht" to refresh'
+
 # https://www.jeantinland.com/toolbox/simple-bar/documentation/resolving-external-screen-overlapping-issue/
-yabai -m config external_bar all:28:0
+# top bar
+yabai -m config external_bar all:32:0
+# bottom ba
+# yabai -m config external_bar all:0:32
+
+# https://www.jeantinland.com/toolbox/simple-bar-server/documentation/yabai/
+yabai -m signal --add event=window_focused action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows when focused application changes"
+yabai -m signal --add event=window_resized action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows when a window is resized"
+yabai -m signal --add event=window_destroyed action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-ba spaces & windows when an application window is closed"
+yabai -m signal --add event=space_changed action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows on space change"
+yabai -m signal --add event=display_changed action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows on display focus change"
+yabai -m signal --add event=window_title_changed action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows when current window title changes"
+yabai -m signal --add event=space_destroyed action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows on space removal"
+yabai -m signal --add event=space_created action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows on space creation"
+yabai -m signal --add event=application_activated action="curl http://localhost:7776/yabai/spaces/refresh && curl http://localhost:7776/yabai/windows/refresh" label="Refresh simple-bar spaces & windows when application is activated"
+yabai -m signal --add event=display_added action="curl http://localhost:7776/yabai/displays/refresh" label="Refresh simple-bar displays when a new dispay is added"
+yabai -m signal --add event=display_removed action="curl http://localhost:7776/yabai/displays/refresh" label="Refresh simple-bar displays when a dispay is removed"
+yabai -m signal --add event=display_moved action="curl http://localhost:7776/yabai/displays/refresh" label="Refresh simple-bar displays when a dispay is moved"
 
 ###########################
 #  Window modifications
@@ -69,8 +87,10 @@ yabai -m config mouse_action1 move
 yabai -m config mouse_action2 resize
 yabai -m config mouse_drop_action swap
 
-# With focus follows mouse, you can also focus windows without having to click on them. This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on). Focus follows mouse is disabled while holding the mouse modifier key so that you can access the menu bar easily.
-# yabai -m config focus_follows_mouse autofocus
+# With focus follows mouse, you can also focus windows without having to click on them.
+# This can be set to either autofocus (window gets focused, but not raised) or autoraise (window gets raised as if it was clicked on).
+# Focus follows mouse is disabled while holding the mouse modifier key so that you can access the menu bar easily.
+yabai -m config focus_follows_mouse autoraise
 # Mouse follows focus makes it so that when yabai focuses another window (e.g. through a focus command), the mouse cursor gets moved to the center of the focused window.
 yabai -m config mouse_follows_focus off
 
@@ -86,11 +106,11 @@ yabai -m config layout bsp
 ## Padding and gaps
 
 # When tiling windows, yabai can maintain gaps between windows and padding towards menu bar, dock and screen edges. This setting can be defined on a per–space basis.
-yabai -m config top_padding 8
-yabai -m config bottom_padding 8
-yabai -m config left_padding 8
-yabai -m config right_padding 8
-yabai -m config window_gap 8
+yabai -m config top_padding 4
+yabai -m config bottom_padding 4
+yabai -m config left_padding 4
+yabai -m config right_padding 4
+yabai -m config window_gap 4
 
 ###########################
 ##        Rules
