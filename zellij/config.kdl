@@ -23,6 +23,7 @@ keybinds clear-defaults=true {
         bind "o" { TogglePaneFrames; SwitchToMode "Normal"; }
         bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "e" { TogglePaneEmbedOrFloating; SwitchToMode "Normal"; }
+        bind "t" { TogglePanePinned; }
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0;}
         bind "<" { NextSwapLayout; }
         bind ">" { PreviousSwapLayout; }
