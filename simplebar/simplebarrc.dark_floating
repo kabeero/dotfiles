@@ -4,7 +4,7 @@
     "theme": "auto",
     "compactMode": false,
     "floatingBar": false,
-    "noBarBg": false,
+    "noBarBg": true,
     "noColorInData": true,
     "bottomBar": false,
     "sideDecoration": false,

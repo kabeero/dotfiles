@@ -4,8 +4,8 @@
     "theme": "auto",
     "compactMode": false,
     "floatingBar": false,
-    "noBarBg": false,
-    "noColorInData": true,
+    "noBarBg": true,
+    "noColorInData": false,
     "bottomBar": false,
     "sideDecoration": false,
     "inlineSpacesOptions": false,
@@ -13,8 +13,8 @@
     "widgetsBackgroundColorAsForeground": true,
     "widgetMaxWidth": "160px",
     "slidingAnimationPace": "4",
-    "font": "FiraCode Nerd Font,Noto Sans, JetBrains Mono, Monaco, Menlo, monospace",
-    "fontSize": "16px",
+    "font": "Noto Sans, JetBrains Mono, Monaco, Menlo, monospace",
+    "fontSize": "12px",
     "yabaiPath": "/opt/homebrew/bin/yabai",
     "aerospacePath": "/opt/homebrew/bin/aerospace",
     "windowManager": "yabai",
@@ -77,7 +77,7 @@
   },
   "widgets": {
     "processWidget": true,
-    "weatherWidget": false,
+    "weatherWidget": true,
     "netstatsWidget": false,
     "cpuWidget": false,
     "gpuWidget": false,
@@ -88,14 +88,14 @@
     "zoomWidget": false,
     "soundWidget": true,
     "micWidget": false,
-    "dateWidget": false,
+    "dateWidget": true,
     "timeWidget": true,
     "keyboardWidget": false,
-    "spotifyWidget": false,
+    "spotifyWidget": true,
     "cryptoWidget": false,
     "stockWidget": false,
     "youtubeMusicWidget": false,
-    "musicWidget": false,
+    "musicWidget": true,
     "mpdWidget": false,
     "browserTrackWidget": false
   },
@@ -234,6 +234,6 @@
     "userWidgetsList": {}
   },
   "customStyles": {
-    "styles": ":root {\n  --main: #1b222d;\n  --main-alt: #98a8c5;\n  --minor: #39465e;\n  --accent: var(--cyan);\n  --red: #e78482;\n  --green: #8fc8BB;\n  --yellow: #ffd484;\n  --orange: #ffb374;\n  --blue: #6db3cE;\n  --magenta: #ad82cB;\n  --cyan: #7eddde;\n  --black: #1b222d;\n  --white: #fff;\n  --foreground: var(--white);\n  --background: rgba(0, 0, 0, 0.5);\n  --transparent-dark: rgba(0, 0, 0, 0.05);\n  --font: \"FiraCode Nerd Font\", \"JetBrains Mono\", Monaco, Menlo, monospace;\n  --font-size: 16px;\n  --bar-height: 64px;\n  --bar-radius: 18px;\n  --bar-border: 0px solid transparent;\n  --bar-inner-margin: 8px;\n  --item-max-width: 160px;\n  --item-radius: 12px;\n  --item-inner-margin: 3px 7px;\n  --item-outer-margin: 0 0 0 5px;\n  --hover-ring: 0 0 0 2px rgba(255, 96, 255, 0.75);\n  --focus-ring: 0 0 0 2px rgb(128, 96, 255);\n  --light-shadow:0 5px 10px rgba(0, 0, 0, 0.24);\n  --foreground-shadow: 0 0 0 1px var(--foreground);\n  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);\n  --click-effect: rgba(255, 255, 255, 0.3);\n}"
+    "styles": "/* your custom css styles here */"
   }
 }
