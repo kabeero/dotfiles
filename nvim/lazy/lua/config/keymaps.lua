@@ -184,14 +184,12 @@ vim.keymap.set("n", "<leader>fj", function()
     { "jless", "-r", "-m", "line", name },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } }
   )
-end, { desc = "jless (line)" })
+end, { desc = "jless" })
+-- json fx
 vim.keymap.set("n", "<leader>fJ", function()
   local name = vim.api.nvim_buf_get_name(0)
-  Snacks.terminal(
-    { "jless", "-r", "-m", "data", name },
-    { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } }
-  )
-end, { desc = "jless (data)" })
+  Snacks.terminal({ "fx", name }, { esc_esc = false, ctrl_hjkl = false, size = { width = 1.0, height = 1.0 } })
+end, { desc = "fx" })
 
 -- lnav
 vim.keymap.set("n", "<leader>fl", function()
