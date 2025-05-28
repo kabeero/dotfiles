@@ -211,7 +211,7 @@ end, { desc = "glow preview" })
 vim.keymap.set(
   "n",
   "<leader>cP",
-  "<cmd>Neominimap on<cr><cmd>Neominimap bufToggle<cr>",
-  { desc = "Toggle Neominimap (buffer)" }
+  "<cmd>Neominimap on<cr><cmd>Neominimap winToggle<cr>",
+  { desc = "Toggle Neominimap (window)" }
 )
 vim.keymap.set("n", "<leader>cp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap (global)" })
