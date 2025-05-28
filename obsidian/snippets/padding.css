@@ -1,0 +1,15 @@
+body {
+  --font-smallest: 0.8em;
+  --font-smaller: 0.9em;
+  --font-small: 1em;
+  --font-ui-smaller: 14px;
+  --font-ui-small: 16px;
+  --font-ui-medium: 18px;
+  --font-ui-large: 20px;
+  --line-height-normal: 1.8;
+  --line-height-tight: 1.6;
+}
+
+p {
+  line-height: 1.8;
+}
