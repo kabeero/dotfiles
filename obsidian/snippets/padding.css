@@ -9,7 +9,3 @@ body {
   --line-height-normal: 1.8;
   --line-height-tight: 1.6;
 }
-
-p {
-  line-height: 1.8;
-}

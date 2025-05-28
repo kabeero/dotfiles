@@ -1,9 +1,14 @@
+:root {
+  --highlight-primary: #c10076;
+  --highlight-primary-text: #333;
+}
+
 ::-moz-selection {
-  color: #333 !important;
-  background: #c10076 !important;
+  color: var(--highlight-primary-text) !important;
+  background: var(--highlight-primary) !important;
 }
 
 ::selection {
-  color: #333 !important;
-  background: #c10076 !important;
+  color: var(--highlight-primary-text) !important;
+  background: var(--highlight-primary) !important;
 }
