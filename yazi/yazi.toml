@@ -3,13 +3,13 @@
 "$schema" = "https://yazi-rs.github.io/schemas/yazi.json"
 
 # install plugins:
-#   ya pack -a AnirudhG07/nbpreview
-#   ya pack -a Reledia/glow
-#   ya pack -a Reledia/miller
-#   ya pack -a yazi-rs/plugins:mount
-#   ya pack -a yazi-rs/plugins:toggle-pane
+#   ya pkg add AnirudhG07/nbpreview
+#   ya pkg add Reledia/glow
+#   ya pkg add Reledia/miller
+#   ya pkg add yazi-rs/plugins:mount
+#   ya pkg add yazi-rs/plugins:toggle-pane
 
-[manager]
+[mgr]
 ratio          = [ 1, 4, 3 ]
 sort_by        = "alphabetical"
 sort_sensitive = false
