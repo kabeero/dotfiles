@@ -215,3 +215,8 @@ vim.keymap.set(
   { desc = "Toggle Neominimap (window)" }
 )
 vim.keymap.set("n", "<leader>cp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap (global)" })
+
+-- Zen
+vim.keymap.set("n", "<leader>wz", function()
+  Snacks.zen()
+end, { desc = "Toggle Zen mode" })
