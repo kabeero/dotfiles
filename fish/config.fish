@@ -8,7 +8,10 @@ if status is-interactive
     alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
+    alias cdr="cd (git rev-parse --show-cdup)"
     alias diffk="kitty +kitten diff"
+    alias glow="glow -p"
+    alias gu="gitui"
     alias jless="jless -r"
     alias sio="sioyek"
 
@@ -16,6 +19,8 @@ if status is-interactive
 
     set -Ux GOPATH {$HOME}/Code/go
     set -Ux GOBIN {$GOPATH}/bin
+
+    set -Ux AWS_CLI_AUTO_PROMPT on-partial
 
     # pip --user paths
     #set -Ux PYTHONPATH (python -c "import site; print(site.USER_SITE)")
@@ -32,20 +37,20 @@ if status is-interactive
     # macos
     #echo -e "\033[0;32m"(date +%c)"\x1b[0m"
 
-    source {$HOME}/.asdf/asdf.fish
+    # source {$HOME}/.asdf/asdf.fish
     zellij setup --generate-completion fish | source
 
     # brew
     # source /opt/homebrew/opt/asdf/libexec/asdf.fish
     # eval "$(/opt/homebrew/bin/brew shellenv)"
 
-    starship init fish | source
-    # zoxide init fish | source
-
     fish_add_path {$HOME}/.asdf/bin
     fish_add_path {$HOME}/.cargo/bin
     fish_add_path {$HOME}/.yarn/bin
     fish_add_path {$GOBIN}
+
+    starship init fish | source
+    # zoxide init fish | source
 
     eval (ssh-agent -c) >/dev/null
     ssh-add -q
