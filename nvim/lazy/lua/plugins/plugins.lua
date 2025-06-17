@@ -12,6 +12,7 @@ return {
     },
     enabled = false,
   },
+  { "f-person/auto-dark-mode.nvim", lazy = false, opts = {} },
   { "f-person/git-blame.nvim" },
   { "folke/tokyonight.nvim", lazy = false },
   { "fynnfluegge/monet.nvim", lazy = false },
