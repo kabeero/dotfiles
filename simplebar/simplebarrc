@@ -61,7 +61,7 @@
   },
   "spacesDisplay": {
     "showOnDisplay": "",
-    "exclusions": "firefox, IINA, Drata Agent",
+    "exclusions": "Drata Agent, kitty, IINA",
     "titleExclusions": "",
     "spacesExclusions": "",
     "exclusionsAsRegex": false,
