@@ -2,7 +2,7 @@
   "$schema": "https://raw.githubusercontent.com/Jean-Tinland/simple-bar/refs/heads/master/lib/schemas/config.json",
   "global": {
     "theme": "auto",
-    "compactMode": false,
+    "compactMode": true,
     "floatingBar": false,
     "noBarBg": false,
     "noColorInData": true,
@@ -23,7 +23,7 @@
     "disableNotifications": false,
     "enableMissives": false,
     "enableServer": true,
-    "serverSocketPort": 7777,
+    "serverSocketPort": "7777",
     "yabaiServerRefresh": false,
     "aerospaceServerRefresh": false,
     "flashspaceServerRefresh": false
@@ -66,7 +66,7 @@
     "spacesExclusions": "",
     "exclusionsAsRegex": false,
     "displayAllSpacesOnAllScreens": false,
-    "hideDuplicateAppsInSpaces": false,
+    "hideDuplicateAppsInSpaces": true,
     "displayStickyWindowsSeparately": false,
     "hideCreateSpaceButton": true,
     "hideEmptySpaces": true,
@@ -174,7 +174,7 @@
     "refreshFrequency": 1000,
     "showOnDisplay": "",
     "hour12": false,
-    "dayProgress": true,
+    "dayProgress": false,
     "showSeconds": false
   },
   "keyboardWidgetOptions": {
