@@ -63,6 +63,9 @@ end, { desc = "Toggle scroll offset" })
 -- replaced with Neotree
 -- vim.keymap.set({ "n", "v" }, "<leader>,", vim.cmd.NvimTreeToggle, { desc = "NvimTree toggle" })
 
+-- Neotree
+vim.keymap.set("n", "<leader>o", ":Neotree dir=.<CR>", { desc = "Neotree (cwd)" })
+
 -- Toggle wordwrap
 vim.keymap.set("n", "<leader>W", function()
   vim.o.wrap = not vim.o.wrap
