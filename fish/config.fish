@@ -14,6 +14,8 @@ if status is-interactive
     alias gu="gitui"
     alias jless="jless -r"
     alias sio="sioyek"
+    alias tfia="terraform init ; terraform apply"
+    alias tfmt="terraform fmt -recursive"
 
     set -Ux EDITOR nvim
 
@@ -28,6 +30,9 @@ if status is-interactive
 
     # iex shell history
     set -Ux ERL_AFLAGS "-kernel shell_history enabled"
+
+    # krew k8s pkg
+    set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
     pfetch
 
