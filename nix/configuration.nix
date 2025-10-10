@@ -116,7 +116,6 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = pkgs: {
-      stable = import <nixos-stable> { config = config.nixpkgs.config; };
       unstable = import (fetchTarball "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz") { config = config.nixpkgs.config; };
     };
   };
@@ -167,6 +166,7 @@
     lazyjj
     luarocks
     k9s
+    kicad
     kitty
     mpd
     mpv
