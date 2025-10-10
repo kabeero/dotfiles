@@ -1,7 +1,7 @@
 return {
   { "akinsho/bufferline.nvim" },
   { "catppuccin/nvim", lazy = false },
-  { "echasnovski/mini.pairs", enabled = false },
+  { "nvim-mini/mini.pairs", enabled = false },
   { "edeneast/nightfox.nvim", lazy = false },
   {
     "Exafunction/codeium.nvim",

@@ -19,7 +19,7 @@ if status is-interactive
 
     set -Ux EDITOR nvim
 
-    set -Ux GOPATH {$HOME}/Code/go
+    set -Ux GOPATH {$HOME}/code/go
     set -Ux GOBIN {$GOPATH}/bin
 
     set -Ux AWS_CLI_AUTO_PROMPT on-partial
@@ -56,6 +56,7 @@ if status is-interactive
 
     starship init fish | source
     # zoxide init fish | source
+    mise activate fish | source
 
     eval (ssh-agent -c) >/dev/null
     ssh-add -q
