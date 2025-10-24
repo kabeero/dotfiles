@@ -145,6 +145,7 @@ yabai -m rule --add manage=off app="^System Information$"
 yabai -m rule --add manage=off app="^System Preferences$"
 yabai -m rule --add manage=off app="^System Settings$"
 yabai -m rule --add manage=off app="^Telegram$"
+yabai -m rule --add manage=off app="^Thunderbird$"
 yabai -m rule --add manage=off app="^[zZ]athura$"
 
 echo "yabai configuration loaded…"
