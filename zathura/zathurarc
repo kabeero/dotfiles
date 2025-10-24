@@ -16,12 +16,12 @@ set render-loading false
 set selection-clipboard clipboard
 set selection-notification false
 set scroll-step 345
-set smooth-scroll true
+# set smooth-scroll true
 
 map \' navigate next
-map , navigate previous
-map . scroll down
-map p scroll up
+map , scroll down
+map . scroll up
+map p navigate previous
 map i recolor
 map f toggle_fullscreen
 map h adjust_window best-fit
