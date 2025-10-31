@@ -1,0 +1,75 @@
+layout {
+    default_tab_template {
+        pane size=1 borderless=true {
+            plugin location="file:${HOME}/.config/zellij/plugins/zjstatus.wasm" {
+                hide_frame_for_single_pane "false"
+
+                format_left   "{mode}#[bg=#1e1e2e] {tabs}"
+                // format_center ""
+                format_right  "#[bg=#1e1e2e,fg=#89b4fa]#[bg=#89b4fa,fg=#181825,bold] #[bg=#313244,fg=#cdd6f4,bold] {session} {datetime} #[bg=#45475a,fg=#cdd6f4,bold]"
+                format_space  ""
+                // format_hide_on_overlength "true"
+                // format_precedence "crl"
+
+                // border_enabled  "true"
+                // border_char     "─"
+                // border_format   "#[fg=#6C7086]{char}"
+                // border_position "top"
+
+                mode_normal        "#[bg=#a6e3a1,fg=#313244,bold] {name}#[bg=#000,fg=#a6e3a1]◗"
+                mode_locked        "#[bg=#585b70,fg=#313244,bold] {name}#[bg=#000,fg=#585b70]◗"
+                mode_resize        "#[bg=#f38ba8,fg=#313244,bold] {name}#[bg=#000,fg=#f38ba8]◗"
+                mode_pane          "#[bg=#89b4fa,fg=#313244,bold] {name}#[bg=#000,fg=#89b4fa]◗"
+                mode_tab           "#[bg=#b4befe,fg=#313244,bold] {name}#[bg=#000,fg=#b4befe]◗"
+                mode_scroll        "#[bg=#f9e2af,fg=#313244,bold] {name}#[bg=#000,fg=#f9e2af]◗"
+                mode_enter_search  "#[bg=#89b4fa,fg=#313244,bold] {name}#[bg=#000,fg=#89b4fa]◗"
+                mode_search        "#[bg=#89b4fa,fg=#313244,bold] {name}#[bg=#000,fg=#89b4fa]◗"
+                mode_rename_tab    "#[bg=#b4befe,fg=#313244,bold] {name}#[bg=#000,fg=#b4befe]◗"
+                mode_rename_pane   "#[bg=#89b4fa,fg=#313244,bold] {name}#[bg=#000,fg=#89b4fa]◗"
+                mode_session       "#[bg=#cba6f7,fg=#313244,bold] {name}#[bg=#000,fg=#cba6f7]◗"
+                mode_move          "#[bg=#f2cdcd,fg=#313244,bold] {name}#[bg=#000,fg=#f2cdcd]◗"
+                mode_prompt        "#[bg=#89b4fa,fg=#313244,bold] {name}#[bg=#000,fg=#89b4fa]◗"
+                mode_tmux          "#[bg=#fab387,fg=#313244,bold] {name}#[bg=#000,fg=#fab387]◗"
+                mode_default_to_mode "tmux" // if not listed above, which color to use
+
+                // formatting for inactive tabs
+                tab_normal              "#[bg=#000,fg=#89b4fa]#[bg=#89b4fa,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{floating_indicator}#[bg=#000,fg=#313244,bold]◗"
+                // tab_normal_fullscreen   "#[bg=#000,fg=#89b4fa]#[bg=#89b4fa,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
+                // tab_normal_sync         "#[bg=#000,fg=#89b4fa]#[bg=#89b4fa,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
+
+                // formatting for the current active tab
+                tab_active              "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{floating_indicator}#[bg=#000,fg=#313244,bold]◗"
+                // tab_active_fullscreen   "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
+                // tab_active_sync         "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
+
+                // separator between the tabs
+                tab_separator           "#[bg=#000] "
+
+                // limit tab display count
+                // tab_display_count         "8"  // limit to showing 8 tabs
+                // tab_truncate_start_format "#[fg=red,bg=#181825] < +{count} ..."
+                // tab_truncate_end_format   "#[fg=red,bg=#181825] ... +{count} >"
+
+                // indicators
+                tab_sync_indicator       " "
+                tab_fullscreen_indicator " 󰊓"
+                tab_floating_indicator   " 󰹙"
+
+                // command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                // command_git_branch_format      "#[fg=blue] {stdout} "
+                // command_git_branch_interval    "10"
+                // command_git_branch_rendermode  "static"
+
+                datetime        "#[fg=#6C7086,bold] {format} "
+                // datetime_format "%A, %d %b %Y %H:%M"
+                datetime_format "%H:%M"
+                datetime_timezone "America/Los_Angeles"
+
+                // notification_format_unread           "#[fg=#89B4FA,bg=#181825,blink]  #[fg=#89B4FA,bg=#181825] {message} "
+                // notification_format_no_notifications "#[fg=#89B4FA,bg=#181825,dim]   "
+                // notification_show_interval           "10"
+            }
+        }
+        children
+    }
+}
