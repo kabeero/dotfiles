@@ -112,11 +112,47 @@ function e
     end
 end
 
+# zellij
 function z
     zellij ls -s | sort | awk '{printf "\033[32m%15s\033[0m\n", $1}'
     alias z="zellij"
 end
 
+# zellij tab rename: update the zellij tab name with the current process name or pwd
+if status is-interactive
+    if type -q zellij
+        # pre-exec programs: we will lose context when they execute so capture them before
+        function zellij_tab_name_update_exe --on-event fish_preexec
+            if set -q ZELLIJ
+                set -l cmd_line (string split " " -- $argv)
+                set -l process_name $cmd_line[1]
+                if test -n "$process_name" \
+                        -a "$process_name" != cd \
+                        -a "$process_name" != exit \
+                        -a not (string match "*vim*" "$process_name")
+                    command nohup zellij action rename-tab $process_name >/dev/null 2>&1
+                end
+            end
+        end
+        # post-exec folders: we want to get the path after cd'ing
+        function zellij_tab_name_update_post --on-event fish_postexec
+            if set -q ZELLIJ
+                set -l cmd_line (string split " " -- $argv)
+                set -l process_name $cmd_line[1]
+                if test -n "$process_name" \
+                        -a "$process_name" = cd
+                    set -l deep_dir (string split "/" -- $PWD)
+                    set -l tab_name (string shorten -m 8 $deep_dir[-1])
+                    command nohup zellij action rename-tab $tab_name >/dev/null 2>&1
+                end
+            end
+        end
+    end
+end
+
 function dockerls
     docker ps --format "table {{.Image}}\t{{.Ports}}\t{{.Names}}"
 end
+
+# uv
+fish_add_path "/Users/mkgz/.local/bin"
