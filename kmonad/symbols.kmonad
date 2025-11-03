@@ -1,6 +1,9 @@
 (defcfg
   input  (
+    ;; built-in kb
     device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+    ;; usb kb
+    ;; device-file "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:9.4:1.0-event-kbd"
   )
   output (
     uinput-sink "KMonad Arrow Keys"

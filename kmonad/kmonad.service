@@ -1,0 +1,13 @@
+[Unit]
+Description=KMonad keybindings
+After=display-manager.service
+
+[Service]
+ExecStart=/opt/kmonad/kmonad /home/mkgz/Code/mkgz/dotfiles/kmonad/symbols.kmonad
+Restart=always
+User=mkgz
+# manually created kmonad:faq
+Group=uinput
+
+[Install]
+WantedBy=default.target
