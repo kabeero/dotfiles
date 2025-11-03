@@ -129,7 +129,7 @@ if status is-interactive
                 if test -n "$process_name" \
                         -a "$process_name" != cd \
                         -a "$process_name" != exit \
-                        -a not (string match "*vim*" "$process_name")
+                        -a (string match -v "*vim*" "$process_name")
                     command nohup zellij action rename-tab $process_name >/dev/null 2>&1
                 end
             end
