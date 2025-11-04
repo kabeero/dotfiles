@@ -33,14 +33,14 @@ layout {
                 mode_default_to_mode "tmux" // if not listed above, which color to use
 
                 // formatting for inactive tabs
-                tab_normal              "#[bg=#000,fg=#89b4fa]#[bg=#89b4fa,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{floating_indicator}#[bg=#000,fg=#313244,bold]◗"
-                // tab_normal_fullscreen   "#[bg=#000,fg=#89b4fa]#[bg=#89b4fa,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
-                // tab_normal_sync         "#[bg=#000,fg=#89b4fa]#[bg=#89b4fa,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
+                tab_normal              "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{floating_indicator}#[bg=#000,fg=#111224,bold]◗"
+                tab_normal_fullscreen   "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
+                tab_normal_sync         "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
 
                 // formatting for the current active tab
                 tab_active              "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{floating_indicator}#[bg=#000,fg=#313244,bold]◗"
-                // tab_active_fullscreen   "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
-                // tab_active_sync         "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
+                tab_active_fullscreen   "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
+                tab_active_sync         "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
 
                 // separator between the tabs
                 tab_separator           "#[bg=#000] "
@@ -55,10 +55,10 @@ layout {
                 tab_fullscreen_indicator " 󰊓"
                 tab_floating_indicator   " 󰹙"
 
-                // command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
-                // command_git_branch_format      "#[fg=blue] {stdout} "
-                // command_git_branch_interval    "10"
-                // command_git_branch_rendermode  "static"
+                command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+                command_git_branch_format      "#[fg=blue] {stdout} "
+                command_git_branch_interval    "10"
+                command_git_branch_rendermode  "static"
 
                 datetime        "#[fg=#6C7086,bold] {format} "
                 // datetime_format "%A, %d %b %Y %H:%M"
