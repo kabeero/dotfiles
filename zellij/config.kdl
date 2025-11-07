@@ -28,10 +28,10 @@ keybinds clear-defaults=true {
         bind "r" { SwitchToMode "RenamePane"; PaneNameInput 0; }
         bind "<" { NextSwapLayout; }
         bind ">" { PreviousSwapLayout; }
-        bind "h" "Left" "[" { MovePane "Left"; }
+        bind "h" "Left" "[" "{" { MovePane "Left"; }
         bind "j" "Down" { MovePane "Down"; }
         bind "k" "Up" { MovePane "Up"; }
-        bind "l" "Right" "]" { MovePane; }
+        bind "l" "Right" "]" "}" { MovePane; }
     }
     tab {
         bind "Ctrl t" { SwitchToMode "Normal"; }
