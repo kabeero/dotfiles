@@ -17,6 +17,8 @@ if status is-interactive
     alias tfia="terraform init ; terraform apply"
     alias tfmt="terraform fmt -recursive"
 
+    abbr gitclean "git fetch -p && git branch -vv | grep ': gone]' | awk '{print}' | xargs git branch -D $argv;"
+
     set -Ux EDITOR nvim
 
     set -Ux GOPATH {$HOME}/code/go
@@ -60,6 +62,12 @@ if status is-interactive
 
     eval (ssh-agent -c) >/dev/null
     ssh-add -q
+
+    ## hybrid: set below
+    ## vi style
+    # fish_vi_key_bindings
+    ## emacs style
+    # fish_default_key_bindings
 end
 
 # jump to directory
@@ -153,6 +161,20 @@ end
 function dockerls
     docker ps --format "table {{.Image}}\t{{.Ports}}\t{{.Names}}"
 end
+
+function multicd
+    echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+end
+abbr --add dotdot --regex '^\.\.+$' --function multicd
+
+function fish_hybrid_key_bindings --description \
+    "Vi-style bindings that inherit emacs-style bindings in all modes"
+    for mode in default insert visual
+        fish_default_key_bindings -M $mode
+    end
+    fish_vi_key_bindings --no-erase
+end
+set -g fish_key_bindings fish_hybrid_key_bindings
 
 # uv
 fish_add_path "/Users/mkgz/.local/bin"
