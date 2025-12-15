@@ -65,6 +65,12 @@ end, { desc = "Toggle scroll offset" })
 
 -- Neotree
 vim.keymap.set("n", "<leader>o", ":Neotree dir=.<CR>", { desc = "Neotree (cwd)" })
+vim.keymap.set(
+  "n",
+  "<leader>O",
+  ":args `find . -maxdepth 1 -type f -not -name '.*' \\| sort -V` | argdo e<CR>",
+  { desc = "Open all files in cwd" }
+)
 
 -- Toggle wordwrap
 vim.keymap.set("n", "<leader>W", function()
@@ -205,7 +211,7 @@ end, { desc = "lnav" })
 vim.keymap.set("n", "<leader>fm", function()
   local name = vim.api.nvim_buf_get_name(0)
   Snacks.terminal(
-    { "glow", "-p", name, "-w", math.floor(vim.api.nvim_win_get_width(0) * 0.7) },
+    { "glow", "-p", name, "-w", tostring(math.floor(vim.api.nvim_win_get_width(0) * 0.7)) },
     { esc_esc = false, ctrl_hjkl = false, size = { width = 0.7, height = 0.7 } }
   )
 end, { desc = "glow preview" })
@@ -213,11 +219,11 @@ end, { desc = "glow preview" })
 -- minimap
 vim.keymap.set(
   "n",
-  "<leader>cP",
+  "<leader>wP",
   "<cmd>Neominimap on<cr><cmd>Neominimap winToggle<cr>",
   { desc = "Toggle Neominimap (window)" }
 )
-vim.keymap.set("n", "<leader>cp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap (global)" })
+vim.keymap.set("n", "<leader>wp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle Neominimap (global)" })
 
 -- Zen
 vim.keymap.set("n", "<leader>wz", function()
