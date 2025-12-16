@@ -34,8 +34,8 @@ layout {
 
                 // formatting for inactive tabs
                 tab_normal              "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{floating_indicator}#[bg=#000,fg=#111224,bold]◗"
-                tab_normal_fullscreen   "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#313244,bold]◗"
-                tab_normal_sync         "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{sync_indicator}#[bg=#000,fg=#313244,bold]◗"
+                tab_normal_fullscreen   "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{fullscreen_indicator}#[bg=#000,fg=#111224,bold]◗"
+                tab_normal_sync         "#[bg=#000,fg=#5984ca]#[bg=#5984ca,fg=#111224,bold]{index} #[bg=#111224,fg=#6d7684,bold] {name}{sync_indicator}#[bg=#000,fg=#111224,bold]◗"
 
                 // formatting for the current active tab
                 tab_active              "#[bg=#000,fg=#fab387]#[bg=#fab387,fg=#313244,bold]{index} #[bg=#313244,fg=#cdd6f4,bold] {name}{floating_indicator}#[bg=#000,fg=#313244,bold]◗"
