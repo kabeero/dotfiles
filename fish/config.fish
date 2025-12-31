@@ -129,19 +129,19 @@ end
 # zellij tab rename: update the zellij tab name with the current process name or pwd
 if status is-interactive
     if type -q zellij
-        # pre-exec programs: we will lose context when they execute so capture them before
-        function zellij_tab_name_update_exe --on-event fish_preexec
-            if set -q ZELLIJ
-                set -l cmd_line (string split " " -- $argv)
-                set -l process_name $cmd_line[1]
-                if test -n "$process_name" \
-                        -a "$process_name" != cd \
-                        -a "$process_name" != exit \
-                        -a (string match -v "*vim*" "$process_name")
-                    command nohup zellij action rename-tab $process_name >/dev/null 2>&1
-                end
-            end
-        end
+        # # pre-exec programs: we will lose context when they execute so capture them before
+        # function zellij_tab_name_update_exe --on-event fish_preexec
+        #     if set -q ZELLIJ
+        #         set -l cmd_line (string split " " -- $argv)
+        #         set -l process_name $cmd_line[1]
+        #         if test -n "$process_name" \
+        #                 -a "$process_name" != cd \
+        #                 -a "$process_name" != exit \
+        #                 -a (string match -q --invert --regex ".*vim.*|v" "$process_name")
+        #             command nohup zellij action rename-tab $process_name >/dev/null 2>&1
+        #         end
+        #     end
+        # end
         # post-exec folders: we want to get the path after cd'ing
         function zellij_tab_name_update_post --on-event fish_postexec
             if set -q ZELLIJ
@@ -150,7 +150,7 @@ if status is-interactive
                 if test -n "$process_name" \
                         -a "$process_name" = cd
                     set -l deep_dir (string split "/" -- $PWD)
-                    set -l tab_name (string shorten -m 8 $deep_dir[-1])
+                    set -l tab_name (string shorten --max 8 --left $deep_dir[-1])
                     command nohup zellij action rename-tab $tab_name >/dev/null 2>&1
                 end
             end
