@@ -19,6 +19,12 @@ return {
   { "ibhagwan/fzf-lua", keys = { { "<leader>fg", false } } },
   { "Isrothy/neominimap.nvim" },
   { "NeogitOrg/neogit", dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" }, config = true },
+  {
+    "nvim-flutter/flutter-tools.nvim",
+    lazy = false,
+    dependencies = { "nvim-lua/plenary.nvim", "stevearc/dressing.nvim" },
+    config = true,
+  },
   { "nvim-neo-tree/neo-tree.nvim", opts = { window = { position = "float" } } },
   { "nvim-telescope/telescope-symbols.nvim" },
   { "nvim-telescope/telescope.nvim", lazy = false },
