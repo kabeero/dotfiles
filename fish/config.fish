@@ -9,7 +9,7 @@ if status is-interactive
     alias vim="nvim"
     alias vimdiff="nvim -d"
     alias cdr="cd (git rev-parse --show-cdup)"
-    alias cdllm="cd (mktemp -d -t llm)"
+    alias cdllm="cd (mktemp -d -t llm.XXXXXXXX)"
     alias diffk="kitty +kitten diff"
     alias glow="glow -p"
     alias gu="gitui"
