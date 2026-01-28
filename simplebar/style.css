@@ -1,0 +1,34 @@
+:root {
+  --main: #1b222d;
+  --main-alt: #98a8c5;
+  --minor: #39465e;
+  --accent: var(--cyan);
+  --red: #e78482;
+  --green: #8fc8bb;
+  --yellow: #ffd484;
+  --orange: #ffb374;
+  --blue: #6db3ce;
+  --magenta: #ad82cb;
+  --cyan: #7eddde;
+  --black: #1b222d;
+  --white: #fff;
+  --foreground: var(--white);
+  --background: rgba(0, 0, 0, 0.3);
+  --transparent-dark: rgba(0, 0, 0, 0.05);
+  --font: "FiraCode Nerd Font", "JetBrains Mono", Monaco, Menlo, monospace;
+  --font-size: 16px;
+  --bar-height: 64px;
+  --bar-radius: 18px;
+  --bar-border: 0px solid transparent;
+  --bar-inner-margin: 8px;
+  --item-max-width: 160px;
+  --item-radius: 12px;
+  --item-inner-margin: 3px 7px;
+  --item-outer-margin: 0 0 0 5px;
+  --hover-ring: 0 0 0 2px rgba(255, 96, 255, 0.75);
+  --focus-ring: 0 0 0 2px rgb(128, 96, 255);
+  --light-shadow: 0 5px 10px rgba(0, 0, 0, 0.24);
+  --foreground-shadow: 0 0 0 1px var(--foreground);
+  --transition-easing: cubic-bezier(0.4, 0, 0.2, 1);
+  --click-effect: rgba(255, 255, 255, 0.3);
+}
