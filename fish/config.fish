@@ -9,7 +9,7 @@ if status is-interactive
     alias vim="nvim"
     alias vimdiff="nvim -d"
     alias cdr="cd (git rev-parse --show-cdup)"
-    alias cdllm="cd (mktemp -d -t llm.XXXXXXXX)"
+    alias cdllm="cd (mktemp -d -t llm.XXXXXXXX); type -q opencode && opencode"
     alias diffk="kitty +kitten diff"
     alias glow="glow -p"
     alias gu="gitui"
@@ -130,6 +130,7 @@ end
 # zellij tab rename: update the zellij tab name with the current process name or pwd
 if status is-interactive
     if type -q zellij
+        # decided against this, as it makes tracking tabs very confusing
         # # pre-exec programs: we will lose context when they execute so capture them before
         # function zellij_tab_name_update_exe --on-event fish_preexec
         #     if set -q ZELLIJ
