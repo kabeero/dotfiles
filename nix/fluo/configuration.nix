@@ -8,7 +8,7 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      "${builtins.fetchTarball { url = "https://github.com/nix-community/disko/archive/master.tar.gz"; sha256 = "1x63snzn1bv98bp50gvhaz0pr4hg78v0h5qkrn0vnp1jmf678lhr"; }}/module.nix"
+      "${builtins.fetchTarball { url = "https://github.com/nix-community/disko/archive/refs/tags/v1.13.0.tar.gz"; sha256 = "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08"; }}/module.nix"
       ./disko-config.nix
     ];
 
@@ -19,7 +19,7 @@
   # Use the latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
   # boot.kernelPackages = pkgs.unstable.linuxPackages;
-  boot.kernelModules = [ "uinput" ];
+  # boot.kernelModules = [ "uinput" ];
 
   boot.initrd.systemd.enable = true;
   security.tpm2.enable = true;
@@ -60,16 +60,26 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  services.displayManager.autoLogin.enable = false;
-  services.displayManager.autoLogin.user = "mkgz";
-  services.displayManager.sddm = {
-    enable = true;
-    enableHidpi = true;
+  services.displayManager = {
+    autoLogin = {
+      user = "mkgz";
+      enable = false;
+    };
+    sddm = {
+      enable = true;
+      enableHidpi = true;
+      theme = "${pkgs.catppuccin-sddm-corners}/share/sddm/themes/catppuccin-sddm-corners";
+      extraPackages = [
+        pkgs.catppuccin-sddm-corners
+      ];
+    };
+  }; 
+
+  services.logind.settings.Login = {
+    HandleLidSwitch = "suspend";
+    HandleLidSwitchDocked = "ignore";
+    HandlePowerKey = "suspend";
   };
-  services.logind.settings.Login.HandleLidSwitch = "suspend";
-  services.logind.settings.Login.HandleLidSwitchDocked = "ignore";
-  services.logind.settings.Login.HandlePowerKey = "suspend";
-  # services.logind.powerKey = "suspend";
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -205,6 +215,7 @@
     ripgrep
     rofi
     slurp
+    socat
     sshfs
     ssm-session-manager-plugin
     starship
