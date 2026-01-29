@@ -2,7 +2,7 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, inputs, ... }:
 
 {
   imports =
@@ -71,6 +71,7 @@
       theme = "${pkgs.catppuccin-sddm-corners}/share/sddm/themes/catppuccin-sddm-corners";
       extraPackages = [
         pkgs.catppuccin-sddm-corners
+        pkgs.qt6.qt5compat
       ];
     };
   }; 
@@ -159,7 +160,6 @@
   # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     # android-studio
-    # home-manager
     android-tools
     bat
     blender
@@ -180,6 +180,13 @@
     gopls
     grimblast
     htop
+    # hyprlauncher
+    # hyprshade
+    hypridle
+    hyprpanel
+    hyprpaper
+    hyprsysteminfo
+    hyprviz
     inkscape
     inotify-tools
     jq
@@ -305,6 +312,14 @@
   #
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.11"; # Did you read the comment?
+
+  # ╭──────────────────╮
+  # │   home-manager   │
+  # ╰──────────────────╯
+
+  home-manager.users."mkgz" = import ./home.nix;
+  ## to share flake `inputs` with home-manager modules : { config, pkgs, inputs, ... }
+  home-manager.extraSpecialArgs = { inherit inputs; };
 
 }
 
