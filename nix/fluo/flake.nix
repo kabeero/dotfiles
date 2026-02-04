@@ -6,22 +6,34 @@
     # Use `nix flake update` to update the flake to the latest revision of the chosen release channel.
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # nixpkgs-pinned.url = "github:NixOS/nixpkgs/3021884f525546d29972368d37452e753443834e";
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     # > https://github.com/hyprwm/hyprland-plugins
     hyprland.url = "github:hyprwm/Hyprland";
 
-    hyprland-plugins.url = "github:hyprwm/hyprland-plugins";
-    hyprland-plugins.inputs.hyprland.follows = "hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
 
-    hy3.url = "github:outfoxxed/hy3?ref=master";
-    # hy3.url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
-    hy3.inputs.hyprland.follows = "hyprland";
+    hy3 = {
+      url = "github:outfoxxed/hy3?ref=master";
+      # url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
+      inputs.hyprland.follows = "hyprland";
+    };
+
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
   };
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { nixpkgs, home-manager, stylix, ... }@inputs: {
     nixosConfigurations.fluo = nixpkgs.lib.nixosSystem {
       ## make flake inputs available to all nixos modules defined below
       specialArgs = { inherit inputs; } ;
@@ -29,6 +41,7 @@
         ./configuration.nix
         home-manager.nixosModules.home-manager
         # hyprland.homeManagerModules.default
+        stylix.nixosModules.default
       ];
     };
   };

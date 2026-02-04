@@ -5,12 +5,10 @@
   home.username = "mkgz";
   home.homeDirectory = "/home/mkgz";
   home.packages = with pkgs; [
-    pkgs.hyprland
-    pkgs.hyprlandPlugins.hy3
-    pkgs.hyprlandPlugins.hypr-darkwindow
-    pkgs.hyprlandPlugins.hypr-dynamic-cursors
-    # pkgs.hyprlandPlugins.hyprgrass
-    # pkgs.hyprlandPlugins.hyprspace
+    # pkgs.hyprlandPlugins.hypr-darkwindow
+    # pkgs.hyprlandPlugins.hypr-dynamic-cursors
+    # # pkgs.hyprlandPlugins.hyprgrass
+    # # pkgs.hyprlandPlugins.hyprspace
   ];
 
   services.gpg-agent = {
@@ -24,6 +22,14 @@
     latitude = 33.68;
     longitude = -117.83;
   };
+
+  # stylix = {
+  #   enable = true;
+  #   base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+  # };
+  stylix.enable = true;
+  stylix.autoEnable = true;
+  # stylix.targets.btop.colors.enable = true;
 
   programs.git = {
     enable = true;
@@ -78,6 +84,7 @@
     systemd.enable = false;
 
     # > https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
+    # This explicitly tells Home-Manager, "Don't install your own version of Hyprland; just manage the configuration files for the one that the system is providing."
     package = null;
     portalPackage = null;
 
@@ -216,7 +223,7 @@
             enabled = true;
             range = 4;
             render_power = 3;
-            color = "rgba(1a1a1aee)";
+            # color = "rgba(1a1a1aee)";
         };
         blur = {
             enabled = true;
@@ -230,17 +237,25 @@
         gaps_in = 5;
         gaps_out = 20;
         border_size = 2;
-        "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.inactive_border" = "rgba(595959aa)";
+        # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        # "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;
         layout = "hy3";
         # layout = "dwindle";
         # layout = "scrolling";
       };
 
+      gestures = {
+        gesture = [
+          "2, swipe, mod: SUPER, resize"
+          "4, horizontal, workspace"
+          "3, vertical, fullscreen"
+        ];
+      };
+
       group = {
-        "col.border_active" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        "col.border_inactive" = "rgba(595959aa)";
+        # "col.border_active" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
+        # "col.border_inactive" = "rgba(595959aa)";
         groupbar = {
             enabled = true;
             keep_upper_gap = true;
@@ -250,8 +265,8 @@
             indicator_height = 6;
             rounding = 2;
             gaps_out = 8;
-            "col.active" = "rgba(33ccff66) rgba(00ff9966) 180deg";
-            "col.inactive" = "rgba(59595966)";
+            # "col.active" = "rgba(33ccff66) rgba(00ff9966) 180deg";
+            # "col.inactive" = "rgba(59595966)";
         };
       };
 

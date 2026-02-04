@@ -140,6 +140,17 @@
     #       config = config.nixpkgs.config;
     #     };
     # };
+    # 1.  (final: prev: { ... }): This defines the overlay function. It takes final and prev as arguments.
+    # 2.  hyprland = ...: This is our "edit" on the transparent sheet. We are declaring, "The package named hyprland in the final package set will now be defined by what's on the right side of this equals sign."
+    # 3.  inputs.hyprland.packages.${prev.system}.hyprland;: This is the new definition.
+    #     *   inputs.hyprland: We're grabbing the hyprland flake input from your flake.nix.
+    #     *   .packages.${prev.system}: We're accessing the packages provided by that flake for the current system architecture (e.g., x86_64-linux).
+    #     *   .hyprland: We're selecting the specific hyprland package from that output.
+    overlays = [
+      (final: prev: {
+        hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
+      })
+    ];
   };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -169,14 +180,16 @@
     curl
     distrobox
     distrobox-tui
+    kdePackages.dolphin
     eza
     fish
     fzf
     gitFull
     # build failure 2026-01-25
     # gitu
-    gitui
     git-lfs
+    gitui
+    glmark2
     gopls
     grimblast
     htop
@@ -204,6 +217,7 @@
     mupdf
     ncmpcpp
     neovim
+    nixfmt
     nmap
     nushell
     obsidian
@@ -279,6 +293,8 @@
 
   # List services that you want to enable:
 
+  services.udisks2.enable = true;
+
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
 
@@ -287,6 +303,8 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  networking.firewall.enable = true;
+  networking.firewall.allowPing = false;
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -320,6 +338,21 @@
   home-manager.users."mkgz" = import ./home.nix;
   ## to share flake `inputs` with home-manager modules : { config, pkgs, inputs, ... }
   home-manager.extraSpecialArgs = { inherit inputs; };
+
+  stylix.enable = true;
+  stylix.autoEnable = true;
+  # > https://nix-community.github.io/stylix/configuration.html
+  # > https://tinted-theming.github.io/tinted-gallery/
+  # ayu-dark, deep, hipster-green, homebrew, horizon-dark, isotope
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+  # stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";
+  stylix.image = pkgs.fetchurl {
+    # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
+    url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
+    hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
+  };
+  # stylix.polarity = "light";
+  stylix.polarity = "dark";
 
 }
 
