@@ -32,17 +32,30 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-  };
-  outputs = { nixpkgs, home-manager, stylix, ... }@inputs: {
-    nixosConfigurations.fluo = nixpkgs.lib.nixosSystem {
-      ## make flake inputs available to all nixos modules defined below
-      specialArgs = { inherit inputs; } ;
-      modules = [
-        ./configuration.nix
-        home-manager.nixosModules.home-manager
-        # hyprland.homeManagerModules.default
-        stylix.nixosModules.default
-      ];
+    zjstatus = {
+      url = "github:dj95/zjstatus";
     };
+
   };
+  outputs =
+    {
+      nixpkgs,
+      home-manager,
+      hyprland,
+      stylix,
+      zjstatus,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations.fluo = nixpkgs.lib.nixosSystem {
+        ## make flake inputs available to all nixos modules defined below
+        specialArgs = { inherit inputs; };
+        modules = [
+          ./configuration.nix
+          home-manager.nixosModules.home-manager
+          # hyprland.homeManagerModules.default
+          stylix.nixosModules.default
+        ];
+      };
+    };
 }

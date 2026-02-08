@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
   home.stateVersion = "25.11";
@@ -29,58 +34,58 @@
   # };
   stylix.enable = true;
   stylix.autoEnable = true;
-  # stylix.targets.btop.colors.enable = true;
+  stylix.targets.btop.colors.enable = true;
 
   programs.git = {
     enable = true;
     lfs.enable = true;
     settings = {
-       user = {
-         useConfigOnly = true;
-         name = "M K Gharzai";
-         email = "kabeer@gharzai.net";
-       };
-       alias = {
-          l   = "log --color --stat";
-          ll  = "log --color --stat -p";
-          lg  = "log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"";
-          lgg = "log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order";
-          pu  = "push";
-          pl  = "pull";
-          s   = "status";
-       };
-       branch.sort = "-committerdate";
-       core = {
-         pager = "delta --dark";
-         editor = "nvim";
-       };
-       delta = {
-         side-by-side = true;
-         line-numbers = true;
-       };
-       diff = {
-         algorithm = "histogram";
-         colorMoved = "default";
-       };
-       init.defaultBranch = "main";
-       log.date = "iso-local";
-       merge = {
-         tool = "difftastic";
-         conflictstyle = "zdiff3";
-       };
-       push = {
-         default = "simple";
-         autoSetupRemote = true;
-         followtags = true;
-       };
-       rerere.enabled = true;
+      user = {
+        useConfigOnly = true;
+        name = "M K Gharzai";
+        email = "kabeer@gharzai.net";
+      };
+      alias = {
+        l = "log --color --stat";
+        ll = "log --color --stat -p";
+        lg = "log --graph --format=\"%C(yellow)%h%C(red)%d%C(reset) - %C(bold green)(%ar)%C(reset) %s %C(blue)<%an>%C(reset)\"";
+        lgg = "log --graph --format='format:%C(yellow)%h%C(reset) %C(blue)\"%an\" <%ae>%C(reset) %C(magenta)%cr%C(reset)%C(auto)%d%C(reset)%n%s' --date-order";
+        pu = "push";
+        pl = "pull";
+        s = "status";
+      };
+      branch.sort = "-committerdate";
+      core = {
+        pager = "delta --dark";
+        editor = "nvim";
+      };
+      delta = {
+        side-by-side = true;
+        line-numbers = true;
+      };
+      diff = {
+        algorithm = "histogram";
+        colorMoved = "default";
+      };
+      init.defaultBranch = "main";
+      log.date = "iso-local";
+      merge = {
+        tool = "difftastic";
+        conflictstyle = "zdiff3";
+      };
+      push = {
+        default = "simple";
+        autoSetupRemote = true;
+        followtags = true;
+      };
+      rerere.enabled = true;
     };
   };
-  
+
   wayland.windowManager.hyprland = {
     enable = true;
 
-    # Warning: If you use the Home Manager module, make sure to disable systemd integration, as it conflicts with UWSM. 
+    # Warning: If you use the Home Manager module, make sure to disable systemd integration, as it conflicts with UWSM.
     systemd.enable = false;
 
     # > https://wiki.hypr.land/Nix/Hyprland-on-Home-Manager/#using-the-home-manager-module-with-nixos
@@ -107,91 +112,104 @@
       "$terminal" = "kitty";
       "$fileManager" = "dolphin";
 
-      bind =
-        [
-          # utils
-          # "$moveMod, F, exec, firefox"
-          "$mod, code:36, exec, $terminal # enter"
-          "$mod, R, exec, $menu"
-          "$mod, L, exec, hyprlock"
-          "$mod, M, exec, pavucontrol"
-          "CTRL_SHIFT, X, exit,"
-          "SUPER_SHIFT, E, exec, $fileManager"
-          "$mod, C, killactive,"
-          "$mod, code:24, killactive, # '"
-          "CTRL, down, exec, hyprctl dispatch hyprexpo:expo toggle"
+      # > https://wiki.hyprland.org/Configuring/Animations/ for more
+      animations = {
+        # animation = NAME, ONOFF, SPEED, CURVE [,STYLE]
+        animation = [
+          "workspaces, 1, 4, default, fade"
+          "windows, 1, 4, default"
+          "fade, 1, 4, default"
+        ];
+      };
 
-          # window manip
-          "$mod, space, togglefloating,"
-          "$moveMod, P, pin"
-          "$mod, P, pseudo, # dwindle"
-          "$mod, E, togglesplit, # dwindle"
-          "$mod, W, togglegroup"
-          "$mod, F, fullscreen, 1 # gaps"
-          "$moveMod, F, fullscreen, 0 # no gaps"
+      bind = [
+        # utils
+        # "$moveMod, F, exec, firefox"
+        "$mod, code:36, exec, $terminal # enter"
+        "$mod, R, exec, $menu"
+        "$mod, L, exec, hyprlock"
+        "$mod, M, exec, pavucontrol"
+        "CTRL_SHIFT, X, exit,"
+        "SUPER_SHIFT, E, exec, $fileManager"
+        "$mod, C, killactive,"
+        "$mod, code:24, killactive, # '"
+        "CTRL, down, exec, hyprctl dispatch hyprexpo:expo toggle"
 
-          # window motions
-          # "$mod, j, hy3:movefocus, l"
-          # "$mod, k, hy3:movefocus, r"
-          # "$mod, left, hy3:movefocus, l"
-          # "$mod, right, hy3:movefocus, r"
-          # "$mod, up, hy3:movefocus, u"
-          # "$mod, q, hy3:movefocus, u"
-          # "$mod, down, hy3:movefocus, d"
-          # "$mod, code:52, hy3:movefocus, d # ;"
-          # "$moveMod, j, hy3:movewindow, l"
-          # "$moveMod, k, hy3:movewindow, r"
-          # "$moveMod, left, hy3:movewindow, l"
-          # "$moveMod, right, hy3:movewindow, r"
-          # "$moveMod, code:52, hy3:movewindow, d"
-          # "$moveMod, q, hy3:movewindow, u"
-          "$mod, j, movefocus, l"
-          "$mod, k, movefocus, r"
-          "$mod, left, movefocus, l"
-          "$mod, right, movefocus, r"
-          "$mod, up, movefocus, u"
-          "$mod, q, movefocus, u"
-          "$mod, down, movefocus, d"
-          "$mod, code:52, movefocus, d # ;"
-          "$moveMod, j, movewindow, l"
-          "$moveMod, k, movewindow, r"
-          "$moveMod, left, movewindow, l"
-          "$moveMod, right, movewindow, r"
-          "$moveMod, code:52, movewindow, d"
-          "$moveMod, q, movewindow, u"
+        # window manip
+        "$mod, space, togglefloating,"
+        "$moveMod, P, pin"
+        "$mod, P, pseudo, # dwindle"
+        "$mod, E, togglesplit, # dwindle"
+        "$mod, W, togglegroup"
+        "$mod, F, fullscreen, 1 # gaps"
+        "$moveMod, F, fullscreen, 0 # no gaps"
 
-          # "$mod, S, togglespecialworkspace, magic"
-          # "$mod SHIFT, S, movetoworkspace, special:magic"
+        # window motions
+        # "$mod, j, hy3:movefocus, l"
+        # "$mod, k, hy3:movefocus, r"
+        # "$mod, left, hy3:movefocus, l"
+        # "$mod, right, hy3:movefocus, r"
+        # "$mod, up, hy3:movefocus, u"
+        # "$mod, q, hy3:movefocus, u"
+        # "$mod, down, hy3:movefocus, d"
+        # "$mod, code:52, hy3:movefocus, d # ;"
+        # "$moveMod, j, hy3:movewindow, l"
+        # "$moveMod, k, hy3:movewindow, r"
+        # "$moveMod, left, hy3:movewindow, l"
+        # "$moveMod, right, hy3:movewindow, r"
+        # "$moveMod, code:52, hy3:movewindow, d"
+        # "$moveMod, q, hy3:movewindow, u"
+        "$mod, j, movefocus, l"
+        "$mod, k, movefocus, r"
+        "$mod, left, movefocus, l"
+        "$mod, right, movefocus, r"
+        "$mod, up, movefocus, u"
+        "$mod, q, movefocus, u"
+        "$mod, down, movefocus, d"
+        "$mod, code:52, movefocus, d # ;"
+        "$moveMod, j, movewindow, l"
+        "$moveMod, k, movewindow, r"
+        "$moveMod, left, movewindow, l"
+        "$moveMod, right, movewindow, r"
+        "$moveMod, code:52, movewindow, d"
+        "$moveMod, q, movewindow, u"
 
-          "$mod, mouse_down, workspace, e+1"
-          "$mod, mouse_up, workspace, e-1"
+        # "$mod, S, togglespecialworkspace, magic"
+        # "$mod SHIFT, S, movetoworkspace, special:magic"
 
-          # screenshots
-          ", Print, exec, grimblast copysave area"
-          "$mod, o, exec, grimblast copysave area"
-          "$mod SHIFT, o, exec, swappy -f $(grimblast copysave area)"
+        "$mod, mouse_down, workspace, e+1"
+        "$mod, mouse_up, workspace, e-1"
 
-          # hyprscrolling
-          "$mod, period, layoutmsg, move +col"
-          "$mod, comma, layoutmsg, move -col"
-          "$mod SHIFT, h, layoutmsg, movewindowto l"
-          "$mod SHIFT, l, layoutmsg, movewindowto r"
-          "$mod SHIFT, c, layoutmsg, movewindowto u"
-          "$mod SHIFT, t, layoutmsg, movewindowto d"
+        # screenshots
+        ", Print, exec, grimblast copysave area"
+        "$mod, o, exec, grimblast copysave area"
+        "$mod SHIFT, o, exec, swappy -f $(grimblast copysave area)"
 
-        ]
-        ++ (
-          # workspaces
-          # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-          builtins.concatLists (builtins.genList (i:
-              let ws = i + 1;
-              in [
-                "$mod, code:1${toString i}, workspace, ${toString ws}"
-                "$mod SHIFT, code:1${toString i}, movetoworkspacesilent, ${toString ws}"
-              ]
-            )
-            9)
-        );
+        # hyprscrolling
+        "$mod, period, layoutmsg, move +col"
+        "$mod, comma, layoutmsg, move -col"
+        "$mod SHIFT, h, layoutmsg, movewindowto l"
+        "$mod SHIFT, l, layoutmsg, movewindowto r"
+        "$mod SHIFT, c, layoutmsg, movewindowto u"
+        "$mod SHIFT, t, layoutmsg, movewindowto d"
+
+      ]
+      ++ (
+        # workspaces
+        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
+        builtins.concatLists (
+          builtins.genList (
+            i:
+            let
+              ws = i + 1;
+            in
+            [
+              "$mod, code:1${toString i}, workspace, ${toString ws}"
+              "$mod SHIFT, code:1${toString i}, movetoworkspacesilent, ${toString ws}"
+            ]
+          ) 9
+        )
+      );
 
       bindm = [
         "$mod, mouse:272, movewindow"
@@ -220,16 +238,16 @@
         active_opacity = 1.0;
         inactive_opacity = 1.0;
         shadow = {
-            enabled = true;
-            range = 4;
-            render_power = 3;
-            # color = "rgba(1a1a1aee)";
+          enabled = true;
+          range = 4;
+          render_power = 3;
+          # color = "rgba(1a1a1aee)";
         };
         blur = {
-            enabled = true;
-            size = 3;
-            passes = 1;
-            vibrancy = "0.1696";
+          enabled = true;
+          size = 3;
+          passes = 1;
+          vibrancy = "0.1696";
         };
       };
 
@@ -257,31 +275,31 @@
         # "col.border_active" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         # "col.border_inactive" = "rgba(595959aa)";
         groupbar = {
-            enabled = true;
-            keep_upper_gap = true;
-            render_titles = false;
-            height = 32;
-            indicator_gap = -6;
-            indicator_height = 6;
-            rounding = 2;
-            gaps_out = 8;
-            # "col.active" = "rgba(33ccff66) rgba(00ff9966) 180deg";
-            # "col.inactive" = "rgba(59595966)";
+          enabled = true;
+          keep_upper_gap = true;
+          render_titles = false;
+          height = 32;
+          indicator_gap = -6;
+          indicator_height = 6;
+          rounding = 2;
+          gaps_out = 8;
+          # "col.active" = "rgba(33ccff66) rgba(00ff9966) 180deg";
+          # "col.inactive" = "rgba(59595966)";
         };
       };
 
       input = {
-         kb_layout = "us";
-         kb_variant = "dvorak";
-         repeat_delay = 180;
-         repeat_rate = 100;
-         follow_mouse = true;
-         sensitivity = 0;
-         natural_scroll = true;
-         touchpad = {
-             natural_scroll = true;
-         };
-       };
+        kb_layout = "us";
+        kb_variant = "dvorak";
+        repeat_delay = 180;
+        repeat_rate = 100;
+        follow_mouse = true;
+        sensitivity = 0;
+        natural_scroll = true;
+        touchpad = {
+          natural_scroll = true;
+        };
+      };
 
       monitor = [
         "eDP-1,preferred,auto,auto"
@@ -289,18 +307,63 @@
 
       plugin = {
         hyprbars = {
-            bar_height = 20;
-            hyprbars-button = [
-              "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-              "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-            ];
-            on_double_click = "hyprctl dispatch fullscreen 1";
+          bar_height = 20;
+          hyprbars-button = [
+            "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
+            "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
+          ];
+          on_double_click = "hyprctl dispatch fullscreen 1";
         };
         hyprscrolling = {
-            column_width = "0.7";
-            fullscreen_on_one_column = false;
+          column_width = "0.7";
+          fullscreen_on_one_column = false;
         };
       };
+
+      exec-once = [
+        "hypridle"
+      ];
+
+    };
+  };
+
+  services.hypridle = {
+    enable = true;
+    settings = {
+      general = {
+        # when sleeping, lock the hypr session
+        lock_cmd = "pidof hyprlock || hyprlock";
+        before_sleep_cmd = "loginctl lock-session";
+        after_sleep_cmd = "hyprctl dispatch dpms on";
+      };
+
+      listener = [
+        {
+          timeout = 60; # 1min
+          on-timeout = "brightnessctl -s set 10"; # razer max is 448
+          on-resume = "brightnessctl -r";
+        }
+        {
+          timeout = 300; # 5min
+          on-timeout = "loginctl lock-session"; # lock screen when timeout has passed
+        }
+        {
+          timeout = 180; # 3min
+          on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed
+          on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired
+        }
+        {
+          timeout = 1800; # 30min
+          on-timeout = "systemctl suspend"; # suspend pc
+        }
+        # {
+        #   # razer kb is apparently not controlled this way
+        #   # > for device in (brightnessctl -l | grep Device | awk '{print $2}' | tr -d "'" | grep -v intel); echo $device ; sleep 1 ; brightnessctl -sd $device set 0 ; sleep 3 ; brightnessctl -sd $device set 1; end
+        #   timeout = 30; # 0.5min
+        #   on-timeout = "brightnessctl -sd phy0-led set 0"; # turn off keyboard backlight
+        #   on-resume = "brightnessctl -rd phy0-led"; # turn on keyboard backlight on resume
+        # }
+      ];
     };
   };
 

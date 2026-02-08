@@ -2,15 +2,26 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, inputs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      "${builtins.fetchTarball { url = "https://github.com/nix-community/disko/archive/refs/tags/v1.13.0.tar.gz"; sha256 = "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08"; }}/module.nix"
-      ./disko-config.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    "${
+      builtins.fetchTarball {
+        url = "https://github.com/nix-community/disko/archive/refs/tags/v1.13.0.tar.gz";
+        sha256 = "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08";
+      }
+    }/module.nix"
+    ./disko-config.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -28,7 +39,7 @@
 
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "America/Los_Angeles";
@@ -74,7 +85,7 @@
         pkgs.qt6.qt5compat
       ];
     };
-  }; 
+  };
 
   services.logind.settings.Login = {
     HandleLidSwitch = "suspend";
@@ -149,11 +160,16 @@
     overlays = [
       (final: prev: {
         hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
+        # hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system}.hyprland-plugins;
+        zjstatus = inputs.zjstatus.packages.${prev.system}.default;
       })
     ];
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   nix.gc = {
     automatic = true;
@@ -177,6 +193,7 @@
     bluetui
     brightnessctl
     btop
+    calibre
     curl
     distrobox
     distrobox-tui
@@ -354,5 +371,6 @@
   # stylix.polarity = "light";
   stylix.polarity = "dark";
 
-}
+  # zjstatus.enable = true;
 
+}

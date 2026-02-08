@@ -3,7 +3,7 @@
     disk = {
       razer = {
         type = "disk";
-    device = "/dev/nvme0n1";
+        device = "/dev/nvme0n1";
         content = {
           type = "gpt";
           partitions = {
@@ -21,8 +21,8 @@
               size = "16G";
               content = {
                 type = "swap";
-        discardPolicy = "both";
-        resumeDevice = true; # resume from hibernation from this device
+                discardPolicy = "both";
+                resumeDevice = true; # resume from hibernation from this device
               };
             };
             root = {
