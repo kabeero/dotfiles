@@ -2,9 +2,16 @@
   config,
   pkgs,
   inputs,
+  colors,
   ...
 }:
 
+let 
+  zjstatus = pkgs.fetchurl {
+    url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
+    sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
+  };
+in 
 {
   home.stateVersion = "25.11";
   home.username = "mkgz";
@@ -28,6 +35,10 @@
     longitude = -117.83;
   };
 
+  # ╭────────────╮
+  # │   stylix   │
+  # ╰────────────╯
+
   # stylix = {
   #   enable = true;
   #   base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
@@ -35,6 +46,10 @@
   stylix.enable = true;
   stylix.autoEnable = true;
   stylix.targets.btop.colors.enable = true;
+
+  # ╭─────────╮
+  # │   git   │
+  # ╰─────────╯
 
   programs.git = {
     enable = true;
@@ -81,6 +96,10 @@
       rerere.enabled = true;
     };
   };
+
+  # ╭──────────╮
+  # │   hypr   │
+  # ╰──────────╯
 
   wayland.windowManager.hyprland = {
     enable = true;
@@ -367,4 +386,91 @@
     };
   };
 
+  # ╭────────────╮
+  # │   zellij   │
+  # ╰────────────╯
+
+  programs.zellij.enable = true;
+
+  home.file.".config/zellij/plugins/zjstatus.wasm".source = zjstatus;
+
+  xdg.configFile."zellij/config.kdl".source = ./cfg/zellij/config.kdl;
+  # inject + interpolate, so we can specify colors dynamically
+  # > https://nix-community.github.io/stylix/styling.html
+  # Default text color: base00
+  # Alternate text color: base01
+  # Item on background color: base0E
+  # Item off background color: base0D
+  # Alternate item on background color: base09
+  # Alternate item off background color: base02
+  # List unselected background: base0D
+  # List selected background: base03
+  xdg.configFile."zellij/layouts/default.kdl".text = 
+  ''
+    layout {
+      default_tab_template {
+        pane size=2 borderless=true {
+          plugin location="file:$HOME/.config/zellij/plugins/zjstatus.wasm" {
+            hide_frame_for_single_pane "false"
+  
+            // format_left   "{mode} {tabs}"
+            // format_right  "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base02},bold] #[bg=#${colors.base02},fg=#${colors.base05},bold] {session}#[fg=#${colors.base02},bold]◗ {datetime}"
+
+            // format_left   "#[fg=#${colors.base0F}]#[bg=#${colors.base0F},fg=#${colors.base00},bold] #[bg=#${colors.base0F},fg=#${colors.base00},bold] {session}#[fg=#${colors.base0F},bold]◗ {tabs}"
+            format_left   "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base0D},bold] #[bg=#${colors.base00},fg=#${colors.base0D},bold] {session}#[fg=#${colors.base00},bold]◗ {tabs}"
+            format_right  "{mode} {datetime}"
+
+            // format_space  ""
+
+            // palette
+            // format_left  "#[bg=#${colors.base00}]00;#[bg=#${colors.base01}]01;#[bg=#${colors.base02}]02;#[bg=#${colors.base03}]03;#[bg=#${colors.base04}]04;#[bg=#${colors.base05}]05;#[bg=#${colors.base06}]06;#[bg=#${colors.base07}]07;#[bg=#${colors.base08}]08;#[bg=#${colors.base09}]09;#[bg=#${colors.base0A}]0A;#[bg=#${colors.base0B}]0B;#[bg=#${colors.base0C}]0C;#[bg=#${colors.base0D}]0D;#[bg=#${colors.base0E}]0E;#[bg=#${colors.base0F}]0F; {tabs}"
+  
+            mode_normal        "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0B}]◗"
+            mode_locked        "#[fg=#${colors.base04}]#[bg=#${colors.base04},fg=#${colors.base00},bold]{name}#[fg=#${colors.base04}]◗"
+            mode_resize        "#[fg=#${colors.base08}]#[bg=#${colors.base08},fg=#${colors.base00},bold]{name}#[fg=#${colors.base08}]◗"
+            mode_pane          "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
+            mode_tab           "#[fg=#${colors.base07}]#[bg=#${colors.base07},fg=#${colors.base00},bold]{name}#[fg=#${colors.base07}]◗"
+            mode_scroll        "#[fg=#${colors.base0A}]#[bg=#${colors.base0A},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0A}]◗"
+            mode_enter_search  "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
+            mode_search        "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
+            mode_rename_tab    "#[fg=#${colors.base07}]#[bg=#${colors.base07},fg=#${colors.base00},bold]{name}#[fg=#${colors.base07}]◗"
+            mode_rename_pane   "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
+            mode_session       "#[fg=#${colors.base0E}]#[bg=#${colors.base0E},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0E}]◗"
+            mode_move          "#[fg=#${colors.base0F}]#[bg=#${colors.base0F},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0F}]◗"
+            mode_prompt        "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
+            mode_tmux          "#[fg=#${colors.base09}]#[bg=#${colors.base09},fg=#${colors.base00},bold]{name}#[fg=#${colors.base09}]◗"
+            mode_default_to_mode "tmux" // if not listed above, which color to use
+  
+            // formatting for inactive tabs
+            tab_normal              "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{floating_indicator}#[fg=#${colors.base00},bold]◗"
+            tab_normal_fullscreen   "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{fullscreen_indicator}#[fg=#${colors.base00},bold]◗"
+            tab_normal_sync         "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{sync_indicator}#[fg=#${colors.base00},bold]◗"
+  
+            // formatting for the current active tab
+            tab_active              "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base01},fg=#${colors.base06},bold] {name}{floating_indicator}#[fg=#${colors.base01},bold]◗"
+            tab_active_fullscreen   "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base01},fg=#${colors.base06},bold] {name}{fullscreen_indicator}#[fg=#${colors.base01},bold]◗"
+            tab_active_sync         "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base01},fg=#${colors.base06},bold] {name}{sync_indicator}#[fg=#${colors.base01},bold]◗"
+  
+            // separator between the tabs
+            tab_separator           " "
+  
+            // indicators
+            tab_sync_indicator       " "
+            tab_fullscreen_indicator " 󰊓"
+            tab_floating_indicator   " 󰹙"
+  
+            command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
+            command_git_branch_format      "#[fg=blue] {stdout} "
+            command_git_branch_interval    "10"
+            command_git_branch_rendermode  "static"
+  
+            datetime          "#[fg=#6C7086,bold] {format} "
+            datetime_format   "%H:%M"
+            datetime_timezone "America/Los_Angeles"
+          }
+        }
+        children
+      }
+    }
+  '';
 }

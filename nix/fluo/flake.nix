@@ -32,9 +32,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    tt-schemes = {
+      url = "github:tinted-theming/schemes";
+      flake = false;
+    };
+
     zjstatus = {
       url = "github:dj95/zjstatus";
     };
+
+    # zjstatus = pkgs.fetchurl {
+    #   url = "https://github.com/dj95/zjstatus/releases/download/v0.11.0/zjstatus.wasm";
+    #   sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Update with actual hash
+    # };
 
   };
   outputs =
@@ -43,7 +53,6 @@
       home-manager,
       hyprland,
       stylix,
-      zjstatus,
       ...
     }@inputs:
     {
