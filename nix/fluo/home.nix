@@ -447,9 +447,9 @@ in
             tab_normal_sync         "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{sync_indicator}#[fg=#${colors.base00},bold]◗"
   
             // formatting for the current active tab
-            tab_active              "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base01},fg=#${colors.base06},bold] {name}{floating_indicator}#[fg=#${colors.base01},bold]◗"
-            tab_active_fullscreen   "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base01},fg=#${colors.base06},bold] {name}{fullscreen_indicator}#[fg=#${colors.base01},bold]◗"
-            tab_active_sync         "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base01},fg=#${colors.base06},bold] {name}{sync_indicator}#[fg=#${colors.base01},bold]◗"
+            tab_active              "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base00},fg=#${colors.base0B},bold] {name}{floating_indicator}#[fg=#${colors.base00},bold]◗"
+            tab_active_fullscreen   "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base00},fg=#${colors.base0B},bold] {name}{fullscreen_indicator}#[fg=#${colors.base00},bold]◗"
+            tab_active_sync         "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base00},fg=#${colors.base0B},bold] {name}{sync_indicator}#[fg=#${colors.base00},bold]◗"
   
             // separator between the tabs
             tab_separator           " "
