@@ -6,12 +6,13 @@
   ...
 }:
 
-let 
-  zjstatus = pkgs.fetchurl {
-    url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
-    sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
-  };
-in 
+## used overlay in config.nix instead
+# let 
+#   zjstatus = pkgs.fetchurl {
+#     url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
+#     sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
+#   };
+# in 
 {
   home.stateVersion = "25.11";
   home.username = "mkgz";
@@ -39,12 +40,35 @@ in
   # │   stylix   │
   # ╰────────────╯
 
+  ## from config.nix
+  # stylix.enable = true;
+  # stylix.autoEnable = true;
+  # # > https://nix-community.github.io/stylix/configuration.html
+  # # > https://tinted-theming.github.io/tinted-gallery/
+  # # > https://github.com/SenchoPens/base16.nix (base16-schemes pkg)
+  # # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
+  # # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
+  # # stylix.base16Scheme = "${inputs.tt-schemes}/base16/horizon-dark.yaml"; # no green or fellow
+  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
+  # stylix.image = pkgs.fetchurl {
+  #   # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
+  #   url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
+  #   hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
+  # };
+  # # generating a palette works OK, but seems to produce crazy combinations, completely unreadable
+  # # stylix.polarity = "light";
+  # # stylix.polarity = "dark";
+
   # stylix = {
   #   enable = true;
-  #   base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+  #   base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
+  #   # image = pkgs.fetchurl {
+  #   #     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
+  #   #     url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
+  #   #     hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
+  #   # };
   # };
-  stylix.enable = true;
-  stylix.autoEnable = true;
+  # stylix.autoEnable = true;
   stylix.targets.btop.colors.enable = true;
 
   # ╭─────────╮
@@ -354,6 +378,7 @@ in
         lock_cmd = "pidof hyprlock || hyprlock";
         before_sleep_cmd = "loginctl lock-session";
         after_sleep_cmd = "hyprctl dispatch dpms on";
+        # ignore_dbus_inhibit = false;
       };
 
       listener = [
@@ -361,19 +386,23 @@ in
           timeout = 60; # 1min
           on-timeout = "brightnessctl -s set 10"; # razer max is 448
           on-resume = "brightnessctl -r";
-        }
-        {
-          timeout = 300; # 5min
-          on-timeout = "loginctl lock-session"; # lock screen when timeout has passed
+          and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }
         {
           timeout = 180; # 3min
           on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed
           on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired
+          and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
+        }
+        {
+          timeout = 300; # 5min
+          on-timeout = "loginctl lock-session"; # lock screen when timeout has passed
+          and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }
         {
           timeout = 1800; # 30min
           on-timeout = "systemctl suspend"; # suspend pc
+          and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }
         # {
         #   # razer kb is apparently not controlled this way
@@ -392,19 +421,12 @@ in
 
   programs.zellij.enable = true;
 
-  home.file.".config/zellij/plugins/zjstatus.wasm".source = zjstatus;
+  home.file.".config/zellij/plugins/zjstatus.wasm".source = inputs.zjstatus;
 
   xdg.configFile."zellij/config.kdl".source = ./cfg/zellij/config.kdl;
   # inject + interpolate, so we can specify colors dynamically
   # > https://nix-community.github.io/stylix/styling.html
-  # Default text color: base00
-  # Alternate text color: base01
-  # Item on background color: base0E
-  # Item off background color: base0D
-  # Alternate item on background color: base09
-  # Alternate item off background color: base02
-  # List unselected background: base0D
-  # List selected background: base03
+  xdg.configFile."zellij/layouts/default.swap.kdl".source = ./cfg/zellij/layout.swap.kdl;
   xdg.configFile."zellij/layouts/default.kdl".text = 
   ''
     layout {

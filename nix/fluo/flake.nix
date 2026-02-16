@@ -37,13 +37,9 @@
       flake = false;
     };
 
-    zjstatus = {
-      url = "github:dj95/zjstatus";
-    };
-
-    # zjstatus = pkgs.fetchurl {
-    #   url = "https://github.com/dj95/zjstatus/releases/download/v0.11.0/zjstatus.wasm";
-    #   sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # Update with actual hash
+    # this is the zjstatus git repo itself, not super useful...
+    # zjstatus = {
+    #   url = "github:dj95/zjstatus";
     # };
 
   };

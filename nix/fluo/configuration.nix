@@ -161,7 +161,10 @@
       (final: prev: {
         hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
         # hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system}.hyprland-plugins;
-        # zjstatus = inputs.zjstatus.packages.${prev.system}.default;
+        zjstatus = pkgs.fetchurl {
+            url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
+            sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
+        };
       })
     ];
   };
@@ -352,6 +355,7 @@
   # │   home-manager   │
   # ╰──────────────────╯
 
+
   home-manager.users."mkgz" = import ./home.nix;
   # TODO: overlay here
   ## to share flake `inputs` with home-manager modules : { config, pkgs, inputs, colors, ... }
@@ -361,6 +365,7 @@
     inherit (config.lib.stylix) colors;
   };
 
+  # enable stylix for home-manager
   stylix.enable = true;
   stylix.autoEnable = true;
   # > https://nix-community.github.io/stylix/configuration.html
@@ -368,7 +373,6 @@
   # > https://github.com/SenchoPens/base16.nix (base16-schemes pkg)
   # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
   # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
-  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/horizon-dark.yaml"; # no green or fellow
   stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
   stylix.image = pkgs.fetchurl {
     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
@@ -378,5 +382,6 @@
   # generating a palette works OK, but seems to produce crazy combinations, completely unreadable
   # stylix.polarity = "light";
   # stylix.polarity = "dark";
+  # stylix.targets.btop.colors.enable = true;
 
 }
