@@ -14,12 +14,13 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    "${
-      builtins.fetchTarball {
-        url = "https://github.com/nix-community/disko/archive/refs/tags/v1.13.0.tar.gz";
-        sha256 = "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08";
-      }
-    }/module.nix"
+    # # e.g: pinned version of disko
+    # "${
+    #   builtins.fetchTarball {
+    #     url = "https://github.com/nix-community/disko/archive/refs/tags/v1.13.0.tar.gz";
+    #     sha256 = "03jz60kw0khm1lp72q65z8gq69bfrqqbj08kw0hbiav1qh3g7p08";
+    #   }
+    # }/module.nix"
     ./disko-config.nix
   ];
 
@@ -140,34 +141,7 @@
     ];
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    # packagesOverrides = pkgs: {
-    #   unstable = import (
-    #     fetchTarball {
-    #         url = "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-    #         sha256 = "15ypswq0yiwk5rsmkp2zkprs1gb2va5gj2nvwqai3d4d5l5vp79h";
-    #     }) {
-    #       config = config.nixpkgs.config;
-    #     };
-    # };
-    # 1.  (final: prev: { ... }): This defines the overlay function. It takes final and prev as arguments.
-    # 2.  hyprland = ...: This is our "edit" on the transparent sheet. We are declaring, "The package named hyprland in the final package set will now be defined by what's on the right side of this equals sign."
-    # 3.  inputs.hyprland.packages.${prev.system}.hyprland;: This is the new definition.
-    #     *   inputs.hyprland: We're grabbing the hyprland flake input from your flake.nix.
-    #     *   .packages.${prev.system}: We're accessing the packages provided by that flake for the current system architecture (e.g., x86_64-linux).
-    #     *   .hyprland: We're selecting the specific hyprland package from that output.
-    overlays = [
-      (final: prev: {
-        hyprland = inputs.hyprland.packages.${prev.system}.hyprland;
-        # hyprland-plugins = inputs.hyprland-plugins.packages.${prev.system}.hyprland-plugins;
-        zjstatus = pkgs.fetchurl {
-            url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
-            sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
-        };
-      })
-    ];
-  };
+  nixpkgs.config.allowUnfree = true;
 
   nix.settings.experimental-features = [
     "nix-command"
@@ -355,9 +329,8 @@
   # │   home-manager   │
   # ╰──────────────────╯
 
-
   home-manager.users."mkgz" = import ./home.nix;
-  # TODO: overlay here
+  home-manager.useGlobalPkgs = true; # share overlay'd pkgs
   ## to share flake `inputs` with home-manager modules : { config, pkgs, inputs, colors, ... }
   ## NOTE: this will be in your home.nix, not here
   home-manager.extraSpecialArgs = {

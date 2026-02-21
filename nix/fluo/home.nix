@@ -136,16 +136,18 @@
     package = null;
     portalPackage = null;
 
-    plugins = [
-      # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hypr-darkwindow
-      # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
-      # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprgrass
-      # inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprspace
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
-      inputs.hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
-      inputs.hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
+    plugins = with inputs; [
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hypr-darkwindow
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprgrass
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprspace
+      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
+      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
+      # hyprlandPlugins.hypr-darkwindow
+      # hyprlandPlugins.hypr-dynamic-cursors
+      hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
     ];
 
     settings = {
@@ -176,6 +178,7 @@
         "SUPER_SHIFT, E, exec, $fileManager"
         "$mod, C, killactive,"
         "$mod, code:24, killactive, # '"
+        "CTRL, up, exec, hyprctl dispatch hyprexpo:expo toggle"
         "CTRL, down, exec, hyprctl dispatch hyprexpo:expo toggle"
 
         # window manip
@@ -214,8 +217,8 @@
         "$moveMod, k, movewindow, r"
         "$moveMod, left, movewindow, l"
         "$moveMod, right, movewindow, r"
-        "$moveMod, code:52, movewindow, d"
         "$moveMod, q, movewindow, u"
+        "$moveMod, code:52, movewindow, d"
 
         # "$mod, S, togglespecialworkspace, magic"
         # "$mod SHIFT, S, movetoworkspace, special:magic"
@@ -231,10 +234,10 @@
         # hyprscrolling
         "$mod, period, layoutmsg, move +col"
         "$mod, comma, layoutmsg, move -col"
-        "$mod SHIFT, h, layoutmsg, movewindowto l"
-        "$mod SHIFT, l, layoutmsg, movewindowto r"
-        "$mod SHIFT, c, layoutmsg, movewindowto u"
-        "$mod SHIFT, t, layoutmsg, movewindowto d"
+        "$mod SHIFT, j, layoutmsg, movewindowto l"
+        "$mod SHIFT, k, layoutmsg, movewindowto r"
+        "$mod SHIFT, q, layoutmsg, movewindowto u"
+        "$mod SHIFT, code:52, layoutmsg, movewindowto d"
 
       ]
       ++ (
@@ -301,9 +304,9 @@
         # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         # "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;
-        layout = "hy3";
+        # layout = "hy3";
         # layout = "dwindle";
-        # layout = "scrolling";
+        layout = "scrolling";
       };
 
       gestures = {
@@ -345,20 +348,20 @@
       };
 
       monitor = [
-        "eDP-1,preferred,auto,auto"
+        ",preferred,auto,auto"
       ];
 
       plugin = {
         hyprbars = {
           bar_height = 20;
-          hyprbars-button = [
-            "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-            "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-          ];
+          # hyprbars-button = [
+          #   "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
+          #   "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
+          # ];
           on_double_click = "hyprctl dispatch fullscreen 1";
         };
         hyprscrolling = {
-          column_width = "0.7";
+          column_width = "0.85";
           fullscreen_on_one_column = false;
         };
       };
@@ -421,7 +424,7 @@
 
   programs.zellij.enable = true;
 
-  home.file.".config/zellij/plugins/zjstatus.wasm".source = inputs.zjstatus;
+  home.file.".config/zellij/plugins/zjstatus.wasm".source = "${pkgs.zjstatus}/bin/zjstatus.wasm";
 
   xdg.configFile."zellij/config.kdl".source = ./cfg/zellij/config.kdl;
   # inject + interpolate, so we can specify colors dynamically
