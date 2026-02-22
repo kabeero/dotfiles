@@ -139,12 +139,17 @@
     plugins = with inputs; [
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hypr-darkwindow
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hypr-dynamic-cursors
+      ## touchscreen gestures
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprgrass
+      ## overview
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprspace
-      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
+      ## title bars
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
       hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
-      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
+      ## flash focus to the new active window
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
       hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
+      # hypr-darkwindow.packages.${pkgs.stdenv.hostPlatform.system}.Hypr-DarkWindow
       # hyprlandPlugins.hypr-darkwindow
       # hyprlandPlugins.hypr-dynamic-cursors
       hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
@@ -203,22 +208,24 @@
         # "$moveMod, k, hy3:movewindow, r"
         # "$moveMod, left, hy3:movewindow, l"
         # "$moveMod, right, hy3:movewindow, r"
-        # "$moveMod, code:52, hy3:movewindow, d"
         # "$moveMod, q, hy3:movewindow, u"
+        # "$moveMod, code:52, hy3:movewindow, d"
         "$mod, j, movefocus, l"
-        "$mod, k, movefocus, r"
         "$mod, left, movefocus, l"
+        "$mod, k, movefocus, r"
         "$mod, right, movefocus, r"
-        "$mod, up, movefocus, u"
         "$mod, q, movefocus, u"
+        "$mod, up, movefocus, u"
+        "$mod, code:52, movefocus, d" # ;
         "$mod, down, movefocus, d"
-        "$mod, code:52, movefocus, d # ;"
-        "$moveMod, j, movewindow, l"
-        "$moveMod, k, movewindow, r"
-        "$moveMod, left, movewindow, l"
-        "$moveMod, right, movewindow, r"
-        "$moveMod, q, movewindow, u"
-        "$moveMod, code:52, movewindow, d"
+        # "$moveMod, j, movewindow, l"
+        # "$moveMod, left, movewindow, l"
+        # "$moveMod, k, movewindow, r"
+        # "$moveMod, right, movewindow, r"
+        # "$moveMod, q, movewindow, u"
+        # "$moveMod, up, movewindow, u"
+        # "$moveMod, code:52, movewindow, d" # ;
+        # "$moveMod, down, movewindow, d" # ;
 
         # "$mod, S, togglespecialworkspace, magic"
         # "$mod SHIFT, S, movetoworkspace, special:magic"
@@ -232,12 +239,16 @@
         "$mod SHIFT, o, exec, swappy -f $(grimblast copysave area)"
 
         # hyprscrolling
-        "$mod, period, layoutmsg, move +col"
-        "$mod, comma, layoutmsg, move -col"
-        "$mod SHIFT, j, layoutmsg, movewindowto l"
-        "$mod SHIFT, k, layoutmsg, movewindowto r"
-        "$mod SHIFT, q, layoutmsg, movewindowto u"
-        "$mod SHIFT, code:52, layoutmsg, movewindowto d"
+        "$mod, comma, layoutmsg, move -col" # pan L
+        "$mod, period, layoutmsg, move +col" # pan R
+        "$moveMod, j, layoutmsg, movewindowto l"
+        "$moveMod, k, layoutmsg, movewindowto r"
+        "$moveMod, left, layoutmsg, movewindowto l"
+        "$moveMod, right, layoutmsg, movewindowto r"
+        "$moveMod, q, layoutmsg, movewindowto u"
+        "$moveMod, up, layoutmsg, movewindowto u"
+        "$moveMod, code:52, layoutmsg, movewindowto d"
+        "$moveMod, down, layoutmsg, movewindowto d"
 
       ]
       ++ (
@@ -304,16 +315,20 @@
         # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
         # "col.inactive_border" = "rgba(595959aa)";
         resize_on_border = false;
-        # layout = "hy3";
-        # layout = "dwindle";
-        layout = "scrolling";
+        # layout = "dwindle"; # default
+        # layout = "hy3"; # hyprland i3-like
+        layout = "scrolling"; # hyprland niri-like
       };
 
       gestures = {
         gesture = [
           "2, swipe, mod: SUPER, resize"
-          "4, horizontal, workspace"
+          "2, pinch, mod: SUPER, float"
           "3, vertical, fullscreen"
+          "3, left, dispatcher, layoutmsg, move +col" # natural scroll
+          "3, right, dispatcher, layoutmsg, move -col" # natural scroll
+          "4, horizontal, workspace"
+          "4, vertical, dispatcher, hyprexpo:expo, toggle"
         ];
       };
 
@@ -361,8 +376,8 @@
           on_double_click = "hyprctl dispatch fullscreen 1";
         };
         hyprscrolling = {
-          column_width = "0.85";
-          fullscreen_on_one_column = false;
+          column_width = "0.90";
+          fullscreen_on_one_column = true;
         };
       };
 
