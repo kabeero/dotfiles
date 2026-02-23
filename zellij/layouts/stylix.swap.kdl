@@ -1,7 +1,7 @@
 // NOTE: tab bar counts as a pane
 
 tab_template name="ui" {
-   pane size=1 borderless=true {
+   pane size=2 borderless=true {
        plugin location="tab-bar"
    }
    children

@@ -148,6 +148,13 @@
     "flakes"
   ];
 
+  # > https://wiki.hypr.land/Nix/Cachix/
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
+
   nix.gc = {
     automatic = true;
     dates = "weekly";
@@ -176,7 +183,6 @@
     distrobox-tui
     kdePackages.dolphin
     eza
-    fish
     fzf
     gitFull
     # build failure 2026-01-25
@@ -262,9 +268,12 @@
     nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
     nerd-fonts.lilex
+    nerd-fonts.symbols-only
   ];
 
   programs.fish.enable = true;
+  # fish causes man cache rebuilding
+  documentation.man.generateCaches = false;
   programs.firefox.enable = true;
   programs.hyprland = {
     enable = true;
@@ -346,7 +355,10 @@
   # > https://github.com/SenchoPens/base16.nix (base16-schemes pkg)
   # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
   # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
-  stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
+  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml"; # vibrant
+  stylix.base16Scheme = "${inputs.tt-schemes}/base16/pasque.yaml"; # sahar
+  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/eris.yaml"; # dark
+  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/emil.yaml"; # light
   stylix.image = pkgs.fetchurl {
     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
     url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
@@ -355,6 +367,27 @@
   # generating a palette works OK, but seems to produce crazy combinations, completely unreadable
   # stylix.polarity = "light";
   # stylix.polarity = "dark";
-  # stylix.targets.btop.colors.enable = true;
+
+  stylix.fonts = with pkgs; {
+    serif = {
+      package = dejavu_fonts;
+      name = "DejaVu Serif";
+    };
+
+    sansSerif = {
+      package = dejavu_fonts;
+      name = "DejaVu Sans";
+    };
+
+    monospace = {
+      package = nerd-fonts.lilex;
+      name = "Lilex Nerd Font Mono";
+    };
+
+    emoji = {
+      package = nerd-fonts.symbols-only;
+      name = "Symbols Nerd Font Mono";
+    };
+  };
 
 }

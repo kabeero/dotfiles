@@ -17,12 +17,10 @@
   home.stateVersion = "25.11";
   home.username = "mkgz";
   home.homeDirectory = "/home/mkgz";
-  home.packages = with pkgs; [
-    # pkgs.hyprlandPlugins.hypr-darkwindow
-    # pkgs.hyprlandPlugins.hypr-dynamic-cursors
-    # # pkgs.hyprlandPlugins.hyprgrass
-    # # pkgs.hyprlandPlugins.hyprspace
-  ];
+  home.packages = with pkgs; [];
+
+  home.shell.enableFishIntegration = true;
+  services.ssh-agent.enableFishIntegration = true;
 
   services.gpg-agent = {
     enable = true;
@@ -36,40 +34,173 @@
     longitude = -117.83;
   };
 
-  # ╭────────────╮
-  # │   stylix   │
-  # ╰────────────╯
+  # ╭──────────╮
+  # │   apps   │
+  # ╰──────────╯
 
-  ## from config.nix
-  # stylix.enable = true;
-  # stylix.autoEnable = true;
-  # # > https://nix-community.github.io/stylix/configuration.html
-  # # > https://tinted-theming.github.io/tinted-gallery/
-  # # > https://github.com/SenchoPens/base16.nix (base16-schemes pkg)
-  # # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
-  # # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
-  # # stylix.base16Scheme = "${inputs.tt-schemes}/base16/horizon-dark.yaml"; # no green or fellow
-  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
-  # stylix.image = pkgs.fetchurl {
-  #   # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
-  #   url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
-  #   hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
-  # };
-  # # generating a palette works OK, but seems to produce crazy combinations, completely unreadable
-  # # stylix.polarity = "light";
-  # # stylix.polarity = "dark";
+  programs.btop.enable = true;
+  programs.starship = {
+    enable = true;
+    enableFishIntegration = true;
+  };
 
-  # stylix = {
-  #   enable = true;
-  #   base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
-  #   # image = pkgs.fetchurl {
-  #   #     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
-  #   #     url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
-  #   #     hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
-  #   # };
-  # };
-  # stylix.autoEnable = true;
-  stylix.targets.btop.colors.enable = true;
+  # ╭──────────╮
+  # │   fish   │
+  # ╰──────────╯
+
+  programs.fish = {
+    enable = true;
+    shellAbbrs = {
+      gitclean = "git fetch -p && git branch -vv | grep ': gone]' | awk '{print}' | xargs git branch -D $argv;";
+      dotdot = {
+        regex = "^\\.\\.+$";
+        function = "multicd";
+      };
+    };
+    shellAliases = {
+      ls = "eza";
+      l = "ls";
+      l1 = "ls -1";
+      ll = "ls -l --icons --git";
+      r = "ranger";
+      y = "yazi";
+      v = "nvim";
+      vim = "nvim";
+      vimdiff = "nvim -d";
+      cdr = "cd (git rev-parse --show-cdup)";
+      cdllm = "cd (mktemp -d -t llm.XXXXXXXX); type -q opencode && opencode";
+      diffk = "kitty +kitten diff";
+      glow = "glow -p";
+      gu = "gitui";
+      jless = "jless -r";
+      sio = "sioyek";
+      tfia = "terraform init ; terraform apply";
+      tfmt = "terraform fmt -recursive";
+    };
+    functions = {
+      d = ''
+        set apps bat fzf
+        for a in $apps
+            if ! command -v $a >/dev/null
+                echo "❗ Please install $a"
+                return
+            end
+        end
+        set flags -e -1 --preview='bat --color always -p {}' --bind shift-up:preview-page-up,shift-down:preview-page-down
+        set chosen ""
+        if test (count $argv) -gt 0
+            set chosen (fzf $flags -q $argv[1])
+        else
+            set chosen (fzf $flags)
+        end
+        if set -q chosen && test -n "$chosen"
+            cd (dirname $chosen)
+        end
+      '';
+
+      e = ''
+        set apps bat fzf nvim
+        for a in $apps
+            if ! command -v $a >/dev/null
+                echo "❗ Please install $a"
+                return
+            end
+        end
+        set flags -e -1 --preview='bat --color always -p {}' --bind shift-up:preview-page-up,shift-down:preview-page-down
+        set chosen ""
+        if test (count $argv) -gt 0
+            set chosen (fzf $flags -q $argv[1])
+        else
+            set chosen (fzf $flags)
+        end
+        if set -q chosen && test -n "$chosen"
+            nvim $chosen
+        end
+      '';
+
+      z = ''
+        zellij ls -s | sort | awk '{printf "\033[32m%15s\033[0m\n", $1}'
+        alias z="zellij"
+      '';
+
+      dockerls = ''
+        docker ps --format "table {{.Image}}\t{{.Ports}}\t{{.Names}}"
+      '';
+
+      multicd = ''
+        echo cd (string repeat -n (math (string length -- $argv[1]) - 1) ../)
+      '';
+
+      fish_hybrid_key_bindings = ''
+        for mode in default insert visual
+            fish_default_key_bindings -M $mode
+        end
+        fish_vi_key_bindings --no-erase
+      '';
+
+      ytarchive = '' 
+        function ytarchive
+         yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
+           --sponsorblock-mark "all" \
+           --geo-bypass \
+           --sub-langs 'all' \
+           --embed-subs \
+           --embed-metadata \
+           --convert-subs 'srt' \
+           --download-archive $argv[1].txt https://www.youtube.com/$argv[1]/videos; 
+        end
+      '';
+
+      ytarchivevideo = '' 
+        function ytarchivevideo
+          yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
+            --sponsorblock-mark "all" \
+            --geo-bypass \
+            --sub-langs 'all' \
+            --embed-metadata \
+            --convert-subs 'srt' \
+            --download-archive $argv[1] $argv[2]; 
+        end
+      '';
+
+      ytd = '' 
+        function ytd
+          yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
+            --sponsorblock-mark "all" \
+            --geo-bypass \
+            --sub-langs 'all' \
+            --embed-subs \
+            --embed-metadata \
+            --convert-subs 'srt' \
+            $argv
+        end
+      '';
+
+    };
+    interactiveShellInit = ''
+      set -g fish_greeting ""
+      set -gx EDITOR nvim
+      set -Ux GOPATH {$HOME}/Code/go
+      set -Ux GOBIN {$GOPATH}/bin
+      set -Ux AWS_CLI_AUTO_PROMPT on-partial
+      set -Ux ERL_AFLAGS "-kernel shell_history enabled"
+      set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
+      pfetch
+      echo -e "\x1b[38;2;0;112;248m"(date +%c)"\x1b[0m"
+      zellij setup --generate-completion fish | source
+      fish_add_path {$HOME}/.asdf/bin
+      fish_add_path {$HOME}/.cargo/bin
+      fish_add_path {$HOME}/.yarn/bin
+      fish_add_path {$HOME}/.local/bin
+      fish_add_path {$GOBIN}
+      starship init fish | source
+      mise activate fish | source
+      eval (ssh-agent -c) >/dev/null
+      ssh-add -q
+      set -g fish_key_bindings fish_hybrid_key_bindings
+    '';
+    plugins = [];
+  };
 
   # ╭─────────╮
   # │   git   │
@@ -210,10 +341,11 @@
         # "$moveMod, right, hy3:movewindow, r"
         # "$moveMod, q, hy3:movewindow, u"
         # "$moveMod, code:52, hy3:movewindow, d"
-        "$mod, j, movefocus, l"
-        "$mod, left, movefocus, l"
-        "$mod, k, movefocus, r"
-        "$mod, right, movefocus, r"
+        ## with hyprscrolling, windows can sometimes stop being focused...
+        # "$mod, j, movefocus, l"
+        # "$mod, left, movefocus, l"
+        # "$mod, k, movefocus, r"
+        # "$mod, right, movefocus, r"
         "$mod, q, movefocus, u"
         "$mod, up, movefocus, u"
         "$mod, code:52, movefocus, d" # ;
@@ -239,12 +371,18 @@
         "$mod SHIFT, o, exec, swappy -f $(grimblast copysave area)"
 
         # hyprscrolling
+        "$mod, j, layoutmsg, move -col" # pan L
+        "$mod, left, layoutmsg, move -col" # pan L
         "$mod, comma, layoutmsg, move -col" # pan L
+        "$mod, k, layoutmsg, move +col" # pan R
+        "$mod, right, layoutmsg, move +col" # pan R
         "$mod, period, layoutmsg, move +col" # pan R
         "$moveMod, j, layoutmsg, movewindowto l"
-        "$moveMod, k, layoutmsg, movewindowto r"
         "$moveMod, left, layoutmsg, movewindowto l"
+        "$moveMod, comma, layoutmsg, movewindowto l"
+        "$moveMod, k, layoutmsg, movewindowto r"
         "$moveMod, right, layoutmsg, movewindowto r"
+        "$moveMod, period, layoutmsg, movewindowto r"
         "$moveMod, q, layoutmsg, movewindowto u"
         "$moveMod, up, layoutmsg, movewindowto u"
         "$moveMod, code:52, layoutmsg, movewindowto d"
@@ -293,7 +431,7 @@
         rounding = 10;
         rounding_power = 2;
         active_opacity = 1.0;
-        inactive_opacity = 1.0;
+        inactive_opacity = 0.8;
         shadow = {
           enabled = true;
           range = 4;
@@ -433,6 +571,100 @@
     };
   };
 
+  # ╭───────────╮
+  # │   kitty   │
+  # ╰───────────╯
+
+  programs.kitty = {
+    enable = true;
+    # background_opacity = "0.85";
+    settings = {
+      adjust_line_height = "120%";
+      cursor_shape = "block";
+      cursor_blink_interval = 0;
+      strip_trailing_spaces = "smart";
+      focus_follows_mouse = true;
+      sync_to_monitor = true;
+      enable_audio_bell = false;
+      remember_window_size = false;
+      initial_window_width = 960;
+      initial_window_height = 720;
+      enabled_layouts = "Tall, Fat, Vertical, Horizontal, Stack, Grid";
+      window_border_width = 0;
+      window_margin_width = "3.0";
+      window_padding_width = "6.0";
+      inactive_text_alpha = "0.7";
+      hide_window_decorations = "titlebar-only";
+      confirm_os_window_close = 2;
+      tab_bar_edge = "top";
+      tab_bar_style = "powerline";
+      tab_powerline_style = "round";
+      tab_separator = " ⦚ ";
+      tab_title_template = " {title.split('/')[-1].partition('-')[0].strip()} ";
+      active_tab_title_template = " ⋄ ";
+      tab_bar_background = "none";
+      # background_opacity = "0.85"; # hyprland overrides
+      dynamic_background_opacity = true;
+      dim_opacity = "0.75";
+      selection_background = "#aaffaa";
+    };
+    keybindings = {
+      "kitty_mod+c" = "copy_or_interrupt";
+      "kitty_mod+v" = "paste_from_clipboard";
+      "shift+insert" = "paste_from_selection";
+      "kitty_mod+enter" = "launch --cwd=current";
+      "kitty_mod+t" = "new_tab";
+      "kitty_mod+i" = "set_tab_title";
+      "kitty_mod+l" = "next_layout";
+      "kitty_mod+/" = "last_used_layout";
+      "kitty_mod+m" = "goto_layout stack";
+      "kitty_mod+s" = "goto_layout vertical";
+      "kitty_mod+p>u" = "kitten hints";
+      "kitty_mod+p>c>l" = "kitten hints --program @ --type line";
+      "kitty_mod+p>c>h" = "kitten hints --program @ --type hash";
+      "kitty_mod+p>c>p" = "kitten hints --program @ --type path";
+      "kitty_mod+p>c>u" = "kitten hints --program @";
+      "kitty_mod+a>m" = "set_background_opacity +0.05";
+      "kitty_mod+a>l" = "set_background_opacity -0.05";
+    };
+  };
+
+  # ╭────────────╮
+  # │   stylix   │
+  # ╰────────────╯
+
+  ## from config.nix
+  # stylix.enable = true;
+  # stylix.autoEnable = true;
+  # # > https://nix-community.github.io/stylix/configuration.html
+  # # > https://tinted-theming.github.io/tinted-gallery/
+  # # > https://github.com/SenchoPens/base16.nix (base16-schemes pkg)
+  # # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
+  # # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
+  # # stylix.base16Scheme = "${inputs.tt-schemes}/base16/horizon-dark.yaml"; # no green or fellow
+  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
+  # stylix.image = pkgs.fetchurl {
+  #   # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
+  #   url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
+  #   hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
+  # };
+  # # generating a palette works OK, but seems to produce crazy combinations, completely unreadable
+  # # stylix.polarity = "light";
+  # # stylix.polarity = "dark";
+
+  # stylix = {
+  #   enable = true;
+  #   base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
+  #   # image = pkgs.fetchurl {
+  #   #     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
+  #   #     url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
+  #   #     hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
+  #   # };
+  # };
+  stylix.targets.btop.colors.enable = true;
+  stylix.targets.kitty.colors.enable = true;
+  stylix.targets.kitty.enable = true;
+
   # ╭────────────╮
   # │   zellij   │
   # ╰────────────╯
@@ -451,45 +683,66 @@
       default_tab_template {
         pane size=2 borderless=true {
           plugin location="file:$HOME/.config/zellij/plugins/zjstatus.wasm" {
+
+            color_bg "#${colors.base00}"
+            color_fg "#${colors.base06}"
+            color_black "#${colors.base00}"
+            color_gray1 "#${colors.base01}"
+            color_gray2 "#${colors.base02}"
+            color_gray3 "#${colors.base03}"
+            color_gray4 "#${colors.base04}"
+            color_gray5 "#${colors.base05}"
+            color_gray6 "#${colors.base06}"
+            color_white "#${colors.base07}"
+            color_red "#${colors.base08}"
+            color_orange "#${colors.base09}"
+            color_yellow "#${colors.base0A}"
+            color_green "#${colors.base0B}"
+            color_blue "#${colors.base0C}"
+            color_cyan "#${colors.base0D}"
+            color_magenta "#${colors.base0E}"
+            color_maroon "#${colors.base0F}"
+
             hide_frame_for_single_pane "false"
   
             // format_left   "{mode} {tabs}"
             // format_right  "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base02},bold] #[bg=#${colors.base02},fg=#${colors.base05},bold] {session}#[fg=#${colors.base02},bold]◗ {datetime}"
 
-            // format_left   "#[fg=#${colors.base0F}]#[bg=#${colors.base0F},fg=#${colors.base00},bold] #[bg=#${colors.base0F},fg=#${colors.base00},bold] {session}#[fg=#${colors.base0F},bold]◗ {tabs}"
-            format_left   "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base0D},bold] #[bg=#${colors.base00},fg=#${colors.base0D},bold] {session}#[fg=#${colors.base00},bold]◗ {tabs}"
+            // format_left   "#[fg=$bg,bg=$bg,]#[fg=$maroon,bg=$bg,bold]  {session}#[fg=$bg,bg=$bg]◗ {tabs}"
+            format_left   " #[fg=$maroon,bg=$bg,bold] {session}  {tabs}"
             format_right  "{mode} {datetime}"
 
             // format_space  ""
 
             // palette
             // format_left  "#[bg=#${colors.base00}]00;#[bg=#${colors.base01}]01;#[bg=#${colors.base02}]02;#[bg=#${colors.base03}]03;#[bg=#${colors.base04}]04;#[bg=#${colors.base05}]05;#[bg=#${colors.base06}]06;#[bg=#${colors.base07}]07;#[bg=#${colors.base08}]08;#[bg=#${colors.base09}]09;#[bg=#${colors.base0A}]0A;#[bg=#${colors.base0B}]0B;#[bg=#${colors.base0C}]0C;#[bg=#${colors.base0D}]0D;#[bg=#${colors.base0E}]0E;#[bg=#${colors.base0F}]0F; {tabs}"
+            // format_left  "#[bg=$fg]fg;#[bg=$bg]bg;#[bg=$black]black;#[bg=$gray1]gray1;#[bg=$gray2]gray2;#[bg=$gray3]gray3;#[bg=$gray4]gray4;#[bg=$gray5]gray5;#[bg=$red]red;#[bg=$orange]orange;#[bg=$yellow]yellow;#[bg=$green]green;#[bg=$cyan]cyan;#[bg=$blue]blue;#[bg=$magenta]magenta;#[bg=$maroon]maroon;#[bg=$white]white;"
   
-            mode_normal        "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0B}]◗"
-            mode_locked        "#[fg=#${colors.base04}]#[bg=#${colors.base04},fg=#${colors.base00},bold]{name}#[fg=#${colors.base04}]◗"
-            mode_resize        "#[fg=#${colors.base08}]#[bg=#${colors.base08},fg=#${colors.base00},bold]{name}#[fg=#${colors.base08}]◗"
-            mode_pane          "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
-            mode_tab           "#[fg=#${colors.base07}]#[bg=#${colors.base07},fg=#${colors.base00},bold]{name}#[fg=#${colors.base07}]◗"
-            mode_scroll        "#[fg=#${colors.base0A}]#[bg=#${colors.base0A},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0A}]◗"
-            mode_enter_search  "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
-            mode_search        "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
-            mode_rename_tab    "#[fg=#${colors.base07}]#[bg=#${colors.base07},fg=#${colors.base00},bold]{name}#[fg=#${colors.base07}]◗"
-            mode_rename_pane   "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
-            mode_session       "#[fg=#${colors.base0E}]#[bg=#${colors.base0E},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0E}]◗"
-            mode_move          "#[fg=#${colors.base0F}]#[bg=#${colors.base0F},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0F}]◗"
-            mode_prompt        "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base00},bold]{name}#[fg=#${colors.base0D}]◗"
-            mode_tmux          "#[fg=#${colors.base09}]#[bg=#${colors.base09},fg=#${colors.base00},bold]{name}#[fg=#${colors.base09}]◗"
+            mode_normal        ""
+            mode_locked        "#[fg=$maroon,bg=$bg]#[bg=$maroon,fg=$gray1,bold]{name}#[fg=$maroon,bg=$bg]◗"
+            mode_pane          "#[fg=$gray5,bg=$bg]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=$bg]◗"
+            mode_tab           "#[fg=$gray5,bg=$bg]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=$bg]◗"
+            mode_scroll        "#[fg=$red,bg=$bg]#[bg=$red,fg=$gray1,bold]{name}#[fg=$red,bg=$bg]◗"
+            mode_enter_search  "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=$bg]◗"
+            mode_search        "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=$bg]◗"
+            mode_resize        "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+            mode_rename_tab    "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+            mode_rename_pane   "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+            mode_move          "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+            mode_session       "#[fg=$green,bg=$bg]#[bg=$green,fg=$gray1,bold]{name}#[fg=$green,bg=$bg]◗"
+            mode_prompt        "#[fg=$magenta,bg=$bg]#[bg=$magenta,fg=$gray1,bold]{name}#[fg=$magenta,bg=$bg]◗"
+            mode_tmux          "#[fg=$cyan,bg=$bg]#[bg=$cyan,fg=$gray1,bold]{name}#[fg=$cyan,bg=$bg]◗"
             mode_default_to_mode "tmux" // if not listed above, which color to use
   
             // formatting for inactive tabs
-            tab_normal              "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{floating_indicator}#[fg=#${colors.base00},bold]◗"
-            tab_normal_fullscreen   "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{fullscreen_indicator}#[fg=#${colors.base00},bold]◗"
-            tab_normal_sync         "#[fg=#${colors.base00}]#[bg=#${colors.base00},fg=#${colors.base03},bold]{index} #[bg=#${colors.base00},fg=#${colors.base01},bold] {name}{sync_indicator}#[fg=#${colors.base00},bold]◗"
+            tab_normal              " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{floating_indicator} "
+            tab_normal_fullscreen   " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{fullscreen_indicator} "
+            tab_normal_sync         " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{sync_indicator} "
   
             // formatting for the current active tab
-            tab_active              "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base00},fg=#${colors.base0B},bold] {name}{floating_indicator}#[fg=#${colors.base00},bold]◗"
-            tab_active_fullscreen   "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base00},fg=#${colors.base0B},bold] {name}{fullscreen_indicator}#[fg=#${colors.base00},bold]◗"
-            tab_active_sync         "#[fg=#${colors.base0B}]#[bg=#${colors.base0B},fg=#${colors.base00},bold]{index} #[bg=#${colors.base00},fg=#${colors.base0B},bold] {name}{sync_indicator}#[fg=#${colors.base00},bold]◗"
+            tab_active              "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{floating_indicator} "
+            tab_active_fullscreen   "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{fullscreen_indicator} "
+            tab_active_sync         "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{sync_indicator} "
   
             // separator between the tabs
             tab_separator           " "
@@ -504,7 +757,7 @@
             command_git_branch_interval    "10"
             command_git_branch_rendermode  "static"
   
-            datetime          "#[fg=#6C7086,bold] {format} "
+            datetime          "#[fg=$gray3,bold] {format} "
             datetime_format   "%H:%M"
             datetime_timezone "America/Los_Angeles"
           }

@@ -2,45 +2,66 @@ layout {
   default_tab_template {
     pane size=2 borderless=true {
       plugin location="file:$HOME/.config/zellij/plugins/zjstatus.wasm" {
+
+        color_bg "#271c3a"
+        color_fg "#edeaef"
+        color_black "#271c3a"
+        color_gray1 "#100323"
+        color_gray2 "#3e2d5c"
+        color_gray3 "#5d5766"
+        color_gray4 "#bebcbf"
+        color_gray5 "#dedcdf"
+        color_gray6 "#edeaef"
+        color_white "#bbaadd"
+        color_red "#a92258"
+        color_orange "#918889"
+        color_yellow "#804ead"
+        color_green "#c6914b"
+        color_blue "#7263aa"
+        color_cyan "#8e7dc6"
+        color_magenta "#953b9d"
+        color_maroon "#59325c"
+
         hide_frame_for_single_pane "false"
 
         // format_left   "{mode} {tabs}"
-        // format_right  "#[fg=#0066ff]#[bg=#0066ff,fg=#606060,bold] #[bg=#606060,fg=#d0d0d0,bold] {session}#[fg=#606060,bold]◗ {datetime}"
+        // format_right  "#[fg=#8e7dc6]#[bg=#8e7dc6,fg=#3e2d5c,bold] #[bg=#3e2d5c,fg=#dedcdf,bold] {session}#[fg=#3e2d5c,bold]◗ {datetime}"
 
-        // format_left   "#[fg=#3300ff]#[bg=#3300ff,fg=#000000,bold] #[bg=#3300ff,fg=#000000,bold] {session}#[fg=#3300ff,bold]◗ {tabs}"
-        format_left   "#[fg=#000000]#[bg=#000000,fg=#0066ff,bold] #[bg=#000000,fg=#0066ff,bold] {session}#[fg=#000000,bold]◗ {tabs}"
+        // format_left   "#[fg=$bg,bg=$bg,]#[fg=$maroon,bg=$bg,bold]  {session}#[fg=$bg,bg=$bg]◗ {tabs}"
+        format_left   " #[fg=$maroon,bg=$bg,bold] {session}  {tabs}"
         format_right  "{mode} {datetime}"
 
         // format_space  ""
 
         // palette
-        // format_left  "#[bg=#000000]00;#[bg=#404040]01;#[bg=#606060]02;#[bg=#808080]03;#[bg=#c0c0c0]04;#[bg=#d0d0d0]05;#[bg=#e0e0e0]06;#[bg=#ffffff]07;#[bg=#ff0000]08;#[bg=#ff9900]09;#[bg=#ff0099]0A;#[bg=#33ff00]0B;#[bg=#00ffff]0C;#[bg=#0066ff]0D;#[bg=#cc00ff]0E;#[bg=#3300ff]0F; {tabs}"
+        // format_left  "#[bg=#271c3a]00;#[bg=#100323]01;#[bg=#3e2d5c]02;#[bg=#5d5766]03;#[bg=#bebcbf]04;#[bg=#dedcdf]05;#[bg=#edeaef]06;#[bg=#bbaadd]07;#[bg=#a92258]08;#[bg=#918889]09;#[bg=#804ead]0A;#[bg=#c6914b]0B;#[bg=#7263aa]0C;#[bg=#8e7dc6]0D;#[bg=#953b9d]0E;#[bg=#59325c]0F; {tabs}"
+        // format_left  "#[bg=$fg]fg;#[bg=$bg]bg;#[bg=$black]black;#[bg=$gray1]gray1;#[bg=$gray2]gray2;#[bg=$gray3]gray3;#[bg=$gray4]gray4;#[bg=$gray5]gray5;#[bg=$red]red;#[bg=$orange]orange;#[bg=$yellow]yellow;#[bg=$green]green;#[bg=$cyan]cyan;#[bg=$blue]blue;#[bg=$magenta]magenta;#[bg=$maroon]maroon;#[bg=$white]white;"
 
-        mode_normal        "#[fg=#33ff00]#[bg=#33ff00,fg=#000000,bold]{name}#[fg=#33ff00]◗"
-        mode_locked        "#[fg=#c0c0c0]#[bg=#c0c0c0,fg=#000000,bold]{name}#[fg=#c0c0c0]◗"
-        mode_resize        "#[fg=#ff0000]#[bg=#ff0000,fg=#000000,bold]{name}#[fg=#ff0000]◗"
-        mode_pane          "#[fg=#0066ff]#[bg=#0066ff,fg=#000000,bold]{name}#[fg=#0066ff]◗"
-        mode_tab           "#[fg=#ffffff]#[bg=#ffffff,fg=#000000,bold]{name}#[fg=#ffffff]◗"
-        mode_scroll        "#[fg=#ff0099]#[bg=#ff0099,fg=#000000,bold]{name}#[fg=#ff0099]◗"
-        mode_enter_search  "#[fg=#0066ff]#[bg=#0066ff,fg=#000000,bold]{name}#[fg=#0066ff]◗"
-        mode_search        "#[fg=#0066ff]#[bg=#0066ff,fg=#000000,bold]{name}#[fg=#0066ff]◗"
-        mode_rename_tab    "#[fg=#ffffff]#[bg=#ffffff,fg=#000000,bold]{name}#[fg=#ffffff]◗"
-        mode_rename_pane   "#[fg=#0066ff]#[bg=#0066ff,fg=#000000,bold]{name}#[fg=#0066ff]◗"
-        mode_session       "#[fg=#cc00ff]#[bg=#cc00ff,fg=#000000,bold]{name}#[fg=#cc00ff]◗"
-        mode_move          "#[fg=#3300ff]#[bg=#3300ff,fg=#000000,bold]{name}#[fg=#3300ff]◗"
-        mode_prompt        "#[fg=#0066ff]#[bg=#0066ff,fg=#000000,bold]{name}#[fg=#0066ff]◗"
-        mode_tmux          "#[fg=#ff9900]#[bg=#ff9900,fg=#000000,bold]{name}#[fg=#ff9900]◗"
+        mode_normal        ""
+        mode_locked        "#[fg=$maroon,bg=$bg]#[bg=$maroon,fg=$gray1,bold]{name}#[fg=$maroon,bg=$bg]◗"
+        mode_pane          "#[fg=$gray5,bg=$bg]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=$bg]◗"
+        mode_tab           "#[fg=$gray5,bg=$bg]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=$bg]◗"
+        mode_scroll        "#[fg=$red,bg=$bg]#[bg=$red,fg=$gray1,bold]{name}#[fg=$red,bg=$bg]◗"
+        mode_enter_search  "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=$bg]◗"
+        mode_search        "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=$bg]◗"
+        mode_resize        "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+        mode_rename_tab    "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+        mode_rename_pane   "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+        mode_move          "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
+        mode_session       "#[fg=$green,bg=$bg]#[bg=$green,fg=$gray1,bold]{name}#[fg=$green,bg=$bg]◗"
+        mode_prompt        "#[fg=$magenta,bg=$bg]#[bg=$magenta,fg=$gray1,bold]{name}#[fg=$magenta,bg=$bg]◗"
+        mode_tmux          "#[fg=$cyan,bg=$bg]#[bg=$cyan,fg=$gray1,bold]{name}#[fg=$cyan,bg=$bg]◗"
         mode_default_to_mode "tmux" // if not listed above, which color to use
 
         // formatting for inactive tabs
-        tab_normal              "#[fg=#000000]#[bg=#000000,fg=#808080,bold]{index} #[bg=#000000,fg=#404040,bold] {name}{floating_indicator}#[fg=#000000,bold]◗"
-        tab_normal_fullscreen   "#[fg=#000000]#[bg=#000000,fg=#808080,bold]{index} #[bg=#000000,fg=#404040,bold] {name}{fullscreen_indicator}#[fg=#000000,bold]◗"
-        tab_normal_sync         "#[fg=#000000]#[bg=#000000,fg=#808080,bold]{index} #[bg=#000000,fg=#404040,bold] {name}{sync_indicator}#[fg=#000000,bold]◗"
+        tab_normal              " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{floating_indicator} "
+        tab_normal_fullscreen   " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{fullscreen_indicator} "
+        tab_normal_sync         " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{sync_indicator} "
 
         // formatting for the current active tab
-        tab_active              "#[fg=#33ff00]#[bg=#33ff00,fg=#000000,bold]{index} #[bg=#000000,fg=#33ff00,bold] {name}{floating_indicator}#[fg=#000000,bold]◗"
-        tab_active_fullscreen   "#[fg=#33ff00]#[bg=#33ff00,fg=#000000,bold]{index} #[bg=#000000,fg=#33ff00,bold] {name}{fullscreen_indicator}#[fg=#000000,bold]◗"
-        tab_active_sync         "#[fg=#33ff00]#[bg=#33ff00,fg=#000000,bold]{index} #[bg=#000000,fg=#33ff00,bold] {name}{sync_indicator}#[fg=#000000,bold]◗"
+        tab_active              "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{floating_indicator} "
+        tab_active_fullscreen   "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{fullscreen_indicator} "
+        tab_active_sync         "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{sync_indicator} "
 
         // separator between the tabs
         tab_separator           " "
@@ -55,7 +76,7 @@ layout {
         command_git_branch_interval    "10"
         command_git_branch_rendermode  "static"
 
-        datetime          "#[fg=#6C7086,bold] {format} "
+        datetime          "#[fg=$gray3,bold] {format} "
         datetime_format   "%H:%M"
         datetime_timezone "America/Los_Angeles"
       }
