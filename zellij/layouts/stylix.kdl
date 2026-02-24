@@ -3,6 +3,7 @@ layout {
     pane size=2 borderless=true {
       plugin location="file:$HOME/.config/zellij/plugins/zjstatus.wasm" {
 
+        color_none "#000000"
         color_bg "#271c3a"
         color_fg "#edeaef"
         color_black "#271c3a"
@@ -24,11 +25,8 @@ layout {
 
         hide_frame_for_single_pane "false"
 
-        // format_left   "{mode} {tabs}"
-        // format_right  "#[fg=#8e7dc6]#[bg=#8e7dc6,fg=#3e2d5c,bold] #[bg=#3e2d5c,fg=#dedcdf,bold] {session}#[fg=#3e2d5c,bold]◗ {datetime}"
-
         // format_left   "#[fg=$bg,bg=$bg,]#[fg=$maroon,bg=$bg,bold]  {session}#[fg=$bg,bg=$bg]◗ {tabs}"
-        format_left   " #[fg=$maroon,bg=$bg,bold] {session}  {tabs}"
+        format_left   "#[fg=$bg,bg=$none]#[fg=$maroon,bg=$bg,bold] {session}#[fg=$bg,bg=$none]◗ {tabs}"
         format_right  "{mode} {datetime}"
 
         // format_space  ""
@@ -54,14 +52,14 @@ layout {
         mode_default_to_mode "tmux" // if not listed above, which color to use
 
         // formatting for inactive tabs
-        tab_normal              " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{floating_indicator} "
-        tab_normal_fullscreen   " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{fullscreen_indicator} "
-        tab_normal_sync         " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{sync_indicator} "
+        tab_normal              "#[fg=$bg]#[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{floating_indicator}#[fg=$bg]◗"
+        tab_normal_fullscreen   "#[fg=$bg]#[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{fullscreen_indicator}#[fg=$bg]◗"
+        tab_normal_sync         "#[fg=$bg]#[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{sync_indicator}#[fg=$bg]◗"
 
         // formatting for the current active tab
-        tab_active              "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{floating_indicator} "
-        tab_active_fullscreen   "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{fullscreen_indicator} "
-        tab_active_sync         "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{sync_indicator} "
+        tab_active              "#[fg=$green]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{floating_indicator}#[fg=$bg]◗"
+        tab_active_fullscreen   "#[fg=$green]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{fullscreen_indicator}#[fg=$bg]◗"
+        tab_active_sync         "#[fg=$green]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{sync_indicator}#[fg=$bg]◗"
 
         // separator between the tabs
         tab_separator           " "
