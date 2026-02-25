@@ -193,8 +193,9 @@
       fish_add_path {$HOME}/.yarn/bin
       fish_add_path {$HOME}/.local/bin
       fish_add_path {$GOBIN}
-      starship init fish | source
       mise activate fish | source
+      starship init fish | source
+      zoxide init --cmd c fish | source
       eval (ssh-agent -c) >/dev/null
       ssh-add -q
       set -g fish_key_bindings fish_hybrid_key_bindings
@@ -427,22 +428,29 @@
         ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
       ];
 
+      cursor = {
+        hide_on_key_press = true;
+      };
+
       decoration = {
         rounding = 10;
         rounding_power = 2;
-        active_opacity = 1.0;
-        inactive_opacity = 0.8;
+
+        active_opacity = 0.95;
+        inactive_opacity = 0.7;
+
+        blur = {
+          enabled = true;
+          size = 8;
+          passes = 1;
+          vibrancy = "0.1696";
+        };
+
         shadow = {
           enabled = true;
           range = 4;
           render_power = 3;
           # color = "rgba(1a1a1aee)";
-        };
-        blur = {
-          enabled = true;
-          size = 3;
-          passes = 1;
-          vibrancy = "0.1696";
         };
       };
 
@@ -459,6 +467,9 @@
       };
 
       gestures = {
+        workspace_swipe_touch = true;
+        workspace_swipe_cancel_ratio = "0.25";
+        workspace_swipe_create_new = false;
         gesture = [
           "2, swipe, mod: SUPER, resize"
           "2, pinch, mod: SUPER, float"
@@ -488,13 +499,16 @@
       };
 
       input = {
+        accel_profile = "flat";
+        sensitivity = "0.3";
+        follow_mouse = false;
+        natural_scroll = true;
+
         kb_layout = "us";
         kb_variant = "dvorak";
         repeat_delay = 180;
         repeat_rate = 100;
-        follow_mouse = true;
-        sensitivity = 0;
-        natural_scroll = true;
+
         touchpad = {
           natural_scroll = true;
         };
@@ -597,11 +611,12 @@
       hide_window_decorations = "titlebar-only";
       confirm_os_window_close = 2;
       tab_bar_edge = "top";
-      tab_bar_style = "powerline";
+      tab_bar_style = "separator";
       tab_powerline_style = "round";
-      tab_separator = " ⦚ ";
-      tab_title_template = " {title.split('/')[-1].partition('-')[0].strip()} ";
-      active_tab_title_template = " ⋄ ";
+      tab_separator = "\"\"";
+      # tab_title_template = " {title.split('/')[-1].partition('-')[0].strip()} ";
+      tab_title_template = "\" ◇ \"";
+      active_tab_title_template = "\" ◈ \"";
       tab_bar_background = "none";
       # background_opacity = "0.85"; # hyprland overrides
       dynamic_background_opacity = true;
@@ -704,45 +719,57 @@
             color_maroon "#${colors.base0F}"
 
             hide_frame_for_single_pane "false"
-  
-            // format_left   "{mode} {tabs}"
-            // format_right  "#[fg=#${colors.base0D}]#[bg=#${colors.base0D},fg=#${colors.base02},bold] #[bg=#${colors.base02},fg=#${colors.base05},bold] {session}#[fg=#${colors.base02},bold]◗ {datetime}"
 
-            // format_left   "#[fg=$bg,bg=$bg,]#[fg=$maroon,bg=$bg,bold]  {session}#[fg=$bg,bg=$bg]◗ {tabs}"
-            format_left   " #[fg=$maroon,bg=$bg,bold] {session}  {tabs}"
+            // style: pill
+            // format_left   "#[fg=$bg,bg=none]#[fg=$maroon,bg=$bg,bold] {session}#[fg=$bg,bg=none]◗ {tabs}"
+
+            // style: plain
+            format_left   " #[fg=$maroon,bg=none,bold] {session}  {tabs}"
+
             format_right  "{mode} {datetime}"
 
             // format_space  ""
 
             // palette
             // format_left  "#[bg=#${colors.base00}]00;#[bg=#${colors.base01}]01;#[bg=#${colors.base02}]02;#[bg=#${colors.base03}]03;#[bg=#${colors.base04}]04;#[bg=#${colors.base05}]05;#[bg=#${colors.base06}]06;#[bg=#${colors.base07}]07;#[bg=#${colors.base08}]08;#[bg=#${colors.base09}]09;#[bg=#${colors.base0A}]0A;#[bg=#${colors.base0B}]0B;#[bg=#${colors.base0C}]0C;#[bg=#${colors.base0D}]0D;#[bg=#${colors.base0E}]0E;#[bg=#${colors.base0F}]0F; {tabs}"
-            // format_left  "#[bg=$fg]fg;#[bg=$bg]bg;#[bg=$black]black;#[bg=$gray1]gray1;#[bg=$gray2]gray2;#[bg=$gray3]gray3;#[bg=$gray4]gray4;#[bg=$gray5]gray5;#[bg=$red]red;#[bg=$orange]orange;#[bg=$yellow]yellow;#[bg=$green]green;#[bg=$cyan]cyan;#[bg=$blue]blue;#[bg=$magenta]magenta;#[bg=$maroon]maroon;#[bg=$white]white;"
+            // format_left  "#[bg=$fg]fg;#[bg=none]bg;#[bg=$black]black;#[bg=$gray1]gray1;#[bg=$gray2]gray2;#[bg=$gray3]gray3;#[bg=$gray4]gray4;#[bg=$gray5]gray5;#[bg=$red]red;#[bg=$orange]orange;#[bg=$yellow]yellow;#[bg=$green]green;#[bg=$cyan]cyan;#[bg=$blue]blue;#[bg=$magenta]magenta;#[bg=$maroon]maroon;#[bg=$white]white;"
   
             mode_normal        ""
-            mode_locked        "#[fg=$maroon,bg=$bg]#[bg=$maroon,fg=$gray1,bold]{name}#[fg=$maroon,bg=$bg]◗"
-            mode_pane          "#[fg=$gray5,bg=$bg]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=$bg]◗"
-            mode_tab           "#[fg=$gray5,bg=$bg]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=$bg]◗"
-            mode_scroll        "#[fg=$red,bg=$bg]#[bg=$red,fg=$gray1,bold]{name}#[fg=$red,bg=$bg]◗"
-            mode_enter_search  "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=$bg]◗"
-            mode_search        "#[fg=$yellow,bg=$bg]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=$bg]◗"
-            mode_resize        "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
-            mode_rename_tab    "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
-            mode_rename_pane   "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
-            mode_move          "#[fg=$orange,bg=$bg]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=$bg]◗"
-            mode_session       "#[fg=$green,bg=$bg]#[bg=$green,fg=$gray1,bold]{name}#[fg=$green,bg=$bg]◗"
-            mode_prompt        "#[fg=$magenta,bg=$bg]#[bg=$magenta,fg=$gray1,bold]{name}#[fg=$magenta,bg=$bg]◗"
-            mode_tmux          "#[fg=$cyan,bg=$bg]#[bg=$cyan,fg=$gray1,bold]{name}#[fg=$cyan,bg=$bg]◗"
+            mode_locked        "#[fg=$maroon,bg=none]#[bg=$maroon,fg=$gray1,bold]{name}#[fg=$maroon,bg=none]◗"
+            mode_pane          "#[fg=$gray5,bg=none]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=none]◗"
+            mode_tab           "#[fg=$gray5,bg=none]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=none]◗"
+            mode_scroll        "#[fg=$red,bg=none]#[bg=$red,fg=$gray1,bold]{name}#[fg=$red,bg=none]◗"
+            mode_enter_search  "#[fg=$yellow,bg=none]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=none]◗"
+            mode_search        "#[fg=$yellow,bg=none]#[bg=$yellow,fg=$gray1,bold]{name}#[fg=$yellow,bg=none]◗"
+            mode_resize        "#[fg=$orange,bg=none]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=none]◗"
+            mode_rename_tab    "#[fg=$orange,bg=none]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=none]◗"
+            mode_rename_pane   "#[fg=$orange,bg=none]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=none]◗"
+            mode_move          "#[fg=$orange,bg=none]#[bg=$orange,fg=$gray1,bold]{name}#[fg=$orange,bg=none]◗"
+            mode_session       "#[fg=$green,bg=none]#[bg=$green,fg=$gray1,bold]{name}#[fg=$green,bg=none]◗"
+            mode_prompt        "#[fg=$magenta,bg=none]#[bg=$magenta,fg=$gray1,bold]{name}#[fg=$magenta,bg=none]◗"
+            mode_tmux          "#[fg=$cyan,bg=none]#[bg=$cyan,fg=$gray1,bold]{name}#[fg=$cyan,bg=none]◗"
             mode_default_to_mode "tmux" // if not listed above, which color to use
-  
-            // formatting for inactive tabs
-            tab_normal              " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{floating_indicator} "
-            tab_normal_fullscreen   " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{fullscreen_indicator} "
-            tab_normal_sync         " #[fg=$gray5,bg=$bg,bold]{index} #[fg=$gray3,bg=$bg,bold] {name}{sync_indicator} "
-  
+
+            // style: pill
+            // tab_normal              "#[fg=$bg,bg=none]#[fg=$gray5,bg=none,bold]{index} #[fg=$gray3,bg=none,bold] {name}{floating_indicator}#[fg=$bg,bg=none]◗"
+            // tab_normal_fullscreen   "#[fg=$bg,bg=none]#[fg=$gray5,bg=none,bold]{index} #[fg=$gray3,bg=none,bold] {name}{fullscreen_indicator}#[fg=$bg,bg=none]◗"
+            // tab_normal_sync         "#[fg=$bg,bg=none]#[fg=$gray5,bg=none,bold]{index} #[fg=$gray3,bg=none,bold] {name}{sync_indicator}#[fg=$bg,bg=none]◗"
+
+            // style: plain
+            tab_normal              "#[fg=$bg,bg=none] #[fg=$gray5,bg=none,bold]{index} #[fg=$gray3,bg=none,bold] {name}{floating_indicator}#[fg=$bg,bg=none] "
+            tab_normal_fullscreen   "#[fg=$bg,bg=none] #[fg=$gray5,bg=none,bold]{index} #[fg=$gray3,bg=none,bold] {name}{fullscreen_indicator}#[fg=$bg,bg=none] "
+            tab_normal_sync         "#[fg=$bg,bg=none] #[fg=$gray5,bg=none,bold]{index} #[fg=$gray3,bg=none,bold] {name}{sync_indicator}#[fg=$bg,bg=none] "
+
             // formatting for the current active tab
-            tab_active              "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{floating_indicator} "
-            tab_active_fullscreen   "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{fullscreen_indicator} "
-            tab_active_sync         "#[fg=$green,bg=$bg]#[fg=$gray1,bg=$green,bold]{index} #[fg=$green,bg=$bg,bold] {name}{sync_indicator} "
+            // style: pill
+            tab_active              "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{floating_indicator}#[fg=$bg,bg=none]◗"
+            tab_active_fullscreen   "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{fullscreen_indicator}#[fg=$bg,bg=none]◗"
+            tab_active_sync         "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{sync_indicator}#[fg=$bg,bg=none]◗"
+
+            // style: plain
+            // tab_active              "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{floating_indicator} "
+            // tab_active_fullscreen   "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{fullscreen_indicator} "
+            // tab_active_sync         "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{sync_indicator} "
   
             // separator between the tabs
             tab_separator           " "

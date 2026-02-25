@@ -260,6 +260,7 @@
     zathura
     zellij
     zig
+    zoxide
   ];
 
   fonts.packages = with pkgs; [
