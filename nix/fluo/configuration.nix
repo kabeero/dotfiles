@@ -205,6 +205,7 @@
     jq
     jujutsu
     k9s
+    kanshi
     kicad
     kitty
     kmonad
@@ -357,8 +358,8 @@
   # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
   # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
   # stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml"; # vibrant
-  stylix.base16Scheme = "${inputs.tt-schemes}/base16/pasque.yaml"; # sahar
-  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/eris.yaml"; # dark
+  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/pasque.yaml"; # sahar
+  stylix.base16Scheme = "${inputs.tt-schemes}/base16/eris.yaml"; # dark
   # stylix.base16Scheme = "${inputs.tt-schemes}/base16/emil.yaml"; # light
   stylix.image = pkgs.fetchurl {
     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space

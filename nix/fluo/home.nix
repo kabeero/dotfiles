@@ -372,20 +372,27 @@
         "$mod SHIFT, o, exec, swappy -f $(grimblast copysave area)"
 
         # hyprscrolling
-        "$mod, j, layoutmsg, move -col" # pan L
-        "$mod, left, layoutmsg, move -col" # pan L
-        "$mod, comma, layoutmsg, move -col" # pan L
-        "$mod, k, layoutmsg, move +col" # pan R
-        "$mod, right, layoutmsg, move +col" # pan R
-        "$mod, period, layoutmsg, move +col" # pan R
+
+        "$mod, j, layoutmsg, move -col"
+        "$mod, left, layoutmsg, move -col"
+        "$mod, comma, layoutmsg, move -col"
+
+        "$mod, k, layoutmsg, move +col"
+        "$mod, right, layoutmsg, move +col"
+        "$mod, period, layoutmsg, move +col"
+
+        "$moveMod, comma, layoutmsg, swapcol l"
+        "$moveMod, period, layoutmsg, swapcol r"
+
         "$moveMod, j, layoutmsg, movewindowto l"
         "$moveMod, left, layoutmsg, movewindowto l"
-        "$moveMod, comma, layoutmsg, movewindowto l"
+
         "$moveMod, k, layoutmsg, movewindowto r"
         "$moveMod, right, layoutmsg, movewindowto r"
-        "$moveMod, period, layoutmsg, movewindowto r"
+
         "$moveMod, q, layoutmsg, movewindowto u"
         "$moveMod, up, layoutmsg, movewindowto u"
+
         "$moveMod, code:52, layoutmsg, movewindowto d"
         "$moveMod, down, layoutmsg, movewindowto d"
 
@@ -436,8 +443,8 @@
         rounding = 10;
         rounding_power = 2;
 
-        active_opacity = 0.95;
-        inactive_opacity = 0.7;
+        active_opacity = 1.0;
+        inactive_opacity = 0.8;
 
         blur = {
           enabled = true;
@@ -533,8 +540,13 @@
         };
       };
 
+      windowrule = [
+        "match:class kitty, opacity 0.9"
+      ];
+
       exec-once = [
         "hypridle"
+        "kanshi"
       ];
 
     };
@@ -644,6 +656,24 @@
     };
   };
 
+  # ╭──────────────╮
+  # │   monitors   │
+  # ╰──────────────╯
+
+  xdg.configFile."kanshi/config".text = ''
+    # https://gitlab.freedesktop.org/emersion/kanshi/-/blob/master/config.c
+    # position is flipped in Y
+    
+    profile laptop-only {
+    	output "Sharp Corporation LQ*" mode 3840x2400 scale 1.5 position 0,0 transform normal
+    }
+    
+    profile tronics {
+    	output "Sharp Corporation LQ*" mode 3840x2400 scale 1.5 position 0,2160 transform normal
+    	output "Dell Inc. DELL UP3221Q *" mode 3840x2160 scale 1.0 position 0,0 transform normal
+    }
+  '';
+
   # ╭────────────╮
   # │   stylix   │
   # ╰────────────╯
@@ -686,14 +716,12 @@
 
   programs.zellij.enable = true;
 
-  home.file.".config/zellij/plugins/zjstatus.wasm".source = "${pkgs.zjstatus}/bin/zjstatus.wasm";
-
+  xdg.configFile."zellij/plugins/zjstatus.wasm".source = "${pkgs.zjstatus}/bin/zjstatus.wasm";
   xdg.configFile."zellij/config.kdl".source = ./cfg/zellij/config.kdl;
   # inject + interpolate, so we can specify colors dynamically
   # > https://nix-community.github.io/stylix/styling.html
   xdg.configFile."zellij/layouts/default.swap.kdl".source = ./cfg/zellij/layout.swap.kdl;
-  xdg.configFile."zellij/layouts/default.kdl".text = 
-  ''
+  xdg.configFile."zellij/layouts/default.kdl".text = ''
     layout {
       default_tab_template {
         pane size=2 borderless=true {
