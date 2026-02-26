@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kmonad = {
+      url = "github:kmonad/kmonad?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,21 +66,22 @@
         modules = with inputs; [
           {
             nixpkgs.overlays = [
-                (final: prev: {
-                    zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
-                })
-                (final: prev: {
-                    hyprland = hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
-                })
-                (final: prev: {
-                    hyprland-plugins = hyprland-plugins.packages.${prev.stdenv.hostPlatform.system}.hyprland-plugins;
-                })
+              (final: prev: {
+                zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
+              })
+              (final: prev: {
+                hyprland = hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
+              })
+              (final: prev: {
+                hyprland-plugins = hyprland-plugins.packages.${prev.stdenv.hostPlatform.system}.hyprland-plugins;
+              })
             ];
           }
           ./configuration.nix
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           # hyprland.homeManagerModules.default
+          kmonad.nixosModules.default
           stylix.nixosModules.default
         ];
       };

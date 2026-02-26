@@ -132,8 +132,9 @@
       "kvm"
       "networkmanager"
       "render"
-      "wheel"
+      "uinput"
       "video"
+      "wheel"
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
@@ -150,9 +151,9 @@
 
   # > https://wiki.hypr.land/Nix/Cachix/
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   nix.gc = {
@@ -299,6 +300,23 @@
   # List services that you want to enable:
 
   services.udisks2.enable = true;
+
+  services.kmonad = {
+    enable = true;
+    keyboards = {
+      razerKB = {
+        device = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd";
+        config = builtins.readFile ./cfg/kmonad/config.kbd;
+        extraGroups = [ "root" ];
+        defcfg = {
+          # generate the defcfg portion of the kmonad config dynamically?
+          enable = true;
+          allowCommands = true;
+          fallthrough = true;
+        };
+      };
+    };
+  };
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;

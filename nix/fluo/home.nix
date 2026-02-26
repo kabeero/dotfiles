@@ -6,20 +6,17 @@
   ...
 }:
 
-## used overlay in config.nix instead
-# let 
-#   zjstatus = pkgs.fetchurl {
-#     url = "https://github.com/dj95/zjstatus/releases/download/v0.22.0/zjstatus.wasm";
-#     sha256 = "sha256-TeQm0gscv4YScuknrutbSdksF/Diu50XP4W/fwFU3VM=";
-#   };
-# in 
 {
   home.stateVersion = "25.11";
   home.username = "mkgz";
   home.homeDirectory = "/home/mkgz";
-  home.packages = with pkgs; [];
-
+  home.packages = with pkgs; [ ];
   home.shell.enableFishIntegration = true;
+
+  # ╭──────────╮
+  # │   apps   │
+  # ╰──────────╯
+
   services.ssh-agent.enableFishIntegration = true;
 
   services.gpg-agent = {
@@ -28,20 +25,16 @@
     enableSshSupport = true;
   };
 
-  services.wlsunset = {
-    enable = true;
-    latitude = 33.68;
-    longitude = -117.83;
-  };
-
-  # ╭──────────╮
-  # │   apps   │
-  # ╰──────────╯
-
   programs.btop.enable = true;
   programs.starship = {
     enable = true;
     enableFishIntegration = true;
+  };
+
+  services.wlsunset = {
+    enable = true;
+    latitude = 33.68;
+    longitude = -117.83;
   };
 
   # ╭──────────╮
@@ -138,7 +131,7 @@
         fish_vi_key_bindings --no-erase
       '';
 
-      ytarchive = '' 
+      ytarchive = ''
         function ytarchive
          yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
            --sponsorblock-mark "all" \
@@ -151,7 +144,7 @@
         end
       '';
 
-      ytarchivevideo = '' 
+      ytarchivevideo = ''
         function ytarchivevideo
           yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
             --sponsorblock-mark "all" \
@@ -163,7 +156,7 @@
         end
       '';
 
-      ytd = '' 
+      ytd = ''
         function ytd
           yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
             --sponsorblock-mark "all" \
@@ -200,7 +193,7 @@
       ssh-add -q
       set -g fish_key_bindings fish_hybrid_key_bindings
     '';
-    plugins = [];
+    plugins = [ ];
   };
 
   # ╭─────────╮
@@ -546,7 +539,6 @@
 
       exec-once = [
         "hypridle"
-        "kanshi"
       ];
 
     };
@@ -660,52 +652,100 @@
   # │   monitors   │
   # ╰──────────────╯
 
-  xdg.configFile."kanshi/config".text = ''
-    # https://gitlab.freedesktop.org/emersion/kanshi/-/blob/master/config.c
-    # position is flipped in Y
-    
-    profile laptop-only {
-    	output "Sharp Corporation LQ*" mode 3840x2400 scale 1.5 position 0,0 transform normal
-    }
-    
-    profile tronics {
-    	output "Sharp Corporation LQ*" mode 3840x2400 scale 1.5 position 0,2160 transform normal
-    	output "Dell Inc. DELL UP3221Q *" mode 3840x2160 scale 1.0 position 0,0 transform normal
-    }
-  '';
+  services.kanshi = {
+    enable = true;
+    settings = [
+      {
+        profile.name = "undocked";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400";
+            position = "0,0";
+            scale = 1.5;
+            transform = "normal";
+          }
+        ];
+      }
+      {
+        profile.name = "tronics";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400";
+            position = "0,2160";
+            scale = 1.5;
+            transform = "normal";
+          }
+          {
+            criteria = "Dell Inc. DELL UP3221Q *";
+            mode = "3840x2160";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+          }
+        ];
+      }
+      {
+        profile.name = "work-2";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            status = "disable";
+          }
+          {
+            criteria = "Dell Inc. DELL UP3221Q D*";
+            mode = "3840x2160";
+            position = "0,0";
+            scale = 1.0;
+            transform = "90";
+          }
+          {
+            criteria = "Dell Inc. DELL U3223QE C*";
+            mode = "3840x2160";
+            position = "2160,0";
+            scale = 1.0;
+            transform = "90";
+          }
+        ];
+      }
+      {
+        profile.name = "work-3";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            status = "disable";
+          }
+          {
+            criteria = "Dell Inc. DELL UP3221Q D*";
+            mode = "3840x2160";
+            position = "0,0";
+            scale = 1.0;
+            transform = "90";
+          }
+          {
+            criteria = "Dell Inc. DELL U3223QE C*";
+            mode = "3840x2160";
+            position = "2160,0";
+            scale = 1.0;
+            transform = "90";
+          }
+          {
+            criteria = "Dell Inc. DELL UP3221Q H*";
+            mode = "3840x2160";
+            position = "4320,0";
+            scale = 1.0;
+            transform = "270";
+          }
+        ];
+      }
+    ];
+  };
 
   # ╭────────────╮
   # │   stylix   │
   # ╰────────────╯
 
-  ## from config.nix
-  # stylix.enable = true;
-  # stylix.autoEnable = true;
-  # # > https://nix-community.github.io/stylix/configuration.html
-  # # > https://tinted-theming.github.io/tinted-gallery/
-  # # > https://github.com/SenchoPens/base16.nix (base16-schemes pkg)
-  # # > https://github.com/tinted-theming/schemes (not a nix pkg yet)
-  # # ayu-dark*, deep, grape, gruvbox-dark-hard* (meh), hipster-green, homebrew, horizon-dark* (!), isotope* (!)
-  # # stylix.base16Scheme = "${inputs.tt-schemes}/base16/horizon-dark.yaml"; # no green or fellow
-  # stylix.base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
-  # stylix.image = pkgs.fetchurl {
-  #   # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
-  #   url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
-  #   hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
-  # };
-  # # generating a palette works OK, but seems to produce crazy combinations, completely unreadable
-  # # stylix.polarity = "light";
-  # # stylix.polarity = "dark";
-
-  # stylix = {
-  #   enable = true;
-  #   base16Scheme = "${inputs.tt-schemes}/base16/isotope.yaml";
-  #   # image = pkgs.fetchurl {
-  #   #     # url = "https://w.wallhaven.cc/full/ml/wallhaven-mlzgy1.jpg"; # blue space
-  #   #     url = "https://w.wallhaven.cc/full/d8/wallhaven-d8386j.png"; # cyan / orange / pink space
-  #   #     hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
-  #   # };
-  # };
   stylix.targets.btop.colors.enable = true;
   stylix.targets.kitty.colors.enable = true;
   stylix.targets.kitty.enable = true;
@@ -716,11 +756,11 @@
 
   programs.zellij.enable = true;
 
-  xdg.configFile."zellij/plugins/zjstatus.wasm".source = "${pkgs.zjstatus}/bin/zjstatus.wasm";
   xdg.configFile."zellij/config.kdl".source = ./cfg/zellij/config.kdl;
+  xdg.configFile."zellij/plugins/zjstatus.wasm".source = "${pkgs.zjstatus}/bin/zjstatus.wasm";
+  xdg.configFile."zellij/layouts/default.swap.kdl".source = ./cfg/zellij/layout.swap.kdl;
   # inject + interpolate, so we can specify colors dynamically
   # > https://nix-community.github.io/stylix/styling.html
-  xdg.configFile."zellij/layouts/default.swap.kdl".source = ./cfg/zellij/layout.swap.kdl;
   xdg.configFile."zellij/layouts/default.kdl".text = ''
     layout {
       default_tab_template {
@@ -761,7 +801,7 @@
             // palette
             // format_left  "#[bg=#${colors.base00}]00;#[bg=#${colors.base01}]01;#[bg=#${colors.base02}]02;#[bg=#${colors.base03}]03;#[bg=#${colors.base04}]04;#[bg=#${colors.base05}]05;#[bg=#${colors.base06}]06;#[bg=#${colors.base07}]07;#[bg=#${colors.base08}]08;#[bg=#${colors.base09}]09;#[bg=#${colors.base0A}]0A;#[bg=#${colors.base0B}]0B;#[bg=#${colors.base0C}]0C;#[bg=#${colors.base0D}]0D;#[bg=#${colors.base0E}]0E;#[bg=#${colors.base0F}]0F; {tabs}"
             // format_left  "#[bg=$fg]fg;#[bg=none]bg;#[bg=$black]black;#[bg=$gray1]gray1;#[bg=$gray2]gray2;#[bg=$gray3]gray3;#[bg=$gray4]gray4;#[bg=$gray5]gray5;#[bg=$red]red;#[bg=$orange]orange;#[bg=$yellow]yellow;#[bg=$green]green;#[bg=$cyan]cyan;#[bg=$blue]blue;#[bg=$magenta]magenta;#[bg=$maroon]maroon;#[bg=$white]white;"
-  
+
             mode_normal        ""
             mode_locked        "#[fg=$maroon,bg=none]#[bg=$maroon,fg=$gray1,bold]{name}#[fg=$maroon,bg=none]◗"
             mode_pane          "#[fg=$gray5,bg=none]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=none]◗"
@@ -798,20 +838,20 @@
             // tab_active              "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{floating_indicator} "
             // tab_active_fullscreen   "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{fullscreen_indicator} "
             // tab_active_sync         "#[fg=$cyan,bg=none]#[fg=$gray1,bg=$cyan,bold]{index} #[fg=$cyan,bg=none,bold] {name}{sync_indicator} "
-  
+
             // separator between the tabs
             tab_separator           " "
-  
+
             // indicators
             tab_sync_indicator       " "
             tab_fullscreen_indicator " 󰊓"
             tab_floating_indicator   " 󰹙"
-  
+
             command_git_branch_command     "git rev-parse --abbrev-ref HEAD"
             command_git_branch_format      "#[fg=blue] {stdout} "
             command_git_branch_interval    "10"
             command_git_branch_rendermode  "static"
-  
+
             datetime          "#[fg=$gray3,bold] {format} "
             datetime_format   "%H:%M"
             datetime_timezone "America/Los_Angeles"
