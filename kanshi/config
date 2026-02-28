@@ -1,0 +1,21 @@
+profile undocked {
+  output "Sharp Corporation LQ*" enable mode 3840x2400@59.99Hz position 0,0 scale 1.500000 transform normal
+}
+
+profile tronics {
+  output "Sharp Corporation LQ*" mode 3840x2400@59.99Hz position 640,2160 scale 1.500000 transform normal
+  output "Dell Inc. DELL UP3221Q *" mode 3840x2160@60.00Hz position 0,0 scale 1.000000 transform normal
+}
+
+profile work-2 {
+  output "Sharp Corporation LQ*" disable mode 3840x2400@59.99Hz position 0,0 scale 1.500000
+  output "Dell Inc. DELL UP3221Q D*" mode 3840x2160@59.94Hz position 0,0 scale 1.000000 transform 90
+  output "Dell Inc. DELL U3223QE C*" mode 3840x2160@60.00Hz position 2160,0 scale 1.000000 transform 90
+}
+
+profile work-3 {
+  output "Sharp Corporation LQ*" disable mode 3840x2400@59.99Hz position -3840,0 scale 1.500000
+  output "Dell Inc. DELL UP3221Q D*" mode 3840x2160 position 0,0 scale 1.000000 transform 90
+  output "Dell Inc. DELL U3223QE C*" mode 3840x2160@60.00Hz position 2160,0 scale 1.000000 transform 90
+  output "Dell Inc. DELL UP3221Q H*" mode 3840x2160@59.94Hz position 4320,0 scale 1.000000 transform 270
+}
