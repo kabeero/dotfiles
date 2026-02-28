@@ -660,10 +660,11 @@
         profile.outputs = [
           {
             criteria = "Sharp Corporation LQ*";
-            mode = "3840x2400";
+            mode = "3840x2400@59.99Hz";
             position = "0,0";
             scale = 1.5;
             transform = "normal";
+            status = "enable";
           }
         ];
       }
@@ -672,14 +673,14 @@
         profile.outputs = [
           {
             criteria = "Sharp Corporation LQ*";
-            mode = "3840x2400";
-            position = "0,2160";
+            mode = "3840x2400@59.99Hz";
+            position = "640,2160";
             scale = 1.5;
             transform = "normal";
           }
           {
             criteria = "Dell Inc. DELL UP3221Q *";
-            mode = "3840x2160";
+            mode = "3840x2160@60.00Hz";
             position = "0,0";
             scale = 1.0;
             transform = "normal";
@@ -691,18 +692,21 @@
         profile.outputs = [
           {
             criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400@59.99Hz";
+            position = "0,0";
+            scale = 1.5;
             status = "disable";
           }
           {
             criteria = "Dell Inc. DELL UP3221Q D*";
-            mode = "3840x2160";
+            mode = "3840x2160@59.94Hz";
             position = "0,0";
             scale = 1.0;
             transform = "90";
           }
           {
             criteria = "Dell Inc. DELL U3223QE C*";
-            mode = "3840x2160";
+            mode = "3840x2160@60.00Hz";
             position = "2160,0";
             scale = 1.0;
             transform = "90";
@@ -714,6 +718,9 @@
         profile.outputs = [
           {
             criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400@59.99Hz";
+            position = "-3840,0";
+            scale = 1.5;
             status = "disable";
           }
           {
@@ -725,14 +732,14 @@
           }
           {
             criteria = "Dell Inc. DELL U3223QE C*";
-            mode = "3840x2160";
+            mode = "3840x2160@60.00Hz";
             position = "2160,0";
             scale = 1.0;
             transform = "90";
           }
           {
             criteria = "Dell Inc. DELL UP3221Q H*";
-            mode = "3840x2160";
+            mode = "3840x2160@59.94Hz";
             position = "4320,0";
             scale = 1.0;
             transform = "270";
