@@ -60,6 +60,12 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  hardware.graphics.enable = true;
+  hardware.graphics.extraPackages = with pkgs; [
+    libva-vdpau-driver
+    libvdpau-va-gl
+  ];
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -131,10 +137,12 @@
       "dialout"
       "input"
       "kvm"
+      "libvirtd"
       "networkmanager"
       "render"
-      "wheel"
+      "uinput"
       "video"
+      "wheel"
     ];
     shell = pkgs.fish;
     packages = with pkgs; [
@@ -151,9 +159,9 @@
 
   # > https://wiki.hypr.land/Nix/Cachix/
   nix.settings = {
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = [ "https://hyprland.cachix.org" ];
+    trusted-substituters = [ "https://hyprland.cachix.org" ];
+    trusted-public-keys = [ "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=" ];
   };
 
   nix.gc = {
@@ -191,8 +199,8 @@
     file
     fzf
     gitFull
-    gitui
     git-lfs
+    gitui
     glmark2
     gnumake
     gopls
@@ -227,6 +235,7 @@
     nix-your-shell
     nixfmt
     nmap
+    nodejs
     nushell
     obs-studio
     obs-studio-plugins.obs-pipewire-audio-capture
@@ -260,7 +269,6 @@
     unzip
     usbutils
     vim
-    virt-manager
     vscodium
     watchman
     wget
@@ -274,6 +282,7 @@
     zathura
     zellij
     zig
+    zoxide
   ];
 
   nixpkgs.config.android_sdk.accept_license = true;
@@ -321,10 +330,33 @@
     enable = true;
     enableSSHSupport = true;
   };
+  programs.virt-manager.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu.swtpm.enable = true;
+  };
+  virtualisation.spiceUSBRedirection.enable = true;
 
   # List services that you want to enable:
 
   services.udisks2.enable = true;
+
+  services.kmonad = {
+    enable = true;
+    keyboards = {
+      razerKB = {
+        device = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd";
+        config = builtins.readFile ./cfg/kmonad/config.kbd;
+        extraGroups = [ "root" ];
+        defcfg = {
+          # generate the defcfg portion of the kmonad config dynamically?
+          enable = true;
+          allowCommands = true;
+          fallthrough = true;
+        };
+      };
+    };
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -338,6 +370,7 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
   networking.firewall.enable = true;
+  networking.firewall.allowPing = false;
 
   system.stateVersion = "25.11";
 

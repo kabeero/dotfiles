@@ -13,6 +13,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    kmonad = {
+      url = "github:kmonad/kmonad?dir=nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,25 +61,24 @@
       nixosConfigurations.navi = nixpkgs.lib.nixosSystem {
         ## make flake inputs available to all nixos modules defined below
         specialArgs = { inherit inputs; };
-
-        ## inject overlays
         modules = with inputs; [
           {
             nixpkgs.overlays = [
               (final: prev: {
-                  zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
+                zjstatus = zjstatus.packages.${prev.stdenv.hostPlatform.system}.default;
               })
               (final: prev: {
-                  hyprland = hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
+                hyprland = hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
               })
               (final: prev: {
-                  hyprland-plugins = hyprland-plugins.packages.${prev.stdenv.hostPlatform.system}.hyprland-plugins;
+                hyprland-plugins = hyprland-plugins.packages.${prev.stdenv.hostPlatform.system}.hyprland-plugins;
               })
             ];
           }
           ./configuration.nix
           home-manager.nixosModules.home-manager
           # hyprland.homeManagerModules.default
+          kmonad.nixosModules.default
           stylix.nixosModules.default
         ];
       };
