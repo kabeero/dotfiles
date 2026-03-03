@@ -688,6 +688,44 @@
         ];
       }
       {
+        profile.name = "work-1-left";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400@59.99Hz";
+            position = "0,0";
+            scale = 1.5;
+            status = "disable";
+          }
+          {
+            criteria = "Dell Inc. DELL UP3221Q D*";
+            mode = "3840x2160@59.94Hz";
+            position = "0,0";
+            scale = 1.0;
+            transform = "90";
+          }
+        ];
+      }
+      {
+        profile.name = "work-1-mid";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400@59.99Hz";
+            position = "0,0";
+            scale = 1.5;
+            status = "disable";
+          }
+          {
+            criteria = "Dell Inc. DELL U3223QE C*";
+            mode = "3840x2160@60.00Hz";
+            position = "2160,0";
+            scale = 1.0;
+            transform = "90";
+          }
+        ];
+      }
+      {
         profile.name = "work-2";
         profile.outputs = [
           {

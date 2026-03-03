@@ -179,6 +179,7 @@
     brightnessctl
     btop
     calibre
+    claude-code
     curl
     distrobox
     distrobox-tui
