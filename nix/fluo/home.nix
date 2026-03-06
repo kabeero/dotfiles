@@ -132,41 +132,35 @@
       '';
 
       ytarchive = ''
-        function ytarchive
-         yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
-           --sponsorblock-mark "all" \
-           --geo-bypass \
-           --sub-langs 'all' \
-           --embed-subs \
-           --embed-metadata \
-           --convert-subs 'srt' \
-           --download-archive $argv[1].txt https://www.youtube.com/$argv[1]/videos; 
-        end
+        yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
+          --sponsorblock-mark "all" \
+          --geo-bypass \
+          --sub-langs 'all' \
+          --embed-subs \
+          --embed-metadata \
+          --convert-subs 'srt' \
+          --download-archive $argv[1].txt https://www.youtube.com/$argv[1]/videos; 
       '';
 
       ytarchivevideo = ''
-        function ytarchivevideo
-          yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
-            --sponsorblock-mark "all" \
-            --geo-bypass \
-            --sub-langs 'all' \
-            --embed-metadata \
-            --convert-subs 'srt' \
-            --download-archive $argv[1] $argv[2]; 
-        end
+        yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
+          --sponsorblock-mark "all" \
+          --geo-bypass \
+          --sub-langs 'all' \
+          --embed-metadata \
+          --convert-subs 'srt' \
+          --download-archive $argv[1] $argv[2]; 
       '';
 
       ytd = ''
-        function ytd
-          yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
-            --sponsorblock-mark "all" \
-            --geo-bypass \
-            --sub-langs 'all' \
-            --embed-subs \
-            --embed-metadata \
-            --convert-subs 'srt' \
-            $argv
-        end
+        yt-dlp -f bestvideo[height<=1080][ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best -o '%(upload_date)s - %(channel)s - %(id)s - %(title)s.%(ext)s' \
+          --sponsorblock-mark "all" \
+          --geo-bypass \
+          --sub-langs 'all' \
+          --embed-subs \
+          --embed-metadata \
+          --convert-subs 'srt' \
+          $argv
       '';
 
     };
