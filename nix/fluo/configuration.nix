@@ -181,6 +181,7 @@
     calibre
     claude-code
     curl
+    delta
     distrobox
     distrobox-tui
     kdePackages.dolphin
@@ -253,10 +254,11 @@
     virt-manager
     vscodium
     watchman
+    wdisplays
     wget
+    wl-clipboard
     wlogout
     wlsunset
-    wl-clipboard
     wofi
     yazi
     yq
@@ -361,6 +363,7 @@
   # ╰──────────────────╯
 
   home-manager.users."mkgz" = import ./home.nix;
+  # This saves an extra Nixpkgs evaluation, adds consistency, and removes the dependency on NIX_PATH, which is otherwise used for importing Nixpkgs.
   home-manager.useGlobalPkgs = true; # share overlay'd pkgs
   ## to share flake `inputs` with home-manager modules : { config, pkgs, inputs, colors, ... }
   ## NOTE: this will be in your home.nix, not here
