@@ -173,11 +173,13 @@
   environment.systemPackages = with pkgs; [
     # android-studio
     android-tools
+    awscli2
     bat
     blender
     bluetui
     brightnessctl
     btop
+    bun
     calibre
     claude-code
     curl
@@ -193,8 +195,10 @@
     git-lfs
     gitui
     glmark2
+    gnumake
     gopls
     grimblast
+    gum
     htop
     # hyprlauncher
     # hyprshade
@@ -212,6 +216,7 @@
     kicad
     kitty
     kmonad
+    kubectl
     lazyjj
     luarocks
     mise
@@ -228,6 +233,7 @@
     obsidian
     opencode
     OVMF
+    pandoc
     pavucontrol
     pciutils
     pfetch
@@ -248,6 +254,7 @@
     swappy
     tailscale
     telegram-desktop
+    texliveMedium
     unzip
     usbutils
     vim
@@ -324,6 +331,8 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  services.tailscale.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 ];

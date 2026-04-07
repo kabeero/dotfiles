@@ -536,6 +536,11 @@
         "hypridle"
       ];
 
+      env = [
+        "HYPRCURSOR_SIZE,64"
+        "XCURSOR_SIZE,64"
+      ];
+
     };
   };
 
@@ -614,8 +619,10 @@
       tab_powerline_style = "round";
       tab_separator = "\"\"";
       # tab_title_template = " {title.split('/')[-1].partition('-')[0].strip()} ";
-      tab_title_template = "\" ◇ \"";
-      active_tab_title_template = "\" ◈ \"";
+      # tab_title_template = "\" ◇ \"";
+      # active_tab_title_template = "\" ◈ \"";
+      tab_title_template = "\" 󰮋 \"";
+      active_tab_title_template = "\" 󰇈 \"";
       tab_bar_background = "none";
       # background_opacity = "0.85"; # hyprland overrides
       dynamic_background_opacity = true;
