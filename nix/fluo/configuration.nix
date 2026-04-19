@@ -232,6 +232,7 @@
     nushell
     obsidian
     opencode
+    orca-slicer
     OVMF
     pandoc
     pavucontrol
@@ -284,6 +285,9 @@
     nerd-fonts.lilex
     nerd-fonts.symbols-only
   ];
+
+  # This links all your system fonts into /run/current-system/sw/share/X11/fonts, giving applications a static path to scan.
+  fonts.fontDir.enable = true;
 
   programs.fish.enable = true;
   # fish causes man cache rebuilding

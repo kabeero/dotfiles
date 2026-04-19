@@ -8,6 +8,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-pinned.url = "github:NixOS/nixpkgs/3021884f525546d29972368d37452e753443834e";
 
+    avenir = {
+      url = "./cfg/fonts/avenir";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -78,6 +83,7 @@
             ];
           }
           ./configuration.nix
+          avenir.nixosModules.default
           disko.nixosModules.disko
           home-manager.nixosModules.home-manager
           # hyprland.homeManagerModules.default
