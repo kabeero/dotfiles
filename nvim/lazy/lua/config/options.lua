@@ -36,3 +36,6 @@ vim.o.updatetime = 250
 
 -- minimap
 vim.g.neominimap = { auto_enable = false }
+
+-- cursor animation
+vim.g.minianimate_disable = true
