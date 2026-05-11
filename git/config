@@ -11,6 +11,7 @@
     pu  = push
     pl  = pull
     s   = status
+    cleanup = "!git branch --merged | grep -v \"\\*\" | grep -E -v \"(main|master|dev)\" | xargs -n 1 git branch -d"
 
 [init]
     defaultBranch = main
