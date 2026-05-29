@@ -63,6 +63,7 @@ shift + alt - 0 : yabai -m space --balance
         alt - w : yabai -m window --stack south || yabai -m window --stack north || yabai -m window --stack east || yabai -m window --stack west
 
 # send window to desktop
+shift + alt - 0 : yabai -m window --space 10
 shift + alt - 1 : yabai -m window --space 1
 shift + alt - 2 : yabai -m window --space 2
 shift + alt - 3 : yabai -m window --space 3
@@ -109,6 +110,7 @@ shift + alt - l : yabai -m space --mirror y-axis
 
 # fast focus desktop
 # cmd + alt - x : yabai -m space --focus recent
+alt - 0 : yabai -m space --focus 10
 alt - 1 : yabai -m space --focus 1
 alt - 2 : yabai -m space --focus 2
 alt - 3 : yabai -m space --focus 3

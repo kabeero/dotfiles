@@ -3,6 +3,7 @@ if status is-interactive
     alias l="ls"
     alias l1="ls -1"
     alias ll="ls -l --icons --git"
+    alias less="less -R"
     alias r="ranger"
     alias y="yazi"
     alias v="nvim"
@@ -14,6 +15,7 @@ if status is-interactive
     alias glow="glow -p"
     alias gu="gitui"
     alias jless="jless -r"
+    alias rg="rg --color=always"
     alias sio="sioyek"
     alias tfia="terraform init ; terraform apply"
     alias tfmt="terraform fmt -recursive"
@@ -37,10 +39,11 @@ if status is-interactive
     # krew k8s pkg
     set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
 
-    pfetch
+    # fastfetch --logo small --structure Uptime:Display:Memory:Swap:Disk:Battery:Network:LocalIP
+    fastfetch --logo small --structure Uptime:Display:Memory:Swap:Disk:Battery:LocalIP
 
     # gentoo
-    echo -e "\x1b[38;2;0;112;248m"(date +%c)"\x1b[0m"
+    echo -e "\n\x1b[38;2;0;112;248m"(date +%c)"\x1b[0m"
 
     # macos
     #echo -e "\033[0;32m"(date +%c)"\x1b[0m"
@@ -58,7 +61,7 @@ if status is-interactive
     fish_add_path {$GOBIN}
 
     starship init fish | source
-    # zoxide init fish | source
+    zoxide init --cmd c fish | source
     mise activate fish | source
 
     eval (ssh-agent -c) >/dev/null

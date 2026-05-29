@@ -371,7 +371,12 @@ scrollback_lines_to_serialize 100
 // Options: tokyo-night-{_, dark, light, storm}, nightfox, terafox, dayfox, nord, one-half-dark
 //          catppuccin-{mocha, macchiato, frappe, latte}
 //
-theme "catppuccin-mocha"
+// > https://github.com/zellij-org/zellij/issues/3277
+// > https://github.com/zellij-org/zellij/releases/tag/v0.44.2
+theme "default"
+theme_light "default"
+theme_dark "one-half-dark"
+// theme "catppuccin-mocha"
 // theme "nightfox"
 
 // The name of the default layout to load on startup
@@ -381,7 +386,8 @@ theme "catppuccin-mocha"
 //
 // default_layout "compact"
 // default_layout "zjstatus"
-default_layout "clean"
+// default_layout "clean"
+default_layout "stylix"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal

@@ -68,7 +68,7 @@ vim.keymap.set("n", "<leader>o", ":Neotree dir=.<CR>", { desc = "Neotree (cwd)" 
 vim.keymap.set(
   "n",
   "<leader>O",
-  ":args `find . -maxdepth 1 -type f -not -name '.*' \\| sort -V` | argdo e<CR>",
+  ":args `find . -maxdepth 1 -type f -not -name '.*' \\| sort -V` | argdo edit | syntax enable | doautocmd BufWinEnter <CR>",
   { desc = "Open all files in cwd" }
 )
 
@@ -141,6 +141,11 @@ end, { desc = "GitUI (root dir)" })
 vim.keymap.set("n", "<leader>gU", function()
   Snacks.terminal({ "gitui" }, { esc_esc = false, ctrl_hjkl = false })
 end, { desc = "GitUI (cwd)" })
+
+-- -- Git: buffer commit history
+-- vim.keymap.set("n", "<leader>gh", function()
+--   builtin.git_bcommits()
+-- end, { desc = "Git: Buffer Commit History" })
 
 -- Neogit
 vim.keymap.set("n", "<leader>gg", vim.cmd.Neogit, { desc = "Neogit" })
@@ -229,3 +234,6 @@ vim.keymap.set("n", "<leader>wp", "<cmd>Neominimap toggle<cr>", { desc = "Toggle
 vim.keymap.set("n", "<leader>wz", function()
   Snacks.zen()
 end, { desc = "Toggle Zen mode" })
+
+-- transparent bg
+vim.keymap.set("n", "<leader>ut", "<cmd>TransparentToggle<cr>", { desc = "Toggle transparency" })

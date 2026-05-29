@@ -18,6 +18,17 @@ return {
   { "fynnfluegge/monet.nvim", lazy = false },
   { "ibhagwan/fzf-lua", keys = { { "<leader>fg", false } } },
   { "Isrothy/neominimap.nvim" },
+  {
+    "kylechui/nvim-surround",
+    event = "VeryLazy",
+    opts = {
+      aliases = { ["b"] = false },
+      surrounds = {
+        ["$"] = { add = { "${", "}" }, find = "$%b{}", delete = "^(..)().-(.)()$" },
+        ["b"] = { add = { "**", "**" }, find = "%*%*.-%*%*", delete = "^(%*%*?)().-(%*%*?)()$" },
+      },
+    },
+  },
   { "NeogitOrg/neogit", dependencies = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" }, config = true },
   {
     "nvim-flutter/flutter-tools.nvim",
@@ -32,4 +43,5 @@ return {
   { "s1n7ax/nvim-window-picker" },
   { "tpope/vim-fugitive" },
   { "whatyouhide/vim-gotham", lazy = false },
+  { "xiyaowong/transparent.nvim", lazy = false },
 }
