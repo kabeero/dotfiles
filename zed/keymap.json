@@ -1,0 +1,108 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  // Disable Space as leader in Vim to prevent conflicts
+  {
+    "context": "VimControl",
+    "bindings": {
+      "space": "vim::NormalBefore"
+    }
+  },
+  {
+    "context": "!menu && !dialog",
+    "bindings": {
+      "cmd-e": "project_panel::ToggleFocus",
+      "ctrl-t": "project_panel::ToggleFocus"
+    }
+  },
+  // Global Workspace Bindings (Restricted)
+  {
+    "context": "Editor && !menu && !dialog && !Terminal && !AgentPanel && !Assistant",
+    "bindings": {
+      "cmd-e": "project_panel::ToggleFocus",
+      "space o": "file_finder::Toggle",
+      "space a": "workspace::ToggleLeftDock",
+      "space e": "workspace::ToggleRightDock",
+      "space space": "tab_switcher::Toggle",
+      "space /": "pane::DeploySearch",
+      "space w m": "workspace::ToggleZoom"
+    }
+  },
+  // Global Workspace Bindings (Unrestricted for Panels/Terminal)
+  {
+    "context": "Workspace && !menu && !dialog",
+    "bindings": {
+      "ctrl-/": "terminal_panel::Toggle",
+      "ctrl-?": "workspace::NewTerminal"
+    }
+  },
+  // Vim Editor-Specific Bindings
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu && !dialog && !AgentPanel && !Assistant",
+    "bindings": {
+      "space o": "file_finder::Toggle",
+      "space a": "workspace::ToggleLeftDock",
+      "space e": "workspace::ToggleRightDock",
+      "space space": "tab_switcher::Toggle",
+      "space /": "pane::DeploySearch",
+      "space w m": "workspace::ToggleZoom"
+    }
+  },
+  // Editor-Specific Bindings
+  {
+    "context": "Editor && !menu && !dialog",
+    "bindings": {
+      "space g c": "editor::OpenGitBlameCommit",
+      "space g h": "editor::ToggleGitBlame",
+      "space g b": "editor::ToggleGitBlameInline"
+    }
+  },
+  // Vim-Specific Bindings
+  {
+    "context": "Editor && VimControl && !VimWaiting && !menu && !dialog",
+    "bindings": {
+      ",": "vim::Down",
+      ".": "vim::Up",
+      "shift-h": "workspace::ActivatePreviousPane",
+      "shift-j": "workspace::ActivatePaneDown",
+      "shift-k": "workspace::ActivatePaneUp",
+      "shift-l": "workspace::ActivateNextPane",
+      "ctrl-h": "pane::ActivatePreviousItem",
+      "ctrl-l": "pane::ActivateNextItem",
+      "ctrl-c": "pane::CloseActiveItem",
+      "space t": "workspace::NewFile",
+      "ctrl-a": "editor::SelectAll",
+      "space shift-w": "editor::ToggleSoftWrap",
+      "space i": "theme_selector::Toggle"
+    }
+  },
+  // Pane & Tab Unbinds
+  {
+    "context": "Pane",
+    "unbind": {
+      "ctrl-_": "pane::GoForward"
+    }
+  },
+  {
+    "context": "VimControl && !menu",
+    "unbind": {
+      "ctrl-o": "pane::GoBack"
+    }
+  },
+  {
+    "context": "(VimControl && !menu) || (!Editor && !Terminal)",
+    "unbind": {
+      "g shift-t": "vim::GoToPreviousTab"
+    }
+  },
+  {
+    "bindings": {
+      "ctrl-l": "vim::GoToTab"
+    }
+  }
+]

@@ -1,0 +1,49 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "show_whitespaces": "selection",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "vim_mode": true,
+  "relative_line_numbers": "enabled",
+  "cursor_blink": false,
+  "scrollbar": {
+    "show": "never",
+  },
+  "agent_servers": {
+    "opencode": {
+      "default_config_options": {
+        "model": "poolside-divers/Laguna-M"
+      },
+      "type": "registry"
+    },
+    "claude-acp": {
+      "type": "registry",
+    },
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "dark",
+    "light": "Ayu Light",
+    "dark": "Ayu Dark",
+  },
+  "buffer_line_height": {
+    "custom": 1.7,
+  },
+  "which_key": {
+    "enabled": true,
+    "delay_ms": 100,
+  },
+}
