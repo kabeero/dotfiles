@@ -786,6 +786,32 @@
           }
         ];
       }
+      {
+        profile.name = "work-vr";
+        profile.outputs = [
+          {
+            criteria = "Sharp Corporation LQ*";
+            mode = "3840x2400@59.99Hz";
+            position = "-3840,0";
+            scale = 1.5;
+            status = "disable";
+          }
+          {
+            criteria = "Dell Inc. DELL UP3221Q *";
+            mode = "3840x2160@60.00Hz";
+            position = "0,0";
+            scale = 1.0;
+            transform = "normal";
+          }
+          {
+            criteria = "Visitech AS VITURE *";
+            mode = "1920x1200@120.00Hz";
+            position = "0,2160";
+            scale = 1.0;
+            transform = "normal";
+          }
+        ];
+      }
     ];
   };
 
