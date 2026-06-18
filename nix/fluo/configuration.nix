@@ -272,6 +272,7 @@
     yq
     yt-dlp
     zathura
+    zed-editor
     zellij
     zig
     zoxide
