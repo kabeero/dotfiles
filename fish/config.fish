@@ -9,7 +9,6 @@ if status is-interactive
     alias v="nvim"
     alias vim="nvim"
     alias vimdiff="nvim -d"
-    alias cdr="cd (git rev-parse --show-cdup)"
     alias cdllm="cd (mktemp -d -t llm); type -q opencode && opencode"
     alias diffk="kitty +kitten diff"
     alias glow="glow -p"
@@ -161,6 +160,14 @@ if status is-interactive
             end
         end
     end
+end
+
+function cdr
+    set -l cdup (git rev-parse --show-cdup)
+    if test -z "$cdup"
+        set cdup .
+    end
+    cd $cdup
 end
 
 function dockerls
