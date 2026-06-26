@@ -10,40 +10,58 @@
   "show_whitespaces": "selection",
   "telemetry": {
     "diagnostics": false,
-    "metrics": false,
+    "metrics": false
   },
   "session": {
-    "trust_all_worktrees": true,
+    "trust_all_worktrees": true
   },
   "vim_mode": true,
   "relative_line_numbers": "enabled",
   "cursor_blink": false,
   "scrollbar": {
-    "show": "never",
+    "show": "never"
   },
   "agent_servers": {
     "opencode": {
       "default_config_options": {
-        "model": "poolside-divers/Laguna-M"
+        "effort": "high",
+        "model": "poolside-divers/Laguna-XS"
       },
       "type": "registry"
     },
     "claude-acp": {
-      "type": "registry",
-    },
+      "type": "registry"
+    }
   },
-  "ui_font_size": 16,
-  "buffer_font_size": 15,
+  "buffer_font_family": "Iosevka SS10",
+  "ui_font_family": "Iosevka SS10",
+  "ui_font_size": 20,
+  "buffer_font_size": 20,
+  "agent_ui_font_size": 24,
+  // "agent_ui_font_size": 24,
+  "agent_buffer_font_size": 20,
+  "terminal": {
+    "font_family": "IosevkaTerm Nerd Font Mono",
+    "font_size": 20
+  },
+  // "agent": {
+  //   "default_width": 400,
+  //   "font_size": 42
+  // },
+  // "buffer_font_family": "Geist Pixel",
+  // "buffer_font_features": {
+  //   "calt": false
+  // },
   "theme": {
     "mode": "dark",
     "light": "Ayu Light",
-    "dark": "Ayu Dark",
+    "dark": "Ayu Dark"
   },
   "buffer_line_height": {
-    "custom": 1.7,
+    "custom": 1.7
   },
   "which_key": {
     "enabled": true,
-    "delay_ms": 100,
-  },
+    "delay_ms": 100
+  }
 }

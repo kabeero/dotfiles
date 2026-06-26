@@ -8,7 +8,7 @@
 [
   // Disable Space as leader in Vim to prevent conflicts
   {
-    "context": "VimControl",
+    "context": "VimControl && vim_mode == normal",
     "bindings": {
       "space": "vim::NormalBefore"
     }
@@ -22,7 +22,7 @@
   },
   // Global Workspace Bindings (Restricted)
   {
-    "context": "Editor && !menu && !dialog && !Terminal && !AgentPanel && !Assistant",
+    "context": "(Editor && vim_mode == normal) || ProjectPanel && !menu && !dialog && !Terminal",
     "bindings": {
       "cmd-e": "project_panel::ToggleFocus",
       "space o": "file_finder::Toggle",
@@ -43,7 +43,7 @@
   },
   // Vim Editor-Specific Bindings
   {
-    "context": "Editor && VimControl && !VimWaiting && !menu && !dialog && !AgentPanel && !Assistant",
+    "context": "Editor && VimControl && !VimWaiting && !menu && !dialog && !AgentPanel && !Assistant && vim_mode == normal",
     "bindings": {
       "space o": "file_finder::Toggle",
       "space a": "workspace::ToggleLeftDock",
@@ -53,9 +53,8 @@
       "space w m": "workspace::ToggleZoom"
     }
   },
-  // Editor-Specific Bindings
   {
-    "context": "Editor && !menu && !dialog",
+    "context": "Editor && !menu && !dialog && vim_mode == normal",
     "bindings": {
       "space g c": "editor::OpenGitBlameCommit",
       "space g h": "editor::ToggleGitBlame",
@@ -64,7 +63,7 @@
   },
   // Vim-Specific Bindings
   {
-    "context": "Editor && VimControl && !VimWaiting && !menu && !dialog",
+    "context": "Editor && VimControl && !VimWaiting && !menu && !dialog && !Terminal && !AgentPanel && vim_mode == normal",
     "bindings": {
       ",": "vim::Down",
       ".": "vim::Up",
@@ -101,6 +100,7 @@
     }
   },
   {
+    "context": "!Terminal",
     "bindings": {
       "ctrl-l": "vim::GoToTab"
     }
