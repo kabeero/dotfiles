@@ -174,6 +174,7 @@
     # android-studio
     android-tools
     awscli2
+    awww
     bat
     blender
     bluetui
@@ -292,7 +293,7 @@
 
   programs.fish.enable = true;
   # fish causes man cache rebuilding
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = true;
   programs.firefox.enable = true;
   programs.hyprland = {
     enable = true;

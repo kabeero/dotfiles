@@ -11,13 +11,10 @@
   home.username = "mkgz";
   home.homeDirectory = "/home/mkgz";
   home.packages = with pkgs; [ ];
-  home.shell.enableFishIntegration = true;
 
   # ╭──────────╮
   # │   apps   │
   # ╰──────────╯
-
-  services.ssh-agent.enableFishIntegration = true;
 
   services.gpg-agent = {
     enable = true;
@@ -35,6 +32,54 @@
     enable = true;
     latitude = 33.68;
     longitude = -117.83;
+  };
+
+  # awww for wallpaper rotation
+  systemd.user.services.awww = {
+    Unit = {
+      Description = "Efficient animated wallpaper daemon for Wayland (awww)";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    
+    Service = {
+      Environment = [ "RUST_BACKTRACE=1" ];
+      # Ensure WAYLAND_DISPLAY is active before spawning the daemon
+      ExecStartPre = "${pkgs.bash}/bin/bash -c 'until [ -n \"$WAYLAND_DISPLAY\" ]; do sleep 0.1; done'";
+      ExecStart = "${pkgs.awww}/bin/awww-daemon";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+  
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
+  systemd.user.services.wallpaper = {
+    Unit = {
+      Description = "Change wallpaper using awww";
+      After = [ "awww.service" ];
+      Requires = [ "awww.service" ];
+    };
+    Service = {
+      Type = "oneshot";
+      ExecStart = "%h/.local/bin/wallpaper";
+    };
+  };
+  systemd.user.timers.wallpaper = {
+    Unit = {
+      Description = "Run wallpaper script every 30 minutes";
+      After = [ "awww.service" ];
+      Requires = [ "awww.service" ];
+    };
+    Timer = {
+      OnActiveSec = "1sec";
+      OnUnitActiveSec = "30min";
+      AccuracySec = "1s";
+    };
+    Install = {
+      WantedBy = [ "timers.target" ];
+    };
   };
 
   # ╭──────────╮
@@ -247,6 +292,8 @@
   wayland.windowManager.hyprland = {
     enable = true;
 
+    configType = "lua";
+
     # Warning: If you use the Home Manager module, make sure to disable systemd integration, as it conflicts with UWSM.
     systemd.enable = false;
 
@@ -264,284 +311,19 @@
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprspace
       ## title bars
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprbars
-      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprexpo
       ## flash focus to the new active window
       # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprfocus
-      hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
+      # hyprland-plugins.packages.${pkgs.stdenv.hostPlatform.system}.hyprscrolling
       # hypr-darkwindow.packages.${pkgs.stdenv.hostPlatform.system}.Hypr-DarkWindow
       # hyprlandPlugins.hypr-darkwindow
       # hyprlandPlugins.hypr-dynamic-cursors
-      hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
+      # TODO: investigate
+      # hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
     ];
 
-    settings = {
-      "$mod" = "SUPER";
-      "$moveMod" = "SUPER_SHIFT";
-      "$menu" = "rofi -show combi -theme \"$HOME/.config/rofi/launchers/type-6/style-1.rasi\"";
-      "$terminal" = "kitty";
-      "$fileManager" = "dolphin";
+    extraConfig = builtins.readFile ./cfg/hypr/hyprland.lua;
 
-      # > https://wiki.hyprland.org/Configuring/Animations/ for more
-      animations = {
-        # animation = NAME, ONOFF, SPEED, CURVE [,STYLE]
-        animation = [
-          "workspaces, 1, 4, default, fade"
-          "windows, 1, 4, default"
-          "fade, 1, 4, default"
-        ];
-      };
-
-      bind = [
-        # utils
-        # "$moveMod, F, exec, firefox"
-        "$mod, code:36, exec, $terminal # enter"
-        "$mod, R, exec, $menu"
-        "$mod, L, exec, hyprlock"
-        "$mod, M, exec, pavucontrol"
-        "CTRL_SHIFT, X, exit,"
-        "SUPER_SHIFT, E, exec, $fileManager"
-        "$mod, C, killactive,"
-        "$mod, code:24, killactive, # '"
-        "CTRL, up, exec, hyprctl dispatch hyprexpo:expo toggle"
-        "CTRL, down, exec, hyprctl dispatch hyprexpo:expo toggle"
-
-        # window manip
-        "$mod, space, togglefloating,"
-        "$moveMod, P, pin"
-        "$mod, P, pseudo, # dwindle"
-        "$mod, E, togglesplit, # dwindle"
-        "$mod, W, togglegroup"
-        "$mod, F, fullscreen, 1 # gaps"
-        "$moveMod, F, fullscreen, 0 # no gaps"
-
-        # window motions
-        # "$mod, j, hy3:movefocus, l"
-        # "$mod, k, hy3:movefocus, r"
-        # "$mod, left, hy3:movefocus, l"
-        # "$mod, right, hy3:movefocus, r"
-        # "$mod, up, hy3:movefocus, u"
-        # "$mod, q, hy3:movefocus, u"
-        # "$mod, down, hy3:movefocus, d"
-        # "$mod, code:52, hy3:movefocus, d # ;"
-        # "$moveMod, j, hy3:movewindow, l"
-        # "$moveMod, k, hy3:movewindow, r"
-        # "$moveMod, left, hy3:movewindow, l"
-        # "$moveMod, right, hy3:movewindow, r"
-        # "$moveMod, q, hy3:movewindow, u"
-        # "$moveMod, code:52, hy3:movewindow, d"
-        ## with hyprscrolling, windows can sometimes stop being focused...
-        # "$mod, j, movefocus, l"
-        # "$mod, left, movefocus, l"
-        # "$mod, k, movefocus, r"
-        # "$mod, right, movefocus, r"
-        "$mod, q, movefocus, u"
-        "$mod, up, movefocus, u"
-        "$mod, code:52, movefocus, d" # ;
-        "$mod, down, movefocus, d"
-        # "$moveMod, j, movewindow, l"
-        # "$moveMod, left, movewindow, l"
-        # "$moveMod, k, movewindow, r"
-        # "$moveMod, right, movewindow, r"
-        # "$moveMod, q, movewindow, u"
-        # "$moveMod, up, movewindow, u"
-        # "$moveMod, code:52, movewindow, d" # ;
-        # "$moveMod, down, movewindow, d" # ;
-
-        # "$mod, S, togglespecialworkspace, magic"
-        # "$mod SHIFT, S, movetoworkspace, special:magic"
-
-        "$mod, mouse_down, workspace, e+1"
-        "$mod, mouse_up, workspace, e-1"
-
-        # screenshots
-        ", Print, exec, grimblast copysave area"
-        "$mod, o, exec, grimblast copysave area"
-        "$mod SHIFT, o, exec, swappy -f $(grimblast copysave area)"
-
-        # hyprscrolling
-
-        "$mod, j, layoutmsg, move -col"
-        "$mod, left, layoutmsg, move -col"
-        "$mod, comma, layoutmsg, move -col"
-
-        "$mod, k, layoutmsg, move +col"
-        "$mod, right, layoutmsg, move +col"
-        "$mod, period, layoutmsg, move +col"
-
-        "$moveMod, comma, layoutmsg, swapcol l"
-        "$moveMod, period, layoutmsg, swapcol r"
-
-        "$moveMod, j, layoutmsg, movewindowto l"
-        "$moveMod, left, layoutmsg, movewindowto l"
-
-        "$moveMod, k, layoutmsg, movewindowto r"
-        "$moveMod, right, layoutmsg, movewindowto r"
-
-        "$moveMod, q, layoutmsg, movewindowto u"
-        "$moveMod, up, layoutmsg, movewindowto u"
-
-        "$moveMod, code:52, layoutmsg, movewindowto d"
-        "$moveMod, down, layoutmsg, movewindowto d"
-
-      ]
-      ++ (
-        # workspaces
-        # binds $mod + [shift +] {1..9} to [move to] workspace {1..9}
-        builtins.concatLists (
-          builtins.genList (
-            i:
-            let
-              ws = i + 1;
-            in
-            [
-              "$mod, code:1${toString i}, workspace, ${toString ws}"
-              "$mod SHIFT, code:1${toString i}, movetoworkspacesilent, ${toString ws}"
-            ]
-          ) 9
-        )
-      );
-
-      bindm = [
-        "$mod, mouse:272, movewindow"
-        "$mod, mouse:273, resizewindow"
-      ];
-
-      bindl = [
-        ", XF86AudioNext, exec, playerctl next"
-        ", XF86AudioPause, exec, playerctl play-pause"
-        ", XF86AudioPlay, exec, playerctl play-pause"
-        ", XF86AudioPrev, exec, playerctl previous"
-      ];
-
-      bindel = [
-        ",XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"
-        ",XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-        ",XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-        ",XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-        ",XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+"
-        ",XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-"
-      ];
-
-      cursor = {
-        hide_on_key_press = true;
-        no_hardware_cursors = true;
-      };
-
-      decoration = {
-        rounding = 10;
-        rounding_power = 2;
-
-        active_opacity = 1.0;
-        inactive_opacity = 0.8;
-
-        blur = {
-          enabled = true;
-          size = 8;
-          passes = 1;
-          vibrancy = "0.1696";
-        };
-
-        shadow = {
-          enabled = true;
-          range = 4;
-          render_power = 3;
-          # color = "rgba(1a1a1aee)";
-        };
-      };
-
-      general = {
-        gaps_in = 5;
-        gaps_out = 20;
-        border_size = 2;
-        # "col.active_border" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        # "col.inactive_border" = "rgba(595959aa)";
-        resize_on_border = false;
-        # layout = "dwindle"; # default
-        # layout = "hy3"; # hyprland i3-like
-        layout = "scrolling"; # hyprland niri-like
-      };
-
-      gestures = {
-        workspace_swipe_touch = true;
-        workspace_swipe_cancel_ratio = "0.25";
-        workspace_swipe_create_new = false;
-        gesture = [
-          "2, swipe, mod: SUPER, resize"
-          "2, pinch, mod: SUPER, float"
-          "3, vertical, fullscreen"
-          "3, left, dispatcher, layoutmsg, move +col" # natural scroll
-          "3, right, dispatcher, layoutmsg, move -col" # natural scroll
-          "4, horizontal, workspace"
-          "4, vertical, dispatcher, hyprexpo:expo, toggle"
-        ];
-      };
-
-      group = {
-        # "col.border_active" = "rgba(33ccffee) rgba(00ff99ee) 45deg";
-        # "col.border_inactive" = "rgba(595959aa)";
-        groupbar = {
-          enabled = true;
-          keep_upper_gap = true;
-          render_titles = false;
-          height = 32;
-          indicator_gap = -6;
-          indicator_height = 6;
-          rounding = 2;
-          gaps_out = 8;
-          # "col.active" = "rgba(33ccff66) rgba(00ff9966) 180deg";
-          # "col.inactive" = "rgba(59595966)";
-        };
-      };
-
-      input = {
-        accel_profile = "flat";
-        sensitivity = "0.3";
-        follow_mouse = false;
-        natural_scroll = true;
-
-        kb_layout = "us";
-        kb_variant = "dvorak";
-        repeat_delay = 180;
-        repeat_rate = 100;
-
-        touchpad = {
-          natural_scroll = true;
-        };
-      };
-
-      monitor = [
-        ",preferred,auto,auto"
-      ];
-
-      plugin = {
-        hyprbars = {
-          bar_height = 20;
-          # hyprbars-button = [
-          #   "rgb(ff4040), 10, 󰖭, hyprctl dispatch killactive"
-          #   "rgb(eeee11), 10, , hyprctl dispatch fullscreen 1"
-          # ];
-          on_double_click = "hyprctl dispatch fullscreen 1";
-        };
-        hyprscrolling = {
-          column_width = "0.90";
-          fullscreen_on_one_column = true;
-        };
-      };
-
-      windowrule = [
-        "match:class kitty, opacity 0.9"
-      ];
-
-      exec-once = [
-        "hypridle"
-      ];
-
-      env = [
-        "HYPRCURSOR_SIZE,64"
-        "XCURSOR_SIZE,64"
-      ];
-
-    };
   };
 
   services.hypridle = {
@@ -551,7 +333,7 @@
         # when sleeping, lock the hypr session
         lock_cmd = "pidof hyprlock || hyprlock";
         before_sleep_cmd = "loginctl lock-session";
-        after_sleep_cmd = "hyprctl dispatch dpms on";
+        after_sleep_cmd = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })'";
         # ignore_dbus_inhibit = false;
       };
 
@@ -564,8 +346,8 @@
         }
         {
           timeout = 180; # 3min
-          on-timeout = "hyprctl dispatch dpms off"; # screen off when timeout has passed
-          on-resume = "hyprctl dispatch dpms on && brightnessctl -r"; # screen on when activity is detected after timeout has fired
+          on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })'"; # screen off when timeout has passed
+          on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })' && brightnessctl -r"; # screen on when activity is detected after timeout has fired
           and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }
         {

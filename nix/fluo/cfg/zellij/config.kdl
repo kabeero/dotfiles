@@ -104,6 +104,7 @@ keybinds clear-defaults=true {
         bind "|" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "{" { MovePane "Left"; }
         bind "}" { MovePane; }
+        bind "w" { ToggleFloatingPanes; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "c" { NewTab; SwitchToMode "Normal"; }
         bind "," { SwitchToMode "RenameTab"; }

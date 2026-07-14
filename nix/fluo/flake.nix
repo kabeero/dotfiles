@@ -38,7 +38,6 @@
 
     hy3 = {
       url = "github:outfoxxed/hy3?ref=master";
-      # url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
       inputs.hyprland.follows = "hyprland";
     };
 
