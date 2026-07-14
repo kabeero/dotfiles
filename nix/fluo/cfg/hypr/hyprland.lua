@@ -1,10 +1,41 @@
 ---@module 'hl'
 
 local fileManager = "dolphin"
-local menu = "rofi -show combi -theme " .. os.getenv("HOME") .. "/.config/rofi/launchers/type-6/style-1.rasi"
-local mod = "SUPER"
-local moveMod = "SUPER + SHIFT"
 local terminal = "kitty"
+local menu = "rofi -show combi -theme " .. os.getenv("HOME") .. "/.config/rofi/launchers/type-6/style-1.rasi"
+
+local mod = "SUPER"
+local mainMod = "SUPER"
+local moveMod = "SUPER + SHIFT"
+
+local function smart_toggle_split()
+	local ws = hl.get_active_workspace()
+	if not ws then
+		return
+	end
+
+	-- Query the active layout on the current workspace
+	local layout = ws.tiled_layout
+
+	if layout == "dwindle" then
+		-- Dwindle layout: standard togglesplit
+		hl.dispatch(hl.dsp.layout("togglesplit"))
+	elseif layout == "scrolling" then
+		-- Scrolling layout: dynamically toggle split state of the active window
+		local w = hl.get_active_window()
+		if w and w.layout and w.layout.name == "scrolling" then
+			-- Count windows currently sharing the active column
+			local num_windows = #w.layout.column.windows
+			if num_windows > 1 then
+				-- Vertically split (stacked in column). Split horizontally.
+				hl.exec_cmd("hyprctl dispatch scroller:expelwindow")
+			else
+				-- Horizontally split (lone window in column). Split vertically.
+				hl.exec_cmd("hyprctl dispatch scroller:admitwindow")
+			end
+		end
+	end
+end
 
 hl.env("HYPRCURSOR_SIZE", 64)
 hl.env("XCURSOR_SIZE", 64)
@@ -13,58 +44,60 @@ hl.config({
 	animations = {},
 })
 
--- enter
-hl.bind(mod .. " + code:36", hl.dsp.exec_cmd("kitty"))
+hl.bind(mod .. " + C", hl.dsp.window.close())
+hl.bind(mod .. " + code:24", hl.dsp.window.close()) -- '
+hl.bind("CTRL + SHIFT + X", hl.dsp.exit())
+hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("dolphin"))
 
+hl.bind(mod .. " + code:36", hl.dsp.exec_cmd("kitty")) -- enter
+hl.bind(mod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+hl.bind(mod .. " + M", hl.dsp.exec_cmd("pavucontrol"))
 hl.bind(
 	mod .. " + R",
 	hl.dsp.exec_cmd("rofi -show combi -theme local_var_HOME/.config/rofi/launchers/type-6/style-1.rasi")
 )
-hl.bind(mod .. " + L", hl.dsp.exec_cmd("hyprlock"))
-hl.bind(mod .. " + M", hl.dsp.exec_cmd("pavucontrol"))
-hl.bind("CTRL + SHIFT + X", hl.dsp.exit())
-hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("dolphin"))
-hl.bind(mod .. " + C", hl.dsp.window.close())
--- '
-hl.bind(mod .. " + code:24", hl.dsp.window.close())
-hl.bind("CTRL + up", hl.dsp.exec_cmd("hyprctl dispatch hyprexpo:expo toggle"))
-hl.bind("CTRL + down", hl.dsp.exec_cmd("hyprctl dispatch hyprexpo:expo toggle"))
+hl.bind("Print", hl.dsp.exec_cmd("grimblast copysave area"))
+hl.bind(mod .. " + o", hl.dsp.exec_cmd("grimblast copysave area"))
+hl.bind(mod .. " + SHIFT + o", hl.dsp.exec_cmd("swappy -f $(grimblast copysave area)"))
+
 hl.bind(mod .. " + space", hl.dsp.window.float())
 hl.bind(moveMod .. " + P", hl.dsp.window.pin())
--- dwindle
 hl.bind(mod .. " + P", hl.dsp.window.pseudo())
--- dwindle
-hl.bind(mod .. " + E", hl.dsp.layout("togglesplit"))
+hl.bind(mod .. " + E", smart_toggle_split)
 hl.bind(mod .. " + W", hl.dsp.group.toggle())
--- gaps
-hl.bind(mod .. " + F", hl.dsp.window.fullscreen())
--- no gaps
-hl.bind(moveMod .. " + F", hl.dsp.window.fullscreen())
+hl.bind(mod .. " + F", hl.dsp.window.fullscreen()) -- gaps
+hl.bind(moveMod .. " + F", hl.dsp.window.fullscreen()) -- no gaps
+
 hl.bind(mod .. " + q", hl.dsp.focus({ direction = "up" }))
 hl.bind(mod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mod .. " + code:52", hl.dsp.focus({ direction = "down" }))
 hl.bind(mod .. " + down", hl.dsp.focus({ direction = "down" }))
+
 hl.bind(mod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
-hl.bind("Print", hl.dsp.exec_cmd("grimblast copysave area"))
-hl.bind(mod .. " + o", hl.dsp.exec_cmd("grimblast copysave area"))
-hl.bind(mod .. " + SHIFT + o", hl.dsp.exec_cmd("swappy -f $(grimblast copysave area)"))
+
+hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
+
 hl.bind(mod .. " + j", hl.dsp.layout("move -col"))
 hl.bind(mod .. " + left", hl.dsp.layout("move -col"))
 hl.bind(mod .. " + comma", hl.dsp.layout("move -col"))
 hl.bind(mod .. " + k", hl.dsp.layout("move +col"))
 hl.bind(mod .. " + right", hl.dsp.layout("move +col"))
 hl.bind(mod .. " + period", hl.dsp.layout("move +col"))
+
 hl.bind(moveMod .. " + comma", hl.dsp.layout("swapcol l"))
 hl.bind(moveMod .. " + period", hl.dsp.layout("swapcol r"))
-hl.bind(moveMod .. " + j", hl.dsp.layout("movewindowto l"))
-hl.bind(moveMod .. " + left", hl.dsp.layout("movewindowto l"))
-hl.bind(moveMod .. " + k", hl.dsp.layout("movewindowto r"))
-hl.bind(moveMod .. " + right", hl.dsp.layout("movewindowto r"))
-hl.bind(moveMod .. " + q", hl.dsp.layout("movewindowto u"))
-hl.bind(moveMod .. " + up", hl.dsp.layout("movewindowto u"))
-hl.bind(moveMod .. " + code:52", hl.dsp.layout("movewindowto d"))
-hl.bind(moveMod .. " + down", hl.dsp.layout("movewindowto d"))
+
+hl.bind(moveMod .. " + j", hl.dsp.window.move({ direction = "left" }))
+hl.bind(moveMod .. " + left", hl.dsp.window.move({ direction = "left" }))
+hl.bind(moveMod .. " + k", hl.dsp.window.move({ direction = "right" }))
+hl.bind(moveMod .. " + right", hl.dsp.window.move({ direction = "right" }))
+hl.bind(moveMod .. " + q", hl.dsp.window.move({ direction = "up" }))
+hl.bind(moveMod .. " + up", hl.dsp.window.move({ direction = "up" }))
+hl.bind(moveMod .. " + code:52", hl.dsp.window.move({ direction = "down" }))
+hl.bind(moveMod .. " + down", hl.dsp.window.move({ direction = "down" }))
+
 hl.bind(mod .. " + code:10", hl.dsp.focus({ workspace = 1 }))
 hl.bind(mod .. " + SHIFT + code:10", hl.dsp.window.move({ workspace = 1 }, { follow = false }))
 hl.bind(mod .. " + code:11", hl.dsp.focus({ workspace = 2 }))
@@ -83,6 +116,7 @@ hl.bind(mod .. " + code:17", hl.dsp.focus({ workspace = 8 }))
 hl.bind(mod .. " + SHIFT + code:17", hl.dsp.window.move({ workspace = 8 }, { follow = false }))
 hl.bind(mod .. " + code:18", hl.dsp.focus({ workspace = 9 }))
 hl.bind(mod .. " + SHIFT + code:18", hl.dsp.window.move({ workspace = 9 }, { follow = false }))
+
 hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd("wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+"), { locked = true })
 hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd("wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"), { locked = true })
 hl.bind("XF86AudioMute", hl.dsp.exec_cmd("wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"), { locked = true })
@@ -93,8 +127,6 @@ hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
-hl.bind(mod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
-hl.bind(mod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 hl.config({
 	cursor = {
