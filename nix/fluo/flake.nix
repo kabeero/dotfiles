@@ -29,15 +29,16 @@
     };
 
     # > https://github.com/hyprwm/hyprland-plugins
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "github:hyprwm/Hyprland?ref=v0.55.0";
 
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins";
+      url = "github:hyprwm/hyprland-plugins?ref=v0.55.0";
       inputs.hyprland.follows = "hyprland";
     };
 
     hy3 = {
-      url = "github:outfoxxed/hy3?ref=master";
+      # url = "github:outfoxxed/hy3?ref=master";
+      url = "github:outfoxxed/hy3?ref=hl0.55.0";
       inputs.hyprland.follows = "hyprland";
     };
 

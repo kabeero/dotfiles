@@ -5,7 +5,6 @@ local terminal = "kitty"
 local menu = "rofi -show combi -theme " .. os.getenv("HOME") .. "/.config/rofi/launchers/type-6/style-1.rasi"
 
 local mod = "SUPER"
-local mainMod = "SUPER"
 local moveMod = "SUPER + SHIFT"
 
 local function smart_toggle_split()
@@ -47,15 +46,12 @@ hl.config({
 hl.bind(mod .. " + C", hl.dsp.window.close())
 hl.bind(mod .. " + code:24", hl.dsp.window.close()) -- '
 hl.bind("CTRL + SHIFT + X", hl.dsp.exit())
-hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd("dolphin"))
+hl.bind("SUPER + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 
-hl.bind(mod .. " + code:36", hl.dsp.exec_cmd("kitty")) -- enter
+hl.bind(mod .. " + code:36", hl.dsp.exec_cmd(terminal)) -- enter
 hl.bind(mod .. " + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind(mod .. " + M", hl.dsp.exec_cmd("pavucontrol"))
-hl.bind(
-	mod .. " + R",
-	hl.dsp.exec_cmd("rofi -show combi -theme local_var_HOME/.config/rofi/launchers/type-6/style-1.rasi")
-)
+hl.bind(mod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind("Print", hl.dsp.exec_cmd("grimblast copysave area"))
 hl.bind(mod .. " + o", hl.dsp.exec_cmd("grimblast copysave area"))
 hl.bind(mod .. " + SHIFT + o", hl.dsp.exec_cmd("swappy -f $(grimblast copysave area)"))
@@ -290,9 +286,9 @@ hl.monitor({
 hl.window_rule({
 	name = "match_class_kitty",
 	match = {
-		class = "opacity 0.9",
+		class = "^(kitty)$",
 	},
-	-- TODO: review rule: "match:class kitty"
+	opacity = "0.90 0.80 1.0",
 })
 
 -- Autostart

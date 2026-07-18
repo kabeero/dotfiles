@@ -319,7 +319,7 @@
       # hyprlandPlugins.hypr-darkwindow
       # hyprlandPlugins.hypr-dynamic-cursors
       # TODO: investigate
-      # hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
+      hy3.packages.${pkgs.stdenv.hostPlatform.system}.hy3
     ];
 
     extraConfig = builtins.readFile ./cfg/hypr/hyprland.lua;
