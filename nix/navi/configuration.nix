@@ -137,7 +137,6 @@
       "dialout"
       "input"
       "kvm"
-      "libvirtd"
       "networkmanager"
       "render"
       "uinput"
@@ -175,17 +174,21 @@
     # (optional): hint Electron apps use Wayland
     NIXOS_OZONE_WL = "1";
   };
-  # List packages installed in system profile. To search, run:
+
+  # List packages installed in system profile.
+  # You can use https://search.nixos.org/ to find more packages (and options).
   # $ nix search nixpkgs wget
   environment.systemPackages = with pkgs; [
     # gcc
     android-studio-full
     android-tools
+    awscli2
     bat
     blender
     bluetui
     brightnessctl
     btop-rocm
+    bun
     calibre
     cargo
     clang
@@ -196,6 +199,7 @@
     distrobox-tui
     kdePackages.dolphin
     eza
+    fastfetch
     file
     fzf
     gitFull
@@ -205,6 +209,7 @@
     gnumake
     gopls
     grimblast
+    gvisor
     htop
     # hyprlauncher
     # hyprshade
@@ -266,15 +271,17 @@
     thonny
     tigervnc
     tldr
+    tree
     unzip
     usbutils
     vim
     vscodium
     watchman
+    wdisplays
     wget
+    wl-clipboard
     wlogout
     wlsunset
-    wl-clipboard
     wofi
     yazi
     yq
@@ -298,7 +305,7 @@
 
   programs.fish.enable = true;
   # fish causes man cache rebuilding
-  documentation.man.generateCaches = false;
+  documentation.man.cache.enable = true;
   programs.firefox.enable = true;
   programs.hyprland = {
     enable = true;
@@ -346,7 +353,7 @@
     keyboards = {
       razerKB = {
         device = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd";
-        config = builtins.readFile ./cfg/kmonad/config.kbd;
+        config = builtins.readFile ./modules/tools/kmonad/config.kbd;
         extraGroups = [ "root" ];
         defcfg = {
           # generate the defcfg portion of the kmonad config dynamically?

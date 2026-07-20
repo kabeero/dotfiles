@@ -8,6 +8,11 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     # nixpkgs-pinned.url = "github:NixOS/nixpkgs/3021884f525546d29972368d37452e753443834e";
 
+    avenir = {
+      url = "./modules/fonts/avenir";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     disko = {
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -24,15 +29,16 @@
     };
 
     # > https://github.com/hyprwm/hyprland-plugins
-    hyprland.url = "github:hyprwm/Hyprland?ref=v0.53.0";
+    hyprland.url = "github:hyprwm/Hyprland?ref=v0.55.0";
 
     hyprland-plugins = {
-      url = "github:hyprwm/hyprland-plugins?ref=v0.53.0";
+      url = "github:hyprwm/hyprland-plugins?ref=v0.55.0";
       inputs.hyprland.follows = "hyprland";
     };
 
     hy3 = {
-      url = "github:outfoxxed/hy3?ref=hl0.53.0.1";
+      # url = "github:outfoxxed/hy3?ref=master";
+      url = "github:outfoxxed/hy3?ref=hl0.55.0";
       inputs.hyprland.follows = "hyprland";
     };
 
@@ -55,6 +61,7 @@
     {
       self,
       nixpkgs,
+      home-manager,
       ...
     }@inputs:
     {
@@ -76,6 +83,7 @@
             ];
           }
           ./configuration.nix
+          avenir.nixosModules.default
           home-manager.nixosModules.home-manager
           # hyprland.homeManagerModules.default
           kmonad.nixosModules.default
