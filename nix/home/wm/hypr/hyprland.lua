@@ -13,26 +13,16 @@ local function smart_toggle_split()
 		return
 	end
 
-	-- Query the active layout on the current workspace
 	local layout = ws.tiled_layout
 
 	if layout == "dwindle" then
 		-- Dwindle layout: standard togglesplit
 		hl.dispatch(hl.dsp.layout("togglesplit"))
 	elseif layout == "scrolling" then
-		-- Scrolling layout: dynamically toggle split state of the active window
-		local w = hl.get_active_window()
-		if w and w.layout and w.layout.name == "scrolling" then
-			-- Count windows currently sharing the active column
-			local num_windows = #w.layout.column.windows
-			if num_windows > 1 then
-				-- Vertically split (stacked in column). Split horizontally.
-				hl.exec_cmd("hyprctl dispatch scroller:expelwindow")
-			else
-				-- Horizontally split (lone window in column). Split vertically.
-				hl.exec_cmd("hyprctl dispatch scroller:admitwindow")
-			end
-		end
+		-- Native scrolling layout: use the built-in consume_or_expel layout message
+		-- - If windows are stacked, it expels the active window (horizontal split)
+		-- - If a window is alone, it merges/stacks with the neighboring column (vertical split)
+		hl.dispatch(hl.dsp.layout("consume_or_expel next"))
 	end
 end
 
