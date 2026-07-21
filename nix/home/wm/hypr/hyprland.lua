@@ -22,7 +22,7 @@ local function smart_toggle_split()
 		-- Native scrolling layout: use the built-in consume_or_expel layout message
 		-- - If windows are stacked, it expels the active window (horizontal split)
 		-- - If a window is alone, it merges/stacks with the neighboring column (vertical split)
-		hl.dispatch(hl.dsp.layout("consume_or_expel next"))
+		hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
 	end
 end
 
