@@ -19,10 +19,19 @@ local function smart_toggle_split()
 		-- Dwindle layout: standard togglesplit
 		hl.dispatch(hl.dsp.layout("togglesplit"))
 	elseif layout == "scrolling" then
-		-- Native scrolling layout: use the built-in consume_or_expel layout message
-		-- - If windows are stacked, it expels the active window (horizontal split)
-		-- - If a window is alone, it merges/stacks with the neighboring column (vertical split)
-		hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
+		local w = hl.get_active_window()
+		if w and w.layout and w.layout.name == "scrolling" then
+			local num_windows = #w.layout.column.windows
+			-- Native scrolling layout: use the built-in consume_or_expel layout message
+			-- - If a window is alone, it merges/stacks with the neighboring column (vertical split)
+			-- - If windows are stacked, it expels the active window (horizontal split)
+			if num_windows == 1 then
+				hl.dispatch(hl.dsp.layout("consume_or_expel next"))
+				hl.dispatch(hl.dsp.window.move({ direction = "up" }))
+			elseif num_windows > 1 then
+				hl.dispatch(hl.dsp.layout("consume_or_expel prev"))
+			end
+		end
 	end
 end
 
