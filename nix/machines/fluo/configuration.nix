@@ -14,13 +14,11 @@
 
   environment.systemPackages = with pkgs; [
     btop
-    claude-code
     gum
     hypridle
     hyprpanel
     hyprpaper
     hyprsysteminfo
-    orca-slicer
     virt-manager
   ];
 

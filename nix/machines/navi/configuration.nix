@@ -8,8 +8,6 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ./www.nix
-    ./www-blog.nix
   ];
 
   networking.hostName = "navi";

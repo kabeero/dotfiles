@@ -185,6 +185,7 @@
     nushell
     obsidian
     opencode
+    orca-slicer
     OVMF
     pandoc
     pavucontrol

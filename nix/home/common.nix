@@ -2,13 +2,13 @@
 
 {
   imports = [
+    ./ide/zed
     ./monitors/awww
     ./monitors/kanshi
     ./terminal/kitty
     ./terminal/zellij
     ./tools/fish
     ./tools/git
-    ./apps/zed.nix
     ./wm/hypr
     ./wm/stylix.nix
   ];
