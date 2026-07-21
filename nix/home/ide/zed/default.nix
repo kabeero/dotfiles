@@ -16,14 +16,17 @@
     ];
 
     userSettings = {
-      assistant = {
-        enabled = true;
-        version = "2";
-        default_open_ai_model = null;
 
-        default_model = {
-          provider = "zed.dev";
-          model = "claude-3-5-sonnet-latest";
+      agent_servers = {
+        opencode = {
+          type = "custom";
+          command = "opencode";
+          args = [ "acp" ];
+        };
+        poolside = {
+          type = "custom";
+          command = "pool";
+          args = [ "acp" ];
         };
       };
 
@@ -33,7 +36,7 @@
       terminal = {
         alternate_scroll = "off";
         blinking = "off";
-        copy_on_select = false;
+        copy_on_select = true;
         dock = "bottom";
         detect_venv = {
           on = {
@@ -47,7 +50,7 @@
           };
         };
         env = {
-          TERM = "alacritty";
+          TERM = "kitty";
         };
         font_family = "FiraCode Nerd Font";
         font_features = null;
@@ -92,7 +95,8 @@
             "elixir-ls"
             "!next-ls"
           ];
-          format_on_save = {
+          format_on_save = true;
+          formatter = {
             external = {
               command = "mix";
               arguments = [
@@ -111,7 +115,8 @@
             "elixir-ls"
             "!next-ls"
           ];
-          format_on_save = {
+          format_on_save = true;
+          formatter = {
             external = {
               command = "mix";
               arguments = [
