@@ -248,10 +248,14 @@
   };
   programs.hyprlock.enable = true;
 
+  # provides a library path for unpatched binaries
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     libgcc
+    stdenv.cc.cc
     stdenv.cc.cc.lib
+    zlib
+    glib
   ];
 
   programs.mtr.enable = true;
