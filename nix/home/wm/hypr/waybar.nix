@@ -46,8 +46,6 @@
         background: rgba(255, 255, 255, 0.1);
       }
 
-      /* stylix.autoEnable = true will override these */
-
       #workspaces button {
         padding: 0 5px;
         background: transparent;
@@ -56,9 +54,9 @@
 
       #workspaces button.active {
         color: #ffffff;
-        border-bottom: 2px solid #aaaaff;
+        /* 0D: cyan, 0B: green, 07: white, 01..06 : grays */
+        border-top: 2px solid @base0D;
       }
-
     '';
   };
 }

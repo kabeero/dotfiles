@@ -9,8 +9,8 @@
     ./terminal/zellij
     ./tools/fish
     ./tools/git
+    ./wm/stylix
     ./wm/hypr
-    ./wm/stylix.nix
   ];
 
   home.stateVersion = "25.11";
