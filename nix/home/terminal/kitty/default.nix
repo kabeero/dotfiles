@@ -1,6 +1,6 @@
 # ╭───────────╮
 # │   kitty   │
-# ╰───────────╮
+# ╰───────────╯
 
 { config, pkgs, ... }:
 
@@ -29,8 +29,9 @@
       tab_bar_style = "separator";
       tab_powerline_style = "round";
       tab_separator = "\"\"";
-      tab_title_template = "\" \ufb4b \"";
-      active_tab_title_template = "\" \ufb08 \"";
+      tab_title_template = "\" 󰮋 \"";
+      active_tab_title_template = "\" 󰇈 \"";
+      active_tab_font_style = "normal";
       tab_bar_background = "none";
       dynamic_background_opacity = true;
       dim_opacity = "0.75";
