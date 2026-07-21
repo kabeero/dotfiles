@@ -41,11 +41,11 @@
         ]
       },
       "locked": {
-        "path": "./modules/fonts/avenir",
+        "path": "./system/fonts/avenir",
         "type": "path"
       },
       "original": {
-        "path": "./modules/fonts/avenir",
+        "path": "./system/fonts/avenir",
         "type": "path"
       },
       "parent": []

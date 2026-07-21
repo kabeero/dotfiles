@@ -10,7 +10,6 @@
   imports = [
     inputs.avenir.nixosModules.default
     inputs.home-manager.nixosModules.home-manager
-    inputs.kmonad.nixosModules.default
     inputs.stylix.nixosModules.default
   ];
 
@@ -168,7 +167,6 @@
     kanshi
     kicad
     kitty
-    kmonad
     kubectl
     lazyjj
     luarocks
@@ -263,22 +261,6 @@
   };
 
   services.udisks2.enable = true;
-
-  services.kmonad = {
-    enable = true;
-    keyboards = {
-      razerKB = {
-        device = "/dev/input/by-path/pci-0000:00:14.0-usbv2-0:6:1.1-event-kbd";
-        config = builtins.readFile ../home/tools/kmonad/config.kbd;
-        extraGroups = [ "root" ];
-        defcfg = {
-          enable = true;
-          allowCommands = true;
-          fallthrough = true;
-        };
-      };
-    };
-  };
 
   services.openssh.enable = true;
   services.tailscale.enable = true;

@@ -3,7 +3,7 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
     avenir = {
-      url = "./modules/fonts/avenir";
+      url = "./system/fonts/avenir";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -61,7 +61,7 @@
         fluo = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = with inputs; [
-            ./modules/common.nix
+            ./system/common.nix
             ./machines/fluo/configuration.nix
             disko.nixosModules.disko
             ./machines/fluo/disko-config.nix
@@ -71,7 +71,7 @@
         navi = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = with inputs; [
-            ./modules/common.nix
+            ./system/common.nix
             ./machines/navi/configuration.nix
           ];
         };
