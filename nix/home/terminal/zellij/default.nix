@@ -41,7 +41,7 @@
             // format_left   "#[fg=$bg,bg=none]#[fg=$maroon,bg=$bg,bold] {session}#[fg=$bg,bg=none]◗ {tabs}"
 
             // style: plain
-            format_left   " #[fg=$maroon,bg=none,bold] {session}  {tabs}"
+            format_left   " #[fg=$maroon,bg=none,bold] {session}  {tabs}"
 
             format_right  "{mode} {datetime}"
 
@@ -52,7 +52,7 @@
             // format_left  "#[bg=$fg]fg;#[bg=none]bg;#[bg=$black]black;#[bg=$gray1]gray1;#[bg=$gray2]gray2;#[bg=$gray3]gray3;#[bg=$gray4]gray4;#[bg=$gray5]gray5;#[bg=$red]red;#[bg=$orange]orange;#[bg=$yellow]yellow;#[bg=$green]green;#[bg=$cyan]cyan;#[bg=$blue]blue;#[bg=$magenta]magenta;#[bg=$maroon]maroon;#[bg=$white]white;"
 
             mode_normal          ""
-            mode_locked          "#[fg=$maroon,bg=none]#[bg=$maroon,fg=$gray1,bold]{name}#[fg=$maroon,bg=none]◗"
+            mode_locked          "#[fg=$maroon,bg=none]#[bg=$maroon,fg=$gray1,bold]#[fg=$maroon,bg=none]◗"
             mode_pane            "#[fg=$gray5,bg=none]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=none]◗"
             mode_tab             "#[fg=$gray5,bg=none]#[bg=$gray5,fg=$gray1,bold]{name}#[fg=$gray5,bg=none]◗"
             mode_scroll          "#[fg=$red,bg=none]#[bg=$red,fg=$gray1,bold]{name}#[fg=$red,bg=none]◗"
