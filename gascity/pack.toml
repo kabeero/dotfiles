@@ -1,0 +1,28 @@
+[pack]
+name = "dev"
+schema = 2
+
+[imports]
+[imports.bd]
+source = "https://github.com/gastownhall/gascity.git//examples/bd"
+version = "sha:f895c0ff47d6ee9334ed282a416387eb5b084d24"
+[imports.core]
+source = "https://github.com/gastownhall/gascity.git//internal/bootstrap/packs/core"
+version = "sha:f895c0ff47d6ee9334ed282a416387eb5b084d24"
+
+[[agent]]
+name            = "mayor"
+provider        = "opencode"
+prompt_template = "agents/mayor/prompt.template.md"
+install_agent_hooks = ["opencode"]
+
+[[agent]]
+name            = "coder"
+provider        = "opencode"
+prompt_template = "agents/coder/prompt.template.md"
+install_agent_hooks = ["opencode"]
+
+# to speak to the mayor, leave it running in a tmux session
+[[named_session]]
+template = "mayor"
+mode     = "always"

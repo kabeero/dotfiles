@@ -1,0 +1,36 @@
+# [mail]
+# retention_ttl controls how long read messages are retained before purge.
+# 0 disables retention; use "168h" for 7 days.
+# "7d" is not a valid Go duration.
+# retention_ttl = "0"
+
+[workspace]
+provider            = "opencode"
+
+# [providers.opencode]
+# if you have an opencode-official model choice
+# option_defaults = { model = "poolside-api/Laguna-S" }
+# if you have a custom model choice
+# args_append = ["--model", "poolside-api/Laguna-S"]
+
+[providers.opencode]
+base = "builtin:opencode"
+options_schema_merge = "by_key"
+option_defaults = { model = "poolside-api/Laguna-S" }
+
+[[providers.opencode.options_schema]]
+key = "model"
+
+[[providers.opencode.options_schema.choices]]
+value     = "poolside-api/Laguna-S"
+label     = "Laguna-S"
+flag_args = ["--model", "poolside-api/Laguna-S"]
+
+# # Point to whichever provider/endpoint OpenCode supports
+# [upstreams.my-provider]
+# api_key     = "$MY_PROVIDER_KEY"
+# api_key_env = "OPENROUTER_API_KEY"
+
+[[rigs]]
+name = "poolside-server-devops"
+default_branch = "main"
