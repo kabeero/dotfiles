@@ -187,7 +187,7 @@ hl.config({
 			natural_scroll = true,
 		},
 		accel_profile = "flat",
-		follow_mouse = false,
+		follow_mouse = true,
 		kb_layout = "us",
 		kb_variant = "dvorak",
 		natural_scroll = true,

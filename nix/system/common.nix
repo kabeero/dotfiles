@@ -149,6 +149,7 @@
     distrobox-tui
     kdePackages.dolphin
     eza
+    fuse3
     fzf
     gitFull
     git-lfs
@@ -239,9 +240,11 @@
 
   fonts.fontDir.enable = true;
 
-  programs.fish.enable = true;
   documentation.man.cache.enable = true;
+
+  programs.fish.enable = true;
   programs.firefox.enable = true;
+  programs.fuse.userAllowOther = true;
   programs.hyprland = {
     enable = true;
     withUWSM = true;
@@ -264,10 +267,9 @@
     enableSSHSupport = true;
   };
 
-  services.udisks2.enable = true;
-
   services.openssh.enable = true;
   services.tailscale.enable = true;
+  services.udisks2.enable = true;
 
   networking.firewall.allowedTCPPorts = [ 22 ];
   networking.firewall.enable = true;
