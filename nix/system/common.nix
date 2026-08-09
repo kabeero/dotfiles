@@ -99,6 +99,7 @@
       "dialout"
       "input"
       "kvm"
+      "libvirtd"
       "networkmanager"
       "render"
       "uinput"

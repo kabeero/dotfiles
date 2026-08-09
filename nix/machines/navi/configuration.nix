@@ -20,12 +20,25 @@
 
   services.desktopManager.plasma6.enable = true;
 
-  programs.virt-manager.enable = true;
   virtualisation.libvirtd = {
     enable = true;
-    qemu.swtpm.enable = true;
+    # UEFI (OVMF) support for guest VMs
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      terseValidation = true;
+      ovmf = {
+        enable = true;
+        packages = [ pkgs.OVMFFull.fd ];
+      };
+      # Emulation of TPM 2.0
+      swtpm.enable = true;
+    };
+
   };
   virtualisation.spiceUSBRedirection.enable = true;
+  # virt-manager GUI
+  programs.virt-manager.enable = true;
 
   nixpkgs.config.android_sdk.accept_license = true;
 
