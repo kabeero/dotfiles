@@ -20,25 +20,17 @@
 
   services.desktopManager.plasma6.enable = true;
 
+  # libvirtd daemon with KVM/QEMU support
+  programs.virt-manager.enable = true;  # virt-manager GUI
   virtualisation.libvirtd = {
     enable = true;
-    # UEFI (OVMF) support for guest VMs
     qemu = {
-      package = pkgs.qemu_kvm;
+      package = pkgs.qemu_kvm;          # saves space by only building host architecture support
       runAsRoot = true;
-      terseValidation = true;
-      ovmf = {
-        enable = true;
-        packages = [ pkgs.OVMFFull.fd ];
-      };
-      # Emulation of TPM 2.0
-      swtpm.enable = true;
+      swtpm.enable = true;              # enables TPM 2.0 emulation (required for Windows 11 VMs)
     };
-
   };
   virtualisation.spiceUSBRedirection.enable = true;
-  # virt-manager GUI
-  programs.virt-manager.enable = true;
 
   nixpkgs.config.android_sdk.accept_license = true;
 
