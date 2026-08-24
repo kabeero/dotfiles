@@ -75,6 +75,17 @@
             ./machines/navi/configuration.nix
           ];
         };
+
+        nebula = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = with inputs; [
+            ./system/common.nix
+            ./machines/nebula/configuration.nix
+            disko.nixosModules.disko
+            ./machines/nebula/disko-config.nix
+          ];
+        };
+
       };
     };
 }

@@ -1,0 +1,50 @@
+{
+  disko.devices = {
+    disk = {
+      os = {
+        type = "disk";
+        device = "/dev/disk/by-id/nvme-WD_BLACK_SN850X_2000GB_222503A003B4";
+        content = {
+          type = "gpt";
+          partitions = {
+            ESP = {
+              size = "2G";
+              type = "EF00";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+                mountOptions = [ "umask=0077" ];
+              };
+            };
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
+            };
+          };
+        };
+      };
+      media = {
+        type = "disk";
+        device = "/dev/disk/by-id/ata-WDC_WD201KFGX-68BKJN0_8LGMN7ZN";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/media/var";
+              };
+            };
+          };
+        };
+      };
+    };
+  };
+}

@@ -50,6 +50,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
+  services.fstrim.enable = true;
   services.xserver.enable = true;
 
   services.displayManager = {
