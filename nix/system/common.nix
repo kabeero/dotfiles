@@ -92,7 +92,10 @@
   security.rtkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
-  virtualisation.docker.enable = true;
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings.features.cdi = true; 
+  };
 
   users.users.mkgz = {
     isNormalUser = true;

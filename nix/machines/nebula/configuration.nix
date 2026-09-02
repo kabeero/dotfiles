@@ -13,11 +13,33 @@
 
   networking.hostName = "nebula";
 
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Required for 32-bit apps/games (like Steam)
+  };
+
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+  hardware.nvidia = {
+    modesetting.enable = true;
+
+    # does not work for vGPU passthru
+    open = true;
+
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+
+
+  # GPU passthrough to containers
+  virtualisation.docker.rootless.enable = false;
+  hardware.nvidia-container-toolkit.enable = true;
+
   environment.systemPackages = with pkgs; [
     btop
     docker-compose
     gum
     kmonad
+    nvtopPackages.nvidia
     virt-manager
   ];
 
@@ -34,5 +56,18 @@
 
   home-manager.users."mkgz" = {
     imports = [ ./home.nix ];
+  };
+
+  users.groups.media = {
+    gid = 950;
+  };
+
+  users.users.media = {
+    isSystemUser = true;
+    uid = 950;
+    description = "Media User";
+    createHome = false;
+    group = "media";
+    extraGroups = [ "media" ];
   };
 }
