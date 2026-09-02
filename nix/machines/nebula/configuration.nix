@@ -15,6 +15,7 @@
 
   environment.systemPackages = with pkgs; [
     btop
+    docker-compose
     gum
     kmonad
     virt-manager

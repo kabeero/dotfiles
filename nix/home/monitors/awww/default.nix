@@ -8,6 +8,7 @@
   systemd.user.services.awww = {
     Unit = {
       Description = "Efficient animated wallpaper daemon for Wayland (awww)";
+      ConditionEnvironment = "WAYLAND_DISPLAY";
       PartOf = [ "graphical-session.target" ];
       After = [ "graphical-session.target" ];
     };

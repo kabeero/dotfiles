@@ -92,12 +92,15 @@
   security.rtkit.enable = true;
   security.sudo.wheelNeedsPassword = false;
 
+  virtualisation.docker.enable = true;
+
   users.users.mkgz = {
     isNormalUser = true;
     description = "Kabeer";
     extraGroups = [
       "adbusers"
       "dialout"
+      "docker"
       "input"
       "kvm"
       "libvirtd"
