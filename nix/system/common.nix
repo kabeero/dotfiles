@@ -157,8 +157,10 @@
     distrobox-tui
     kdePackages.dolphin
     eza
+    fastfetch
     fuse3
     fzf
+    gcc
     gitFull
     git-lfs
     gitui
@@ -197,7 +199,6 @@
     pandoc
     pavucontrol
     pciutils
-    pfetch
     playerctl
     podman
     podman-compose
@@ -240,10 +241,12 @@
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
     nerd-fonts.geist-mono
+    nerd-fonts.hack
     nerd-fonts.iosevka
     nerd-fonts.jetbrains-mono
     nerd-fonts.lilex
     nerd-fonts.symbols-only
+    nerd-fonts.victor-mono
   ];
 
   fonts.fontDir.enable = true;

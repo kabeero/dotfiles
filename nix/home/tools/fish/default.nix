@@ -135,22 +135,22 @@
       set -Ux GOBIN {$GOPATH}/bin
       set -Ux AWS_CLI_AUTO_PROMPT on-partial
       set -Ux ERL_AFLAGS "-kernel shell_history enabled"
-      set -Ux MISE_PREFER_OFFLINE true
+      set -Ux MISE_NO_NETWORK true
       set -q KREW_ROOT; and set -gx PATH $PATH $KREW_ROOT/.krew/bin; or set -gx PATH $PATH $HOME/.krew/bin
-      pfetch
-      echo -e "\x1b[38;2;0;112;248m"(date +%c)"\x1b[0m"
-      zellij setup --generate-completion fish | source
+      set -g fish_key_bindings fish_hybrid_key_bindings
       fish_add_path {$HOME}/.asdf/bin
       fish_add_path {$HOME}/.cargo/bin
       fish_add_path {$HOME}/.yarn/bin
       fish_add_path {$HOME}/.local/bin
       fish_add_path {$GOBIN}
-      mise activate fish | source
-      starship init fish | source
+      mise activate fish --no-hook-env | source
       zoxide init --cmd c fish | source
-      eval (ssh-agent -c) >/dev/null
-      ssh-add -q
-      set -g fish_key_bindings fish_hybrid_key_bindings
+      if not set -q SSH_AUTH_SOCK
+        eval (ssh-agent -c) >/dev/null
+        ssh-add -q
+      end
+      fastfetch --logo small --structure Uptime:Display:Memory:Swap:Disk:Battery:LocalIP
+      echo -e "\n\x1b[38;2;0;112;248m"(date +%c)"\x1b[0m"
     '';
     plugins = [ ];
   };
