@@ -42,13 +42,13 @@
           and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }
         {
-          timeout = 180;
+          timeout = 300;
           on-timeout = "hyprctl dispatch 'hl.dsp.dpms({ action = \"disable\" })'";
           on-resume = "hyprctl dispatch 'hl.dsp.dpms({ action = \"enable\" })' && brightnessctl -r";
           and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }
         {
-          timeout = 300;
+          timeout = 600;
           on-timeout = "loginctl lock-session";
           and = "! hyprctl activewindow -j | jq -e '.fullscreen == 2'";
         }

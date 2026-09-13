@@ -17,12 +17,23 @@
     btop
     gum
     hypridle
-    hyprpanel
     hyprpaper
     hyprsysteminfo
     kmonad
-    virt-manager
+    # wayle
   ];
+
+  programs.virt-manager.enable = true;
+
+  virtualisation.libvirtd = {
+    enable = true;
+    qemu = {
+      package = pkgs.qemu_kvm;
+      runAsRoot = true;
+      swtpm.enable = true;
+    };
+  };
+  virtualisation.spiceUSBRedirection.enable = true;
 
   services.kmonad = {
     enable = true;
@@ -46,9 +57,19 @@
     hash = "sha256-kjlrWCnKGLXxkkeu0QjVDHc/3HR79lMkqgRT1k9gbkk=";
   };
 
+  # stylix.fonts.monospace = {
+  #   package = pkgs.nerd-fonts.lilex;
+  #   name = "Lilex Nerd Font Mono";
+  # };
+
+  # stylix.fonts.monospace = {
+  #   package = pkgs.nerd-fonts.hack;
+  #   name = "Hack Nerd Font Mono";
+  # };
+
   stylix.fonts.monospace = {
-    package = pkgs.nerd-fonts.lilex;
-    name = "Lilex Nerd Font Mono";
+    package = pkgs.nerd-fonts.iosevka;
+    name = "Iosevka Nerd Font Mono";
   };
 
   home-manager.users."mkgz" = {
