@@ -6,6 +6,7 @@
     ./monitors/awww
     ./monitors/kanshi
     ./terminal/kitty
+    ./terminal/yazi
     ./terminal/zellij
     ./tools/fish
     ./tools/git
