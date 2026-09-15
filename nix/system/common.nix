@@ -6,6 +6,12 @@
   ...
 }:
 
+let
+  primaryUser = lib.findFirst (
+    u: u.isNormalUser
+  ) (throw "No normal user defined in config.users.users") (builtins.attrValues config.users.users);
+  vpnConfigFile = "${primaryUser.home}/Documents/vpn/mullvad/mullvad.conf";
+in
 {
   imports = [
     inputs.avenir.nixosModules.default
@@ -21,7 +27,8 @@
       hyprland = inputs.hyprland.packages.${prev.stdenv.hostPlatform.system}.hyprland;
     })
     (final: prev: {
-      hyprland-plugins = inputs.hyprland-plugins.packages.${prev.stdenv.hostPlatform.system}.hyprland-plugins;
+      hyprland-plugins =
+        inputs.hyprland-plugins.packages.${prev.stdenv.hostPlatform.system}.hyprland-plugins;
     })
   ];
 
@@ -34,6 +41,95 @@
   security.tpm2.enable = true;
 
   networking.networkmanager.enable = true;
+  networking.firewall.checkReversePath = "loose";
+
+  systemd.services.networkmanager-wireguard-mullvad = {
+    description = "Sync Mullvad WireGuard configuration with NetworkManager";
+    after = [ "NetworkManager.service" ];
+    wants = [ "NetworkManager.service" ];
+    wantedBy = [ "multi-user.target" ];
+    path = with pkgs; [
+      networkmanager
+      coreutils
+      gnugrep
+      gawk
+    ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+    };
+    script = ''
+      CONFIG="${vpnConfigFile}"
+      STATE_DIR="/var/lib/networkmanager-wireguard"
+      STATE_FILE="$STATE_DIR/mullvad.sha256"
+      CON_NAME="mullvad"
+
+      if [ ! -f "$CONFIG" ]; then
+        if nmcli -t -f NAME connection show | grep -Fxq "$CON_NAME"; then
+          echo "$CONFIG not found; removing connection $CON_NAME."
+          nmcli connection delete "$CON_NAME" || true
+          rm -f "$STATE_FILE"
+        fi
+        exit 0
+      fi
+
+      mkdir -p "$STATE_DIR"
+
+      CURRENT_HASH=$(sha256sum "$CONFIG" | awk '{print $1}')
+      SAVED_HASH=""
+      if [ -f "$STATE_FILE" ]; then
+        SAVED_HASH=$(cat "$STATE_FILE")
+      fi
+
+      CON_EXISTS=false
+      if nmcli -t -f NAME connection show | grep -Fxq "$CON_NAME"; then
+        CON_EXISTS=true
+      fi
+
+      if [ "$CON_EXISTS" = true ] && [ "$CURRENT_HASH" = "$SAVED_HASH" ]; then
+        echo "WireGuard connection $CON_NAME is up to date."
+        exit 0
+      fi
+
+      AUTOCONNECT="no"
+      CON_WAS_ACTIVE=false
+      if [ "$CON_EXISTS" = true ]; then
+        CURRENT_AC=$(nmcli -g connection.autoconnect connection show "$CON_NAME" 2>/dev/null || echo "no")
+        if [ -n "$CURRENT_AC" ]; then
+          AUTOCONNECT="$CURRENT_AC"
+        fi
+        if nmcli -t -f NAME,STATE connection show --active | grep -Eq "^''${CON_NAME}:(activated|activating)"; then
+          CON_WAS_ACTIVE=true
+        fi
+        nmcli connection delete "$CON_NAME" || true
+      fi
+
+      echo "Importing $CONFIG into NetworkManager..."
+      nmcli connection import type wireguard file "$CONFIG"
+      nmcli connection modify "$CON_NAME" \
+        connection.autoconnect "$AUTOCONNECT" \
+        ipv4.dns-priority -50 \
+        ipv6.dns-priority -50
+
+      if [ "$CON_WAS_ACTIVE" = true ] || [ "$AUTOCONNECT" = "yes" ]; then
+        nmcli connection up "$CON_NAME" || true
+      else
+        nmcli connection down "$CON_NAME" || true
+      fi
+
+      echo "$CURRENT_HASH" > "$STATE_FILE"
+      echo "Successfully configured $CON_NAME."
+    '';
+  };
+
+  systemd.paths.networkmanager-wireguard-mullvad = {
+    description = "Watch Mullvad VPN Config for NetworkManager WireGuard import";
+    wantedBy = [ "multi-user.target" ];
+    pathConfig = {
+      PathModified = vpnConfigFile;
+      Unit = "networkmanager-wireguard-mullvad.service";
+    };
+  };
 
   time.timeZone = "America/Los_Angeles";
 
@@ -55,7 +151,7 @@
 
   services.displayManager = {
     autoLogin = {
-      user = "mkgz";
+      user = primaryUser.name;
       enable = false;
     };
     sddm = {
@@ -94,7 +190,7 @@
 
   virtualisation.docker = {
     enable = true;
-    daemon.settings.features.cdi = true; 
+    daemon.settings.features.cdi = true;
   };
 
   users.users.mkgz = {
@@ -224,6 +320,7 @@
     watchman
     wdisplays
     wget
+    wireguard-tools
     wl-clipboard
     wlogout
     wlsunset

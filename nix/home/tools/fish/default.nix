@@ -33,6 +33,9 @@
       sio = "sioyek";
       tfia = "terraform init ; terraform apply";
       tfmt = "terraform fmt -recursive";
+      vpn-up = "nmcli connection up mullvad";
+      vpn-down = "nmcli connection down mullvad";
+      vpn-status = "nmcli connection show mullvad";
     };
     functions = {
       d = ''
