@@ -206,3 +206,21 @@ alt - k : yabai -m query --spaces --space \
   | jq -sre 'add | map(select(."is-minimized"==false)) | . as $array | length as $array_length | index(map(select(."has-focus"==true))) as $has_index | if $has_index > 0 then nth($has_index - 1).id else nth($array_length - 1).id end'  \
   | xargs -I{} yabai -m window --focus {}
 
+# toggle opacity
+# requires: `yabai -m config window_opacity on`
+alt - o : yabai -m window --opacity $( \
+  yabai -m query --windows --window | \
+  jq 'if .opacity == 1.0 or .opacity == 0.0 or .opacity == null then 0.5 else 1.0 end' \
+)
+
+# ctrl + alt + cmd - h : skhd -k "left"
+# ctrl + alt + cmd - j : skhd -k "left"
+# hyper - h : skhd -k "left"
+# hyper - j : skhd -k "left"
+# hyper - t : skhd -k "down"
+# hyper - c : skhd -k "up"
+# hyper - n : skhd -k "right"
+# hyper - d : skhd -k "home"
+# hyper - b : skhd -k "end"
+# hyper - g : skhd -k "pageup"
+# hyper - r : skhd -k "pagedown"
