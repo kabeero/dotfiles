@@ -17,7 +17,7 @@
     "docs_open": "none",
 
     "editor_open": "<leader>e",
-    "theme_list": "<leader>t",
+    "theme_list": "<leader>T",
     "theme_switch_mode": "none",
     "theme_mode_lock": "none",
     "sidebar_toggle": "<leader>b",
@@ -76,7 +76,7 @@
     "messages_redo": "<leader>r",
     "messages_toggle_conceal": "<leader>h",
     "tool_details": "none",
-    "display_thinking": "none",
+    "display_thinking": "<leader>t",
 
     "prompt_submit": "none",
     "prompt_editor_context_clear": "none",
@@ -166,4 +166,3 @@
     "which_key_end": "ctrl+alt+end"
   }
 }
-
