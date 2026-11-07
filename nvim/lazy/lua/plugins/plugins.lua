@@ -22,16 +22,22 @@ return {
     opts = function(_, opts)
       -- Find Files
       opts.files = opts.files or {}
-      opts.files.fd_opts = "--color=never --type f --hidden --follow --no-ignore --exclude .git"
-      opts.files.rg_opts = "--color=never --files --hidden --follow --no-ignore -g '!.git'"
+      opts.files.fd_opts =
+        "--color=never --type f --hidden --follow --no-ignore --exclude .git --exclude .venv --exclude .delta"
+      opts.files.rg_opts = "--color=never --files  --hidden --follow --no-ignore -g '!.git' -g '!.venv' -g '!.delta'"
 
       -- Live Grep
       opts.grep = opts.grep or {}
       opts.grep.rg_opts =
-        "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --no-ignore -e"
+        "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --no-ignore -g '!.venv' -g '!.delta' -e"
     end,
   },
-  { "Isrothy/neominimap.nvim" },
+  {
+    "Isrothy/neominimap.nvim",
+    init = function()
+      vim.g.neominimap = { auto_enable = false }
+    end,
+  },
   {
     "kylechui/nvim-surround",
     event = "VeryLazy",
@@ -40,6 +46,17 @@ return {
       surrounds = {
         ["$"] = { add = { "${", "}" }, find = "$%b{}", delete = "^(..)().-(.)()$" },
         ["b"] = { add = { "**", "**" }, find = "%*%*.-%*%*", delete = "^(%*%*?)().-(%*%*?)()$" },
+      },
+    },
+  },
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        -- upstream lspconfig ships oxfmt with toml/json/yaml in its filetypes,
+        -- so mason-lspconfig auto-attached it to every pyproject.toml buffer.
+        -- Disable it here; formatting stays with conform/prettier.
+        oxfmt = { enabled = false },
       },
     },
   },
