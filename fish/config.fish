@@ -63,9 +63,6 @@ if status is-interactive
     zoxide init --cmd c fish | source
     mise activate fish | source
 
-    eval (ssh-agent -c) >/dev/null
-    ssh-add -q
-
     ## hybrid: set below
     ## vi style
     # fish_vi_key_bindings
