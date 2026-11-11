@@ -1,8 +1,3 @@
-# Only trigger if:
-# - 'fish' is not the parent process of this shell
-# - We did not call: bash -c '...'
-# - The fish binary exists and is executable
-if [[ $(ps --no-header --pid=$PPID --format=comm) != "fish" && -z ${BASH_EXECUTION_STRING} && -x "/bin/fish" ]]; then
-  shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=''
-  exec fish $LOGIN_OPTION
+if [[ $- == *i* ]] && [ -z "$FISH_VERSION" ] && command -v fish >/dev/null 2>&1; then
+    shopt -q login_shell && exec fish --login || exec fish
 fi
