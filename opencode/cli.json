@@ -1,11 +1,11 @@
 {
   "$schema": "https://opencode.ai/v2/cli.json",
   "theme": {
-    "name": "orng"
+    "name": "cursor"
   },
   "keybinds": {
     "leader": "ctrl+b",
-    "app.exit": "ctrl+c,ctrl+d,<leader>q",
+    "app.exit": "<leader>q",
     "app.clear": "ctrl+l",
     "app.debug": "none",
     "app.console": "none",
@@ -17,7 +17,7 @@
     "help.show": "none",
     "docs.open": "none",
     "prompt.editor": "<leader>e",
-    "theme.switch": "<leader>v",
+    "theme.switch": "<leader>v,<leader>c",
     "theme.switch_mode": "none",
     "theme.mode.lock": "none",
     "session.sidebar.toggle": "<leader>b",
@@ -31,7 +31,7 @@
     "session.move": "<leader>w",
     "session.tab.next": "ctrl+l,ctrl+tab,alt+down,<leader>n",
     "session.tab.previous": "ctrl+h,ctrl+shift+tab,alt+up,<leader>p",
-    "session.tab.close": "<leader>c",
+    "session.tab.close": "ctrl+c",
     "session.tab.reopen": "<leader>shift+t,ctrl+shift+t",
     "session.timeline": "<leader>g",
     "session.fork": "none",
@@ -79,7 +79,7 @@
     "prompt.stash": "none",
     "prompt.stash.pop": "none",
     "prompt.stash.list": "none",
-    "prompt.clear": "ctrl+c",
+    "prompt.clear": "none",
     "prompt.paste": {
       "key": "ctrl+v",
       "preventDefault": false
