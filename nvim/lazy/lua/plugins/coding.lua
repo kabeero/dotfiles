@@ -49,10 +49,10 @@ return {
     },
     opts = {},
     keys = {
-      { "<leader>rs", "<cmd>RemoteStart<cr>", desc = "Remote Start" },
+      { "<leader>rc", "<cmd>RemoteStart<cr>", desc = "Remote Start" },
       { "<leader>ro", "<cmd>RemoteStop<cr>", desc = "Remote Stop" },
       { "<leader>ri", "<cmd>RemoteInfo<cr>", desc = "Remote Info" },
-      { "<leader>rc", "<cmd>RemoteCleanup<cr>", desc = "Remote Cleanup" },
+      { "<leader>rx", "<cmd>RemoteCleanup<cr>", desc = "Remote Cleanup" },
       { "<leader>rl", "<cmd>RemoteLog<cr>", desc = "Remote Log" },
     },
   },
