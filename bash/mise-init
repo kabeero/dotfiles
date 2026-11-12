@@ -1,0 +1,18 @@
+########################################################################################
+# ~/.bashrc
+########################################################################################
+
+# If the file has a line like `[[ $- != *i* ]] && return`, the export
+# must come before it, or non-interactive shells skip it.
+
+export PATH="$HOME/.local/share/mise/shims:$PATH"
+
+# For interactive shells, after that check:
+eval "$(mise activate bash)"
+
+########################################################################################
+# ~/.bash_profile
+########################################################################################
+
+# (login shells read this instead of ~/.profile)
+[ -f ~/.bashrc ] && . ~/.bashrc
